@@ -21,6 +21,6 @@ build:
 
 # run tests using the binary built before
 test:
-  stage: test
+  #stage: test
   #script:
   #  - ./runmytests.sh
