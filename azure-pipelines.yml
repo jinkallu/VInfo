@@ -6,26 +6,43 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+  - job: BuildDockerBuildImage
+  displayName: Build Docker build image
+
+  pool:
+    vmImage: 'ubuntu-latest'
   
-steps:
- - task: Docker@1 
-   displayName: 'Build an image'
-   inputs:
-     containerregistrytype: 'container Registry'
-     dockerRegistryEndpoint: dockerhub
-     imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
-     command: build an image
-     dockerFile: '**/Dockerfile'
- - task: Docker@1
-   displayName: Login
-   inputs:
-     containerregistrytype: 'container Registry'
-     dockerRegistryEndpoint: dockerhub
-     command: login
- - task: Docker@1
-   displayName: 'Push an image'
-   inputs:
-     command: push an image
-     imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+  steps:
+    - task: Docker@1 
+      displayName: 'Build an image'
+      inputs:
+        containerregistrytype: 'container Registry'
+        dockerRegistryEndpoint: dockerhub
+        imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+        command: build an image
+        dockerFile: '**/Dockerfile'
+    
+    - task: Docker@1
+      displayName: Login
+      inputs:
+        containerregistrytype: 'container Registry'
+        dockerRegistryEndpoint: dockerhub
+        command: login
+    - task: Docker@1
+      displayName: 'Push an image'
+      inputs:
+        command: push an image
+        imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+        
+        
+ - job: BuildSource
+  displayName: Build source
+
+  pool:
+    vmImage: 'ubuntu-latest'
+    
+  container: 'jinkallu/python_gcc:$(Build.BuildId)'
+
+  steps:
+  - script: printenv
