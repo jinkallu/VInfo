@@ -9,14 +9,23 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
   
-container: jinkallu/python_gcc:latest
-
-
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+ - task: Docker@1 
+   displayName: 'Build an image'
+   inputs:
+     containerregistrytype: 'container Registry'
+     dockerRegistryEndpoint: dockerhub
+     imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+     command: build an image
+     dockerFile: '**/Dockerfile'
+ - task: Docker@1
+   displayName: Login
+   inputs:
+     containerregistrytype: 'container Registry'
+     dockerRegistryEndpoint: dockerhub
+     command: login
+ - task: Docker@1
+   displayName: 'Push an image'
+   inputs:
+     command: push an image
+     imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
