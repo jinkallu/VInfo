@@ -8,12 +8,12 @@ trigger:
 
 jobs:
   - job: BuildDockerBuildImage
-  displayName: 'Build Docker build image'
+    displayName: 'Build Docker build image'
 
-  pool:
-    vmImage: 'ubuntu-latest'
+    pool:
+      vmImage: 'ubuntu-latest'
   
-  steps:
+    steps:
     - task: Docker@1 
       displayName: 'Build an image'
       inputs:
@@ -37,12 +37,12 @@ jobs:
         
         
  - job: BuildSource
-  displayName: 'Build source'
+   displayName: 'Build source'
 
-  pool:
-    vmImage: 'ubuntu-latest'
+   pool:
+     vmImage: 'ubuntu-latest'
     
-  container: 'jinkallu/python_gcc:$(Build.BuildId)'
+   container: 'jinkallu/python_gcc:$(Build.BuildId)'
 
-  steps:
-  - script: printenv
+   steps:
+   - script: printenv
