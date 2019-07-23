@@ -8,7 +8,7 @@ trigger:
 
 jobs:
   - job: BuildDockerBuildImage
-  displayName: Build Docker build image
+  displayName: 'Build Docker build image'
 
   pool:
     vmImage: 'ubuntu-latest'
@@ -37,7 +37,7 @@ jobs:
         
         
  - job: BuildSource
-  displayName: Build source
+  displayName: 'Build source'
 
   pool:
     vmImage: 'ubuntu-latest'
