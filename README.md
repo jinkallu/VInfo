@@ -1,3 +1,3 @@
 # vinfo
 
-[![pipeline status](https://gitlab.com/jkallu/vinfo_git/badges/master/pipeline.svg)](https://gitlab.com/jkallu/vinfo_git/commits/master)
+[![Build Status](https://dev.azure.com/jineshkallunkathariyil/vinfo/_apis/build/status/jkallu.vinfo_git?branchName=master)](https://dev.azure.com/jineshkallunkathariyil/vinfo/_build/latest?definitionId=6&branchName=master)
