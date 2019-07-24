@@ -19,7 +19,8 @@ jobs:
       inputs:
         containerregistrytype: 'container Registry'
         dockerRegistryEndpoint: dockerhub
-        imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+        #imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+        imageName: 'jinkallu/python_gcc:latest'
         command: build an image
         dockerFile: '**/Dockerfile'
     
@@ -33,7 +34,7 @@ jobs:
       displayName: 'Push an image'
       inputs:
         command: push an image
-        imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
+        imageName: 'jinkallu/python_gcc:latest'
         
         
   - job: RunSource
@@ -42,7 +43,7 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     
-    container: 'jinkallu/python_gcc:$(Build.BuildId)'
+    container: 'jinkallu/python_gcc:latest'
 
     steps:
     - script: python src/front_end/python/www/main.py
