@@ -36,8 +36,8 @@ jobs:
         imageName: 'jinkallu/python_gcc:$(Build.BuildId)'
         
         
-  - job: BuildSource
-    displayName: 'Build source'
+  - job: RunSource
+    displayName: 'Run source'
 
     pool:
       vmImage: 'ubuntu-latest'
@@ -45,4 +45,4 @@ jobs:
     container: 'jinkallu/python_gcc:$(Build.BuildId)'
 
     steps:
-    - script: printenv
+    - script: python src/front_end/python/www/main.py
