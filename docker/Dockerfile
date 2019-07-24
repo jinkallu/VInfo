@@ -4,10 +4,12 @@ FROM python:3
 MAINTAINER Jinesh Kallunkathariyil <jinesh.kallunkathariyil@gmail.com>
 
 RUN apt update &&                  \
-    apt upgrade -y &&              \
-    apt dist-upgrade -y &&         \
+    #apt upgrade -y &&              \
+    #apt dist-upgrade -y &&         \
     apt install -y                 \
-        gcc                      &&\
+        gcc                        \
+        postgresql                 \
+        postgresql-contrib       &&\
     apt clean
 
 
