@@ -12,5 +12,7 @@ RUN apt update &&                  \
         postgresql-contrib       &&\
     apt clean
 
-
+WORKDIR /src
+ENTRYPOINT ["python"]
+CMD ["main.py"]
 
