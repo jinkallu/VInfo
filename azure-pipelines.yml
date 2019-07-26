@@ -47,4 +47,5 @@ jobs:
 
     steps:
     #- script: python src/front_end/python/www/main.py
-    - script: python -v
+    - script: python --version
+
