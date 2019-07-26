@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/python
-FROM python:3
+FROM python:3.7-slim
 
 MAINTAINER Jinesh Kallunkathariyil <jinesh.kallunkathariyil@gmail.com>
 
