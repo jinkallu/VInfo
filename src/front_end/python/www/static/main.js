@@ -14,11 +14,10 @@ init();
 animate();
 
 function init() {
-    //container = document.createElement( 'div' );
-    //document.body.appendChild( container );
-     container = document.querySelector( '#scene-container' );
+    container = document.createElement( 'div' );
+    document.body.appendChild( container );
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
-    camera.position.set( 1000, 50, 1500 );
+    camera.position.set( 0, 0, 1500 );
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 'skyblue' );
@@ -29,11 +28,10 @@ function init() {
 
     setControls();
 
-    createSphere(0, 0, 0);
-    createSphere(0, 300, 0);
+    createSphere(0, 0, 0, "Maths");
+    createSphere(0, 0, -400, "Arithematic");
 
-    createLine(0, 0, 0, 0, 300, 0);
-
+    createLine(0, 0, 0, 0, 0, -400);
 
 
 
@@ -41,9 +39,16 @@ function init() {
     window.addEventListener( 'resize', onWindowResize, false );
 }
 
-function createSphere(x, y, z){
-    var nod_geometry = new THREE.SphereBufferGeometry( 50, 32, 16 );
-    var node_material = new THREE.MeshLambertMaterial( { color: 0xffffff/*, envMap: scene.background */} );
+function createSphere(x, y, z, txt){
+    var dynamicTexture	= new THREEx.DynamicTexture(300,500);
+    //https://github.com/jeromeetienne/threex.dynamictexture
+    dynamicTexture.context.font	= "bolder 30px Verdana";
+    dynamicTexture.texture.anisotropy = renderer.getMaxAnisotropy();
+    dynamicTexture.clear("blue");
+    dynamicTexture.drawText(txt, 30, 256, 'white');
+
+    var nod_geometry = new THREE.SphereBufferGeometry( 100, 32, 16 );
+    var node_material = new THREE.MeshLambertMaterial( { map	: dynamicTexture.texture, transparent: true, opacity: 0.8/*, envMap: scene.background */} );
 
     var node = new THREE.Mesh( nod_geometry, node_material );
     node.castShadow = true;
@@ -52,11 +57,15 @@ function createSphere(x, y, z){
     node.position.y = y;
     node.position.z = z;
     scene.add( node );
+
+
 }
 
 function createLine(x1, y1, z1, x2, y2, z2){
+
+
     var line_material = new THREE.LineBasicMaterial({
-                                       color: 0x5f00ff  ,linewidth: 2
+                                       color: 0x5f00ff  ,linewidth: 5
                                    });
 
     var line_geometry = new THREE.Geometry();
@@ -119,5 +128,6 @@ function createLine(x1, y1, z1, x2, y2, z2){
     }
 
     function render() {
+
         renderer.render( scene, camera );
     }
