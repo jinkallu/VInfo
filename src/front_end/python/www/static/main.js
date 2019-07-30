@@ -14,7 +14,8 @@ init();
 animate();
 
 function init() {
-    container = document.createElement( 'div' );
+    //container = document.createElement( 'div' );
+    container = document.getElementById( 'canvas' );
     document.body.appendChild( container );
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
     camera.position.set( 0, 0, 1500 );
@@ -48,7 +49,7 @@ function createSphere(x, y, z, txt){
     dynamicTexture.drawText(txt, 30, 256, 'white');
 
     var nod_geometry = new THREE.SphereBufferGeometry( 100, 32, 16 );
-    var node_material = new THREE.MeshLambertMaterial( { map	: dynamicTexture.texture, transparent: true, opacity: 0.8/*, envMap: scene.background */} );
+    var node_material = new THREE.MeshLambertMaterial( { map	: dynamicTexture.texture, transparent: true, opacity: 1.0/*, envMap: scene.background */} );
 
     var node = new THREE.Mesh( nod_geometry, node_material );
     node.castShadow = true;
