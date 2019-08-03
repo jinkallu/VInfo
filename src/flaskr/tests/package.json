@@ -3,9 +3,10 @@
     "test": "jest"
   },
   "devDependencies": {
-    "jest-cli": "^24.8.0"
+    "jest-cli": "^24.8.0",
+    "jest-junit": "~7.0.0"
   },
   "jest": {
-    "reporters": ["jest-junit"]
+    "reporters": ["default", "jest-junit"]
   }
 }
