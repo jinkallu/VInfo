@@ -47,7 +47,8 @@ jobs:
 
     steps:
     #- script: python src/front_end/python/www/main.py
-    - script: npm install jest
+    - script: npm install
+      workingDirectory: 'src/flaskr/tests'
     #- script: git pull https://github.com/jkallu/vinfo_git.git
     #- script: cd vinfo/vinfo_git/src/flaskr/tests
     - script: npm test
