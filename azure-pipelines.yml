@@ -49,6 +49,6 @@ jobs:
     #- script: python src/front_end/python/www/main.py
     - script: npm install
       workingDirectory: 'src/flaskr/tests'
-    - script: jest --ci --reporters=default --reporters=jest-junit
+    - script: npm test
       workingDirectory: 'src/flaskr/tests'
 
