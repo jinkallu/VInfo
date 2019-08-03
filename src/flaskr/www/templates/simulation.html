@@ -3,11 +3,12 @@
 	<head>
 		<meta charset=utf-8>
                 <title>My first three.js app</title>
-                <link rel="stylesheet" href="/static/mathquill.css"/>
+                <link rel="stylesheet" href="{{
+                  url_for('static', filename='css/mathquill.css')}}"/>
                 <script type=text/javascript src="{{
-                  url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+                  url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
                 <script type=text/javascript src="{{
-                  url_for('static', filename='mathquill.js') }}"></script>
+                  url_for('static', filename='js/mathquill.js') }}"></script>
 
 	</head>
 
@@ -21,18 +22,19 @@
           function buttonClicked()
           {
             $.ajax({
-              url: "/postmethod", 
-              javascript_data: "hi how are you",
+              type: "POST",
+              cache: false,
+              data:{keyword:'hiii'},
+              url: '/postmethod',
               dataType: "json",
-              type: 'POST',
-              success: function(response) {
-                $("#msg").html(response);
-                console.log(response);
+              success: function(data) { 
+                console.log(data);                    
               },
-              error: function(error) {
-                console.log(error);
+              error: function(jqXHR) {
+                alert("error: " + jqXHR.status);
+                console.log(jqXHR);
               }
-            });
+            })
           }
         var mathFieldSpan = document.getElementById('math-field');
         var latexSpan = document.getElementById('latex');

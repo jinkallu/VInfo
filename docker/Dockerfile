@@ -8,6 +8,8 @@ RUN apt update &&                  \
     #apt dist-upgrade -y &&         \
     apt install -y                 \
         gcc                        \
+	nodejs                     \
+        npm                        \
         postgresql                 \
         postgresql-contrib       &&\
     apt clean
