@@ -50,5 +50,6 @@ jobs:
     - script: npm install jest
     #- script: git pull https://github.com/jkallu/vinfo_git.git
     #- script: cd vinfo/vinfo_git/src/flaskr/tests
-    - script: npm test src/flaskr/tests
+    - script: npm test
+      workingDirectory: 'src\flaskr\tests'
 
