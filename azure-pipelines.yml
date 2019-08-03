@@ -47,5 +47,9 @@ jobs:
 
     steps:
     #- script: python src/front_end/python/www/main.py
-    - script: python --version
+    - script: apt-get install git nodejs npm 
+    - script: npm install jest
+    - script: git pull https://github.com/jkallu/vinfo_git.git
+    - script: cd vinfo/vinfo_git/src/flaskr/tests
+    - script: npm test
 
