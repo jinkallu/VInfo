@@ -8,6 +8,7 @@ RUN apt update &&                  \
     #apt dist-upgrade -y &&         \
     apt install -y                 \
         gcc                        \
+	git                        \
 	nodejs                     \
         npm                        \
         postgresql                 \
