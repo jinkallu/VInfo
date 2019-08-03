@@ -14,7 +14,8 @@ RUN apt update &&                  \
         postgresql                 \
         postgresql-contrib       &&\
     apt clean			 &&\
-    npm install -g jest
+    npm install -g jest		 &&\
+    npm install -g jest-junit
 
 RUN mkdir /app
 COPY requirements.txt /app
