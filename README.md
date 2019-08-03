@@ -7,12 +7,12 @@
 ```
 git clone https://github.com/jkallu/vinfo_git.git   
 cd vinfo_git 
-sudo docker run  -v `pwd`/src/front_end/python/www:/app -p 5000:5000 jinkallu/python_gcc python main.py
+docker run  -v `pwd`/src/flaskr:/app -p 5000:5000 jinkallu/python_gcc python run.py
 ```
 ### Already cloned
 From location vinfo_git
 ```
 git pull   
-sudo docker run  -v `pwd`/src/front_end/python/www:/app -p 5000:5000 jinkallu/python_gcc python main.py
+docker run  -v `pwd`/src/flaskr:/app -p 5000:5000 jinkallu/python_gcc python run.py
 ```
 
