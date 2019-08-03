@@ -51,6 +51,6 @@ jobs:
       workingDirectory: 'src/flaskr/tests'
     #- script: git pull https://github.com/jkallu/vinfo_git.git
     #- script: cd vinfo/vinfo_git/src/flaskr/tests
-    - script: npm test
+    - script: jest --ci --reporters=default --reporters=jest-junit
       workingDirectory: 'src/flaskr/tests'
 
