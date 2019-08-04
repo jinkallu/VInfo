@@ -54,7 +54,7 @@ jobs:
       workingDirectory: 'src/flaskr/tests/js'
       
     # Publish CI js test results
-    - task: PublishTestResultsJS@1
+    - task: PublishTestResults@1
       inputs:
         testResultsFiles: 'src/flaskr/tests/js/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS) JS'
@@ -62,7 +62,7 @@ jobs:
       condition: succeededOrFailed()
 
     # Publish CI python test results
-    - task: PublishTestResultsPython@2
+    - task: PublishTestResults@2
       inputs:
         testResultsFiles: 'src/flaskr/tests/python/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS) Python'
