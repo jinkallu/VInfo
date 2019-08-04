@@ -37,8 +37,8 @@ jobs:
         imageName: 'jinkallu/python_gcc:latest'
         
         
-  - job: RunSource
-    displayName: 'Run source'
+  - job: RunTests
+    displayName: 'Run Tests'
 
     pool:
       vmImage: 'ubuntu-latest'
@@ -46,16 +46,15 @@ jobs:
     container: 'jinkallu/python_gcc:latest'
 
     steps:
-    #- script: python src/front_end/python/www/main.py
     - script: npm install
-      workingDirectory: 'src/flaskr/tests'
+      workingDirectory: 'src/flaskr/tests/js'
     - script: jest
-      workingDirectory: 'src/flaskr/tests'
+      workingDirectory: 'src/flaskr/tests/js'
       
     # Publish CI test results
     - task: PublishTestResults@1
       inputs:
-        testResultsFiles: 'src/flaskr/tests/*.xml'
+        testResultsFiles: 'src/flaskr/tests/js/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS)'
       displayName: 'Publish test results'
       condition: succeededOrFailed()
