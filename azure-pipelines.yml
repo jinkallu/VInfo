@@ -46,16 +46,26 @@ jobs:
     container: 'jinkallu/python_gcc:latest'
 
     steps:
+    - script: py.test -v --junitxml="result.xml"
+      workingDirectory: 'src/flaskr/tests/python'
     - script: npm install
       workingDirectory: 'src/flaskr/tests/js'
     - script: jest
       workingDirectory: 'src/flaskr/tests/js'
       
-    # Publish CI test results
-    - task: PublishTestResults@1
+    # Publish CI js test results
+    - task: PublishTestResultsJS@1
       inputs:
         testResultsFiles: 'src/flaskr/tests/js/*.xml'
-        testRunTitle: 'CI Tests $(Agent.OS)'
+        testRunTitle: 'CI Tests $(Agent.OS) JS'
+      displayName: 'Publish test results'
+      condition: succeededOrFailed()
+
+    # Publish CI python test results
+    - task: PublishTestResultsPython@2
+      inputs:
+        testResultsFiles: 'src/flaskr/tests/python/*.xml'
+        testRunTitle: 'CI Tests $(Agent.OS) Python'
       displayName: 'Publish test results'
       condition: succeededOrFailed()
 
