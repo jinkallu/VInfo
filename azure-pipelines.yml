@@ -54,7 +54,6 @@ jobs:
       
     # Publish CI test results
     - task: PublishTestResults@1
-      displayName: 'React Test'
       inputs:
         testResultsFiles: 'src/flaskr/tests/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS)'
