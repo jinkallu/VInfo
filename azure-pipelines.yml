@@ -53,7 +53,8 @@ jobs:
       workingDirectory: 'src/flaskr/tests'
       
     # Publish CI test results
-    - task: PublishTestResults@2
+    - task: PublishTestResults@1
+      displayName: 'React Test'
       inputs:
         testResultsFiles: 'src/flaskr/tests/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS)'
