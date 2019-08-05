@@ -49,14 +49,18 @@ jobs:
     # py tests
     - script: py.test -v --junitxml="result.xml"
       workingDirectory: 'src/flaskr/tests/python'
+
     # react tests
     - script: npm install
       workingDirectory: 'src/flaskr/tests/js'
+
     - script: jest
       workingDirectory: 'src/flaskr/tests/js'
+
     # svelte tests
     - script: npm install
       workingDirectory: 'src/flaskr/tests/svelte_jest'
+      
     - script: jest --ci --reporters=default --reporters=jest-junit
       workingDirectory: 'src/flaskr/tests/svelte_jest'
       
