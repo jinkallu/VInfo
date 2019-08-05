@@ -60,7 +60,7 @@ jobs:
     # svelte tests
     - script: npm install
       workingDirectory: 'src/flaskr/tests/svelte_jest'
-      
+
     - script: jest --ci --reporters=default --reporters=jest-junit
       workingDirectory: 'src/flaskr/tests/svelte_jest'
       
@@ -81,7 +81,7 @@ jobs:
       condition: succeededOrFailed()
 
      # Publish CI Svelte test results
-    - task: PublishTestResults@3
+    - task: PublishTestResults@2
       inputs:
         testResultsFiles: 'src/flaskr/tests/svelte_jest/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS) svelte'
