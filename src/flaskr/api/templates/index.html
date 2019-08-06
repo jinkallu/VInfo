@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+            <title>Visual information</title>
+		<style>
+			body { margin: 0; }
+			
+		</style>
+        <script src="/static/three.min.js"></script>
+        <script src="/static/OrbitControls.js"></script>
+		<script src="/static/threex.dynamictexture.js"></script>
+
+		<!-- Load an icon library -->
+		<link rel="stylesheet" href="/static/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/main.css">
+		
+	</head>
+
+	<body>
+		<!-- The sidebar -->
+		<div id="mySidebar" class="sidebar">
+			<!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+			<a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
+			<a href="simulation"><i class="fa fa-fw fa-wrench"></i> Simulation</a>
+			<a href="#clients"><i class="fa fa-fw fa-user"></i> Clients</a>
+			<button class="dropdown-btn">Dropdown 
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a href="#"><i class="fa fa-fw fa-user"></i>Link 1</a>
+				<a href="#"><i class="fa fa-fw fa-user"></i>Link 2</a>
+				<a href="#"><i class="fa fa-fw fa-user"></i>Link 3</a>
+			</div>
+			<a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+		</div>
+
+		<div id="canvas"></div>
+		<div id="main" class = "main">
+			<button class="openbtn" onclick="toggle()">&#9776;</button> 
+		</div>
+		
+		<script>
+
+			function toggle() {
+  				var x = document.getElementById("mySidebar");
+  				if (x.style.display === "block") {
+					x.style.display = "none";
+					closeNav();
+  				} else {
+					x.style.display = "block";
+					openNav();
+  				}
+			}
+			/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+			function openNav() {
+				document.getElementById("mySidebar").style.width = "250px";
+				document.getElementById("main").style.marginLeft = "250px";
+				document.getElementById("canvas").style.marginLeft = "250px";
+				document.getElementById("canvas").style.marginTop = "0";
+			}
+
+			/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+			function closeNav() {
+				document.getElementById("mySidebar").style.width = "0";
+				document.getElementById("main").style.marginLeft = "0";
+				document.getElementById("canvas").style.marginLeft = "0";
+				document.getElementById("canvas").style.marginTop = "0";
+			}
+
+			//* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+			var dropdown = document.getElementsByClassName("dropdown-btn");
+			var i;
+
+			for (i = 0; i < dropdown.length; i++) {
+			dropdown[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var dropdownContent = this.nextElementSibling;
+				if (dropdownContent.style.display === "block") {
+				dropdownContent.style.display = "none";
+				} else {
+				dropdownContent.style.display = "block";
+				}
+			});
+			}
+		</script>
+        <script src="/static/main.js"></script>
+	</body>
+</html>
