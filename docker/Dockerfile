@@ -12,6 +12,7 @@ RUN apt update &&                  \
 	nodejs                     \
         npm                        \
         postgresql                 \
+        libpq-dev                  \ 
         postgresql-contrib       &&\
     apt clean			 &&\
     npm install -g jest		 &&\
