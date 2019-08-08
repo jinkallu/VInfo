@@ -28,7 +28,7 @@ jwt = JWTManager(app)
 #     jti = decrypted_token['jti']
 #     return models.RevokedTokenModel.is_jti_blacklisted(jti)
 
-import views, models, resources
+import  models, resources
 
 # api.add_resource(resources.UserRegistration, '/registration')
 # api.add_resource(resources.UserLogin, '/login')

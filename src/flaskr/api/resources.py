@@ -40,14 +40,6 @@ listnodeparser=reqparse.RequestParser()
 listnodeparser.add_argument('nodeid', help = 'This field cannot be blank...', required=False)
 listnodeparser.add_argument('session', help = 'This field cannot be blank...', required = True)
 
-
-
-
-
-
-
-
-
 class UserRegistration(Resource):
     def post(self):
         data = regparser.parse_args()        
@@ -83,7 +75,7 @@ class UserLogoutAccess(Resource):
         #     return {"status":"error","message":"Something went wrong while logging out......."},500
 
 class CreateNode(Resource):
-    @jwt_required
+    # @jwt_required
     def post(self):
         data=nodeparser.parse_args()
         res=NodeModel.create_node(data)

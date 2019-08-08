@@ -5,8 +5,8 @@ import json
 
 DATABASELOCAL="dbname='postgres' user='postgres' host='localhost' password='Antiquity@1'"
 DATABASECLOUD="dbname='gqdhjhdi' user='gqdhjhdi' host='john.db.elephantsql.com' password='a7obAswTJ2i4Pe9sCvUnKQ2NVFf_TwVH'"
-CONNTYPE='LOCAL'
-# CONNTYPE='CLOUD'
+# CONNTYPE='LOCAL'
+CONNTYPE='CLOUD'
 
 class UserModel():
     @classmethod
