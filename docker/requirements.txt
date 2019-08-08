@@ -1,2 +1,14 @@
+# requiremets for frontend
 flask
 pytest
+
+# requirements for api
+flask
+aniso8601
+Flask-JWT-Extended
+Flask-RESTful
+passlib
+psycopg2
+PyJWT
+pytz
+six
