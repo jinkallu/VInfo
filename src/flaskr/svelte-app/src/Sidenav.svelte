@@ -71,7 +71,9 @@
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s; /* If you want a transition effect */
-  padding: 20px;
+  padding: 5px;
+  color: white;
+  position: fixed;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -91,7 +93,5 @@
 <div id="main">
 	<button  class="openbtn" on:click={toggle}>
 		&#9776;
-</button>
-  <h2>Collapsed Sidebar</h2>
-  <p>Content...</p>
+  </button>
 </div>
