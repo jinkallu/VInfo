@@ -16,10 +16,19 @@
 	import { onMount } from 'svelte';
 	
 	onMount(() => {
+		//canvas.width = window.innerWidth;
+          //canvas.height = window.innerHeight;
           canvas.style.top = top;
           canvas.style.left = left;
 	});
 </script>
+
+<style>
+	#myCanvas{
+		width: 1000;
+		height: 1000;
+	}
+</style>
 
 <canvas bind:this={canvas} id="myCanvas" width="1000" height="1000"></canvas>
 
