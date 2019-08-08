@@ -20,7 +20,7 @@ RUN apt update &&                  \
 RUN mkdir /app
 WORKDIR /app
 
-COPY src/flaskr/svelte-app/package.json /app
+COPY package.json /app
 RUN npm install -g
 
 COPY requirements.txt /app
