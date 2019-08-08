@@ -8,6 +8,7 @@ aniso8601
 Flask-JWT-Extended
 Flask-RESTful
 passlib
+libpq-dev
 psycopg2
 PyJWT
 pytz
