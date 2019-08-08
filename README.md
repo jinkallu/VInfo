@@ -7,12 +7,31 @@
 ```
 git clone https://github.com/jkallu/vinfo_git.git   
 cd vinfo_git 
+```
+To build the Svelte app
+```
+sudo docker run  -v `pwd`:/app jinkallu/python_gcc npm --prefix src/flaskr/svelte-app run build
+```
+To run the server on http://0.0.0.0:5000/
+```
 docker run  -v `pwd`/src/flaskr:/app -p 5000:5000 jinkallu/python_gcc python run.py
 ```
 ### Already cloned
 From location vinfo_git
 ```
 git pull   
+```
+To build the Svelte app
+```
+sudo docker run  -v `pwd`:/app jinkallu/python_gcc npm --prefix src/flaskr/svelte-app run build
+```
+To run the server on http://0.0.0.0:5000/
+```
 docker run  -v `pwd`/src/flaskr:/app -p 5000:5000 jinkallu/python_gcc python run.py
+```
+### Docker
+Time to time it is better to pull the latest docker image
+```
+docker pull jinkallu/python_gcc:latest
 ```
 
