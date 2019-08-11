@@ -46,6 +46,10 @@ jobs:
     container: 'jinkallu/python_gcc:latest'
 
     steps:
+    # API tests
+    - script: py.test -v flaskr/tests/api/unit --junitxml="flaskr/tests/api/unit/result.xml"
+      workingDirectory: 'src'
+
     # py tests
     - script: py.test -v --junitxml="result.xml"
       workingDirectory: 'src/flaskr/tests/python'
@@ -77,6 +81,14 @@ jobs:
       inputs:
         testResultsFiles: 'src/flaskr/tests/python/*.xml'
         testRunTitle: 'CI Tests $(Agent.OS) Python'
+      displayName: 'Publish test results'
+      condition: succeededOrFailed()
+
+    # Publish CI API test results
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFiles: 'src/flaskr/tests/api/unit/*.xml'
+        testRunTitle: 'CI Tests $(Agent.OS) API'
       displayName: 'Publish test results'
       condition: succeededOrFailed()
 

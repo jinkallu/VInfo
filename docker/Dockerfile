@@ -30,6 +30,10 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 EXPOSE 8081
 
+# API pytest
+ENV PYTHONPATH=$PYTHONPATH:flaskr/api/
+ENV PYTHONWARNINGS="ignore"
+
 #ENTRYPOINT ["python"]
 #CMD ["main.py"]
 
