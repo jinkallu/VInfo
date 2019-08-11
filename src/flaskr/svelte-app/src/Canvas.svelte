@@ -33,13 +33,16 @@
 
 <canvas bind:this={canvas} id="myCanvas" width="1000" height="1000"></canvas>
 
-<D3Test />
 
 <GenDrawPos node_names = {node_names} x = {x} y = {y} let:nodes_pos>
+	
+
 	{#each nodes_pos as pos}
 		<DrawNode canv = {canvas} x = {pos.rx} y = {pos.ry}/>
 		<DrawText canv = {canvas} x = {pos.rx} y = {pos.ry + 60} text = {pos.name}/>
 	{/each}
+
+	<D3Test data = {nodes_pos}/>
 </GenDrawPos>
 
 

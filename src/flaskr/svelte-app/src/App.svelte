@@ -1,7 +1,10 @@
 <script>
   import Sidenav from "./Sidenav.svelte";
   import ThreeWindow from "./ThreeWindow.svelte";
-  import Canvas from "./Canvas.svelte";
+  //import Canvas from "./Canvas.svelte";
+  import NodeView from './nodeview/NodeView.svelte';
+  import Login from './apicalls/Login.svelte';
+
 </script>
 
 <style>
@@ -17,8 +20,10 @@
 
   
 <body>
-  <div class = "canv"> <Canvas left = {100}, top = {100}/> </div>
+  <NodeView />
+  <!-- <div class = "canv"> <Canvas left = {100}, top = {100}/> </div>-->
   <div class = "side"> <Sidenav /> </div>
+  <Login />
 </body>
 
 

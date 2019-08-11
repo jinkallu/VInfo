@@ -18,7 +18,7 @@ docker run  -v `pwd`/src/flaskr:/app -p 8081:8081 jinkallu/python_gcc python run
 ```
 To run API server on http://0.0.0.0:5000/
 ```
-docker run  -v `pwd`/src/flaskr/api:/app -p 5000:5000 jinkallu/python_gcc python main.py
+docker run  -v `pwd`/src/flaskr/api:/app -p 5000:5000 jinkallu/python_gcc python run.py
 ```
 ### Already cloned
 From location vinfo_git

@@ -44,3 +44,13 @@ api.add_resource(resources.ListNodeAttribs,'/listattribs')
 api.add_resource(resources.AddNodeAttribs ,'/addattribs')
 api.add_resource(resources.ListAttribVals ,'/listattribvals')
 api.add_resource(resources.ListNodes,'/listnodes')
+
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
+
+if __name__ == '__main__':
+     app.run(host='0.0.0.0')
