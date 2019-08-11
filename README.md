@@ -38,4 +38,9 @@ Time to time it is better to pull the latest docker image
 ```
 docker pull jinkallu/python_gcc:latest
 ```
+### Tests
+API
+```
+sudo docker run -v `pwd`/src:/app jinkallu/python_gcc pytest -rav flaskr/tests/api/unit
+```
 
