@@ -41,6 +41,7 @@ docker pull jinkallu/python_gcc:latest
 ### Tests
 API
 ```
-sudo docker run -v `pwd`/src:/app jinkallu/python_gcc pytest -rav flaskr/tests/api/unit
+docker run -v `pwd`/src:/app jinkallu/python_gcc pytest -rav flaskr/tests/api/unit
 ```
+In ubuntu add sudo for running docker.
 
