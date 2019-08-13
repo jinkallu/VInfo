@@ -47,7 +47,7 @@ jobs:
 
     steps:
     # API tests
-    - script: py.test -v flaskr/tests/api/unit --junitxml="flaskr/tests/api/unit/test-results.xml" --cov=com --cov-report=xml --cov-report=html
+    - script: py.test -v flaskr/tests/api/unit --junitxml="flaskr/tests/api/unit/test-results.xml" --cov=models --cov-report=xml --cov-report=html
       workingDirectory: 'src'
 
     # py tests
