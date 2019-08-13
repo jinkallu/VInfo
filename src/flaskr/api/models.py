@@ -3,14 +3,15 @@ from passlib.hash import pbkdf2_sha256 as sha256
 import psycopg2
 import json
 
+
 DATABASELOCAL="dbname='postgres' user='postgres' host='localhost' password='Antiquity@1'"
 DATABASECLOUD="dbname='gqdhjhdi' user='gqdhjhdi' host='john.db.elephantsql.com' password='a7obAswTJ2i4Pe9sCvUnKQ2NVFf_TwVH'"
 # CONNTYPE='LOCAL'
 CONNTYPE='CLOUD'
-
 class UserModel():
     @classmethod
     def add_user(cls,authtype,email, password):
+        conn=None
         try:
             # conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' password='Antiquity@1'")
             if(CONNTYPE)=='LOCAL':
@@ -21,6 +22,7 @@ class UserModel():
             print("conn successfull")
         except:
             print("I am unable to connect to the database")
+           
         
         cur=conn.cursor()
         res_json=None
@@ -92,11 +94,12 @@ class NodeModel():
 
     @classmethod
     def create_node(cls, nodedata):
+       
         try:
             if(CONNTYPE)=='LOCAL':
-                conn = psycopg2.connect(DATABASELOCAL)
+                conn=psycopg2.connect(DATABASELOCAL)
             else:
-                conn = psycopg2.connect(DATABASECLOUD)
+                conn=psycopg2.connect(DATABASECLOUD)
         except:
             print("I am unable to connect to the database")        
         cur=conn.cursor()
@@ -162,6 +165,24 @@ class NodeModel():
         result=cur.fetchall()
         return result
     
+    # @classmethod
+    # def list_nodes(cls , datain):
+    #     try:
+    #         if(CONNTYPE)=='LOCAL':
+    #             conn = psycopg2.connect(DATABASELOCAL)
+    #         else:
+    #             conn = psycopg2.connect(DATABASECLOUD)
+    #     except:
+    #         print("I am unable to connect to the database") 
+
+    #     cur=conn.cursor()
+    #     res_json=None
+    #     res_vals=None
+    #     res=cur.execute(""" call noder.list_node(%s,%s,%s)""",[json.dumps(datain),res_vals,res_json])    
+    #     conn.commit()
+    #     result=cur.fetchall()
+    #     return result
+
     @classmethod
     def list_nodes(cls , datain):
         try:
@@ -175,10 +196,10 @@ class NodeModel():
         cur=conn.cursor()
         res_json=None
         res_vals=None
-        res=cur.execute(""" call noder.list_node(%s,%s,%s)""",[json.dumps(datain),res_vals,res_json])    
+        res=cur.execute(""" call noder.listnodes(%s,%s)""",[json.dumps(datain),res_vals])    
         conn.commit()
-        result=cur.fetchall()
-        return result
+        result=cur.fetchone()
+        return result[0]
 
 
         

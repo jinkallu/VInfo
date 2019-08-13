@@ -17,6 +17,7 @@ loginparser.add_argument('sessiondata', help = 'This field cannot be blank', req
 nodeparser=reqparse.RequestParser()
 nodeparser.add_argument('session', help = 'This field cannot be blank...', required = True)
 nodeparser.add_argument('programid', help = 'This field cannot be blank...', required = True)
+nodeparser.add_argument('nodename', help = 'This field cannot be blank...', required = True)
 nodeparser.add_argument('title', help = 'This field cannot be blank...', required = True)
 nodeparser.add_argument('parent', help = 'This field cannot be blank...', required = True)
 nodeparser.add_argument('briefdesc', help = 'This field cannot be blank...', required = True)
@@ -39,6 +40,7 @@ listattribvalparser.add_argument('session', help = 'This field cannot be blank..
 listnodeparser=reqparse.RequestParser()
 listnodeparser.add_argument('nodeid', help = 'This field cannot be blank...', required=False)
 listnodeparser.add_argument('session', help = 'This field cannot be blank...', required = True)
+listnodeparser.add_argument('nodetype', help = 'This field cannot be blank...', required = True)
 
 class UserRegistration(Resource):
     def post(self):
