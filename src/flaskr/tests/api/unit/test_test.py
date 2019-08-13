@@ -25,6 +25,7 @@ def test_login(record_property):
     assert len(data['refresh_token']) > 0;
     assert data['message'] == 'Session Created Successfully';
 
+@pytest.mark.xfail # make the test fail
 def test_listnodes():
     """
     Given session,

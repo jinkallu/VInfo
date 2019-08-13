@@ -47,7 +47,7 @@ jobs:
 
     steps:
     # API tests
-    - script: py.test -v flaskr/tests/api/unit --junitxml="flaskr/tests/api/unit/result.xml"
+    - script: py.test -v flaskr/tests/api/unit --junitxml="flaskr/tests/api/unit/test-results.xml" --cov=com --cov-report=xml --cov-report=html
       workingDirectory: 'src'
 
     # py tests
@@ -87,10 +87,17 @@ jobs:
     # Publish CI API test results
     - task: PublishTestResults@2
       inputs:
-        testResultsFiles: 'src/flaskr/tests/api/unit/*.xml'
+        testResultsFiles: 'src/flaskr/tests/api/unit/test-*.xml'
         testRunTitle: 'CI Tests $(Agent.OS) API'
       displayName: 'Publish test results'
       condition: succeededOrFailed()
+
+    # Publish CI API test coverage results
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+        reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
 
      # Publish CI Svelte test results
     - task: PublishTestResults@2

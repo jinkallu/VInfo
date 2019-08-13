@@ -1,6 +1,7 @@
 # requiremets for frontend
 flask
 pytest
+pytest-cov
 
 # requirements for api
 flask
