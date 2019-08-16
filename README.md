@@ -45,3 +45,4 @@ docker run -v `pwd`/src:/app jinkallu/python_gcc pytest -rav flaskr/tests/api/un
 ```
 In ubuntu add sudo for running docker.
 
+Test to check Azure board works well with Github
