@@ -114,7 +114,7 @@
     */
     // To the right
         let prev_x_c = data[0].rx_c;
-        let prev_width = data[0].width;
+        //let prev_width = data[0].width;
         for(let i = 0; i < 4; i++)
         {
             let new_h = data[0].height / ((i +1) * 1.5);
@@ -131,7 +131,23 @@
             prev_x_c = prev_x_c + new_w;
         }
         // To the left
+        prev_x_c = data[0].rx_c;
+        for(let i = 0; i < 4; i++)
+        {
+            let new_h = data[0].height / ((i +1) * 1.5);
+            let new_w = data[0].width / ((i + 1) * 2);
 
+            new_data.push(
+                {
+                    rx: prev_x_c - new_w / 2 - new_w,
+                    ry: data[0].ry_c - new_h / 2,
+                    height: new_h,
+                    width: new_w,
+                    src: data[0].src
+                }
+            );
+            prev_x_c = prev_x_c - new_w;
+        }
         // root
         new_data.push(
             {
