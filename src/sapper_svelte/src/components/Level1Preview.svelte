@@ -112,41 +112,54 @@
         }
 
     */
+    let colors = ['#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3', '#DCDCDC'];
+
     // To the right
+        let right_data = [];
         let prev_x_c = data[0].rx_c;
         //let prev_width = data[0].width;
         for(let i = 0; i < 4; i++)
         {
             let new_h = data[0].height / ((i +1) * 1.5);
             let new_w = data[0].width / ((i + 1) * 2);
-            new_data.push(
+            right_data.push(
                 {
                     rx: prev_x_c + new_w / 2,
                     ry: data[0].ry_c - new_h / 2,
                     height: new_h,
                     width: new_w,
-                    src: data[0].src
+                    src: data[0].src,
+                    color: colors[i+1],
+                    focus: 0
                 }
             );
             prev_x_c = prev_x_c + new_w;
         }
         // To the left
+        let left_data = [];
         prev_x_c = data[0].rx_c;
         for(let i = 0; i < 4; i++)
         {
             let new_h = data[0].height / ((i +1) * 1.5);
             let new_w = data[0].width / ((i + 1) * 2);
 
-            new_data.push(
+            left_data.push(
                 {
                     rx: prev_x_c - new_w / 2 - new_w,
                     ry: data[0].ry_c - new_h / 2,
                     height: new_h,
                     width: new_w,
-                    src: data[0].src
+                    src: data[0].src,
+                    color: colors[i+1],
+                    focus: 0
                 }
             );
             prev_x_c = prev_x_c - new_w;
+        }
+        for(let i = 3; i >= 0; i--)
+        {
+            new_data.push(left_data[i]);
+            new_data.push(right_data[i]);
         }
         // root
         new_data.push(
@@ -155,9 +168,12 @@
                 ry: data[0].ry_c - data[0].height / 2,
                 height: data[0].height,
                 width: data[0].width,
-                src: data[0].src
+                src: data[0].src,
+                color: colors[0],
+                focus: 1
             }
         );
+
 
         return new_data;
     }

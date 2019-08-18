@@ -47,5 +47,5 @@
 <PlotLevel1 data = {level_1_data} />
 <PlotLevel2 data = {level_2_data} />
 
-<svg bind:this={svg} width="1000" height="1000">
+<svg bind:this={svg} width="1000" height="500">
 </svg>

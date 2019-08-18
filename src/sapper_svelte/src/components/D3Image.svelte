@@ -17,7 +17,7 @@ rectangle.enter().append("rect")
           .attr("y", function(d) { return d.ry; })
           .attr("width", function(d) { return d.width; })
           .attr("height", function(d) { return d.height; })
-          .style("fill", "steelblue")
+          .style("fill", function(d) { return d.color; })
           ;
 
 rectangle.exit().remove();
@@ -34,6 +34,16 @@ rectangle.exit().remove();
           .attr('x', function(d) { return d.rx; })
           .attr('y', function(d) { return d.ry; })
           .attr('stroke', 'black')
+          .on("click", function(d) {
+                let focus = d.focus;
+                if( focus === 1)
+                {
+                  console.log("Focus " + focus);
+                }
+                else{
+                    console.log("No Focus " + focus);
+                }
+          })
           ;
 
         image.exit().remove();
