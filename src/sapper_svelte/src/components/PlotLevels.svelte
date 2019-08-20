@@ -48,4 +48,5 @@
 <PlotLevel2 data = {level_2_data} />
 
 <svg bind:this={svg} width="1000" height="500">
+    <div id = "preview" > </div>
 </svg>
