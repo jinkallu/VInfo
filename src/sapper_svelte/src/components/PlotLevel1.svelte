@@ -9,7 +9,7 @@
     let width = data[0].width + 200;
     let height = data[0].height + 150;
 
-    function create()
+    const new_d = function create()
     {
         let new_data = [];
         new_data.push(
@@ -18,13 +18,27 @@
                 ry_c: data[0].ry + y_offset + height / 2,
                 height: height,
                 width: width,
-                src: data[0].src
+                src: data[0].src,
+                id: 0
             }
         );
+        for(let i = 1; i < 9; i++)
+        {
+            new_data.push(
+                {
+                    rx_c: data[0].rx + x_offset + width / 2,
+                    ry_c: data[0].ry + y_offset + height / 2,
+                    height: height,
+                    width: width,
+                    src: data[0].src,
+                    id: i
+                }
+            );
+        }
 
         return new_data;
     }
 </script>
 
 <D3Test data = {data} />
-<Preview data = {create()}/>
+<Preview data = {new_d()}/>
