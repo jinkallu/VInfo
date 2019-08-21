@@ -3,7 +3,7 @@ from flask_restful import Api
 # from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static/images/')
 api = Api(app)
 
 app.config['POSTGRES_DATABASE_URI_REMOTE'] = "dbname='gqdhjhdi' user='gqdhjhdi' host='john.db.elephantsql.com' password='a7obAswTJ2i4Pe9sCvUnKQ2NVFf_TwVH'"
@@ -44,6 +44,8 @@ api.add_resource(resources.ListNodeAttribs,'/listattribs')
 api.add_resource(resources.AddNodeAttribs ,'/addattribs')
 api.add_resource(resources.ListAttribVals ,'/listattribvals')
 api.add_resource(resources.ListNodes,'/listnodes')
+api.add_resource(resources.UploadFile,'/upload')
+api.add_resource(resources.GetResource,'/getresource')
 
 @app.after_request
 def after_request(response):

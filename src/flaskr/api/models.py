@@ -134,11 +134,12 @@ class NodeModel():
     def add_nodeattribs(cls, datain):
         try:
             if(CONNTYPE)=='LOCAL':
-                conn = psycopg2.connect(DATABASELOCAL)
+                conn=psycopg2.connect(DATABASELOCAL)
             else:
-                conn = psycopg2.connect(DATABASECLOUD)
+                conn=psycopg2.connect(DATABASECLOUD)
         except:
-            print("I am unable to connect to the database") 
+            print("I am unable to connect to the database")  
+            return    
 
         cur=conn.cursor()
         res_json=None
@@ -164,6 +165,45 @@ class NodeModel():
         conn.commit()
         result=cur.fetchall()
         return result
+
+    @classmethod
+    def get_resource(cls, datain):
+        try:
+            if(CONNTYPE)=='LOCAL':
+                conn = psycopg2.connect(DATABASELOCAL)
+            else:
+                conn = psycopg2.connect(DATABASECLOUD)
+        except:
+            print("I am unable to connect to the database") 
+
+        cur=conn.cursor()
+        res_json=None
+        res_vals=None
+        res=cur.execute(""" call noder.get_resource(%s,%s)""",[json. dumps(datain),res_vals])    
+        conn.commit()
+        result=cur.fetchone()
+        return result[0]
+
+    @classmethod
+    def create_resource   (cls, datain):
+        try:
+            if(CONNTYPE)=='LOCAL':
+                conn = psycopg2.connect(DATABASELOCAL)
+            else:
+                conn = psycopg2.connect(DATABASECLOUD)
+        except:
+            print("I am unable to connect to the database") 
+
+        cur=conn.cursor()
+        res_json=None
+        res_vals=None
+        res=cur.execute(""" call noder.get_resource(%s,%s)""",[json.dumps(datain),res_vals])    
+        conn.commit()
+        result=cur.fetchone()
+        return result[0]
+
+
+
     
     # @classmethod
     # def list_nodes(cls , datain):
@@ -200,6 +240,10 @@ class NodeModel():
         conn.commit()
         result=cur.fetchone()
         return result[0]
+
+    
+
+    
 
 
         

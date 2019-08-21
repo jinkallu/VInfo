@@ -1,9 +1,12 @@
 from flask_restful import Resource, reqparse
+from flask import send_from_directory,Response
+import werkzeug
 from models import UserModel,TokenModel,NodeModel
 # , RevokedTokenModel
 import json
+import os
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-
+UPLOAD_FOLDER='C:/Users/ADMIN/Documents/GitHub/vinfo_git/src/flaskr/api/static/images/'
 regparser = reqparse.RequestParser()
 regparser.add_argument('username', help = 'This field cannot be blank', required = True)
 regparser.add_argument('password', help = 'This field cannot be blank', required = True)
@@ -42,6 +45,15 @@ listnodeparser.add_argument('nodeid', help = 'This field cannot be blank...', re
 listnodeparser.add_argument('session', help = 'This field cannot be blank...', required = True)
 listnodeparser.add_argument('nodetype', help = 'This field cannot be blank...', required = True)
 
+uploadparser = reqparse.RequestParser()
+uploadparser.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
+uploadparser.add_argument('nodeid', help = 'This field cannot be blank...', required=True)
+uploadparser.add_argument('attribid', help = 'This field cannot be blank...', required=True)
+
+resourceparser=reqparse.RequestParser()
+resourceparser.add_argument('resourceid', help = 'This field cannot be blank...', required=False)
+
+
 class UserRegistration(Resource):
     def post(self):
         data = regparser.parse_args()        
@@ -62,9 +74,7 @@ class UserLogin(Resource):
             return {"status":"success","session":sessionid,"access_token":access_token,"refresh_token":refresh_token,"message":"Session Created Successfully"}
         return {"status":"error","message":"Unable to create session"}
 
-class UserLogoutAccess(Resource):
-
-    
+class UserLogoutAccess(Resource):    
     @jwt_required
     def post(self):
         currentuser=get_jwt_identity()
@@ -106,7 +116,36 @@ class ListNodes(Resource):
     def post(self):
         datain=listnodeparser.parse_args()
         res=NodeModel.list_nodes(datain)
+        return Response(json.dumps(res),status=res["status"]['status'],mimetype='application/json')
+
+class UploadFile(Resource):
+      def post(self):       
+        args = uploadparser.parse_args()
+        print(args)
+        file = uploadparser['file']
+        path=os.path.join(UPLOAD_FOLDER,'test.jpg')
+        try:
+            file.save(path)
+            return "saving success"
+
+        except:
+            return "error saving file"
+
+class GetResource(Resource):
+    def post(self):
+        datain=resourceparser.parse_args()
+        res=NodeModel.get_resource(datain)
+        if(datain['resourceid']==res['resourceid']):
+            print('matching')
+            try:
+                return  send_from_directory('static/images','test.jpg')
+            except:
+                return"unable to load file"
+        print(res)
         return res
+
+            
+        
 
         
 
