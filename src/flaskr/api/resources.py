@@ -6,7 +6,7 @@ from models import UserModel,TokenModel,NodeModel
 import json
 import os
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-UPLOAD_FOLDER='C:/Users/ADMIN/Documents/GitHub/vinfo_git/src/flaskr/api/static/images/'
+UPLOAD_FOLDER='static/images/'
 regparser = reqparse.RequestParser()
 regparser.add_argument('username', help = 'This field cannot be blank', required = True)
 regparser.add_argument('password', help = 'This field cannot be blank', required = True)
