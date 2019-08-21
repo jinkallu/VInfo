@@ -69,7 +69,8 @@ new_data = [];
                     src: src,
                     color: colors[i - mid],
                     focus: 0,
-                    id: data[i].id
+                    id: data[i].id,
+                    nodename: data[i].nodename
                 }
             );
             prev_x_c = prev_x_c + new_w;
@@ -92,7 +93,8 @@ new_data = [];
                     src: src,
                     color: colors[i + 1],
                     focus: 0,
-                    id: data[i].id
+                    id: data[i].id,
+                    nodename: data[i].nodename
                 }
             );
             prev_x_c = prev_x_c - new_w;
@@ -118,7 +120,8 @@ new_data = [];
                 src: src,
                 color: colors[0],
                 focus: 1,
-                id: data[mid].id
+                id: data[mid].id,
+                nodename: data[mid].nodename
             }
         );
 
