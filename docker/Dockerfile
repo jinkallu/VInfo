@@ -27,8 +27,7 @@ RUN npm install -g
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
-EXPOSE 8081
+EXPOSE 5000 3000
 
 # API pytest
 ENV PYTHONPATH=$PYTHONPATH:flaskr/api/
