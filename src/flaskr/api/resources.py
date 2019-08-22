@@ -56,23 +56,26 @@ resourceparser.add_argument('resourceid', help = 'This field cannot be blank...'
 
 class UserRegistration(Resource):
     def post(self):
-        data = regparser.parse_args()        
-        res=UserModel.add_user(data['authtype'],data['username'],data['password'])
+        data = regparser.parse_args()  
+        print(data)      
+        res=UserModel.add_user(data)
         return res
+        return Response(json.dumps(res),status=res["status"]['status'],mimetype='application/json')
 
 class UserLogin(Resource):
     def post(self):
         data=loginparser.parse_args()
         res=UserModel.user_auth( data['username'],data['password'],data['sessiondata'])   
         print(res)    
-        if(res[0][1]['status'])=='success' and  (res[0][0] )!=None:
+        if(res[0][1]['status'])==200 and  (res[0][0] )!=None:
             access_token=create_access_token(identity=res[0])
             refresh_token=create_refresh_token(res[0])
             postdata={"sessionid":res[0][0],"jti":access_token}
             sessionid=res[0][0]
             TokenModel.insert_tokens(postdata)
-            return {"status":"success","session":sessionid,"access_token":access_token,"refresh_token":refresh_token,"message":"Session Created Successfully"}
-        return {"status":"error","message":"Unable to create session"}
+            resp={"session":sessionid,"access_token":access_token,"refresh_token":refresh_token,"message":"Session Created Successfully"}
+            return Response(json.dumps(resp),status=200,mimetype='application/json' )
+        return Response(json.dumps(res[0]),res[0][1]["status"],mimetype='application/json' )
 
 class UserLogoutAccess(Resource):    
     @jwt_required

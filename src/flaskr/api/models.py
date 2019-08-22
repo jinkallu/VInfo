@@ -10,7 +10,7 @@ DATABASECLOUD="dbname='gqdhjhdi' user='gqdhjhdi' host='john.db.elephantsql.com' 
 CONNTYPE='CLOUD'
 class UserModel():
     @classmethod
-    def add_user(cls,authtype,email, password):
+    def add_user(cls,data):
         conn=None
         try:
             # conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' password='Antiquity@1'")
@@ -23,15 +23,15 @@ class UserModel():
         except:
             print("I am unable to connect to the database")
            
-        
+        print(data)
         cur=conn.cursor()
         res_json=None
-        res=cur.execute(""" call noder.add_user(%s,%s,%s,%s)""",[authtype,email,password,res_json])
-        data=cur.fetchall()
+        res=cur.execute(""" call noder.add_user(%s,%s)""",[json.dumps(data),res_json])
+        data=cur.fetchone()
         # cur.execute("""SELECT datname from pg_database""")
         conn.commit()
         conn.close()
-        return data
+        return data[0]
 
     @classmethod
     def user_auth(cls,username, password,sessiondata):
@@ -231,7 +231,7 @@ class NodeModel():
             else:
                 conn = psycopg2.connect(DATABASECLOUD)
         except:
-            print("I am unable to connect to the database") 
+            print("I am unable to connect to the database")    
 
         cur=conn.cursor()
         res_json=None
