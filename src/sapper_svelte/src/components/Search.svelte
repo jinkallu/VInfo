@@ -17,7 +17,6 @@
         border: 0;
         outline: none;
         box-shadow: none;
-        background-image: url('http://www.paulund.co.uk/playground/demo/pretty_search_forms/images/search.png');
     }
 </style>
 

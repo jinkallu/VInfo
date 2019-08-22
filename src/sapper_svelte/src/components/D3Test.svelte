@@ -17,6 +17,15 @@
                     .attr("height", function(d) { return d.height; })
                     .style("fill", function(d) { return d.color; });
 
+            rectangle.enter().append("text")
+                  .attr("x", function(d) { return (d.rx); })
+                  .attr("y", function(d) { return (d.ry + d.height / 2); })
+                  .style("fill", "black")
+                  .attr("dy", ".35em")
+                  .text(function(d) {
+                    return d.name;
+                  })
+
           rectangle.exit().remove();   
      });
 </script>

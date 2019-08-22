@@ -25,12 +25,14 @@ function create() {
                            ;
 
     group.append("rect")
-          .transition()
+    .merge(group)
+//          .transition()
           .attr("x", function(d) { return d.rx; })
           .attr("y", function(d) { return d.ry; })
           .attr("width", function(d) { return d.width; })
           .attr("height", function(d) { return d.height; })
           .style("fill", function(d) { return d.color; })
+          .attr('class', 'preview rect')
           ;
 
     group.append("image")
@@ -40,6 +42,7 @@ function create() {
       .attr('x', function(d) { return d.rx; })
       .attr('y', function(d) { return d.ry; })
       .attr('stroke', 'black')
+      .attr('class', 'preview img')
       .on("click", function(d, i) {
             let focus = d.focus;
             if( focus === 1)
@@ -56,17 +59,18 @@ function create() {
       ;
 
     group.append("text")
-            .attr("x", function(d) { return (d.rx + d.width / 2); })
+            .attr("x", function(d) { return (d.rx); })
             .attr("y", function(d) { return (d.ry + d.height / 2); })
             .attr("dy", ".35em")
-            .text(function(d) { return d.id; });
+            .attr('class', 'preview txt')
+            .text(function(d) { return d.nodename; });
 
     group.exit().remove();
 
 }
 
 $: {
-    var rect = d3.selectAll("rect")
+    var rect = d3.selectAll(".preview.rect")
                 .data(data)
                 .transition()
                 .duration(1000)
@@ -77,9 +81,10 @@ $: {
                 .style("fill", function(d) { return d.color; })
                 ;
 
-    var image = d3.selectAll("image")
+    var image = d3.selectAll(".preview.img")
                     .data(data)
                     .transition()
+                    .duration(1000)
                     .attr('xlink:href', function(d) { return d.src; })
                     .attr('width', function(d) { return d.width; })
                     .attr('height', function(d) { return d.height; })
@@ -88,13 +93,14 @@ $: {
                     .attr('stroke', 'black')
                     ;
 
-    var text = d3.selectAll("text")
+    var text = d3.selectAll(".preview.txt")
                 .data(data)
                 .transition()
-                .attr("x", function(d) { return (d.rx + d.width / 2); })
+                .duration(1000)
+                .attr("x", function(d) { return (d.rx); })
                 .attr("y", function(d) { return (d.ry + d.height / 2); })
                 .attr("dy", ".35em")
-                .text(function(d) { return d.id; });
+                .text(function(d) { return d.nodename; });
 /*
     // test rect
     var svg = d3.select("svg");

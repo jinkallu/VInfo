@@ -39,7 +39,7 @@
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+        <title>VInfo</title>
 </svelte:head>
 <!--
 <h1>Great success!</h1>
@@ -50,4 +50,5 @@
 </figure>
 -->
 <PlotLevels />
-<p><strong>Try this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<!--<p><strong>Try this file (src/routes/index.svelte) to test live reloading.</strong></p>
+-->
