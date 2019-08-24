@@ -37,7 +37,7 @@ jobs:
         command: push an image
         imageName: 'jinkallu/python_gcc:latest'
         
-    -condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))      
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))      
   
   - job: RunTests
     displayName: 'Run Tests'
