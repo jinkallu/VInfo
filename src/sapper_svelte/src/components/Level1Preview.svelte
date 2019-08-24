@@ -1,5 +1,6 @@
 <script>
     import D3Image from '../components/D3Image.svelte';
+    import PlotPreview from '../components/PlotPreview.svelte';
 
     export let data = [];
     let id = undefined;
@@ -11,6 +12,8 @@
     let mid;
      let new_data = [];
      let len;
+
+export let svg;
 
 let test = false;
 
@@ -170,4 +173,8 @@ new_data = [];
 </script>
 
 <D3Image  bind:data = {new_d}  bind:clicked_id = {id} on:click={handleClick}/>
-
+<!--
+{#each new_d as d}
+    <PlotPreview {svg} data = {d} />
+{/each}
+-->

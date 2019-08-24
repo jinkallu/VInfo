@@ -2,6 +2,7 @@
     import D3Test from '../components/D3Test.svelte';
     import Preview from '../components/Level1Preview.svelte';
 
+export let svg;
     export let data = [];
     export let size_data = [];
     let new_data = [];
@@ -58,4 +59,4 @@
 </script>
 
 <D3Test data = {size_data} />
-<Preview data = {new_d}/>
+<Preview {svg} data = {new_d}/>

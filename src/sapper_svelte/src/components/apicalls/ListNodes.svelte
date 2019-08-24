@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
      //let url = "http://0.0.0.0:5000/login?username=jinesh&password=jinesh&sessiondata=ppp";
-     let url = "http://0.0.0.0:5000/listnodes?session=ss&nodetype=TOP";
+     let url = "http://0.0.0.0:5000/listnodes?session=ss&nodetype=FOCUS&nodeid=db4b740e-c3cf-406f-ab70-78e0929ece80";
      export let data = [];
      export let flag = false;
      onMount(async () =>  {
