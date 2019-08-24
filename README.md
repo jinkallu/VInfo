@@ -5,7 +5,7 @@
 ## Run   
 ### First time clone
 ```
-git clone https://github.com/jkallu/vinfo_git.git   
+git clone https://Freeedu@dev.azure.com/Freeedu/vinfo/_git/vinfo   
 cd vinfo_git 
 ```
 To build the Svelte app
