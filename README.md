@@ -8,7 +8,7 @@
 git clone https://Freeedu@dev.azure.com/Freeedu/vinfo/_git/vinfo   
 cd  vinfo   
 ```
-To build  the Svelte app
+To  build  the Svelte app
 ```
 docker run  -v `pwd`:/app jinkallu/python_gcc npm --prefix src/flaskr/svelte-app run build
 ```
