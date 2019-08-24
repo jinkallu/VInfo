@@ -51,6 +51,10 @@ jobs:
     steps:
 
     # Sapper build
+    - script: npm install
+      workingDirectory: 'src/sapper_svelte'
+
+    # Sapper build
     - script: npm run build
       workingDirectory: 'src/sapper_svelte'
 
