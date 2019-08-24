@@ -59,10 +59,11 @@ function create() {
       ;
 
     group.append("text")
-            .attr("x", function(d) { return (d.rx); })
+            .attr("x", function(d) { return (d.rx + d.width / 4); })
             .attr("y", function(d) { return (d.ry + d.height / 2); })
             .attr("dy", ".35em")
             .attr('class', 'preview txt')
+            .style("fill", "red")
             .text(function(d) { return d.nodename; });
 
     group.exit().remove();
@@ -97,9 +98,10 @@ $: {
                 .data(data)
                 .transition()
                 .duration(1000)
-                .attr("x", function(d) { return (d.rx); })
+                .attr("x", function(d) { return (d.rx + d.width / 4); })
                 .attr("y", function(d) { return (d.ry + d.height / 2); })
                 .attr("dy", ".35em")
+                .style("fill", "red")
                 .text(function(d) { return d.nodename; });
 /*
     // test rect
@@ -146,6 +148,7 @@ $: {
             .attr("x", function(d) { return (d.rx + d.width / 2); })
             .attr("y", function(d) { return (d.ry + d.height / 2); })
             .attr("dy", ".35em")
+            .style("fill", "red")
             .text(function(d) { return d.id; });
 
     group.exit().remove();

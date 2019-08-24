@@ -55,9 +55,9 @@ let flag  = false;
 
 
 {#if flag}
-    {level_0_data[0].name = node_data.parent.briefdesc}
+    {level_0_data[0].name = node_data.parent.nodename}
     <PlotLevel0 data = {level_0_data} />
-    <PlotLevel1 bind:data = {node_data} bind:size_data = {level_1_data} />
+    <PlotLevel1 {svg} bind:data = {node_data} bind:size_data = {level_1_data} />
     <PlotLevel2 data = {level_2_data} />
 {:else}
     Loading...
