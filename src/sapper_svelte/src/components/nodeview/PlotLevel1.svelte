@@ -1,6 +1,6 @@
 <script>
-    import D3Test from '../components/D3Test.svelte';
-    import Preview from '../components/Level1Preview.svelte';
+    import D3Test from '../d3/D3Test.svelte';
+    import Preview from './Level1Preview.svelte';
 
 export let svg;
     export let data = [];

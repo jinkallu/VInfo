@@ -18,7 +18,7 @@
                     .style("fill", function(d) { return d.color; });
 
             rectangle.enter().append("text")
-                  .attr("x", function(d) { return (d.rx); })
+                  .attr("x", function(d) { return (d.rx + d.width / 10); })
                   .attr("y", function(d) { return (d.ry + d.height / 2); })
                   .style("fill", "black")
                   .attr("dy", ".35em")

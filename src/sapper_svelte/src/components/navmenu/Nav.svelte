@@ -1,6 +1,6 @@
 <script>
-    import SideNav from '../components/Sidenav.svelte';
-    import Search from '../components/Search.svelte';
+    import SideNav from './Sidenav.svelte';
+    import Search from './Search.svelte';
 
 	export let segment;
 </script>

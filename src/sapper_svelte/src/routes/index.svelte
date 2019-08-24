@@ -1,5 +1,5 @@
 <script>
-    import PlotLevels from '../components/PlotLevels.svelte';
+    import PlotLevels from '../components/nodeview/PlotLevels.svelte';
 
 
 </script>
