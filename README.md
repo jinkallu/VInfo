@@ -12,7 +12,7 @@ To  build  the Svelte app
 ```
 docker run  -v `pwd`:/app jinkallu/python_gcc npm --prefix src/flaskr/svelte-app run build
 ```
-To run the server on http://0.0.0.0:8081/
+To  run the server on http://0.0.0.0:8081/
 ```
 docker run  -v `pwd`/src/flaskr:/app -p 8081:8081 jinkallu/python_gcc python run.py
 ```
