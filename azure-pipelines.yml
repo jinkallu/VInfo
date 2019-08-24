@@ -49,6 +49,11 @@ jobs:
     container: 'jinkallu/python_gcc:latest'
 
     steps:
+
+    # Sapper build
+    - script: npm run build
+      workingDirectory: 'src/sapper_svelte'
+
     # API tests
     - script: py.test -v flaskr/tests/api/unit --junitxml="flaskr/tests/api/unit/test-results.xml" --cov=models --cov-report=xml --cov-report=html
       workingDirectory: 'src'
