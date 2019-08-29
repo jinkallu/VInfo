@@ -1,7 +1,10 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
-    const click = () => dispatch('click');
+    const click = () => dispatch('click', {
+        id: clicked_id,
+        nodeid: nodeid
+    });
      import * as d3 from 'd3';
 
      import { onMount } from 'svelte';
@@ -9,6 +12,7 @@
      export let test;
      export let data = [];
      export let clicked_id = undefined;
+     let nodeid;
 
     onMount(() => {
         create();
@@ -45,14 +49,15 @@ function create() {
       .attr('class', 'preview img')
       .on("click", function(d, i) {
             let focus = d.focus;
-            if( focus === 1)
+            if( focus === true)
             {
-              console.log("Focus " + focus + " " + i + " " + d.id );
+              console.log("Focus " + focus + " " + i + " " + d.id + " " + d.nodeid + " " + d.nodename );
 
             }
             else{
-                console.log("No Focus " + focus + " " + i  + " " + d.id );
+                console.log("No Focus " + focus + " " + i  + " " + d.id + " " + d.nodeid + " " + d.nodename);
                 clicked_id = d.id;
+                nodeid = d.nodeid;
                 click("Focus " + focus + " " + d.id );
             }
       })
@@ -70,6 +75,7 @@ function create() {
 
 }
 
+/*
 $: {
     var rect = d3.selectAll(".preview.rect")
                 .data(data)
@@ -103,6 +109,9 @@ $: {
                 .attr("dy", ".35em")
                 .style("fill", "red")
                 .text(function(d) { return d.nodename; });
+}
+*/
+
 /*
     // test rect
     var svg = d3.select("svg");
@@ -153,7 +162,6 @@ $: {
 
     group.exit().remove();
 */
-}
 </script>
 
 

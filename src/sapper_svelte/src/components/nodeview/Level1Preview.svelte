@@ -1,6 +1,9 @@
 <script>
     import D3Image from '../d3/D3Image.svelte';
     import PlotPreview from './PlotPreview.svelte';
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
 
     export let data = [];
     let id = undefined;
@@ -43,6 +46,12 @@ new_data = [];
 
     len = data.length;
     mid = len % 2 ? Math.floor(len / 2) : len / 2;
+    console.log(mid);
+
+    while(data[mid].focus !== true)
+    {
+        data = arrayRotate(data, false);
+    }
 
     let colors = ['#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3', '#DCDCDC'];
 
@@ -71,9 +80,10 @@ new_data = [];
                     width: new_w,
                     src: src,
                     color: colors[i - mid],
-                    focus: 0,
+                    focus: data[i].focus,
                     id: data[i].id,
-                    nodename: data[i].nodename
+                    nodename: data[i].nodename,
+                    nodeid: data[i].nodeid
                 }
             );
             prev_x_c = prev_x_c + new_w;
@@ -95,9 +105,10 @@ new_data = [];
                     width: new_w,
                     src: src,
                     color: colors[i + 1],
-                    focus: 0,
+                    focus: data[i].focus,
                     id: data[i].id,
-                    nodename: data[i].nodename
+                    nodename: data[i].nodename,
+                    nodeid: data[i].nodeid
                 }
             );
             prev_x_c = prev_x_c - new_w;
@@ -109,9 +120,7 @@ new_data = [];
         }
         for(let i = right_data.length - 1; i >= 0; i--)
         {
-        new_data.push(right_data[i]);
-
-
+            new_data.push(right_data[i]);
         }
         // root (middle data, now on focus)
         new_data.push(
@@ -122,17 +131,21 @@ new_data = [];
                 width: width,
                 src: src,
                 color: colors[0],
-                focus: 1,
+                focus: data[mid].focus,
                 id: data[mid].id,
-                nodename: data[mid].nodename
+                nodename: data[mid].nodename,
+                nodeid: data[mid].nodeid
             }
         );
 
-// reverse the order of left data
+        // reverse the order of left data
+        // This is not the best solution, but works
         for(let i = 0; i < mid; i++)
         {
-            //console.log(data[i].id, new_data[i].id);
             new_data[i].id = data[i].id;
+            new_data[i].nodename = data[i].nodename;
+            new_data[i].nodeid = data[i].nodeid;
+            new_data[i].focus = data[i].focus;
         }
 
         test = !test;
@@ -142,7 +155,13 @@ new_data = [];
         //return test;
     }
 
-    function handleClick() {
+    function handleClick(event) {
+        console.log('clicked id', event.detail.id);
+        dispatch('click', {
+            id: event.detail.id,
+            nodeid: event.detail.nodeid
+        });
+/*
         if(id !== undefined)
         {
             let diff = data[mid].id - id;
@@ -168,7 +187,7 @@ new_data = [];
         {
             console.log(data[i].id, new_d[i].id);
         }
-
+*/
     }
 </script>
 
