@@ -3,16 +3,6 @@
 
     const dispatch = createEventDispatcher();
 
-    function click (nodeid, focus)
-    {
-        //console.log('Focus ' + focus);
-        dispatch('click', {
-                nodeid: nodeid,
-                focus: focus
-            }
-        );
-    };
-
     export let data;
 
 </script>
@@ -28,16 +18,15 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     }
 </style>
-{#each data as d, i}
+{#if data}
     <div class = "preview"
-         style="left: {d.rx + 'px'};
-                top: {d.ry + 'px'};
-                width: {d.width + 'px'};
-                height: {d.height + 'px'};
-                background-color: {d.color}"
-
-         on:click={click.bind(this, d.nodeid, d.focus)}
+         style="left: {data.rx + 'px'};
+                top: {data.ry + 'px'};
+                width: {data.width + 'px'};
+                height: {data.height + 'px'};
+                background-color: {data.color}"
+         on:click="{() => {dispatch('click', {nodeid: data.nodeid, focus: data.focus })}}"
     >
-        {d.nodename}
+        {data.nodename}
     </div>
-{/each}
+{/if}

@@ -26,6 +26,13 @@
         }
     }
 
+    function arrayRotate(arr, reverse) {
+        if (reverse) arr.unshift(arr.pop());
+        else arr.push(arr.shift());
+
+        return arr;
+    }
+
     function create(){
         let new_data = [];
 
@@ -37,6 +44,7 @@
         {
             sibblings = arrayRotate(sibblings, false);
         }
+        console.log(sibblings);
 
         // colors must be replaced with better logic
         let colors = ['#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3', '#DCDCDC'];
@@ -126,12 +134,12 @@
         // This is not the best solution, but works
         for(let i = 0; i < mid; i++)
         {
-            new_data[i].id = sibblings[i].id;
+            //new_data[i].id = sibblings[i].id;
             new_data[i].nodename = sibblings[i].nodename;
             new_data[i].nodeid = sibblings[i].nodeid;
             new_data[i].focus = false;
         }
-
+        console.log(new_data);
         return new_data;
     }
 
@@ -144,6 +152,8 @@
     }
 </script>
 
-{#if sibblings}
-    <SelfAndSibblingsCarouselView data = {view_data} on:click={handleClick}/>
+{#if view_data}
+    {#each view_data as d}
+        <SelfAndSibblingsCarouselView data = {d} on:click={handleClick}/>
+    {/each}
 {/if}

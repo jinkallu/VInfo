@@ -8,9 +8,11 @@
 
 
     const unsubscribe = nodestore.subscribe(items => {
-        if(items.children)
-        {
-            childrenPos (items.children);
+        if(items){
+            if(items.children)
+            {
+                childrenPos (items.children);
+            }
         }
     });
 

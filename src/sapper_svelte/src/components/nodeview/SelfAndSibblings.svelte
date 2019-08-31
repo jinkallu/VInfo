@@ -10,13 +10,15 @@
     let view_data = [];
 
     const unsubscribe = nodestore.subscribe(items => {
-        if(items.sibblings)
-        {
-            sibblings = items.sibblings;
-        }
-        if(items.self)
-        {
-            self = items.self;
+        if(items){
+            if(items.sibblings)
+            {
+                sibblings = items.sibblings;
+            }
+            if(items.self)
+            {
+                self = items.self;
+            }
         }
     });
 
@@ -29,7 +31,9 @@
     function handleClick(event) {
         if(!event.detail.focus)
         {
-            nodestore.getFull({nodeid:event.detail.nodeid});
+            nodestore.getFull({nodeid:event.detail.nodeid,
+                               op: 'FOCUS'
+                                });
         }
         else{
             console.log('Show full page of focus');
@@ -38,5 +42,5 @@
 
 </script>
 
-<SelfAndSibblingsNorm {sibblings} {size_data} />
+<SelfAndSibblingsNorm {sibblings} {self} {size_data} />
 <SelfAndSibblingsCarousel {sibblings} {self} {size_data} on:click={handleClick}/>

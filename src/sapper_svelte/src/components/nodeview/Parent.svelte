@@ -7,13 +7,15 @@
     export let size_data;
     let view_data = [];
 
-    nodestore.getFull({nodeid:'db4b740e-c3cf-406f-ab70-78e0929ece80'});
+    nodestore.getFull({nodeid:null, op: 'FOCUS'});
 
 
     const unsubscribe = nodestore.subscribe(items => {
-        if(items.parent)
-        {
-            parentPos(items.parent);
+        if(items){
+            if(items.parent)
+            {
+                parentPos(items.parent);
+            }
         }
     });
 
