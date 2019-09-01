@@ -21,27 +21,32 @@
         if(sibblings)
         {
             let len = sibblings.length;
-            let mid = len % 2 ? Math.floor(len / 2) : len / 2;
-            console.log(mid);
+            if(len > 0){
 
-            while(sibblings[mid].nodeid !== self.nodeid)
-            {
-                sibblings = arrayRotate(sibblings, false);
-            }
-            for(let i = 0; i < sibblings.length; i++)
-            {
-                tmp_view_data.push({
-                    rx: size_data[0].rx + i * (size_data[0].width + 10) - ((sibblings.length - 1) * (size_data[0].width + 10) / 2),
-                    ry: size_data[0].ry,
-                    width: size_data[0].width,
-                    height: size_data[0].height,
-                    color: i === mid ? 'Red': color,
-                    name: sibblings[i].nodename,
-                    focus: i === mid ? true: false
-                });
-            }
+                let mid = len % 2 ? Math.floor(len / 2) : len / 2;
+                console.log(mid);
 
-            view_data = tmp_view_data;
+                let loopLimit = 0;
+                while(sibblings[mid].nodeid !== self.nodeid && loopLimit < 100) // magic number 100
+                {
+                    sibblings = arrayRotate(sibblings, false);
+                    loopLimit++;
+                }
+                for(let i = 0; i < sibblings.length; i++)
+                {
+                    tmp_view_data.push({
+                        rx: size_data[0].rx + i * (size_data[0].width + 10) - ((sibblings.length - 1) * (size_data[0].width + 10) / 2),
+                        ry: size_data[0].ry,
+                        width: size_data[0].width,
+                        height: size_data[0].height,
+                        color: i === mid ? 'Red': color,
+                        name: sibblings[i].nodename,
+                        focus: i === mid ? true: false
+                    });
+                }
+
+                view_data = tmp_view_data;
+            }
         }
     }
 </script>

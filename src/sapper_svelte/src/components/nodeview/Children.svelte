@@ -8,18 +8,15 @@
 
 
     const unsubscribe = nodestore.subscribe(items => {
+        view_data = [];
         if(items){
             if(items.children)
             {
                 childrenPos (items.children);
             }
-            else{
-                view_data = null;
-            }
+
         }
-        else{
-            view_data = null;
-        }
+
     });
 
     onDestroy( () => {
@@ -56,7 +53,7 @@
     }
 </script>
 
-{#if view_data}
+{#if view_data.length > 0}
     {#each view_data as d}
         <ChildrenView data = {d} on:click={handleClick}/>
     {/each}

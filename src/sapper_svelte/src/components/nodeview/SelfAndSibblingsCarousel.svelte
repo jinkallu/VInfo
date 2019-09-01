@@ -19,6 +19,7 @@
     let view_data = [];
 
     $: {
+        view_data = null;
         let tmp_view_data = [];
         if(sibblings)
         {
@@ -40,9 +41,11 @@
         let mid = len % 2 ? Math.floor(len / 2) : len / 2;
         console.log(mid);
 
-        while(sibblings[mid].nodeid !== self.nodeid)
+        let loopLimit = 0;
+        while(sibblings[mid].nodeid !== self.nodeid && loopLimit < 100) // magic number 100
         {
             sibblings = arrayRotate(sibblings, false);
+            loopLimit++;
         }
         console.log(sibblings);
 

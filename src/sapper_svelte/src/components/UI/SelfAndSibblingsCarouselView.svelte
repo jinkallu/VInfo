@@ -1,4 +1,7 @@
 <script>
+    import {fade} from 'svelte/transition';
+    import {cubicIn} from 'svelte/easing';
+
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
@@ -19,7 +22,9 @@
     }
 </style>
 {#if data}
-    <div class = "preview"
+    <div out:fade={{easing: cubicIn, delay: 3000, duration: 100}}
+         in:fade={{easing: cubicIn, delay: 100, duration: 100}}
+         class = "preview"
          style="left: {data.rx + 'px'};
                 top: {data.ry + 'px'};
                 width: {data.width + 'px'};

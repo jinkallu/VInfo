@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
+//import {tweened} from 'svelte/motion';
 
 const nstore = writable([]);
+//const nstore = tweened([]);
 
 async function firstAsync(url, inp)  {
     const options = {

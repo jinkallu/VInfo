@@ -10,6 +10,8 @@
     let view_data = [];
 
     const unsubscribe = nodestore.subscribe(items => {
+        sibblings = [];
+        self = [];
         if(items){
             if(items.sibblings)
             {
@@ -42,5 +44,7 @@
 
 </script>
 
-<SelfAndSibblingsNorm {sibblings} {self} {size_data} />
-<SelfAndSibblingsCarousel {sibblings} {self} {size_data} on:click={handleClick}/>
+{#if sibblings.length > 0 && self}
+    <SelfAndSibblingsNorm {sibblings} {self} {size_data} />
+    <SelfAndSibblingsCarousel {sibblings} {self} {size_data} on:click={handleClick}/>
+{/if}
