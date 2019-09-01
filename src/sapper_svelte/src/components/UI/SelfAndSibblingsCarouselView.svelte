@@ -1,0 +1,37 @@
+<script>
+    import {fade} from 'svelte/transition';
+    import {cubicIn} from 'svelte/easing';
+
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
+    export let data;
+
+</script>
+
+<style>
+    .preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color:blue;
+        color: white;
+        position:absolute;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    }
+</style>
+{#if data}
+    <div out:fade={{easing: cubicIn, delay: 3000, duration: 100}}
+         in:fade={{easing: cubicIn, delay: 100, duration: 100}}
+         class = "preview"
+         style="left: {data.rx + 'px'};
+                top: {data.ry + 'px'};
+                width: {data.width + 'px'};
+                height: {data.height + 'px'};
+                background-color: {data.color}"
+         on:click="{() => {dispatch('click', {nodeid: data.nodeid, focus: data.focus })}}"
+    >
+        {data.nodename}
+    </div>
+{/if}

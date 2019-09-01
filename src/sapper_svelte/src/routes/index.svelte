@@ -1,5 +1,5 @@
 <script>
-    import PlotLevels from '../components/PlotLevels.svelte';
+    import NodeView from '../components/nodeview/NodeView.svelte';
 
 
 </script>
@@ -49,6 +49,6 @@
 	<figcaption>HIGH FIVE!</figcaption>
 </figure>
 -->
-<PlotLevels />
+<NodeView />
 <!--<p><strong>Try this file (src/routes/index.svelte) to test live reloading.</strong></p>
 -->
