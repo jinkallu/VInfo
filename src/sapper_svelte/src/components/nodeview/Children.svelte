@@ -13,6 +13,18 @@
             {
                 childrenPos (items.children);
             }
+            else{
+                view_data = null;
+            }
+        }
+        else{
+            view_data = null;
+        }
+    });
+
+    onDestroy( () => {
+        if(unsubscribe) {
+            unsubscribe();
         }
     });
 
@@ -27,19 +39,25 @@
                 width: size_data[0].width,
                 height: size_data[0].height,
                 color: size_data[0].color,
-                name: children[i].nodename
+                name: children[i].nodename,
+                nodeid: children[i].nodeid
             });
         }
 
         view_data = tmp_view_data;
     }
 
-    onDestroy( () => {
-        if(unsubscribe) {
-            unsubscribe();
-        }
-    });
+
+
+    function handleClick(event) {
+        nodestore.getFull({nodeid:event.detail.nodeid,
+                       op: event.detail.op
+            });
+    }
 </script>
 
-<ChildrenView data = {view_data}/>
-
+{#if view_data}
+    {#each view_data as d}
+        <ChildrenView data = {d} on:click={handleClick}/>
+    {/each}
+{/if}

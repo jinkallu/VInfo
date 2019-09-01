@@ -35,7 +35,7 @@
                     ry: size_data[0].ry,
                     width: size_data[0].width,
                     height: size_data[0].height,
-                    color: color,
+                    color: i === mid ? 'Red': color,
                     name: sibblings[i].nodename,
                     focus: i === mid ? true: false
                 });
@@ -46,6 +46,8 @@
     }
 </script>
 
-{#if sibblings}
-    <SelfAndSibblingsNormView data = {view_data}/>
+{#if view_data}
+    {#each view_data as d}
+        <SelfAndSibblingsNormView data = {d}/>
+    {/each}
 {/if}

@@ -13,14 +13,14 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     }
 </style>
-{#each data as d}
+{#if data}
     <div class = "level0"
-         style="left: {d.rx + 'px'};
-                top: {d.ry + 'px'};
-                width: {d.width + 'px'};
-                height: {d.height + 'px'};
-                background-color: {d.color}"
+         style="left: {data.rx + 'px'};
+                top: {data.ry + 'px'};
+                width: {data.width + 'px'};
+                height: {data.height + 'px'};
+                background-color: {data.color}"
     >
-        {d.name}
+        {data.name}
     </div>
-{/each}
+{/if}

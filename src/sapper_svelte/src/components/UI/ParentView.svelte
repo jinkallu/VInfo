@@ -1,4 +1,8 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
     export let data;
 </script>
 
@@ -20,6 +24,7 @@
                 width: {d.width + 'px'};
                 height: {d.height + 'px'};
                 background-color: {d.color}"
+         on:click="{() => {dispatch('click', {nodeid: d.nodeid, op: 'FOCUS'})}}"
     >
         {d.name}
     </div>

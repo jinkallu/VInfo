@@ -70,7 +70,7 @@
                     ry: ry_c - new_h / 2,
                     height: new_h,
                     width: new_w,
-                    src: src,
+                    //src: src,
                     color: colors[i - mid],
                     focus: false,
                     //id: data[i].id,

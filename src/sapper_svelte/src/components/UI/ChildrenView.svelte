@@ -1,4 +1,8 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
     export let data;
 </script>
 
@@ -13,14 +17,15 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     }
 </style>
-{#each data as d}
+{#if data}
     <div class = "level2"
-         style="left: {d.rx + 'px'};
-                top: {d.ry + 'px'};
-                width: {d.width + 'px'};
-                height: {d.height + 'px'};
-                background-color: {d.color}"
+         style="left: {data.rx + 'px'};
+                top: {data.ry + 'px'};
+                width: {data.width + 'px'};
+                height: {data.height + 'px'};
+                background-color: {data.color}"
+         on:click="{() => {dispatch('click', {nodeid: data.nodeid, op: 'FOCUS'})}}"
     >
-        {d.name}
+        {data.name}
     </div>
-{/each}
+{/if}
