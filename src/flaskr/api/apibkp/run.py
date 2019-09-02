@@ -3,7 +3,7 @@ from flask_restful import Api
 # from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 
-app = Flask(__name__,static_folder='static/images/')
+app = Flask(__name__)
 api = Api(app)
 
 app.config['POSTGRES_DATABASE_URI_REMOTE'] = "dbname='gqdhjhdi' user='gqdhjhdi' host='john.db.elephantsql.com' password='a7obAswTJ2i4Pe9sCvUnKQ2NVFf_TwVH'"
@@ -28,7 +28,7 @@ jwt = JWTManager(app)
 #     jti = decrypted_token['jti']
 #     return models.RevokedTokenModel.is_jti_blacklisted(jti)
 
-import  models, resources
+import views, models, resources
 
 # api.add_resource(resources.UserRegistration, '/registration')
 # api.add_resource(resources.UserLogin, '/login')
@@ -44,15 +44,3 @@ api.add_resource(resources.ListNodeAttribs,'/listattribs')
 api.add_resource(resources.AddNodeAttribs ,'/addattribs')
 api.add_resource(resources.ListAttribVals ,'/listattribvals')
 api.add_resource(resources.ListNodes,'/listnodes')
-api.add_resource(resources.UploadFile,'/upload')
-api.add_resource(resources.GetResource,'/getresource')
-
-@app.after_request
-def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', '*')
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  return response
-
-if __name__ == '__main__':
-     app.run(host='0.0.0.0')

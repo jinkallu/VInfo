@@ -19,6 +19,7 @@ def test_login(record_property):
     data = json.loads(response.get_data(as_text=True))
 
     assert response.status_code == 200
+    assert data['status'] == 'success';
     assert len(data['session']) > 0;
     assert len(data['access_token']) > 0;
     assert len(data['refresh_token']) > 0;
