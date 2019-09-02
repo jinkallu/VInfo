@@ -4,17 +4,19 @@
 
 <style>
     .searchform {
-        padding-left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
         position: absolute;
-        left: 500px;
-        top: 10px;
-        float: right;
+        left: 40%;
+        width: 20%;
+        height: 80%;
         background-color: white;
 
     }
     .search {
-        position: relative;
-        padding-left: 10px;
+        padding: 10px;
         border: 0;
         outline: none;
         box-shadow: none;
@@ -24,6 +26,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <form class = "searchform" action="/search">
-    <i class="fa fa-search"></i>
+    <i style = "color: black; padding-top: 1em; padding-right: 1em" class="fa fa-search"></i>
   <input class = "search" type="text" name="search" placeholder="Search.."><br>
 </form>

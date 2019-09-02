@@ -17,46 +17,12 @@
     });
   });
 
-  // function onbottonclickedapi(node) {
-  //   let postdata = { nodeid: node, nodetype: "BOTTOM", session: "kdfdkf" };
-  //   return fetch("http://localhost:5000/listnodes", {
-  //     method: "POST",
-  //     body: JSON.stringify(postdata),
-  //     headers: { "Content-Type": "application/json" }
-  //   })
-  //     .then(res => {
-  //       if (!res.ok) {
-  //         throw new Error("An error occurred, please try again!");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then(fetchdata => {
-  //       if (fetchdata.children) {
-  //         children.set(fetchdata.children);
-  //       } else {
-  //         children.set([]);
-  //       }
-  //       sibblings.set(loadedchildrenforupdate);
-  //     })
-  //     .catch(err => {
-  //       isLoading = false;
-  //       console.log(err);
-  //     });
-  // }
-
   function onbottomclicked(event) {
     console.log("bottom clicked");
 
     // parent.set(loadedself);
     let clickedSelf = children.find(node => node.nodeid == event.detail);
     nodestore.onBottomClicked(self,clickedSelf,children);
-
-    // console.log(clickedSelf.nodeid);
-    // self.set(clickedSelf);
-    // sibblings.set([]);
-    // loadedchildrenforupdate = loadedchildren;
-    // children.set([]);
-    // const apichildren = onbottonclickedapi(event.detail);
   }
 
   onDestroy(() => {

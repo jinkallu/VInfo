@@ -12,7 +12,7 @@
     color: white;
     padding: 0 0.5rem;
     font-family: "Lato", sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 </style>
 

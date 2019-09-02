@@ -1,10 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  // import Parent from "./Parent.svelte";
-  // import Children from "./Children.svelte";
-  // import SelfAndSibblings from "./SelfAndSibblings.svelte";
-  // import SibblingsScreen from "./SelfAndSibblingsNorm.svelte";
-
   import { scale } from "svelte/transition";
   import { flip } from "svelte/animate";
   import ParentItem from "./ParentItem.svelte";
@@ -12,7 +7,6 @@
   import PreviewScreen from "./PreviewScreen.svelte";
   import SelfItem from "./SelfItem.svelte";
   import ChildScreen from "./ChildScreen.svelte";
-  // import noder from "../nodestore.js";
   import nodestore from "../../selfstore.js";
   import LoadingSpinner from "../UI/LoadingSpinner.svelte";
 
@@ -26,32 +20,10 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    background-color: lightcyan;
+    background-color: white;
     justify-content: space-around;
   }
-  #noder {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
-
-  #noder-parent {
-    background-color: #bbb;
-
-    margin: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  #noder-controls {
-    background-color: #bbb;
-    overflow: scroll;
-    margin: 1rem;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
+  
   .sibblings {
     display: flex;
     flex-direction: row;
@@ -66,10 +38,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-  }
-
-  #no-noder {
-    margin: 1rem;
   }
 
   @media (min-width: 768px) {
