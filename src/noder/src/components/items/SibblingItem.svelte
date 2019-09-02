@@ -32,18 +32,19 @@
 </script>
 
 <style>
-  .clickable {
-    background: bisque;
+  .sibbling.clickable {
+    background: DarkTurquoise;
   }
-  .clickable:hover {
-    background: yellowgreen;
+  .sibbling.clickable:hover {
+    background: rgb(15, 196, 156);
+    margin: 0 5px;
   }
 
-  #sibbling {
-    width: 128px;
-    height: 60px;
-    border-radius: 5px;
-    border: 2px solid orange;
+  .sibbling {
+    padding: 1em;
+    background: rgb(163, 5, 5);
+    margin: 0 5px;
+    color: white;
   }
 
  
@@ -52,19 +53,18 @@
 <!-- <article> -->
 {#if !isSelf}
   <div
-    id="sibbling"
-    class="clickable"
+    class="sibbling clickable"
     on:click={() => loadData(sibbling.nodeid)}>
-    <div class="chip">
-      <Badge>{sibbling.nodename}</Badge>
-      
+    <div>
+      <!--<Badge>{sibbling.nodename}</Badge>-->
+      {sibbling.nodename}
     </div>
 
   </div>
 {:else}
-  <div id="sibbling">
+  <div class="sibbling">
     <div>
-      <h5>{sibbling.nodename}</h5>
+      {sibbling.nodename}
     </div>
   </div>
 {/if}

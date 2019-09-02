@@ -33,8 +33,11 @@
   });
 
   function ontopclicked(nodeid) {
-    console.log("ontope clicked");
-    nodestore.onTopClicked(parent, sibblings, nodeid);
+    if(parent.pnodeid)
+    {
+      console.log("ontop clicked");
+      nodestore.onTopClicked(parent, sibblings, nodeid);
+    }
   }
 </script>
 
@@ -42,7 +45,7 @@
   #circle {
     display: flex;
     flex-direction: column;
-    background: lightblue;
+    background: navy;
     width: 128px;
     height: 128px;
     border-radius: 64px;
@@ -59,11 +62,15 @@
 </style>
 
 {#if parent}
-  <div id="circle">
+  <div 
+      id="circle"
+      on:click={() => ontopclicked(parent.nodeid)}
+      >
     <div>
-      <Badge>{parent.nodename}</Badge>
+      {parent.nodename}
+      <!--<Badge>{parent.nodename}</Badge>-->
     </div>
-
+<!--
     {#if parent.pnodeid}
       <div>
         <Button
@@ -73,7 +80,7 @@
           VIEW
         </Button>
       </div>
-    {/if}
+    {/if} -->
 
   </div>
 {/if}

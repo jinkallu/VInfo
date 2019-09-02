@@ -47,8 +47,9 @@
   .toper {
     display: flex;
     flex-direction: row;
-
-    background: lightskyblue;
+    justify-content: center;
+    align-items: center;
+    background: white;
   }
 </style>
 
