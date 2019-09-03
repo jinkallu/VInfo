@@ -42,8 +42,8 @@ listattribvalparser.add_argument('session', help = 'This field cannot be blank..
 
 listnodeparser=reqparse.RequestParser()
 listnodeparser.add_argument('nodeid', help = 'This field cannot be blank...', required=False)
-listnodeparser.add_argument('session', help = 'This field cannot be blank...', required = True)
-listnodeparser.add_argument('nodetype', help = 'This field cannot be blank...', required = True)
+listnodeparser.add_argument('session', help = 'This field cannot be blank...', required = False)
+listnodeparser.add_argument('nodetype', help = 'This field cannot be blank...', required = False)
 
 uploadparser = reqparse.RequestParser()
 uploadparser.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
@@ -118,6 +118,7 @@ class ListAttribVals(Resource):
 class ListNodes(Resource):
     def post(self):
         datain=listnodeparser.parse_args()
+        print(datain)
         res=NodeModel.list_nodes(datain)
         return Response(json.dumps(res),status=res["status"]['status'],mimetype='application/json')
 
