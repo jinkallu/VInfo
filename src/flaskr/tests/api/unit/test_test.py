@@ -5,6 +5,7 @@ from flask import json
 
 from flaskr.api.run import app
 
+@pytest.mark.xfail # make the test fail
 def test_login(record_property):
     """
     GIVEN a username and password
