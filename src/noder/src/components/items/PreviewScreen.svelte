@@ -4,6 +4,8 @@
   import { onMount, onDestroy, beforeUpdate } from "svelte";
   import nodestore from "../../selfstore.js";
 
+  import PreviewCarousel from "../UI/PreviewCarousel.svelte";
+
   let sibblings;
   let self;
   let view_data = [];
@@ -155,7 +157,7 @@
     background: lightskyblue;
   }
 </style>
-
+<!--
 <svelte:head>
   <link
     rel="stylesheet"
@@ -177,7 +179,7 @@
 
   </script>
 </svelte:head>
-
+-->
 <!-- <div>
   <div class="carouselsimple">
     {#if sibblings}
@@ -208,4 +210,5 @@
       <!-- <div id="circle"> -->
     {/each}
   </div>
+  <PreviewCarousel data = {sibblings} />
 {/if}
