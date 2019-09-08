@@ -33,4 +33,5 @@
 <form class = "searchform" action="/search">
     <i class="fa fa-search"></i>
     <input class = "search" type="text" name="search" placeholder="Search.."><br>
+    <i class="fa fa-caret-down"></i>
 </form>
