@@ -1,7 +1,10 @@
 <script>
   import { onMount, onDestroy } from "svelte";
-  import nodestore from "../../selfstore.js";
+  import nodestore from "../../store/selfstore.js";
   import ChildItem from "./ChildItem.svelte";
+  import ChildrenView from "./ChildrenView.svelte";
+
+  //  import ChildrenCarousel from "../UI/ChildrenCarousel.svelte";
 
   let unsubscribeChildren;
   let unsubscribeSelf;
@@ -40,15 +43,20 @@
     display: flex;
     flex-direction: row;
 
-    background: lightskyblue;
+    background: white;
   }
 </style>
 
 <div class="toper">
   {#if children}
+          <!--
+
     {#each children as child (children.nodeid)}
       <ChildItem {child} on:bottom={onbottomclicked} />
-      <!-- </div> -->
-    {/each}
+    {/each} 
+
+    <ChildrenCarousel data = {children} on:bottom={onbottomclicked}/>
+    -->
+        <ChildrenView {children} on:bottom={onbottomclicked} />
   {/if}
 </div>

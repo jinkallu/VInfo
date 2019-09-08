@@ -5,9 +5,9 @@
     beforeUpdate,
     createEventDispatcher
   } from "svelte";
-  import Button from "../UI/Button.svelte";
-  import Badge from "../UI/Badge.svelte";
-  import LoadingSpinner from "../UI/LoadingSpinner.svelte";
+  //import Button from "../UI/Button.svelte";
+  //import Badge from "../UI/Badge.svelte";
+  //import LoadingSpinner from "../UI/LoadingSpinner.svelte";
 
   export let preview;
   export let self;
@@ -28,12 +28,17 @@
   }
 
   div {
-    text-align: right;
+    text-align: center;
   }
 .self{color:yellow}
   /* .content {
     height: 4rem;
   } */
+
+  .row{
+    height: 200px;
+    padding : 30px;
+  }
 </style>
 
 <div class="row">

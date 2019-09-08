@@ -1,8 +1,8 @@
 <script>
   import { onMount, onDestroy, createEventDispatcher } from "svelte";
-  import Button from "../UI/Button.svelte";
-  import Badge from "../UI/Badge.svelte";
-  import LoadingSpinner from "../UI/LoadingSpinner.svelte";
+  //import Button from "../UI/Button.svelte";
+  //import Badge from "../UI/Badge.svelte";
+  //import LoadingSpinner from "../UI/LoadingSpinner.svelte";
  
   export let sibbling;
   export let selfId;

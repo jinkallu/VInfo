@@ -50,6 +50,14 @@ jobs:
 
     steps:
 
+    # noder sapper build
+    - script: npm install
+      workingDirectory: 'src/noder'
+
+    # noder sapper build
+    - script: npm run build
+      workingDirectory: 'src/noder'
+
     # Sapper build
     - script: npm install
       workingDirectory: 'src/sapper_svelte'

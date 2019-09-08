@@ -2,13 +2,13 @@
   import { onMount } from "svelte";
   import { scale } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import ParentItem from "./ParentItem.svelte";
-  import SibblingScreen from "./SibblingScreen.svelte";
-  import PreviewScreen from "./PreviewScreen.svelte";
-  import SelfItem from "./SelfItem.svelte";
-  import ChildScreen from "./ChildScreen.svelte";
-  import nodestore from "../../selfstore.js";
-  import LoadingSpinner from "../UI/LoadingSpinner.svelte";
+  import ParentItem from "./parent/ParentItem.svelte";
+  import SibblingScreen from "./siblings/SibblingScreen.svelte";
+  import PreviewScreen from "./preview/PreviewScreen.svelte";
+  //import SelfItem from "../SelfItem.svelte";
+  import ChildScreen from "./children/ChildScreen.svelte";
+  import nodestore from "../store/selfstore.js";
+  //import LoadingSpinner from "../../UI/LoadingSpinner.svelte";
 
   onMount(async () => {
     nodestore.fetchInitData();
@@ -80,5 +80,4 @@
       <ChildScreen />
     </div>
   </div>
-
 </div>
