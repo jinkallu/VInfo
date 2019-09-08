@@ -1,6 +1,6 @@
 <script>
-     import LeftArrow from "./LeftArrow.svelte"; 
-     import RightArrow from "./RightArrow.svelte"; 
+     import LeftArrow from "../../UI/LeftArrow.svelte"; 
+     import RightArrow from "../../UI/RightArrow.svelte"; 
 
      import {createEventDispatcher} from "svelte"; 
      export let children;

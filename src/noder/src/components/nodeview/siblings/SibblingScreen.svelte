@@ -1,10 +1,10 @@
 <script>
   import SibblingItem from "./SibblingItem.svelte";
-  import SibblingsCarousel from "../UI/SibblingsCarousel.svelte";
-  import SiblingsView from "../UI/SiblingsView.svelte";
+  //import SibblingsCarousel from "../../../UI/SibblingsCarousel.svelte";
+  import SiblingsView from "../../UI/SiblingsView.svelte";
 
   import { onMount, onDestroy, beforeUpdate } from "svelte";
-  import nodestore from "../../selfstore.js";
+  import nodestore from "../../store/selfstore.js";
 
   let siblings;
   let self;

@@ -1,5 +1,5 @@
 <script>
-  import NodeView from "../components/items/NodeView.svelte";
+  import NodeView from "../components/nodeview/NodeView.svelte";
   
 </script>
 

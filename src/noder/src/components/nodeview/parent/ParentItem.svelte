@@ -1,9 +1,9 @@
 <script>
   import { onMount, onDestroy, createEventDispatcher } from "svelte";
-  import Button from "../UI/Button.svelte";
-  import Badge from "../UI/Badge.svelte";
-  import LoadingSpinner from "../UI/LoadingSpinner.svelte";
-  import nodestore from "../../selfstore.js";
+  //import Button from "../../../UI/Button.svelte";
+  //import Badge from "../../../UI/Badge.svelte";
+  //import LoadingSpinner from "../../../UI/LoadingSpinner.svelte";
+  import nodestore from "../../store/selfstore.js";
 
   const dispatch = createEventDispatcher();
 

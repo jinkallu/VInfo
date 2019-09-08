@@ -1,10 +1,10 @@
 <script>
   import { onMount, onDestroy } from "svelte";
-  import nodestore from "../../selfstore.js";
+  import nodestore from "../../store/selfstore.js";
   import ChildItem from "./ChildItem.svelte";
-  import ChildrenView from "../UI/ChildrenView.svelte";
+  import ChildrenView from "./ChildrenView.svelte";
 
-    import ChildrenCarousel from "../UI/ChildrenCarousel.svelte";
+  //  import ChildrenCarousel from "../UI/ChildrenCarousel.svelte";
 
   let unsubscribeChildren;
   let unsubscribeSelf;

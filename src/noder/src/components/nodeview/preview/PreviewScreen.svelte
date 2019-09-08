@@ -2,9 +2,9 @@
   import PreviewItem from "./PreviewItem.svelte";
 
   import { onMount, onDestroy, beforeUpdate } from "svelte";
-  import nodestore from "../../selfstore.js";
+  import nodestore from "../../store/selfstore.js";
 
-  import PreviewCarousel from "../UI/PreviewCarousel.svelte";
+  //import PreviewCarousel from "../UI/PreviewCarousel.svelte";
 
   let sibblings;
   let self;
