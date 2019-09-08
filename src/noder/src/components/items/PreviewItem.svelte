@@ -28,12 +28,17 @@
   }
 
   div {
-    text-align: right;
+    text-align: center;
   }
 .self{color:yellow}
   /* .content {
     height: 4rem;
   } */
+
+  .row{
+    height: 200px;
+    padding : 30px;
+  }
 </style>
 
 <div class="row">

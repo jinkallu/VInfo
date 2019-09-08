@@ -154,20 +154,11 @@
                <div class="carousel__cell" on:click = {() => clicked(i)}> {d.nodename} </div>
           {/each}
      {/if}
-    <!--
-    <div class="carousel__cell" on:click = {() => clicked(2)}>2</div>
-    <div class="carousel__cell" on:click = {() => clicked(3)}>3</div>
-    <div class="carousel__cell" on:click = {() => clicked(4)}>4</div>
-    <div class="carousel__cell" on:click = {() => clicked(5)}>5</div>
-    <div class="carousel__cell" on:click = {() => clicked(6)}>6</div>
-    <div class="carousel__cell" on:click = {() => clicked(7)}>7</div>
-    <div class="carousel__cell" on:click = {() => clicked(8)}>8</div>
-    <div class="carousel__cell" on:click = {() => clicked(9)}>9</div>
-    -->
   </div>
 </div>
-
+<!--
 <div class="carousel-options">
      <button class="previous-button" on:click = {() => prev(1)}>Previous</button>
      <button class="next-button" on:click = {next}>Next</button>
 </div>
+-->

@@ -1,17 +1,19 @@
 <script>
   import SibblingItem from "./SibblingItem.svelte";
+  import SibblingsCarousel from "../UI/SibblingsCarousel.svelte";
+  import SiblingsView from "../UI/SiblingsView.svelte";
 
   import { onMount, onDestroy, beforeUpdate } from "svelte";
   import nodestore from "../../selfstore.js";
 
-  let sibblings;
+  let siblings;
   let self;
   let unsubscribeSibblings;
   let unsubscribeSelf;
 
   onMount(() => {
     unsubscribeSibblings = nodestore.subscribeSibblings(items => {
-      sibblings = items;
+      siblings = items;
     });
 
     unsubscribeSelf = nodestore.subscribeSelf(items => {
@@ -29,16 +31,13 @@
   });
 
   function onsideclicked(event) {
-    if (!event.detail.focus) {
-      console.log(event.detail.nodeid + "first clicked nodeid");
-
-      let clickedSelf = sibblings.find(
+    if(self.nodeid !== event.detail.nodeid)
+    {
+      let clickedSelf = siblings.find(
         node => node.nodeid == event.detail.nodeid
       );
 
-      nodestore.onSideClicked(clickedSelf, sibblings);
-    } else {
-      console.log("Show full page of focus");
+      nodestore.onSideClicked(clickedSelf, siblings);
     }
   }
 </script>
@@ -53,14 +52,17 @@
   }
 </style>
 
-{#if sibblings}
+{#if siblings}
   <div class="toper">
+  <!--
     {#each sibblings as sibbling (sibblings.nodeid)}
       <SibblingItem {sibbling} selfId={self.nodeid} on:side={onsideclicked} />
-
-      <!-- <div id="circle"> -->
-
-      <!-- </div> -->
     {/each}
+    -->
+    <SiblingsView {siblings} selfId={self.nodeid} on:side={onsideclicked}/>
+      <!--
+
+    <SibblingsCarousel data = {sibblings} selfId={self.nodeid} on:side={onsideclicked}/>
+  -->
   </div>
 {/if}
