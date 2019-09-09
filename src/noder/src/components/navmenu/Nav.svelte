@@ -28,7 +28,7 @@
 
      .login{
           float: right;
-          padding-right: 1em;
+          padding-right: 0em;
      }
 
      .sidenav{
