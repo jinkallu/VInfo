@@ -1,1 +1,3 @@
-<button> Logout </button>
+<button on:click> 
+     Logout 
+</button>

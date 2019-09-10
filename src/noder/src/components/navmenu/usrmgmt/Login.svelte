@@ -1,11 +1,15 @@
 <script>
      import DefaultLogin from "../../UI/DefaultLogin.svelte";
      import Logout from "../../UI/Logout.svelte";
+     import GoogleLogin from "../../UI/GoogleLogin.svelte";
+     import UserRegistration from "../../UI/UserRegistration.svelte";
 
      let loginWindow = false;
      let username;
      let loginSuccess = 0; // 0 not logged in, 1 loggedin, 2 auth fail
-     function writeCookie(){
+     let registration = 0; // 0 idle, 1 registration password not matching
+     // 2 registered, 3 user name not available 4, registration failure
+     function loginWdw(){
           
           loginWindow = !loginWindow;
      }
@@ -31,6 +35,8 @@
           return null;
      }
 
+     
+
      async function firstAsync(url, inp)  {
           const options = {
                method: 'POST',
@@ -43,11 +49,14 @@
           const response = await fetch(url, options);
           const json = await response.json();
           let data = json;
-          console.log(data);
+          //console.log(data);
+          
           if(data.message === "Session Created Successfully")
           {
                loginWindow = false;
                loginSuccess = 1;
+
+               document.cookie = "username" + "=" + username + ";" 
                document.cookie = "session" + "=" + data.session + ";" ;
                document.cookie = "access_token" + "=" + data.access_token + ";";
                document.cookie = "refresh_token" + "=" + data.refresh_token + ";";
@@ -57,6 +66,7 @@
                console.log("error");
           }
 
+          console.log(getCookie("username"));
           console.log(getCookie("session"));
           console.log(getCookie("access_token"));
           console.log(getCookie("refresh_token"));
@@ -77,7 +87,46 @@
                   }
 
           let url = "http://0.0.0.0:5000/login";
+
           firstAsync(url, inp);
+
+          
+     }
+
+     function logout(){
+          var now = new Date();
+          now.setMonth( now.getMonth() - 1 );
+          document.cookie = "session" + "=" + "hii" + ";" + "expires=" + now.toUTCString() + ";";
+          document.cookie = "access_token" + "=" + "hii" + ";" + "expires=" + now.toUTCString() + ";";
+          document.cookie = "refresh_token" + "=" + "hii" + ";" + "expires=" + now.toUTCString() + ";";
+
+          console.log(getCookie("session"));
+          console.log(getCookie("access_token"));
+          console.log(getCookie("refresh_token"));
+
+          loginWindow = false;
+          loginSuccess = 0;
+     }
+
+     function register(event){
+          if(event.target.password.value !== event.target.repassword.value ||
+               event.target.password.value === null
+          )
+          {
+               registration = 1; // password miss match
+          }
+          else{
+               registration = 0; //idle
+          }
+
+          let inp = {
+                       username: event.target.email.value,
+                       password: event.target.password.value,
+                       authtype: "GOOGLE",
+                  }
+
+          let url = "http://0.0.0.0:5000/register";
+          let data = firstAsync(url, inp);
      }
 </script>
 
@@ -111,7 +160,7 @@
 </style>
 
 <div class = "login">
-     <div on:click = {writeCookie}>
+     <div on:click = {loginWdw}>
           {#if loginSuccess === 1}
                {username}
           {:else}
@@ -123,14 +172,20 @@
           <div id = "dropdown" class="dropdown">
                <div id = "dropdown-content" class="dropdown-content">
                     {#if loginSuccess === 1}
-                         <Logout />
+                         <Logout on:click = {logout}/>
                     {:else}
-                         <DefaultLogin on:submit = {login}/>
+                         <DefaultLogin username = {getCookie("username")? getCookie("username"): ""} on:submit = {login}/>
+                         <GoogleLogin />
+                         
                          {#if loginSuccess === 2}
                               <div class = "authfail" >
                                    Login failure
                               </div>
                          {/if}
+                         <br />
+                         <br />
+                         <br />
+                         <UserRegistration {registration} on:submit = {register}/>
                     {/if}
                </div>
           </div> 

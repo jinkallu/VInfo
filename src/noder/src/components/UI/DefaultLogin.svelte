@@ -1,5 +1,5 @@
 <script>
-
+     export let username;
 </script>
 
 <style>
@@ -15,7 +15,7 @@
 </style>
 
 <form class = "loginform" on:submit|preventDefault>
-    <input id = "email" class = "email" type="text" placeholder="Email"><br>
-    <input id = "password" class = "password" type="text" placeholder="Password"><br>
+    <input id = "email" class = "email" type="text" placeholder="Email" value={username}><br>
+    <input id = "password" class = "password" type="password" placeholder="Password"><br>
     <input class = "submit" type="submit" value="Sign in">
 </form>
