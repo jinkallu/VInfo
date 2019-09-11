@@ -1,6 +1,7 @@
 <script>
     import SideNav from './Sidenav.svelte';
     import Search from './Search.svelte';
+    import Login from './usrmgmt/Login.svelte';
 
 	export let segment;
 </script>
@@ -25,12 +26,26 @@
 		display: block;
 	}
 
+     .login{
+          float: right;
+          padding-right: 0em;
+     }
+
+     .sidenav{
+          float: left;
+          top: 0;
+     }
+
+     .search{
+     }
+
 	
 </style>
 
 <nav>
 	<ul>
-          <li> <SideNav /> </li>
-          <li> <Search /> </li>
+          <li class = "sidenav"> <SideNav /> </li>
+          <li class = "search"> <Search /> </li>
+          <li class = "login"> <Login /> </li>
 	</ul>
 </nav>
