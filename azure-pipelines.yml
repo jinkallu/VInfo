@@ -136,7 +136,8 @@ jobs:
     # Copy files
     - task: CopyFiles@2
       inputs:
-        sourceFolder: '$(Build.SourcesDirectory)'
+        sourceFolder: '$(Agent.BuildDirectory)'
+        contents: '**/*.zip'
         targetFolder: '$(Build.ArtifactStagingDirectory)' 
 
     # Publish build artifacts
