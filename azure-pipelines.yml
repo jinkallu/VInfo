@@ -130,7 +130,7 @@ jobs:
     # archive sapper build
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/noder/__sapper__/build'
         includeRootFolder: false
 
     # Publish build artifacts
