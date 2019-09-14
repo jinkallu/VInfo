@@ -135,6 +135,3 @@ jobs:
 
     # Publish build artifacts
     - task: PublishBuildArtifacts@1
-      inputs:
-        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-        artifactName: 'drop' 
