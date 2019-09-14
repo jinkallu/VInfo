@@ -133,5 +133,14 @@ jobs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/noder/__sapper__/build'
         includeRootFolder: false
 
+    # Copy files
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: '$(Build.SourcesDirectory)'
+        targetFolder: '$(Build.ArtifactStagingDirectory)' 
+
     # Publish build artifacts
     - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+        artifactName: 'drop' 
