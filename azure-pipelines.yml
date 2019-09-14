@@ -138,7 +138,7 @@ jobs:
       inputs:
         sourceFolder: '$(Agent.BuildDirectory)'
         contents: '**/*.zip'
-        targetFolder: '$(System.ArtifactsDirectory)' 
+        targetFolder: '$(Build.ArtifactStagingDirectory)' 
 
     # Publish build artifacts
     - task: PublishBuildArtifacts@1
