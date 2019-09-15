@@ -130,7 +130,7 @@ jobs:
     # archive sapper build
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/noder/__sapper__/build'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/noder'
         includeRootFolder: false
 
     # Copy files
