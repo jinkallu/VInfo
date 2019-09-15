@@ -136,12 +136,9 @@ jobs:
     # Copy files
     - task: CopyFiles@2
       inputs:
-        sourceFolder: '$(Agent.BuildDirectory)'
+        sourceFolder: '$(System.DefaultWorkingDirectory)'
         contents: '**/*.zip'
         targetFolder: '$(Build.ArtifactStagingDirectory)' 
 
     # Publish build artifacts
     - task: PublishBuildArtifacts@1
-      inputs:
-        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-        artifactName: 'drop' 
