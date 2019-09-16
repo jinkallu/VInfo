@@ -1,7 +1,7 @@
 <script>
   import PreviewItem from "./PreviewItem.svelte";
 
-  import { onMount, onDestroy, beforeUpdate } from "svelte";
+  import { onMount, onDestroy, beforeUpdate, createEventDispatcher } from "svelte";
   import nodestore from "../../store/selfstore.js";
 
   //import PreviewCarousel from "../UI/PreviewCarousel.svelte";
@@ -11,6 +11,12 @@
   let view_data = [];
   let unsubscribeSibblings;
   let unsubscribeSelf;
+
+  export let previewFull;
+
+  $: height = previewFull? '200px' : '400px';
+
+  const dispatch = createEventDispatcher();
 
   unsubscribeSibblings = nodestore.subscribeSibblings(items => {
     if (items) {
@@ -37,15 +43,17 @@
     }
   });
 
-  function onsideclicked(event) {
-    if (!event.detail.focus) {
+  function onclicked(event) {
+   /* if (!event.detail.focus) {
       let clickedSelf = sibblings.find(
         node => node.nodeid == event.detail.nodeid
       );
       nodestore.onSideClicked(clickedSelf, sibblings);
     } else {
       console.log("Show full page of focus");
-    }
+    }*/
+    console.log("Show full page of focus");
+    dispatch('toggle');
   }
 </script>
 
@@ -78,6 +86,7 @@
     <PreviewItem
         preview={self}
         self={self.nodeid}
-        on:side={onsideclicked} />
+        on:click={onclicked} 
+        style = "height: {height}"/>
   </div>
 {/if}

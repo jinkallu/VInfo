@@ -10,9 +10,16 @@
   import nodestore from "../store/selfstore.js";
   //import LoadingSpinner from "../../UI/LoadingSpinner.svelte";
 
+  let previewFull = false;
+
   onMount(async () => {
     nodestore.fetchInitData();
   });
+
+  function togglePreview(event){
+    console.log("Toggle preview");
+    previewFull = !previewFull;
+  }
 </script>
 
 <style>
@@ -54,6 +61,7 @@
   <div class="divider" />
 
   <div class="divider" />
+    {#if !previewFull}
   <div class="section">
     <div class="parent">
       <div>
@@ -61,23 +69,28 @@
       </div>
     </div>
   </div>
+  {/if}
 
   <div class="divider" />
+  {#if !previewFull}
   <div class="section">
     <div class="sibblings">
       <SibblingScreen />
     </div>
   </div>
+  {/if}
 
   <div class="section">
     <div class="preview">
-      <PreviewScreen />
+      <PreviewScreen {previewFull} on:toggle = {togglePreview}
+        style = "height: 50em;"/>
     </div>
   </div>
-
+{#if !previewFull}
   <div class="section">
     <div class="children">
       <ChildScreen />
     </div>
   </div>
+  {/if}
 </div>

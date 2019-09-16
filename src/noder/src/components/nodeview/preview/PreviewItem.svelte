@@ -23,38 +23,62 @@
 
 <style>
   p {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin: 0;
   }
 
   div {
     text-align: center;
   }
-.self{color:yellow}
-  /* .content {
-    height: 4rem;
-  } */
 
-  .row{
+  .preview{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 10% auto;
+    grid-gap: 10px;
+
+    grid-template-areas: 
+      ". gnodename gnodename ."
+      "gbriefdesc gbriefdesc gimage gimage";
     height: 200px;
     padding : 30px;
+
+  }
+
+  .nodename{
+    grid-area: gnodename;
+    align-self: center;
+    color: yellow;
+  }
+
+  .briefdesc{
+    grid-area: gbriefdesc;
+    overflow: hidden;
+  }
+
+  .image{
+    grid-area: gimage;
+  }
+
+  .img{
+    max-height: 100%;
   }
 </style>
 
-<div class="row">
-  <div class="col s12 m6">
-    <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
-      {#if preview.nodeid==self}
-        <span class=" self card-title">{preview.nodename}</span>
-        {:else}
-        <span class="card-title">{preview.nodename}</span>
-
+<div class="preview" on:click>
+        <div class = "nodename">
+        {#if preview.nodeid==self}
+          {#if preview.nodename}
+            <h1>{preview.nodename}</h1>
+          {/if}
         {/if}
-        <div>
-          <p>{preview.briefdesc}</p>
         </div>
+        <div class = "briefdesc" >
+          {#if preview.briefdesc}
+            <p>{preview.briefdesc}</p>
+          {/if}
+        </div>
+      <div class = "image">
+        <img class = "img" src = "images/science.png" alt = ""/>
       </div>
-    </div>
-  </div>
 </div>
