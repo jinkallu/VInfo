@@ -64,15 +64,25 @@
     max-width: 100%;
     object-fit: contain;
   }
+
+  .fa-window-restore{
+       position: absolute;
+       top: 0;
+       left: 90%
+  }
+  .fa-window-restore:hover{
+       cursor: pointer;
+  }
 </style>
 
-<div class="preview" on:click>
+<div class="preview">
         <div class = "nodename">
         {#if preview.nodeid==self}
           {#if preview.nodename}
             <h1>{preview.nodename}</h1>
           {/if}
         {/if}
+        <i class="fa fa-window-restore" on:click></i>
         </div>
         <div class = "briefdesc" >
           {#if preview.briefdesc}

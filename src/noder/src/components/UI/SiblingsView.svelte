@@ -88,5 +88,12 @@
           >
                <RightArrow />
           </div>
+     {:else}
+               <div class = "sibling"
+                         style = "background: DarkTurquoise;"
+                         
+                    > 
+                        Loading... 
+                    </div>    
      {/if}
 </div>

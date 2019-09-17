@@ -67,7 +67,9 @@
       on:click={() => ontopclicked(parent.nodeid)}
       >
     <div>
-      {parent.nodename}
+      {#if parent.nodename}
+        {parent.nodename}
+      {/if}
       <!--<Badge>{parent.nodename}</Badge>-->
     </div>
 <!--

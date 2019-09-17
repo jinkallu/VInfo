@@ -1,5 +1,5 @@
 <script>
-  import PreviewItem from "./PreviewItem.svelte";
+  import FullPageView from "./FullPageView.svelte";
 
   import { onMount, onDestroy, beforeUpdate, createEventDispatcher } from "svelte";
   import nodestore from "../../store/selfstore.js";
@@ -63,7 +63,7 @@
     flex-direction: row;
 
     background: white;
-    border: 0.2em solid blue;
+    /*border: 0.2em solid blue;*/
   }
 </style>
 
@@ -84,7 +84,7 @@
 
 {#if self}
   <div class="toper" style = "height: {height}">
-    <PreviewItem
+    <FullPageView
         preview={self}
         self={self.nodeid}
         on:click={onclicked} 

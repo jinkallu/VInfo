@@ -5,6 +5,7 @@
   import ParentItem from "./parent/ParentItem.svelte";
   import SibblingScreen from "./siblings/SibblingScreen.svelte";
   import PreviewScreen from "./preview/PreviewScreen.svelte";
+  import FullPage from "./fullview/FullPage.svelte";
   //import SelfItem from "../SelfItem.svelte";
   import ChildScreen from "./children/ChildScreen.svelte";
   import nodestore from "../store/selfstore.js";
@@ -26,6 +27,7 @@
   #toper {
     display: flex;
     width: 100%;
+    height: 100%;
     flex-direction: column;
     background-color: white;
     justify-content: space-around;
@@ -79,13 +81,18 @@
     </div>
   </div>
   {/if}
-
+{#if !previewFull}
   <div class="section">
     <div class="preview">
       <PreviewScreen {previewFull} on:toggle = {togglePreview}
         style = "height: 50em;"/>
     </div>
   </div>
+{:else}
+  <div>
+    <FullPage {previewFull} on:toggle = {togglePreview}/>
+  </div>
+{/if}
 {#if !previewFull}
   <div class="section">
     <div class="children">
