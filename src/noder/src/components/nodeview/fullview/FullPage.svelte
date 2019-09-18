@@ -63,7 +63,8 @@
     flex-direction: row;
 
     background: white;
-    /*border: 0.2em solid blue;*/
+    border: 0.2em solid blue;
+    height: 100%;
   }
 </style>
 

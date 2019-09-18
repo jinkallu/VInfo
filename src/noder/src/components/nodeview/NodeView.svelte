@@ -49,6 +49,10 @@
     justify-content: center;
   }
 
+  .fullpage{
+    height: 100%;
+  }
+
   @media (min-width: 768px) {
     #noder {
       grid-template-columns: repeat(2, 1fr);
@@ -89,7 +93,7 @@
     </div>
   </div>
 {:else}
-  <div>
+  <div class = "fullpage">
     <FullPage {previewFull} on:toggle = {togglePreview}/>
   </div>
 {/if}

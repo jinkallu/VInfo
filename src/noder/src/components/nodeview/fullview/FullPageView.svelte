@@ -67,8 +67,8 @@
 
   .fa-window-restore{
        position: absolute;
-       top: 0;
-       left: 90%
+       top: 4%;
+       left: 96%
   }
   .fa-window-restore:hover{
        cursor: pointer;
