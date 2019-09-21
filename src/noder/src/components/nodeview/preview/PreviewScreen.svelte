@@ -7,10 +7,12 @@
   //import PreviewCarousel from "../UI/PreviewCarousel.svelte";
 
   let sibblings;
+  let previewData;
   let self;
   let view_data = [];
   let unsubscribeSibblings;
   let unsubscribeSelf;
+  let unsubscribePreview;
 
   export let previewFull;
 
@@ -23,6 +25,15 @@
       sibblings = items;
     } else {
       sibblings = [];
+    }
+  });
+
+
+  unsubscribePreview = nodestore.subscribePreview(items => {
+    if (items) {
+      previewData = items;
+    } else {
+      previewData = [];
     }
   });
 
@@ -87,6 +98,7 @@
     <PreviewItem
         preview={self}
         self={self.nodeid}
+        previewData={previewData}
         on:click={onclicked} 
         />
   </div>
