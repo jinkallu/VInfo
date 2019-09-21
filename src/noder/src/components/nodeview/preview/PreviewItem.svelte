@@ -29,41 +29,53 @@
   }
 
   div {
-    text-align: center;
   }
 
   .preview {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 10% auto;
-    grid-gap: 10px;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: auto;
 
     grid-template-areas:
-      ". gnodename gnodename ."
-      "gbriefdesc gbriefdesc gimage gimage";
+      ". gnodename gnodename . "
+      "gbriefdesc gbriefdesc gbriefdesc gbriefdesc"
+      " gdesc gdesc gdesc gimage"
+      ;
     padding: 30px;
   }
 
   .nodename {
     grid-area: gnodename;
     align-self: center;
+    text-align: center;
     color: black;
   }
 
   .briefdesc {
     grid-area: gbriefdesc;
-    overflow: hidden;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    align-self: center;
+  }
+  .desc {
+    grid-area: gdesc;
+    padding: 1em;
+    align-self: center;
   }
 
   .image {
     grid-area: gimage;
-    width: 100px;
+    width: 100%;
+    align-self: auto;
+    padding: 1em;
   }
 
   .img {
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    overflow: auto;
   }
 </style>
 
@@ -77,26 +89,22 @@
   </div>
   <div class="briefdesc">
     {#if preview.briefdesc}
-      <p>{preview.briefdesc}</p>
+      {preview.briefdesc}
     {/if}
   </div>
-  <!-- <div class = "image">
-        <img class = "img" src = "images/science.png" alt = ""/>
-      </div> -->
-
   {#if previewData}
-    {#each previewData as preview}
-      <div>
-        {#if preview.attribtype == 'IMAGE'}
-          <div class="image">
-            <img class="img" src={preview.val} alt="" />
+    {#each previewData as preview, i}
+        {#if preview.attribtype === 'IMAGE'}
+            <div class = "image">
+              <img class = "img" src={preview.val} alt="image" />
+            </div>
+        {/if}
+
+        {#if preview.attribtype === 'TEXT'}
+          <div class="desc">
+            {preview.val}
           </div>
         {/if}
-
-        {#if preview.attribtype == 'TEXT'}
-          <p>{preview.val}</p>
-        {/if}
-      </div>
     {/each}
   {/if}
 </div>

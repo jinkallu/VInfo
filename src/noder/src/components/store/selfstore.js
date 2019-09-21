@@ -35,7 +35,7 @@ function ontopclickedapi(node) {
             }
 
             if (fetchdata.preview) {
-                preview.set(fetchdata.previe);
+                preview.set(fetchdata.preview);
             }
             else {
                 parent.set([]);

@@ -52,6 +52,10 @@
     if (unsubscribeSelf) {
       unsubscribeSelf();
     }
+
+    if(unsubscribePreview){
+      unsubscribePreview();
+    }
   });
 
   function onclicked(event) {
@@ -72,7 +76,7 @@
   .toper {
     display: flex;
     flex-direction: row;
-
+    width: 100%;
     background: white;
     border: 0.2em solid blue;
   }
