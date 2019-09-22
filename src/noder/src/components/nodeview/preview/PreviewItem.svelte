@@ -40,6 +40,7 @@
       ". gnodename gnodename . "
       "gbriefdesc gbriefdesc gbriefdesc gbriefdesc"
       " gdesc gdesc gdesc gimage"
+      " gdesc gdesc gdesc gvideo"
       ;
     padding: 30px;
   }
@@ -77,6 +78,9 @@
     object-fit: contain;
     overflow: auto;
   }
+  .video{
+    grid-area: gvideo;
+  }
 </style>
 
 <div class="preview" on:click>
@@ -106,5 +110,13 @@
           </div>
         {/if}
     {/each}
+    <div class = "video">
+      <iframe width="100%" 
+              src="https://www.youtube.com/embed/ohyai6GIRZg?autoplay=1&mute=1&&end=455" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+    </div> 
   {/if}
 </div>
