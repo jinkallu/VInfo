@@ -21,7 +21,6 @@
   const dispatch = createEventDispatcher();
 
   function loadData(nodeid) {
-    console.log(nodeid + "while clicking nodeid");
     if (!isSelf) {
       dispatch("side", {
         nodeid: nodeid,

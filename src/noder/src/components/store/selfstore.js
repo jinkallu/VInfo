@@ -86,7 +86,6 @@ function onbottonclickedapi(node) {
 
 
 function onsideclickedapi(node) {
-    console.log(node + " node is ");
     let postdata = { nodeid: node, nodetype: "SIDE", session: "kdfdkf" };
     return fetch("http://127.0.0.1:5000/listnodes", {
         method: "POST",
@@ -101,15 +100,17 @@ function onsideclickedapi(node) {
         })
         .then(fetchdata => {
             if (fetchdata.children) {
-                children.set(fetchdata.children);
+                children.set(fetchdata.children);               
+               
+            }
+            else {
+                children.set([]);
             }
 
             if (fetchdata.preview) {
                 preview.set(fetchdata.preview);
             }
-            else {
-                children.set([]);
-            }
+           
             sibblings.set(loadedsibblingforupdate);
 
         })
@@ -167,20 +168,16 @@ const nodestore = {
     subscribeChildren: children.subscribe,
     subscribePreview: preview.subscribe,
     fetchInitData: async () => {
-        console.log("fetchinitdata api clicked");
         const fetchData = fetchInitDataApi();
         console.log(fetchData);
     },
     onSideClicked: (clickedSelf, prevSibblings) => {
-        console.log(clickedSelf + "clicked self");
-        console.log("onsideclicked called");
         loadedsibblingforupdate = prevSibblings;
-        console.log(loadedsibblingforupdate + "sibblings for update");
         self.set(clickedSelf);
         sibblings.set([]);
         children.set([]);
         preview.set([]);
-        const apichildren = onsideclickedapi(clickedSelf.nodeid);
+        const apichildren = onsideclickedapi(clickedSelf.nodeid);        
     },
     onBottomClicked: (newParent, clickedSelf, prevchildren) => {
         parent.set(newParent);

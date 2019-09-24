@@ -13,15 +13,15 @@
 
   onMount(() => {
     unsubscribeChildren = nodestore.subscribeChildren(items => {
-      children = items;
+      children = items;       
     });
      unsubscribeSelf = nodestore.subscribeSelf(items => {
       self = items;
+     
     });
   });
 
   function onbottomclicked(event) {
-    console.log("bottom clicked");
 
     // parent.set(loadedself);
     let clickedSelf = children.find(node => node.nodeid == event.detail);

@@ -31,12 +31,10 @@
   });
 
   function onsideclicked(event) {
-    if(self.nodeid !== event.detail.nodeid)
-    {
+    if (self.nodeid !== event.detail.nodeid) {
       let clickedSelf = siblings.find(
         node => node.nodeid == event.detail.nodeid
       );
-
       nodestore.onSideClicked(clickedSelf, siblings);
     }
   }
@@ -54,13 +52,13 @@
 
 {#if siblings}
   <div class="toper">
-  <!--
+    <!--
     {#each sibblings as sibbling (sibblings.nodeid)}
       <SibblingItem {sibbling} selfId={self.nodeid} on:side={onsideclicked} />
     {/each}
     -->
-    <SiblingsView {siblings} selfId={self.nodeid} on:side={onsideclicked}/>
-      <!--
+    <SiblingsView {siblings}  selfId={self.nodeid} on:side={onsideclicked} />
+    <!--
 
     <SibblingsCarousel data = {sibblings} selfId={self.nodeid} on:side={onsideclicked}/>
   -->
