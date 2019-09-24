@@ -5,6 +5,7 @@ const self = writable([]);
 const parent = writable([]);
 const sibblings = writable([]);
 const children = writable([]);
+const preview = writable([]);
 
 let loadedsibblingforupdate;
 let loadedchildrenforupdate;
@@ -31,7 +32,12 @@ function ontopclickedapi(node) {
             }
             if (fetchdata.parent) {
                 parent.set(fetchdata.parent);
-            } else {
+            }
+
+            if (fetchdata.preview) {
+                preview.set(fetchdata.preview);
+            }
+            else {
                 parent.set([]);
             }
 
@@ -62,7 +68,12 @@ function onbottonclickedapi(node) {
         .then(fetchdata => {
             if (fetchdata.children) {
                 children.set(fetchdata.children);
-            } else {
+            }
+            if (fetchdata.preview) {
+                preview.set(fetchdata.preview);
+            }
+
+            else {
                 children.set([]);
             }
             sibblings.set(loadedchildrenforupdate);
@@ -91,7 +102,12 @@ function onsideclickedapi(node) {
         .then(fetchdata => {
             if (fetchdata.children) {
                 children.set(fetchdata.children);
-            } else {
+            }
+
+            if (fetchdata.preview) {
+                preview.set(fetchdata.preview);
+            }
+            else {
                 children.set([]);
             }
             sibblings.set(loadedsibblingforupdate);
@@ -127,13 +143,15 @@ async function fetchInitDataApi() {
             parent.set(data.parent);
             children.set(data.children);
             sibblings.set(data.sibblings);
+            preview.set(data.preview);
 
 
             return {
                 fetchedSelf: data.self,
                 fetchedParent: data.parent,
                 fetchedChildren: data.children,
-                fetchedSibblings: data.sibblings
+                fetchedSibblings: data.sibblings,
+                fetchedPreview: data.preview
             };
         })
         .catch(err => {
@@ -147,6 +165,7 @@ const nodestore = {
     subscribeParent: parent.subscribe,
     subscribeSibblings: sibblings.subscribe,
     subscribeChildren: children.subscribe,
+    subscribePreview: preview.subscribe,
     fetchInitData: async () => {
         console.log("fetchinitdata api clicked");
         const fetchData = fetchInitDataApi();
@@ -160,6 +179,7 @@ const nodestore = {
         self.set(clickedSelf);
         sibblings.set([]);
         children.set([]);
+        preview.set([]);
         const apichildren = onsideclickedapi(clickedSelf.nodeid);
     },
     onBottomClicked: (newParent, clickedSelf, prevchildren) => {
@@ -168,6 +188,8 @@ const nodestore = {
         sibblings.set([]);
         loadedchildrenforupdate = prevchildren;
         children.set([]);
+        preview.set([]);
+
         const apichildren = onbottonclickedapi(clickedSelf.nodeid);
     },
     onTopClicked: (loadedParent, loadedSibblings, clickedNodeid) => {
@@ -179,6 +201,8 @@ const nodestore = {
         children.set([]);
         parent.set([]);
         sibblings.set([]);
+        preview.set([]);
+
 
         const apisibblings = ontopclickedapi(clickedNodeid);
 

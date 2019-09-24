@@ -29,8 +29,8 @@
   }
 
   onDestroy(() => {
-    if (unsubscribechildren) {
-      unsubscribechildren();
+    if (unsubscribeChildren) {
+      unsubscribeChildren();
     }
     if (unsubscribeSelf) {
       unsubscribeSelf();

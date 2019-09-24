@@ -127,4 +127,18 @@ jobs:
       displayName: 'Publish test results'
       condition: succeededOrFailed()
 
+    # archive sapper build
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/noder'
+        includeRootFolder: false
 
+    # Copy files
+    #- task: CopyFiles@2
+    #  inputs:
+    #    sourceFolder: '$(Agent.BuildDirectory)'
+    #    contents: '**/*.zip'
+    #    targetFolder: '$(Build.ArtifactStagingDirectory)' 
+
+    # Publish build artifacts
+    - task: PublishBuildArtifacts@1

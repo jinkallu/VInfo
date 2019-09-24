@@ -1,5 +1,5 @@
 <script>
-  import PreviewItem from "./PreviewItem.svelte";
+  import FullPageView from "./FullPageView.svelte";
 
   import { onMount, onDestroy, beforeUpdate, createEventDispatcher } from "svelte";
   import nodestore from "../../store/selfstore.js";
@@ -7,12 +7,10 @@
   //import PreviewCarousel from "../UI/PreviewCarousel.svelte";
 
   let sibblings;
-  let previewData;
   let self;
   let view_data = [];
   let unsubscribeSibblings;
   let unsubscribeSelf;
-  let unsubscribePreview;
 
   export let previewFull;
 
@@ -25,15 +23,6 @@
       sibblings = items;
     } else {
       sibblings = [];
-    }
-  });
-
-
-  unsubscribePreview = nodestore.subscribePreview(items => {
-    if (items) {
-      previewData = items;
-    } else {
-      previewData = [];
     }
   });
 
@@ -51,10 +40,6 @@
     }
     if (unsubscribeSelf) {
       unsubscribeSelf();
-    }
-
-    if(unsubscribePreview){
-      unsubscribePreview();
     }
   });
 
@@ -76,9 +61,10 @@
   .toper {
     display: flex;
     flex-direction: row;
-    width: 100%;
+
     background: white;
     border: 0.2em solid blue;
+    height: 100%;
   }
 </style>
 
@@ -99,10 +85,9 @@
 
 {#if self}
   <div class="toper" style = "height: {height}">
-    <PreviewItem
+    <FullPageView
         preview={self}
         self={self.nodeid}
-        previewData={previewData}
         on:click={onclicked} 
         />
   </div>

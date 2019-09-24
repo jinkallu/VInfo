@@ -11,6 +11,7 @@
 
   export let preview;
   export let self;
+  export let previewData;
 
   let isLoading = false;
 
@@ -23,38 +24,99 @@
 
 <style>
   p {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin: 0;
   }
 
   div {
-    text-align: center;
   }
-.self{color:yellow}
-  /* .content {
-    height: 4rem;
-  } */
 
-  .row{
-    height: 200px;
-    padding : 30px;
+  .preview {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: auto;
+
+    grid-template-areas:
+      ". gnodename gnodename . "
+      "gbriefdesc gbriefdesc gbriefdesc gbriefdesc"
+      " gdesc gdesc gdesc gimage"
+      " gdesc gdesc gdesc gvideo"
+      ;
+    padding: 30px;
+  }
+
+  .nodename {
+    grid-area: gnodename;
+    align-self: center;
+    text-align: center;
+    color: black;
+  }
+
+  .briefdesc {
+    grid-area: gbriefdesc;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    align-self: center;
+  }
+  .desc {
+    grid-area: gdesc;
+    padding: 1em;
+    align-self: center;
+  }
+
+  .image {
+    grid-area: gimage;
+    width: 100%;
+    align-self: auto;
+    padding: 1em;
+  }
+
+  .img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    overflow: auto;
+  }
+  .video{
+    grid-area: gvideo;
   }
 </style>
 
-<div class="row">
-  <div class="col s12 m6">
-    <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
-      {#if preview.nodeid==self}
-        <span class=" self card-title">{preview.nodename}</span>
-        {:else}
-        <span class="card-title">{preview.nodename}</span>
-
-        {/if}
-        <div>
-          <p>{preview.briefdesc}</p>
-        </div>
-      </div>
-    </div>
+<div class="preview" on:click>
+  <div class="nodename">
+    {#if preview.nodeid == self}
+      {#if preview.nodename}
+        <h1>{preview.nodename}</h1>
+      {/if}
+    {/if}
   </div>
+  <div class="briefdesc">
+    {#if preview.briefdesc}
+      {preview.briefdesc}
+    {/if}
+  </div>
+  {#if previewData}
+    {#each previewData as preview, i}
+        {#if preview.attribtype === 'IMAGE'}
+            <div class = "image">
+              <img class = "img" src={preview.val} alt="image" />
+            </div>
+        {/if}
+
+        {#if preview.attribtype === 'TEXT'}
+          <div class="desc">
+            {preview.val}
+          </div>
+        {/if}
+    {/each}
+    <div class = "video">
+      <iframe width="100%" 
+              src="https://www.youtube.com/embed/ohyai6GIRZg?autoplay=1&mute=1&&end=455" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+    </div> 
+  {/if}
 </div>

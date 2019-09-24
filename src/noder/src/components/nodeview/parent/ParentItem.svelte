@@ -46,9 +46,9 @@
     display: flex;
     flex-direction: column;
     background: navy;
-    width: 128px;
-    height: 128px;
-    border-radius: 64px;
+    width: 6em;
+    height: 6em;
+    border-radius: 3em;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -67,7 +67,9 @@
       on:click={() => ontopclicked(parent.nodeid)}
       >
     <div>
-      {parent.nodename}
+      {#if parent.nodename}
+        {parent.nodename}
+      {/if}
       <!--<Badge>{parent.nodename}</Badge>-->
     </div>
 <!--
