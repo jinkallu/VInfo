@@ -38,7 +38,7 @@
       : (beginIdx = siblings.length - maxSibsToShow);
     data = siblings.slice(beginIdx, beginIdx + maxSibsToShow);
   }
-
+//new line added
   function onSideClick() {}
 </script>
 
