@@ -5,7 +5,6 @@
     beforeUpdate,
     createEventDispatcher
   } from "svelte";
-  import TestMxGraph from "../../virtuallab/TestMxGraph.svelte";
   //import Button from "../UI/Button.svelte";
   //import Badge from "../UI/Badge.svelte";
   //import LoadingSpinner from "../UI/LoadingSpinner.svelte";
@@ -94,7 +93,5 @@
         <img class = "img" src = "images/science.png" alt = ""/>
       </div>
 
-      <div>
-          <TestMxGraph />
-      </div>
+      
 </div>

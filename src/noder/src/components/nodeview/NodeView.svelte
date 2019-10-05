@@ -10,8 +10,11 @@
   import ChildScreen from "./children/ChildScreen.svelte";
   import nodestore from "../store/selfstore.js";
   //import LoadingSpinner from "../../UI/LoadingSpinner.svelte";
+  import TestMxGraph from "../virtuallab/TestMxGraph.svelte";
+
 
   let previewFull = false;
+  let virtualLab = false;
 
   onMount(async () => {
     nodestore.fetchInitData();
@@ -49,6 +52,22 @@
     justify-content: center;
   }
 
+  .virtuallab{
+    display: flex;
+    width: 10em;
+    height: 3em;
+    background-color: gray;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .vlabGraph{
+    display: relative;
+    height: 40em;
+  }
+
   .fullpage{
     height: 100%;
   }
@@ -65,7 +84,10 @@
   <!-- <section id="noder-parent"> -->
 
   <div class="divider" />
-
+    <div class="virtuallab" on:click = "{()=>{virtualLab = !virtualLab;}}">
+      Virtual Lab
+    </div>
+  {#if !virtualLab}
   <div class="divider" />
     {#if !previewFull}
   <div class="section">
@@ -104,4 +126,10 @@
     </div>
   </div>
   {/if}
+
+{:else}
+  <div class="vlabGraph" >
+    <TestMxGraph />
+  </div>
+{/if}
 </div>
