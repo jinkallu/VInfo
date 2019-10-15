@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="0" time="1.749">
+  <testsuite name="My test suit" errors="0" failures="0" skipped="0" timestamp="2019-08-05T06:31:10" time="0.499" tests="2">
+    <testcase classname="My test suit `true` should be `true`" name="My test suit `true` should be `true`" time="0.003">
+    </testcase>
+    <testcase classname="My test suit `false` should be `false`" name="My test suit `false` should be `false`" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2019-08-05T06:31:10" time="0.5" tests="1">
+    <testcase classname=" adds 1 + 2 to equal 3" name=" adds 1 + 2 to equal 3" time="0.004">
+    </testcase>
+  </testsuite>
+</testsuites>

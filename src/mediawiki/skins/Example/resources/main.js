@@ -55,6 +55,25 @@ jQuery( document ).ready( function() {
         console.log('clicked edit');
         editPage(siblings[focus].replace(' ', '_'));
     });
+
+    jQuery( '.siblings_holder' ).on( 'contextmenu', '.siblings', function(event) {
+    //$( ".siblings" ).contextmenu(function(event) {
+        event.preventDefault();
+        if(focus !== jQuery(this).index()){
+            console.log('not focus');
+            return false;
+        }
+        var person = prompt("Please enter the child name", "MatheMatics");
+
+        if (person == null || person == "") {
+            alert("User cancelled the prompt.");
+        } else {
+            createPage(siblings[jQuery(this).index()].replace(' ', '_'), person.replace(' ', '_'));
+        }
+
+        return false;
+    });
+
 } );
 
 function initialLoading(){
@@ -109,13 +128,15 @@ function getCategoryMembers(type, cat, holder_div, child_div){
         cmtitle: 'Category:' + cat
     } ).done( function ( data ) {
         let child = data.query.categorymembers;
+        jQuery( ".children_holder .child" ).remove();     
         if(type === "siblings")
         {
-            siblings = [];    
+            siblings = [];
+            jQuery( ".siblings_holder .siblings" ).remove(); 
         }
         else if(type === "children")
         {
-            children = [];    
+            children = [];  
         }
         for (var i = 0; i < child.length; i++){
             console.log( child[i].title);
@@ -159,7 +180,7 @@ function editPage(cat){
     console.log("Edit");
     jQuery( ".preview_holder .mw-parser-output" ).remove();
     jQuery(".preview_holder").append('<div id = editform> </div>');
-    $('#editform').load('http://34.65.220.95/mediawiki/index.php?title=Category:' + cat + '&action=edit #editform', function () {
+    $('#editform').load('http://localhost/mediawiki/index.php?title=Category:' + cat + '&action=edit #editform', function () {
        // mw.notify( 'Load complete!' );
     } );
     var api = new mw.Api();
@@ -171,4 +192,22 @@ function editPage(cat){
         console.log(data);
         //jQuery(".preview_holder").append(data.parse.text['*']);
     });
+}
+
+function createPage(par, cat){
+    var par_cat = '[[Category:'+ par +' | ' + children.length +']]';
+    console.log("creating child " + cat + " belongs to " + par_cat);
+    var params = {
+		action: 'edit',
+		title: 'Category:' + cat,
+		appendtext: par_cat,
+		format: 'json'
+	},
+	api = new mw.Api();
+
+    api.postWithToken( 'csrf', params ).done( function ( data ) {
+        console.log( data );
+        //focus = siblings.length;
+        getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+    } );
 }

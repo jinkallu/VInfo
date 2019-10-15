@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="0" name="pytest" skipped="0" tests="2" time="8.370"><testcase classname="flaskr.tests.api.test_test" file="flaskr/tests/api/test_test.py" line="7" name="test_login" time="5.505"><system-out>[(&apos;7139fbc6-a438-4a9e-aaea-4db3e5cf5b62&apos;, {&apos;status&apos;: &apos;success&apos;, &apos;message&apos;: &apos;Login successfull..&apos;})]
+[({&apos;status&apos;: &apos;success&apos;, &apos;message&apos;: &apos;Token process successfull..&apos;},)]
+</system-out></testcase><testcase classname="flaskr.tests.api.test_test" file="flaskr/tests/api/test_test.py" line="27" name="test_listnodes" time="2.687"></testcase></testsuite>
