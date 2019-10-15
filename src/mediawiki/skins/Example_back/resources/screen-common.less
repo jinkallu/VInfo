@@ -1,0 +1,188 @@
+/* Common styling for the Example skin */
+
+@import "variables.less";
+
+// Page layout
+.parent_hold{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	flex-direction: column;
+}
+.parent_root{
+	position: relative;
+	background: navy;
+    width: 128px;
+    height: 128px;
+    border-radius: 64px;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin: auto;
+	align-content: center;
+	align-self: center;
+}
+.siblings_holder{
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+}
+.siblings{
+	color: white;
+	height: 3em;
+	margin: 1em;
+	padding: 0.2em;
+	background: navy;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.preview_holder{
+	height: 15em;
+	width: 80%;
+	left: 10%;
+	overflow:scroll;
+}
+
+.children_holder{
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+}
+
+.child{
+	color: white;
+	height: 2em;
+	margin: 1em;
+	padding: 0.2em;
+	background: navy;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.pagetools_holder{
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.fullview{
+	background: red;
+	height: 1em;
+	margin: 0.2em;
+	cursor: pointer; 
+}
+.edit{
+	background: red;
+	height: 1em;
+	margin: 0.2em;
+	cursor: pointer; 
+}
+
+#mw-wrapper {
+	max-width: @width;
+	margin: 0 auto;
+	position: relative;
+	padding: 1em;
+}
+
+#p-logo {
+	text-align: center;
+	width: 10em;
+	float: right;
+
+	// Make logo image visible
+	// The class sets the background image from $wgLogo, but we still need to give it a size in order to show up
+	a.mw-wiki-logo {
+		display: block;
+		content: '';
+		width: 10em;
+		height: 10em;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+	}
+}
+
+.mw-body {
+	position: relative;
+	word-wrap: break-word;
+}
+
+// Some content stuff
+.firstHeading {
+	margin-top: 0;
+	color: blue;
+}
+
+// parent
+.parent{
+	margin-top: 0;
+	color: white;
+	background: green;
+}
+
+.mw-indicators {
+	float: right;
+	margin: 1.5em 0 0 1em;
+}
+
+pre {
+	overflow: auto;
+	white-space: pre-wrap;
+}
+
+.center,
+.center * {
+	margin: auto;
+	text-align: center;
+}
+
+// Splatter the menus and tools at the bottom
+#footer,
+#page-tools,
+#p-personal {
+	margin: 1em 0;
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+	}
+
+	li {
+		padding-right: 1em;
+		display: inline-block;
+	}
+}
+
+#page-tools .mw-portlet {
+	display: inline-block;
+	margin: auto;
+}
+
+#mw-navigation {
+	margin: 1em 0;
+}
+
+// Footer
+#footer {
+	clear: both;
+	border-top: 1px solid @border;
+
+	ul {
+		margin-top: 1em;
+	}
+}
+
+#footer-icons {
+	float: right;
+	margin: 0 0 1em 1em;
+}
+
+// hidden stuff
+#page-tools h3,
+#p-search h3,
+#p-personal h3 {
+	.hidden;
+}
