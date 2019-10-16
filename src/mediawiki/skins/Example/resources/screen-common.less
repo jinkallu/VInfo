@@ -2,6 +2,10 @@
 
 @import "variables.less";
 
+// nodeview
+.nodeview{
+	margin-top : 3em;
+}
 // Page layout
 .parent_hold{
 	display: flex;
@@ -185,4 +189,25 @@ pre {
 #p-search h3,
 #p-personal h3 {
 	.hidden;
+}
+
+// nav
+.nav {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	border-bottom: 5em;
+	font-weight: 300;
+	padding: 0.2em;
+	background-color: #0f7fff;
+	top: 0; /* Position the navbar at the top of the page */
+	width: 100%; /* Full width */
+	height: 8%;
+	z-index: 1;
+	position: fixed;
+}
+
+// user-tools
+.user-tools{
+	color: white;
 }

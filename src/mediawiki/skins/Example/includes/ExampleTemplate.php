@@ -10,10 +10,24 @@ class ExampleTemplate extends BaseTemplate {
 	 */
 	public function execute() {
 		$html = '';
-		$html .= $this->getSearch();
 		$html .= $this->get( 'headelement' );
+		$html .= Html::openElement( 'div', [ 'class' => 'nav' ] );
+			$html .= Html::openElement( 'div', [ 'class' => 'search' ] );
+				$html .= $this->getSearch();
+			$html .= Html::closeElement( 'div' ); // search
+			/*Html::rawElement(
+				'div',
+				[ 'id' => 'user-tools', 'class' => 'user-tools' ],
+				$this->getSearch().
+				$this->getUserLinks()
+			);*/
+			$html .= Html::openElement( 'div', [ 'class' => 'user-tools' ] );
+				$html .= $this->getUserLinks();
+			$html .= Html::closeElement( 'div' ); // user-tools
+		$html .= Html::closeElement( 'div' ); // nav
+		//$html .= $this->getSearch();
 
-		$html .= Html::rawElement( 'div', [ 'id' => 'mw-wrapper' , 'style' => 'visibility: hidden;'],
+		$html .= Html::rawElement( 'div', [ 'id' => 'mw-wrapper'],
 			Html::rawElement( 'div', [ 'class' => 'mw-body', 'id' => 'content', 'role' => 'main' ],
 				$this->getSiteNotice() .
 				$this->getNewTalk()
@@ -30,7 +44,7 @@ class ExampleTemplate extends BaseTemplate {
 				//	$this->getMsg( 'tagline' )->parse()
 				//) 
 				.
-				Html::rawElement( 'div', [ 'class' => 'mw-body-content' ],
+				Html::rawElement( 'div', [ 'class' => 'mw-body-content','style' => 'display: none;' ],
 					Html::rawElement( 'div', [ 'id' => 'contentSub' ],
 						//$this->getPageSubtitle() .
 						Html::rawElement(
@@ -38,12 +52,14 @@ class ExampleTemplate extends BaseTemplate {
 							[],
 							$this->get( 'undelete' )
 						)
-					) .
-					$this->get( 'bodycontent' ) .
-					$this->getClear() .
+					) 
+					.$this->get( 'bodycontent' ) 
+					.
+					$this->getClear() 
+					/* .
 					Html::rawElement( 'div', [ 'class' => 'printfooter' ],
 						$this->get( 'printfooter' )
-					) 
+					)*/ 
 					//.
 					//$this->getCategoryLinks()
 				) .
@@ -51,33 +67,33 @@ class ExampleTemplate extends BaseTemplate {
 				$this->get( 'debughtml' )
 			) .
 			Html::rawElement( 'div', [ 'id' => 'mw-navigation' ],
-				Html::rawElement(
+				/*Html::rawElement(
 					'h2',
 					[],
 					$this->getMsg( 'navigation-heading' )->parse()
-				) .
-				$this->getLogo() .
-				$this->getSearch() .
+				) .*/
+				//$this->getLogo() .
+				//$this->getSearch() .
 				// User profile links
-				Html::rawElement(
-					'div',
-					[ 'id' => 'user-tools' ],
-					$this->getUserLinks()
-				) .
+				//Html::rawElement(
+				//	'div',
+				//	[ 'id' => 'user-tools' ],
+				//	$this->getUserLinks()
+				//) 
 				// Page editing and tools
-				Html::rawElement(
+				/*. Html::rawElement(
 					'div',
 					[ 'id' => 'page-tools' ],
 					$this->getPageLinks()
-				) .
+				) */
 				// Site navigation/sidebar
-				Html::rawElement(
+				/*. Html::rawElement(
 					'div',
 					[ 'id' => 'site-navigation' ],
 					$this->getSiteNavigation()
-				)
-			) .		
-			$this->getFooterBlock()
+				)*/
+			) 
+			//. $this->getFooterBlock()
 		);
 
 		$html .= Html::openElement( 'div', [ 'class' => 'nodeview' ] );

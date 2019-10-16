@@ -168,6 +168,7 @@ function getPreview(cat){
     var api = new mw.Api();
     api.get( {
         action: 'parse',
+        useskin: 'vector',
         page: 'Category:'+ cat,
         format: "json"
     } ).done( function ( data ) {
