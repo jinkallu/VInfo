@@ -182,7 +182,6 @@ function editPage(cat){
     jQuery( ".preview_holder .mw-parser-output" ).remove();
     jQuery(".preview_holder").append('<div id = editform> </div>');
     $('#editform').load('http://localhost/mediawiki/index.php?title=Category:' + cat + '&action=edit #editform', function () {
-       // mw.notify( 'Load complete!' );
     } );
     var api = new mw.Api();
     api.get( {

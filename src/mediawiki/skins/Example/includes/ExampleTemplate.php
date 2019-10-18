@@ -45,6 +45,8 @@ class ExampleTemplate extends BaseTemplate {
 				//) 
 				.
 				Html::rawElement( 'div', [ 'class' => 'mw-body-content','style' => 'display: none;' ],
+
+				//Html::rawElement( 'div', [ 'class' => 'mw-body-content' ],
 					Html::rawElement( 'div', [ 'id' => 'contentSub' ],
 						//$this->getPageSubtitle() .
 						Html::rawElement(
@@ -81,11 +83,11 @@ class ExampleTemplate extends BaseTemplate {
 				//	$this->getUserLinks()
 				//) 
 				// Page editing and tools
-				/*. Html::rawElement(
+				Html::rawElement(
 					'div',
 					[ 'id' => 'page-tools' ],
 					$this->getPageLinks()
-				) */
+				) 
 				// Site navigation/sidebar
 				/*. Html::rawElement(
 					'div',
