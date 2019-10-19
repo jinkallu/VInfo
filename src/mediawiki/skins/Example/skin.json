@@ -40,6 +40,12 @@
 			}
 		},
 		"skins.example.js": {
+			"dependencies": [
+				"oojs-ui-core",
+				"oojs-ui-windows",
+				"oojs-ui-widgets",
+				"oojs-ui-toolbars"
+			],
 			"scripts": [
 				"resources/main.js"
 			]

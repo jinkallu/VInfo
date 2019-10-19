@@ -6,6 +6,9 @@ var siblings = [];
 var children = [];
 var focus = 0;
 
+// edit
+var multilineInput; 
+
 jQuery( document ).ready( function() {
     //$("#content").hide();
     console.log('initial loading');
@@ -164,6 +167,10 @@ function getCategoryMembers(type, cat, holder_div, child_div){
 
 function getPreview(cat){
     jQuery( ".preview_holder .mw-parser-output" ).remove();
+    if(multilineInput){
+        jQuery(multilineInput.$element).remove();
+    }
+    multilineInput = null;
     jQuery( ".preview_holder #editform" ).remove();
     var api = new mw.Api();
     api.get( {
@@ -180,7 +187,8 @@ function getPreview(cat){
 function editPage(cat){
     console.log("Edit");
     jQuery( ".preview_holder .mw-parser-output" ).remove();
-    jQuery(".preview_holder").append('<div id = editform> </div>');
+    
+    /*jQuery(".preview_holder").append('<div id = editform> </div>');
     $('#editform').load('http://localhost/mediawiki/index.php?title=Category:' + cat + '&action=edit #editform', function () {
     } );
     var api = new mw.Api();
@@ -190,6 +198,49 @@ function editPage(cat){
         format: "json"
     } ).done( function ( data ) {
         console.log(data);
+        //jQuery(".preview_holder").append(data.parse.text['*']);
+    });*/
+    // test
+    var api = new mw.Api();
+    api.get( {
+        action: 'query',
+        //useskin: 'vector',
+        titles: 'Category:'+ cat,
+        prop: 'revisions',
+        rvprop: 'content',
+        format: "json",
+        formatversion: '2'
+        //prop: "text"
+    } ).done( function ( data ) {
+        // A MultilineTextInput 
+        //var multilineInput = new OO.ui.MultilineTextInputWidget( { 
+            //value: data.query.pages[0].revisions[0].content
+        //} );
+        multilineInput = new OO.ui.MultilineTextInputWidget({
+            autosize: true,
+            maxRows: 10
+        });
+        multilineInput.setValue(data.query.pages[0].revisions[0].content);
+        jQuery(multilineInput.$element).show();
+
+        $( '.preview_holder' ).append( multilineInput.$element );
+        multilineInput.adjustSize();
+        getEditPreview(multilineInput.getValue());
+        //console.log('Length ', data.query.pages[0].revisions[0].content);
+            //jQuery(".preview_holder").append(data.parse.text['*']);
+    });
+
+}
+
+function getEditPreview(text){
+    var api = new mw.Api();
+    api.get( {
+        action: 'parse',
+        useskin: 'vector',
+        text: 'Category:'+ text,
+        format: "json"
+    } ).done( function ( data ) {
+        console.log(data.parse.text['*']);
         //jQuery(".preview_holder").append(data.parse.text['*']);
     });
 }
