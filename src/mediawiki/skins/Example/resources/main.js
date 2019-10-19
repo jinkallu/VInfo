@@ -5,6 +5,7 @@ var parent;
 var siblings = [];
 var children = [];
 var focus = 0;
+var flagPageFullViewToggle = false;
 
 // edit
 var multilineInput; 
@@ -51,12 +52,19 @@ jQuery( document ).ready( function() {
         console.log('clicked siblings ' + sib);
         jQuery( ".children_holder .child" ).remove();
         getCategoryMembers("children", sib, ".children_holder", "child");
-        getPreview(siblings[focus].replace(' ', '_'));
+        //getPreview(siblings[focus].replace(' ', '_'));
+        loadPageView();
     } );
     
     jQuery( '.edit' ).on( 'click', function() {
         console.log('clicked edit');
         editPage(siblings[focus].replace(' ', '_'));
+    });
+
+    jQuery( '.fullview' ).on( 'click', function() {
+        console.log('clicked FullView');
+        flagPageFullViewToggle = !flagPageFullViewToggle;
+        loadPageView();
     });
 
     jQuery( '.siblings_holder' ).on( 'contextmenu', '.siblings', function(event) {
@@ -79,6 +87,18 @@ jQuery( document ).ready( function() {
 
 } );
 
+function loadPageView(){
+    $( '.pagefullview_holder .editpageview_holder' ).remove();
+    if(flagPageFullViewToggle){
+        getFullPageView(siblings[focus].replace(' ', '_'));
+        jQuery(".pagetools_holder .fullview").html('Preview');
+    }
+    else{
+        getPreview(siblings[focus].replace(' ', '_'));
+        jQuery(".pagetools_holder .fullview").html('Full View');
+    }
+}
+
 function initialLoading(){
     // initial loading
     parent = "BigBang";
@@ -92,10 +112,14 @@ function initialLoading(){
     // Fullview, edit
     jQuery(".nodeview").append('<div class="pagetools_holder"></div>');
     jQuery(".pagetools_holder").append('<div class="edit">Edit</div>');
+    jQuery(".pagetools_holder .edit" ).hide();
     jQuery(".pagetools_holder").append('<div class="fullview">Full View</div>');
 
     // preview holder
-    jQuery(".nodeview").append('<div class="preview_holder"></div>');
+    jQuery(".nodeview").append('<div class="pagepreview_holder"></div>');
+    
+    // full page view
+    jQuery(".nodeview").append('<div class="pagefullview_holder"></div>'); 
 
     // children
     jQuery(".nodeview").append('<div class="children_holder"></div>');
@@ -166,12 +190,12 @@ function getCategoryMembers(type, cat, holder_div, child_div){
 }
 
 function getPreview(cat){
-    jQuery( ".preview_holder .mw-parser-output" ).remove();
+    jQuery( ".pagepreview_holder .mw-parser-output" ).remove();
     if(multilineInput){
         jQuery(multilineInput.$element).remove();
     }
     multilineInput = null;
-    jQuery( ".preview_holder #editform" ).remove();
+    jQuery( ".pagepreview_holder #editform" ).remove();
     var api = new mw.Api();
     api.get( {
         action: 'parse',
@@ -179,27 +203,21 @@ function getPreview(cat){
         page: 'Category:'+ cat,
         format: "json"
     } ).done( function ( data ) {
-        //console.log(data.parse.text['*']);
-        jQuery(".preview_holder").append(data.parse.text['*']);
+        jQuery(".pagepreview_holder .mw-parser-output" ).remove();
+        jQuery(".pagepreview_holder").append(data.parse.text['*']);
+        jQuery( ".pagefullview_holder" ).hide();
+        jQuery(".pagetools_holder .edit" ).hide();
+        jQuery( ".pagepreview_holder" ).show();
     });
 }
 
 function editPage(cat){
+    if(multilineInput){
+        jQuery(multilineInput.$element).remove();
+    }
     console.log("Edit");
-    jQuery( ".preview_holder .mw-parser-output" ).remove();
+    jQuery( ".pagefullview_holder .mw-parser-output" ).remove();
     
-    /*jQuery(".preview_holder").append('<div id = editform> </div>');
-    $('#editform').load('http://localhost/mediawiki/index.php?title=Category:' + cat + '&action=edit #editform', function () {
-    } );
-    var api = new mw.Api();
-    api.get( {
-        action: 'edit',
-        title: 'Category:'+ cat,
-        format: "json"
-    } ).done( function ( data ) {
-        console.log(data);
-        //jQuery(".preview_holder").append(data.parse.text['*']);
-    });*/
     // test
     var api = new mw.Api();
     api.get( {
@@ -222,12 +240,13 @@ function editPage(cat){
         });
         multilineInput.setValue(data.query.pages[0].revisions[0].content);
         jQuery(multilineInput.$element).show();
-
-        $( '.preview_holder' ).append( multilineInput.$element );
+        
+        $( '.pagefullview_holder' ).append('<div class="editpageview_holder"> </div>');
+        $( '.pagefullview_holder .editpageview_holder' ).append( multilineInput.$element );
         multilineInput.adjustSize();
         getEditPreview(multilineInput.getValue());
         //console.log('Length ', data.query.pages[0].revisions[0].content);
-            //jQuery(".preview_holder").append(data.parse.text['*']);
+            //jQuery(".pagepreview_holder").append(data.parse.text['*']);
     });
 
 }
@@ -241,7 +260,8 @@ function getEditPreview(text){
         format: "json"
     } ).done( function ( data ) {
         console.log(data.parse.text['*']);
-        //jQuery(".preview_holder").append(data.parse.text['*']);
+        $( '.pagefullview_holder .editpageview_holder' ).append(data.parse.text['*']);
+        //jQuery(".pagepreview_holder").append(data.parse.text['*']);
     });
 }
 
@@ -261,4 +281,24 @@ function createPage(par, cat){
         //focus = siblings.length;
         getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
     } );
+}
+
+function getFullPageView(cat){
+    if(multilineInput){
+        jQuery(multilineInput.$element).remove();
+    }
+    multilineInput = null;
+    var api = new mw.Api();
+    api.get( {
+        action: 'parse',
+        useskin: 'vector',
+        page: 'Category:'+ cat,
+        format: "json"
+    } ).done( function ( data ) {
+        jQuery(".pagefullview_holder .mw-parser-output" ).remove();
+        jQuery(".pagefullview_holder").append(data.parse.text['*']);
+        jQuery( ".pagepreview_holder" ).hide();
+        jQuery(".pagetools_holder .edit" ).show();
+        jQuery( ".pagefullview_holder" ).show();
+    });
 }
