@@ -67,8 +67,9 @@ class ExampleTemplate extends BaseTemplate {
 				) .
 				$this->getDataAfterContent() .
 				$this->get( 'debughtml' )
-			) .
-			Html::rawElement( 'div', [ 'id' => 'mw-navigation' ],
+			) 
+			//.
+			//Html::rawElement( 'div', [ 'id' => 'mw-navigation' ],
 				/*Html::rawElement(
 					'h2',
 					[],
@@ -83,18 +84,18 @@ class ExampleTemplate extends BaseTemplate {
 				//	$this->getUserLinks()
 				//) 
 				// Page editing and tools
-				Html::rawElement(
+				/*Html::rawElement(
 					'div',
 					[ 'id' => 'page-tools' ],
 					$this->getPageLinks()
-				) 
+				)*/ 
 				// Site navigation/sidebar
 				/*. Html::rawElement(
 					'div',
 					[ 'id' => 'site-navigation' ],
 					$this->getSiteNavigation()
 				)*/
-			) 
+			//) 
 			//. $this->getFooterBlock()
 		);
 

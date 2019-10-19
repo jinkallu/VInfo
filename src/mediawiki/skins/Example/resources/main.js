@@ -5,22 +5,57 @@ var parent;
 var siblings = [];
 var children = [];
 var focus = 0;
+var focus_page;
 var flagPageFullViewToggle = false;
 
 // edit
 var multilineInput; 
+var page_name;
 
 jQuery( document ).ready( function() {
     //$("#content").hide();
     console.log('initial loading');
     initialLoading();
+
+    page_name = mw.config.get( 'wgPageName' );
+    page_name = page_name.replace('Category:', '');
+    if(page_name === "Main_Page"){
+        parent = "BigBang";
+        jQuery(".parent_holder .parent_root").html(parent);
+        getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+    }
+    else{
+        parent = page_name;
+        getParentCategory(parent);
+
+        // parent is empty
+        if(parent === page_name){
+            jQuery( ".parent_root" ).html('   ');
+            //jQuery( ".siblings_holder .siblings" ).remove();
+            siblings = [];
+            siblings.push(parent);
+            jQuery(".siblings_holder").append('<div class="siblings">' + siblings[0] + '</div>');
+            focus  = 0;
+            focus_page = siblings[focus];
+            jQuery( ".children_holder .child" ).remove();
+            getCategoryMembers("children", siblings[focus], ".children_holder", "child");
+            getPreview(page_name);
+        }
+    }
+    console.log('Page name ' + page_name + mw.util.getUrl(page_name));
     
     jQuery( '.parent_root' ).on( 'click', function() {
         console.log('clicked parent');
-        getParentCategory(parent);
+        location.href = 'http://localhost' + mw.util.getUrl('Category:' + parent);
+        
+        //getParentCategory(parent);
     });
     // when clicked on children
 	jQuery( '.children_holder' ).on( 'click', '.child', function() {
+        focus = jQuery(this).index()
+        location.href = 'http://localhost' + mw.util.getUrl('Category:' + children[focus]);
+
+        /*
         parent = siblings[focus];
         jQuery( ".parent_root" ).html(parent);
         focus = jQuery(this).index()
@@ -34,10 +69,14 @@ jQuery( document ).ready( function() {
         jQuery( ".children_holder .child" ).remove();
         getCategoryMembers("children", siblings[focus], ".children_holder", "child");
         getPreview(siblings[focus].replace(' ', '_'));
+        */
     } );
     // when clicked on siblings
     // very important to keep this format
     jQuery( '.siblings_holder' ).on( 'click', '.siblings', function(event) {
+        focus = jQuery(this).index()
+        location.href = 'http://localhost' + mw.util.getUrl('Category:' + siblings[focus]);
+/*
         if(focus === jQuery(this).index())
         {
             console.log('focus');
@@ -53,12 +92,12 @@ jQuery( document ).ready( function() {
         jQuery( ".children_holder .child" ).remove();
         getCategoryMembers("children", sib, ".children_holder", "child");
         //getPreview(siblings[focus].replace(' ', '_'));
-        loadPageView();
+        loadPageView();*/
     } );
     
     jQuery( '.edit' ).on( 'click', function() {
         console.log('clicked edit');
-        editPage(siblings[focus].replace(' ', '_'));
+        editPage(focus_page);
     });
 
     jQuery( '.fullview' ).on( 'click', function() {
@@ -100,24 +139,23 @@ jQuery( document ).ready( function() {
 function loadPageView(){
     $( '.pagefullview_holder .editpageview_holder' ).hide();
     if(flagPageFullViewToggle){
-        getFullPageView(siblings[focus].replace(' ', '_'));
+        getFullPageView(focus_page);
         jQuery(".pagetools_holder .fullview").html('Preview');
     }
     else{
-        getPreview(siblings[focus].replace(' ', '_'));
+        getPreview(focus_page);
         jQuery(".pagetools_holder .fullview").html('Full View');
     }
 }
 
 function initialLoading(){
     // initial loading
-    parent = "BigBang";
     jQuery(".nodeview").append('<div class="parent_holder"></div>');
     jQuery(".parent_holder").append('<div class="parent_root">' + parent + '</div>');
 
     // get siblings
     jQuery(".nodeview").append('<div class="siblings_holder"></div>');
-    getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+    //getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
 
     // Fullview, edit
     jQuery(".nodeview").append('<div class="pagetools_holder"></div>');
@@ -149,14 +187,16 @@ function getParentCategory(cat){
     } ).done( function ( data ) {
         var pages = data.query.pages;
         for (var p in pages) {
-            for (var cat of pages[p].categories) {
-                parent = cat.title.replace('Category:', '');
-                jQuery( ".parent_root" ).html(parent);
-                console.log(parent);
-                focus = 0;
-                jQuery( ".siblings_holder .siblings" ).remove();
-                jQuery( ".children_holder .child" ).remove();
-                getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+            if(pages[p].categories){
+                for (var cat of pages[p].categories) {
+                    parent = cat.title.replace('Category:', '');
+                    jQuery( ".parent_root" ).html(parent);
+                    console.log(parent);
+                    focus = 0;
+                    jQuery( ".siblings_holder .siblings" ).remove();
+                    jQuery( ".children_holder .child" ).remove();
+                    getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+                }
             }
         }
     });
@@ -182,24 +222,38 @@ function getCategoryMembers(type, cat, holder_div, child_div){
         }
         for (var i = 0; i < child.length; i++){
             console.log( child[i].title);
+            var flagColor = false;
             if(type === "siblings")
             {
                 siblings.push(child[i].title.replace('Category:', ''));
+                console.log("Focus page: " + child[i].title.replace('Category:', '') + ' ' + page_name);
+
+                if(child[i].title.replace('Category:', '').replace(' ', '_') === page_name){
+                    flagColor = true;
+                }
             }
             if(type === "children")
             {
                 children.push(child[i].title.replace('Category:', ''));
             }
-            jQuery(holder_div).append('<div class='+ child_div +'>' + child[i].title.replace('Category:', '') + '</div>');
-        }
-        if(type === "siblings")
-        {
-            // get children
-            if(siblings.length > focus){
-                getCategoryMembers("children", siblings[focus].replace(' ', '_'), ".children_holder", "child");
-                getPreview(siblings[focus].replace(' ', '_'));
+            if(flagColor){
+                jQuery(holder_div).append('<div class='+ child_div +' style="background-color: red;">' + child[i].title.replace('Category:', '') + '</div>');
             }
+            else{
+                jQuery(holder_div).append('<div class='+ child_div +'>' + child[i].title.replace('Category:', '') + '</div>');
+            }
+        }
+        if(type === "siblings" && siblings.length > 0)
+        {
+            focus_page = page_name === "Main_Page" ? siblings[0].replace(' ', '_'): page_name;
+            // get children
+            //if(siblings.length > focus){
+            //    getCategoryMembers("children", siblings[focus].replace(' ', '_'), ".children_holder", "child");
+            //    getPreview(siblings[focus].replace(' ', '_'));
+            //}
             //editPage('Formal_Science');
+            getCategoryMembers("children", focus_page, ".children_holder", "child");
+            getPreview(focus_page);
         }
     } );
 }
@@ -329,6 +383,12 @@ function submitEdit(title, text){
 	api = new mw.Api();
 
     api.postWithToken( 'csrf', params ).done( function ( data ) {
-        console.log( data );
+        console.log( data.edit.result );
+        if(data.edit.result === "Success"){
+            mw.notify( 'Submitted successfullly.' ); 
+        }
+        else{
+            mw.notify( 'Error in submission.' ); 
+        }
     } );
 }
