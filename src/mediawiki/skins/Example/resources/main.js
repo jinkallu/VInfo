@@ -67,6 +67,16 @@ jQuery( document ).ready( function() {
         loadPageView();
     });
 
+    jQuery( '.nodeview .pagefullview_holder .editpageview_holder .editpreview' ).on( 'click', function() {
+        console.log('clicked EditPreView');
+        getEditPreview(multilineInput.getValue());
+    });
+
+    jQuery( '.nodeview .pagefullview_holder .editpageview_holder .submitedit' ).on( 'click', function() {
+        console.log('clicked SubmitEdit');
+        submitEdit(siblings[focus].replace(' ', '_'), multilineInput.getValue());
+    });
+
     jQuery( '.siblings_holder' ).on( 'contextmenu', '.siblings', function(event) {
     //$( ".siblings" ).contextmenu(function(event) {
         event.preventDefault();
@@ -88,7 +98,7 @@ jQuery( document ).ready( function() {
 } );
 
 function loadPageView(){
-    $( '.pagefullview_holder .editpageview_holder' ).remove();
+    $( '.pagefullview_holder .editpageview_holder' ).hide();
     if(flagPageFullViewToggle){
         getFullPageView(siblings[focus].replace(' ', '_'));
         jQuery(".pagetools_holder .fullview").html('Preview');
@@ -120,6 +130,11 @@ function initialLoading(){
     
     // full page view
     jQuery(".nodeview").append('<div class="pagefullview_holder"></div>'); 
+    jQuery( '.pagefullview_holder' ).append('<div class="editpageview_holder"> </div>');
+    jQuery( '.pagefullview_holder .editpageview_holder' ).append( '<div class="editpreview style="display: none;"> Edit Preview </div>' );
+    jQuery( '.pagefullview_holder .editpageview_holder' ).append( '<div class="submitedit style="display: none;"> Submit Edit </div>' );
+
+
 
     // children
     jQuery(".nodeview").append('<div class="children_holder"></div>');
@@ -230,6 +245,7 @@ function editPage(cat){
         formatversion: '2'
         //prop: "text"
     } ).done( function ( data ) {
+        $( '.pagefullview_holder .editpageview_holder' ).show();
         // A MultilineTextInput 
         //var multilineInput = new OO.ui.MultilineTextInputWidget( { 
             //value: data.query.pages[0].revisions[0].content
@@ -241,7 +257,6 @@ function editPage(cat){
         multilineInput.setValue(data.query.pages[0].revisions[0].content);
         jQuery(multilineInput.$element).show();
         
-        $( '.pagefullview_holder' ).append('<div class="editpageview_holder"> </div>');
         $( '.pagefullview_holder .editpageview_holder' ).append( multilineInput.$element );
         multilineInput.adjustSize();
         getEditPreview(multilineInput.getValue());
@@ -260,6 +275,7 @@ function getEditPreview(text){
         format: "json"
     } ).done( function ( data ) {
         console.log(data.parse.text['*']);
+        $( '.editpageview_holder .mw-parser-output' ).remove();
         $( '.pagefullview_holder .editpageview_holder' ).append(data.parse.text['*']);
         //jQuery(".pagepreview_holder").append(data.parse.text['*']);
     });
@@ -301,4 +317,18 @@ function getFullPageView(cat){
         jQuery(".pagetools_holder .edit" ).show();
         jQuery( ".pagefullview_holder" ).show();
     });
+}
+
+function submitEdit(title, text){
+    var params = {
+		action: 'edit',
+		title: 'Category:'+ title,
+		text: text,
+		format: 'json'
+	},
+	api = new mw.Api();
+
+    api.postWithToken( 'csrf', params ).done( function ( data ) {
+        console.log( data );
+    } );
 }
