@@ -12,6 +12,14 @@ var flagPageFullViewToggle = false;
 var multilineInput; 
 var page_name;
 
+//file uploads
+var fileUpload = $( '<div/>' ).attr( 'class', 'fileupload' );
+var fileInput = $( '<input/>' ).attr( 'type', 'file' );
+var fileUploadName = $( '<input class = "fileuploadname"/>' ).attr( 'type', 'text' )//Last name: <input type="text" name="lname"><br>
+//var fileInput = new OO.ui.SelectFileInputWidget();
+var fileSubmitBtn = $( '<input/>' ).attr( 'type', 'button' ).attr( 'value', 'Upload' );
+fileUpload.append( [ fileInput, fileUploadName, fileSubmitBtn ] );
+
 jQuery( document ).ready( function() {
     //$("#content").hide();
     console.log('initial loading');
@@ -116,6 +124,15 @@ jQuery( document ).ready( function() {
         submitEdit(siblings[focus].replace(' ', '_'), multilineInput.getValue());
     });
 
+    $( fileUpload ).on( 'change', function (e) {
+        console.log("chaned");
+        $( fileUploadName).val(e.target.files[0].name);
+    });
+
+    $( fileSubmitBtn ).on( 'click', function () {
+        uploadFile();
+    });
+
     jQuery( '.siblings_holder' ).on( 'contextmenu', '.siblings', function(event) {
     //$( ".siblings" ).contextmenu(function(event) {
         event.preventDefault();
@@ -135,6 +152,37 @@ jQuery( document ).ready( function() {
     });
 
 } );
+
+function uploadFile(){
+    console.log("Uploading file ");
+    var api = new mw.Api();
+    var filen = jQuery( fileUploadName).val();
+    var params = {
+		action: 'upload',
+        filename: filen,//fileInput.getFilename(),
+        //url: fileInput.getData(),
+        format: 'json',
+		ignorewarnings: 1
+	};
+    api.upload( fileInput[0], params ).done( function ( data ) {
+        console.log("Successfully uploaded " + data);
+    }).fail(function ( data ) {
+		console.log( "Error upload " + data );
+	} );
+    /*
+    api.post( {
+        action: 'upload',
+        filename: filen,
+        file: fileInput[0],
+        format: 'json',
+        token: "csrf",
+		ignorewarnings: 1
+    } ).done( function ( data ) {
+        console.log( data.upload.filename + ' has sucessfully uploaded.' );
+    }).fail(function ( data ) {
+		console.log( data );
+	} );*/
+}
 
 function loadPageView(){
     $( '.pagefullview_holder .editpageview_holder' ).hide();
@@ -300,6 +348,7 @@ function editPage(cat){
         //prop: "text"
     } ).done( function ( data ) {
         $( '.pagefullview_holder .editpageview_holder' ).show();
+        $( '.pagefullview_holder .editpageview_holder' ).append(fileUpload);
         // A MultilineTextInput 
         //var multilineInput = new OO.ui.MultilineTextInputWidget( { 
             //value: data.query.pages[0].revisions[0].content
@@ -349,7 +398,8 @@ function createPage(par, cat){
     api.postWithToken( 'csrf', params ).done( function ( data ) {
         console.log( data );
         //focus = siblings.length;
-        getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+        location.href = 'http://localhost' + mw.util.getUrl('Category:' + cat);
+        //getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
     } );
 }
 
@@ -377,7 +427,7 @@ function submitEdit(title, text){
     var params = {
 		action: 'edit',
 		title: 'Category:'+ title,
-		text: text,
+        text: text,
 		format: 'json'
 	},
 	api = new mw.Api();
