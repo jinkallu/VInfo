@@ -16,15 +16,16 @@ var page_name;
 var fileUpload = $( '<div/>' ).attr( 'class', 'fileupload' );
 var fileInput = $( '<input/>' ).attr( 'type', 'file' );
 var fileUploadName = $( '<input class = "fileuploadname"/>' ).attr( 'type', 'text' )//Last name: <input type="text" name="lname"><br>
-//var fileInput = new OO.ui.SelectFileInputWidget();
 var fileSubmitBtn = $( '<input/>' ).attr( 'type', 'button' ).attr( 'value', 'Upload' );
 fileUpload.append( [ fileInput, fileUploadName, fileSubmitBtn ] );
+
+// 
 
 jQuery( document ).ready( function() {
     //$("#content").hide();
     console.log('initial loading');
     initialLoading();
-
+    console.log("Server " + mw.config.get( 'wgServer' ));
     page_name = mw.config.get( 'wgPageName' );
     page_name = page_name.replace('Category:', '');
     if(page_name === "Main_Page"){
@@ -38,7 +39,7 @@ jQuery( document ).ready( function() {
 
         // parent is empty
         if(parent === page_name){
-            jQuery( ".parent_root" ).html('   ');
+            jQuery( ".parent_root" ).html('Root');
             //jQuery( ".siblings_holder .siblings" ).remove();
             siblings = [];
             siblings.push(parent);
@@ -54,14 +55,14 @@ jQuery( document ).ready( function() {
     
     jQuery( '.parent_root' ).on( 'click', function() {
         console.log('clicked parent');
-        location.href = 'http://localhost' + mw.util.getUrl('Category:' + parent);
+        location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + parent);
         
         //getParentCategory(parent);
     });
     // when clicked on children
 	jQuery( '.children_holder' ).on( 'click', '.child', function() {
         focus = jQuery(this).index()
-        location.href = 'http://localhost' + mw.util.getUrl('Category:' + children[focus]);
+        location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + children[focus]);
 
         /*
         parent = siblings[focus];
@@ -83,7 +84,7 @@ jQuery( document ).ready( function() {
     // very important to keep this format
     jQuery( '.siblings_holder' ).on( 'click', '.siblings', function(event) {
         focus = jQuery(this).index()
-        location.href = 'http://localhost' + mw.util.getUrl('Category:' + siblings[focus]);
+        location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + siblings[focus]);
 /*
         if(focus === jQuery(this).index())
         {
@@ -143,7 +144,7 @@ jQuery( document ).ready( function() {
         var person = prompt("Please enter the child name", "MatheMatics");
 
         if (person == null || person == "") {
-            alert("User cancelled the prompt.");
+            //alert("User cancelled the prompt.");
         } else {
             createPage(siblings[jQuery(this).index()].replace(' ', '_'), person.replace(' ', '_'));
         }
@@ -166,8 +167,10 @@ function uploadFile(){
 	};
     api.upload( fileInput[0], params ).done( function ( data ) {
         console.log("Successfully uploaded " + data);
+        mw.notify("Successfully uploaded " + data)
     }).fail(function ( data ) {
-		console.log( "Error upload " + data );
+        console.log( "Error upload " + data );
+        mw.notify("Error upload " + data );
 	} );
     /*
     api.post( {
@@ -217,8 +220,13 @@ function initialLoading(){
     // full page view
     jQuery(".nodeview").append('<div class="pagefullview_holder"></div>'); 
     jQuery( '.pagefullview_holder' ).append('<div class="editpageview_holder"> </div>');
-    jQuery( '.pagefullview_holder .editpageview_holder' ).append( '<div class="editpreview style="display: none;"> Edit Preview </div>' );
-    jQuery( '.pagefullview_holder .editpageview_holder' ).append( '<div class="submitedit style="display: none;"> Submit Edit </div>' );
+    jQuery( '.pagefullview_holder .editpageview_holder' ).hide();
+    jQuery( '.pagefullview_holder .editpageview_holder' ).append( '<div class="editor"></div>' );
+    jQuery( '.pagefullview_holder .editpageview_holder .editor' ).append( '<div class="edittoolbar"></div>' );
+    jQuery( '.pagefullview_holder .editpageview_holder .editor .edittoolbar' ).append( '<div class="editpreview"> Edit Preview </div>' );
+    jQuery( '.pagefullview_holder .editpageview_holder .editor .edittoolbar' ).append( '<div class="submitedit"> Submit Edit </div>' );
+    jQuery( '.pagefullview_holder .editpageview_holder .editor .edittoolbar' ).append(fileUpload);
+
 
 
 
@@ -278,6 +286,15 @@ function getCategoryMembers(type, cat, holder_div, child_div){
 
                 if(child[i].title.replace('Category:', '').replace(' ', '_') === page_name){
                     flagColor = true;
+                    focus = i;
+                }
+                else if(page_name === "Main_Page" && i === 0){
+                    flagColor = true;
+                    focus = i;
+                }
+                else if(page_name === "BigBang"){
+                    flagColor = true;
+                    focus = i;
                 }
             }
             if(type === "children")
@@ -348,7 +365,6 @@ function editPage(cat){
         //prop: "text"
     } ).done( function ( data ) {
         $( '.pagefullview_holder .editpageview_holder' ).show();
-        $( '.pagefullview_holder .editpageview_holder' ).append(fileUpload);
         // A MultilineTextInput 
         //var multilineInput = new OO.ui.MultilineTextInputWidget( { 
             //value: data.query.pages[0].revisions[0].content
@@ -360,7 +376,7 @@ function editPage(cat){
         multilineInput.setValue(data.query.pages[0].revisions[0].content);
         jQuery(multilineInput.$element).show();
         
-        $( '.pagefullview_holder .editpageview_holder' ).append( multilineInput.$element );
+        $( '.pagefullview_holder .editpageview_holder .editor' ).append( multilineInput.$element );
         multilineInput.adjustSize();
         getEditPreview(multilineInput.getValue());
         //console.log('Length ', data.query.pages[0].revisions[0].content);
@@ -385,12 +401,16 @@ function getEditPreview(text){
 }
 
 function createPage(par, cat){
+    var tmplate = "{{WikiNod \n \
+        | title = " + cat.replace('_', ' ') + " \n \
+        }} \n \
+        ";
     var par_cat = '[[Category:'+ par +' | ' + children.length +']]';
     console.log("creating child " + cat + " belongs to " + par_cat);
     var params = {
 		action: 'edit',
 		title: 'Category:' + cat,
-		appendtext: par_cat,
+		appendtext: tmplate + par_cat,
 		format: 'json'
 	},
 	api = new mw.Api();
@@ -398,7 +418,7 @@ function createPage(par, cat){
     api.postWithToken( 'csrf', params ).done( function ( data ) {
         console.log( data );
         //focus = siblings.length;
-        location.href = 'http://localhost' + mw.util.getUrl('Category:' + cat);
+        location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + cat);
         //getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
     } );
 }
