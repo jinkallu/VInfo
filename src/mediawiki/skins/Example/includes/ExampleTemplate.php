@@ -98,6 +98,9 @@ class ExampleTemplate extends BaseTemplate {
 			//) 
 			//. $this->getFooterBlock()
 		);
+		// user login
+		//$html .= Html::openElement( 'div', [ 'class' => 'login' ] );
+		//$html .= Html::closeElement( 'div' ); // user login
 
 		$html .= Html::openElement( 'div', [ 'class' => 'nodeview' ] );
 		$html .= Html::closeElement( 'div' ); // nodeview

@@ -201,6 +201,19 @@ function loadPageView(){
 
 function initialLoading(){
     // initial loading
+    //if(mw.config.get( 'wgPageName' ) === "Special:UserLogin" ||
+    //   mw.config.get( 'wgPageName' ) === "Special:UserLogout" ||
+    //   mw.config.get( 'wgPageName' ) === "Special:PasswordReset" || 
+    //   mw.config.get( 'wgPageName' ) === "Special:CreateAccount"){
+    
+    if(mw.config.get( 'wgPageName' ).startsWith("Special:")){
+        jQuery(".mw-body-content").show();
+        return;
+    }
+    
+    console.log("Current page " + mw.config.get( 'wgPageName' ));
+    //jQuery(".nodeview").append('<div class="parent_holder"></div>');
+    // nodeview
     jQuery(".nodeview").append('<div class="parent_holder"></div>');
     jQuery(".parent_holder").append('<div class="parent_root">' + parent + '</div>');
 
