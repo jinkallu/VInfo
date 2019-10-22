@@ -206,7 +206,12 @@ function initialLoading(){
     //   mw.config.get( 'wgPageName' ) === "Special:PasswordReset" || 
     //   mw.config.get( 'wgPageName' ) === "Special:CreateAccount"){
     
-    if(mw.config.get( 'wgPageName' ).startsWith("Special:")){
+    // hide talk link in user-tools
+    jQuery("#pt-anontalk").hide();
+
+    if(mw.config.get( 'wgPageName' ).startsWith("Special:") ||
+       mw.config.get( 'wgPageName' ).startsWith("User_talk:") ||
+       mw.config.get( 'wgPageName' ).startsWith("Template:")){
         jQuery(".mw-body-content").show();
         return;
     }
