@@ -32,6 +32,7 @@ jQuery( document ).ready( function() {
         parent = "BigBang";
         jQuery(".parent_holder .parent_root").html(parent);
         getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+        jQuery( '.nodeview' ).find('.details').css( "display", "none" );
     }
     else{
         parent = page_name;
@@ -51,6 +52,7 @@ jQuery( document ).ready( function() {
             getPreview(page_name);
         }
     }
+    $( '.nodeview' ).find('.details').css( "display", "none" );;
     console.log('Page name ' + page_name + mw.util.getUrl(page_name));
     
     jQuery( '.parent_root' ).on( 'click', function() {
@@ -190,11 +192,15 @@ function uploadFile(){
 function loadPageView(){
     $( '.pagefullview_holder .editpageview_holder' ).hide();
     if(flagPageFullViewToggle){
+        $( 'div.details' ).show();
         getFullPageView(focus_page);
+        $( 'div.details' ).show();
         jQuery(".pagetools_holder .fullview").html('Preview');
     }
     else{
+        $( 'div.details' ).hide();
         getPreview(focus_page);
+        $( 'div.details' ).hide();
         jQuery(".pagetools_holder .fullview").html('Full View');
     }
 }
@@ -421,6 +427,14 @@ function getEditPreview(text){
 function createPage(par, cat){
     var tmplate = "{{WikiNod \n \
         | title = " + cat.replace('_', ' ') + " \n \
+        | brief = Brief description of " + cat.replace('_', ' ') + " \n \
+        | image = WikiNodLogo.png \n \
+        | caption = WikiNod caption \n \
+        | video = [[File:WikiNod.mp4 | center]] \n \
+        <!-- {{#evu:https://www.youtube.com/watch?v=pSsYTj9kCHE \n \
+               |alignment=center \n \
+            }}--> \n \
+        | detail = Detailed description of " + cat.replace('_', ' ') + " \n \
         }} \n \
         ";
     var par_cat = '[[Category:'+ par +' | ' + children.length +']]';
@@ -473,10 +487,13 @@ function submitEdit(title, text){
     api.postWithToken( 'csrf', params ).done( function ( data ) {
         console.log( data.edit.result );
         if(data.edit.result === "Success"){
-            mw.notify( 'Submitted successfullly.' ); 
+            //mw.notify( 'Submitted successfullly.' ); 
+            location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + siblings[focus]);
         }
         else{
-            mw.notify( 'Error in submission.' ); 
+            //mw.notify( 'Error in submission.' ); 
         }
-    } );
+    } ).fail(function(){
+
+    });
 }
