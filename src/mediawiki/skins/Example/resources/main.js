@@ -214,7 +214,8 @@ function initialLoading(){
 
     if(mw.config.get( 'wgPageName' ).startsWith("Special:") ||
        mw.config.get( 'wgPageName' ).startsWith("User_talk:") ||
-       mw.config.get( 'wgPageName' ).startsWith("Template:")){
+       mw.config.get( 'wgPageName' ).startsWith("Template:") ||
+       mw.config.get( 'wgPageName' ).startsWith("File:")){
         jQuery(".mw-body-content").show();
         return;
     }
