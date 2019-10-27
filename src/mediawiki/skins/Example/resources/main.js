@@ -32,7 +32,7 @@ jQuery( document ).ready( function() {
         parent = "BigBang";
         jQuery(".parent_holder .parent_root").html(parent);
         getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
-        jQuery( '.nodeview' ).find('.details').css( "display", "none" );
+        //jQuery( '.nodeview' ).find('.details').css( "display", "none" );
     }
     else{
         parent = page_name;
@@ -44,7 +44,7 @@ jQuery( document ).ready( function() {
             //jQuery( ".siblings_holder .siblings" ).remove();
             siblings = [];
             siblings.push(parent);
-            jQuery(".siblings_holder").append('<div class="siblings">' + siblings[0] + '</div>');
+            jQuery(".siblings_holder").append('<div class="siblings" style="background-color: red;">' + siblings[0] + '</div>');
             focus  = 0;
             focus_page = siblings[focus];
             jQuery( ".children_holder .child" ).remove();
@@ -52,7 +52,7 @@ jQuery( document ).ready( function() {
             getPreview(page_name);
         }
     }
-    $( '.nodeview' ).find('.details').css( "display", "none" );;
+    //$( '.nodeview' ).find('.details').css( "display", "none" );;
     console.log('Page name ' + page_name + mw.util.getUrl(page_name));
     
     jQuery( '.parent_root' ).on( 'click', function() {
@@ -190,17 +190,14 @@ function uploadFile(){
 }
 
 function loadPageView(){
-    $( '.pagefullview_holder .editpageview_holder' ).hide();
+    //$( '.pagefullview_holder .editpageview_holder' ).hide();
     if(flagPageFullViewToggle){
-        $( 'div.details' ).show();
         getFullPageView(focus_page);
-        $( 'div.details' ).show();
         jQuery(".pagetools_holder .fullview").html('Preview');
     }
     else{
-        $( 'div.details' ).hide();
+        //$( 'div.details' ).hide();
         getPreview(focus_page);
-        $( 'div.details' ).hide();
         jQuery(".pagetools_holder .fullview").html('Full View');
     }
 }
@@ -365,7 +362,9 @@ function getPreview(cat){
         jQuery(".pagepreview_holder").append(data.parse.text['*']);
         jQuery( ".pagefullview_holder" ).hide();
         jQuery(".pagetools_holder .edit" ).hide();
+        $( '.details' ).hide();
         jQuery( ".pagepreview_holder" ).show();
+
     });
 }
 
