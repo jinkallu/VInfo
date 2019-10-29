@@ -212,6 +212,11 @@ function initialLoading(){
     // hide talk link in user-tools
     jQuery("#pt-anontalk").hide();
 
+    // add home page link and help to nav
+    $(".nav").prepend('<a href="https://www.wikinod.com">Home</a>');
+    $(".nav").append('<a href="https://www.wikinod.com/index.php/Help:Help">Help</a>');
+
+
     if(mw.config.get( 'wgPageName' ).startsWith("Special:") ||
        mw.config.get( 'wgPageName' ).startsWith("User_talk:") ||
        mw.config.get( 'wgPageName' ).startsWith("Template:") ||
@@ -257,10 +262,7 @@ function initialLoading(){
     // children
     jQuery(".nodeview").append('<div class="children_holder"></div>');
 
-    // add home page link and help to nav
-    $(".nav").prepend('<a href="https://www.wikinod.com">Home</a>');
-    $(".nav").append('<a href="https://www.wikinod.com/index.php/Help:Help">Help</a>');
-
+    
 }
 
 function getParentCategory(cat){
