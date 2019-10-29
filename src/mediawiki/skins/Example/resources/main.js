@@ -218,6 +218,7 @@ function initialLoading(){
        mw.config.get( 'wgPageName' ).startsWith("Help:") ||
        mw.config.get( 'wgPageName' ).startsWith("File:")){
         jQuery(".mw-body-content").show();
+        jQuery(".mw-body").css("top", "5em");
         return;
     }
     
