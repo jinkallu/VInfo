@@ -256,6 +256,11 @@ function initialLoading(){
 
     // children
     jQuery(".nodeview").append('<div class="children_holder"></div>');
+
+    // add home page link and help to nav
+    $(".nav").prepend('<a href="https://www.wikinod.com">Home</a>');
+    $(".nav").append('<a href="https://www.wikinod.com/index.php/Help:Help">Help</a>');
+
 }
 
 function getParentCategory(cat){
