@@ -425,34 +425,56 @@ function getEditPreview(text){
 }
 
 function createPage(par, cat){
-    var tmplate = "{{WikiNod \n \
-        | title = " + cat.replace('_', ' ') + " \n \
-        | brief = Brief description of " + cat.replace('_', ' ') + " \n \
-        | image = WikiNodLogo.png \n \
-        | caption = WikiNod caption \n \
-        | video = [[File:WikiNod.mp4 | center]] \n \
-        <!-- {{#evu:https://www.youtube.com/watch?v=pSsYTj9kCHE \n \
-               |alignment=center \n \
-            }}--> \n \
-        | detail = Detailed description of " + cat.replace('_', ' ') + " \n \
-        }} \n \
-        ";
-    var par_cat = '[[Category:'+ par +' | ' + children.length +']]';
-    console.log("creating child " + cat + " belongs to " + par_cat);
-    var params = {
-		action: 'edit',
-		title: 'Category:' + cat,
-		appendtext: tmplate + par_cat,
-		format: 'json'
-	},
-	api = new mw.Api();
+    var api = new mw.Api();
+    // check if the page already exists
+    api.get( {
+        action: 'query',
+        titles: 'Category:'+ cat,
+        format: "json",
+        formatversion: "2"
+    } ).done( function ( data ) {
+        console.log(data);
+        if(data.query.pages !== null){
+            if(data.query.pages[0].missing){
+                    console.log("Page is not exists");
+                    // create page
+                    var tmplate = "{{WikiNod \n \
+                        | title = " + cat.replace('_', ' ') + " \n \
+                        | brief = Brief description of " + cat.replace('_', ' ') + " \n \
+                        | image = WikiNodLogo.png \n \
+                        | caption = WikiNod caption \n \
+                        | video = [[File:WikiNod.mp4 | center]] \n \
+                        <!-- {{#evu:https://www.youtube.com/watch?v=pSsYTj9kCHE \n \
+                               |alignment=center \n \
+                            }}--> \n \
+                        | detail = Detailed description of " + cat.replace('_', ' ') + " \n \
+                        }} \n \
+                        ";
+                    var par_cat = '[[Category:'+ par +' | ' + children.length +']]';
+                    console.log("creating child " + cat + " belongs to " + par_cat);
+                    var params = {
+                        action: 'edit',
+                        title: 'Category:' + cat,
+                        appendtext: tmplate + par_cat,
+                        format: 'json'
+                    };
+                
+                    api.postWithToken( 'csrf', params ).done( function ( data ) {
+                        console.log( data );
+                        //focus = siblings.length;
+                        location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + cat);
+                        //getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
+                    } );
+            }
+            else{
+                console.log("Page already exists");
+                $( '.siblings_holder .siblings' ).contextmenu();
+            }
+        }
+    });
+    return;
 
-    api.postWithToken( 'csrf', params ).done( function ( data ) {
-        console.log( data );
-        //focus = siblings.length;
-        location.href = mw.config.get( 'wgServer' ) + mw.util.getUrl('Category:' + cat);
-        //getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
-    } );
+    
 }
 
 function getFullPageView(cat){
