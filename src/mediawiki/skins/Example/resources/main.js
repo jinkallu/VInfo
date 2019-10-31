@@ -313,9 +313,9 @@ function getCategoryMembers(type, cat, holder_div, child_div){
             if(type === "siblings")
             {
                 siblings.push(child[i].title.replace('Category:', ''));
-                console.log("Focus page: " + child[i].title.replace('Category:', '') + ' ' + page_name);
+                console.log("Focus page: " + child[i].title.replace('Category:', '') + ' ' + page_name.replace(/_/g, ' '));
 
-                if(child[i].title.replace('Category:', '').replace(' ', '_') === page_name){
+                if(child[i].title.replace('Category:', '') === page_name.replace(/_/g, ' ')){
                     flagColor = true;
                     focus = i;
                 }
