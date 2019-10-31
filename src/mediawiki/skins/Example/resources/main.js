@@ -262,7 +262,8 @@ function initialLoading(){
     // children
     jQuery(".nodeview").append('<div class="children_holder"></div>');
 
-    
+    // footer
+    jQuery(".nodeview").append('<div class="footer" style = "text-align: center;"> This page may contain data from Wikipedia or Mediawiki foundation.</div>');
 }
 
 function getParentCategory(cat){
