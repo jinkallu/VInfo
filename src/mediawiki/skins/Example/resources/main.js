@@ -406,13 +406,14 @@ function editPage(cat){
         //} );
         multilineInput = new OO.ui.MultilineTextInputWidget({
             autosize: true,
-            maxRows: 10
+            minRows: 10,
+            maxRows: 1000
         });
         multilineInput.setValue(data.query.pages[0].revisions[0].content);
         jQuery(multilineInput.$element).show();
-        
-        $( '.pagefullview_holder .editpageview_holder .editor' ).append( multilineInput.$element );
         multilineInput.adjustSize();
+
+        $( '.pagefullview_holder .editpageview_holder .editor' ).append( multilineInput.$element );
         getEditPreview(multilineInput.getValue());
         //console.log('Length ', data.query.pages[0].revisions[0].content);
             //jQuery(".pagepreview_holder").append(data.parse.text['*']);
