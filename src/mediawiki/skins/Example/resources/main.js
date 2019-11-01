@@ -256,6 +256,7 @@ function initialLoading(){
     jQuery( '.pagefullview_holder .editpageview_holder .editor .edittoolbar' ).append( '<div class="submitedit"> Submit Edit </div>' );
     jQuery( '.pagefullview_holder .editpageview_holder .editor .edittoolbar' ).append(fileUpload);
 
+    jQuery( '.pagefullview_holder .editpageview_holder' ).append( '<div class="instantpreview"></div>' );
 
 
 
@@ -263,7 +264,7 @@ function initialLoading(){
     jQuery(".nodeview").append('<div class="children_holder"></div>');
 
     // footer
-    jQuery(".nodeview").append('<div class="footer" style = "text-align: center;"> This page may contain data from Wikipedia or Mediawiki foundation.</div>');
+    jQuery(".nodeview").append('<div class="footer" style = "text-align: center;"> <hr> This page may contain data from Wikipedia or Mediawiki foundation.</div>');
 }
 
 function getParentCategory(cat){
@@ -427,9 +428,9 @@ function getEditPreview(text){
         text: 'Category:'+ text,
         format: "json"
     } ).done( function ( data ) {
-        console.log(data.parse.text['*']);
-        $( '.editpageview_holder .mw-parser-output' ).remove();
-        $( '.pagefullview_holder .editpageview_holder' ).append(data.parse.text['*']);
+        //console.log(data.parse.text['*']);
+        $( '.editpageview_holder .instantpreview .mw-parser-output' ).remove();
+        $( '.pagefullview_holder .editpageview_holder .instantpreview' ).append(data.parse.text['*']);
         //jQuery(".pagepreview_holder").append(data.parse.text['*']);
     });
 }
