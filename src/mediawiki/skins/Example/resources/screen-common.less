@@ -27,11 +27,14 @@
 }
 .siblings_holder{
 	display: flex;
+	flex-wrap: nowrap;
+  	overflow-x: auto;
 	align-items: center;
   	justify-content: center;
 }
 .siblings{
-	display: table-cell;
+	flex: 0 0 auto;
+	overflow-x: auto;
 	color: white;
 	height: 3em;
 	line-height: 3em;
@@ -45,21 +48,25 @@
 }
 
 .pagepreview_holder{
+	position: relative;
 	display: flex;
 	align-items: center;
   	justify-content: center;
 
 	text-overflow :scroll;
-	width: 100%;
+	width: 90%;
+	left: 5%;
 }
 
 .pagefullview_holder{
+	position: relative;
 	display: flex;
 	align-items: center;
   	justify-content: center;
 
 	text-overflow :scroll;
-	width: 100%;
+	width: 90%;
+	left: 5%;
 }
 
 .editpageview_holder{
@@ -87,8 +94,25 @@
 
 .children_holder{
 	display: flex;
+	flex-wrap: nowrap;
+  	overflow-x: auto;
 	align-items: center;
-  	justify-content: center;
+	justify-content: center;
+}
+
+.child{
+	flex: 0 0 auto;
+	flex-wrap: nowrap;
+	color: white;
+	height: 2em;
+	line-height: 2em;
+	margin: 0.5em;
+	padding: 0.2em;
+	background: navy;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer; 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .editor{
@@ -123,18 +147,7 @@ hr {
   	justify-content: center;
 }
 
-.child{
-	color: white;
-	height: 2em;
-	line-height: 2em;
-	margin: 0.5em;
-	padding: 0.2em;
-	background: navy;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer; 
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+
 
 .pagetools_holder{
 	display: flex;
@@ -284,3 +297,5 @@ pre {
 	color: white;
 	margin: 0.5em;
 }
+
+

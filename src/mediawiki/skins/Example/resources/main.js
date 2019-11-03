@@ -374,7 +374,7 @@ function getPreview(cat){
         jQuery(".pagepreview_holder").append(data.parse.text['*']);
         jQuery( ".pagefullview_holder" ).hide();
         jQuery(".pagetools_holder .edit" ).hide();
-        $( '.details' ).hide();
+        $( '.temp_details' ).hide();
         jQuery( ".pagepreview_holder" ).show();
 
     });
