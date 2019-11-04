@@ -15,15 +15,21 @@ class ExampleTemplate extends BaseTemplate {
 			$html .= Html::openElement( 'div', [ 'class' => 'search' ] );
 				$html .= $this->getSearch();
 			$html .= Html::closeElement( 'div' ); // search
-			/*Html::rawElement(
-				'div',
-				[ 'id' => 'user-tools', 'class' => 'user-tools' ],
-				$this->getSearch().
-				$this->getUserLinks()
-			);*/
-			$html .= Html::openElement( 'div', [ 'class' => 'user-tools' ] );
-				$html .= $this->getUserLinks();
-			$html .= Html::closeElement( 'div' ); // user-tools
+			// open button for sidebar nav
+			$html .= Html::rawElement(
+				'button',
+				[ 'class' => 'openbtn'],
+				'&#9776;'
+			);
+			$html .= Html::openElement( 'div', [ 'class' => 'sidebar']);
+				foreach ($this->get( 'personal_urls' ) as $key => $item){
+					$html .= Html::rawElement(
+						'a',
+						[ 'href' => $item['href'] ],
+						$item['text']
+					);
+				}
+			$html .= Html::closeElement( 'div' ); // sidebar
 		$html .= Html::closeElement( 'div' ); // nav
 		//$html .= $this->getSearch();
 

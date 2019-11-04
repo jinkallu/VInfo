@@ -11,6 +11,7 @@ var flagPageFullViewToggle = false;
 // edit
 var multilineInput; 
 var page_name;
+var flag = 0; // side bar nav
 
 //file uploads
 var fileUpload = $( '<div/>' ).attr( 'class', 'fileupload' );
@@ -136,6 +137,17 @@ jQuery( document ).ready( function() {
         uploadFile();
     });
 
+    $( '.openbtn' ).on( 'click', function () {
+        if(flag === 0){
+            flag = 1;
+            openNav();
+        }
+        else{
+            flag = 0;
+            closeNav();
+        }
+    });
+
     jQuery( '.siblings_holder' ).on( 'contextmenu', '.siblings', function(event) {
     //$( ".siblings" ).contextmenu(function(event) {
         event.preventDefault();
@@ -155,6 +167,18 @@ jQuery( document ).ready( function() {
     });
 
 } );
+
+/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openNav() {
+    jQuery(".sidebar").width("250px");
+    jQuery("body").css("background-color","grey")
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+    jQuery(".sidebar").width("0");
+    jQuery("body").css("background-color","white")
+}
 
 function uploadFile(){
     console.log("Uploading file ");
@@ -212,9 +236,9 @@ function initialLoading(){
     // hide talk link in user-tools
     jQuery("#pt-anontalk").hide();
 
-    // add home page link and help to nav
-    $(".nav").prepend('<a href="https://www.wikinod.com">Home</a>');
-    $(".nav").append('<a href="https://www.wikinod.com/index.php/Help:Help">Help</a>');
+    
+    $(".nav").prepend('<a class = "home" href="https://www.wikinod.com">Home</a>');
+    $(".sidebar").append('<a href="https://www.wikinod.com/index.php/Help:Help">Help</a>');
 
 
     if(mw.config.get( 'wgPageName' ).startsWith("Special:") ||
