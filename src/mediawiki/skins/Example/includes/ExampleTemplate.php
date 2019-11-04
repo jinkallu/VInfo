@@ -12,7 +12,7 @@ class ExampleTemplate extends BaseTemplate {
 		$html = '';
 		$html .= $this->get( 'headelement' );
 		$html .= Html::openElement( 'div', [ 'class' => 'nav' ] );
-			$html .= Html::openElement( 'div', [ 'class' => 'search' ] );
+			$html .= Html::openElement( 'div', [ 'class' => 'search'] );
 				$html .= $this->getSearch();
 			$html .= Html::closeElement( 'div' ); // search
 			// open button for sidebar nav
