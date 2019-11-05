@@ -95,23 +95,27 @@
 .children_holder{
 	display: flex;
 	flex-wrap: nowrap;
-  	overflow-x: auto;
-	align-items: center;
-	justify-content: center;
+	overflow-x: auto;
+	align-items: stretch;
+
 }
 
 .child{
+	justify-content: space-evenly;
+
 	flex: 0 0 auto;
 	flex-wrap: nowrap;
 	color: white;
 	height: 2em;
 	line-height: 2em;
-	margin: 0.5em;
+	margin: auto;
+	border: 0.5em solid white;
 	padding: 0.2em;
 	background: navy;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer; 
+	max-width:100%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
