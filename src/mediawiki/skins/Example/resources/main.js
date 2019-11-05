@@ -255,8 +255,8 @@ function initialLoading(){
     //jQuery(".nodeview").append('<div class="parent_holder"></div>');
     // nodeview
     jQuery(".nodeview").append('<div class="parent_holder"></div>');
-    jQuery(".parent_holder").append('<div class="parent_root">' + parent + '</div>');
-
+    jQuery(".parent_holder").append('<div class="parent_root">' + parent + '</div>' );
+    jQuery(".nodeview").append('<br>');
     // get siblings
     jQuery(".nodeview").append('<div class="siblings_holder"></div>');
     //getCategoryMembers("siblings", parent, ".siblings_holder", "siblings");
