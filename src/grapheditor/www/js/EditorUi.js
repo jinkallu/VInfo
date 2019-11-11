@@ -3685,6 +3685,13 @@ EditorUi.prototype.save = function(name)
 		}
 		
 		var xml = mxUtils.getXml(this.editor.getGraphXml());
+		console.log(this.editor.getGraphXml());
+		//xml = mxUtils.parseXml(xml);
+		//var encoder = new mxCodec();
+
+		//var node = encoder.encode(this.editor.getGraphXml());
+
+		//var xml = this.editor.getGraphXml();
 		
 		try
 		{
@@ -3703,8 +3710,20 @@ EditorUi.prototype.save = function(name)
 			{
 				if (xml.length < MAX_REQUEST_SIZE)
 				{
-					new mxXmlRequest(SAVE_URL, 'filename=' + encodeURIComponent(name) +
-						'&xml=' + encodeURIComponent(xml)).simulate(document, '_blank');
+					console.log('saving file ' + SAVE_URL);
+					$.post( SAVE_URL, { xml: xml})
+					.done(function( data ) {
+						console.log( "Data Loaded: " + data );
+					});
+					//mxUtils.post(SAVE_URL, 'xml=' + xml, function(req)
+					//{
+					//	console.log('Ready: '+req.isReady()+' Status: '+req.getStatus());
+						// Process req.getDocumentElement() using DOM API if OK...
+						
+					//});
+					//new mxXmlRequest(SAVE_URL, 'xml=' + xml).send(onload, onerror);
+					//new mxXmlRequest(SAVE_URL, 'filename=' + encodeURIComponent(name) +
+					//	'&xml=' + encodeURIComponent(xml)).simulate(document, '_blank');
 				}
 				else
 				{

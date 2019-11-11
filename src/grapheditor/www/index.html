@@ -38,6 +38,7 @@
 		// Default resources are included in grapheditor resources
 		mxLoadResources = false;
 	</script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">  mxBasePath = 'src/';</script>
 	<script type="text/javascript" src="js/Init.js"></script>
 	<script type="text/javascript" src="deflate/pako.min.js"></script>
@@ -62,7 +63,11 @@
 		(function()
 		{
 			var editorUiInit = EditorUi.prototype.init;
-			
+
+			EXPORT_URL = 'server.php';  //'/export';
+ 			SAVE_URL = 'http://localhost/grapheditor/www/server.php';  //'/save';
+			OPEN_URL = 'server.php'; //'/open';
+						
 			EditorUi.prototype.init = function()
 			{
 				editorUiInit.apply(this, arguments);
