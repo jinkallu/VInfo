@@ -46,19 +46,15 @@ for edge1 in edges:
 # src_nodes containes the id of initial src
 # now find the vetex with the ids, these vertex will be teh first children
 for src in src_nodes:
-    print 'started src iter' + src
     for child in root.iter():
         if 'id' in child.attrib:
-            print child.attrib['id']
             if child.attrib['id'] == src:
-                print 'form iter ' + child.attrib['id']
                 tree.child.append(Tree())
                 tree.child[-1].data = child.attrib
                 break
             
 #We have now the first children
 # now recurse over all tree find the next nodes and add it as child
-print 'Start recursion'
 def find_targets(tree_child):
     for edge in edges:
         if edge['source'] == tree_child.data['id']:
@@ -71,11 +67,9 @@ def find_targets(tree_child):
                         break
 
 for child in tree.child:
-    print child.data
     find_targets(child)
 
 
-print 'Print tree'
 def print_recurse(tree_child, level):
     print 'level ' , level
     print tree_child.data
