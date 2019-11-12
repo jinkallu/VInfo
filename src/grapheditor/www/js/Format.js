@@ -484,10 +484,13 @@ Format.prototype.refresh = function()
 		label.style.width = (containsLabel) ? '50%' : '33.3%';
 		var label2 = label.cloneNode(false);
 		var label3 = label2.cloneNode(false);
+		// var to hold the data
+		var label_data = label3.cloneNode(false);
 
 		// Workaround for ignored background in IE
 		label2.style.backgroundColor = this.inactiveTabBackgroundColor;
 		label3.style.backgroundColor = this.inactiveTabBackgroundColor;
+		label_data.style.backgroundColor = this.inactiveTabBackgroundColor;
 		
 		// Style
 		if (containsLabel)
@@ -516,18 +519,31 @@ Format.prototype.refresh = function()
 		textPanel.style.display = 'none';
 		this.panels.push(new TextFormatPanel(this, ui, textPanel));
 		this.container.appendChild(textPanel);
+
+		// data panel
+		mxUtils.write(label_data, 'Data'); 
+		div.appendChild(label_data);
+
+		var dataPanel = div.cloneNode(false);
+		dataPanel.style.display = 'none';
+		this.panels.push(new DataPanel(this, ui, dataPanel));
+		this.container.appendChild(dataPanel);
 		
 		// Arrange
-		mxUtils.write(label3, mxResources.get('arrange'));
+		/*mxUtils.write(label3, mxResources.get('arrange'));
 		div.appendChild(label3);
 
 		var arrangePanel = div.cloneNode(false);
 		arrangePanel.style.display = 'none';
 		this.panels.push(new ArrangePanel(this, ui, arrangePanel));
 		this.container.appendChild(arrangePanel);
+*/
+		
+
 		
 		addClickHandler(label2, textPanel, idx++);
-		addClickHandler(label3, arrangePanel, idx++);
+		//addClickHandler(label3, arrangePanel, idx++);
+		addClickHandler(label_data, dataPanel, idx++);
 	}
 };
 
@@ -2485,6 +2501,77 @@ ArrangePanel.prototype.addEdgeGeometry = function(container)
 	this.listeners.push({destroy: function() { graph.getModel().removeListener(listener); }});
 	listener();
 };
+
+/**
+ * Adds the label menu items to the given menu and parent.
+ */
+DataPanel = function(format, editorUi, container)
+{
+	BaseFormatPanel.call(this, format, editorUi, container);
+	this.init();
+};
+
+mxUtils.extend(DataPanel, BaseFormatPanel);
+
+/**
+ * Adds the label menu items to the given menu and parent.
+ */
+DataPanel.prototype.init = function()
+{
+	this.container.style.borderBottom = 'none';
+	this.addInput(this.container);
+};
+
+/**
+ * Adds the label menu items to the given menu and parent.
+ */
+DataPanel.prototype.addInput = function(container)
+{
+	var ui = this.editorUi;
+	var editor = ui.editor;
+	var graph = editor.graph;
+	var ss = this.format.getSelectionState();
+	
+	var title = this.createTitle('Array');
+	title.style.paddingLeft = '18px';
+	title.style.paddingTop = '10px';
+	title.style.paddingBottom = '6px';
+	container.appendChild(title);
+
+	// Add array size, begin and end
+	var divArray = document.createElement("div");
+	divArray.setAttribute("class", "div_array");
+
+	var divCount = document.createElement("div");
+	var tSize = document.createTextNode("Size");
+	var xSize = document.createElement("INPUT");
+	xSize.setAttribute("type", "text");
+	xSize.setAttribute("class", "arraySize");
+	divCount.appendChild(tSize);
+	divCount.appendChild(xSize);
+	divArray.appendChild(divCount)
+
+	var divBegin = document.createElement("div");
+	var tBegin = document.createTextNode("Begin");
+	var xBegin = document.createElement("INPUT");
+	xBegin.setAttribute("type", "text");
+	xBegin.setAttribute("class", "arrayBegin");
+	divBegin.appendChild(tBegin);
+	divBegin.appendChild(xBegin);
+	divArray.appendChild(divBegin)
+
+	var divEnd = document.createElement("div");
+	var tEnd = document.createTextNode("End");
+	var xEnd = document.createElement("INPUT");
+	xEnd.setAttribute("type", "text");
+	xEnd.setAttribute("class", "arrayEnd");
+	divEnd.appendChild(tEnd);
+	divEnd.appendChild(xEnd);
+	divArray.appendChild(divEnd)
+
+	container.appendChild(divArray);
+}
+
 
 /**
  * Adds the label menu items to the given menu and parent.
