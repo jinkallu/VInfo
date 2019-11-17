@@ -5,5 +5,11 @@ export class Category {
         this._categoryOrder = _categoryOrder;
         this._categoryImgUrl = _categoryImgUrl;
     }
+    get categoryName() {
+        return this._categoryName;
+    }
+    get categoryId() {
+        return this._categoryId;
+    }
 }
 //# sourceMappingURL=category.js.map

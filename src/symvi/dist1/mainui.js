@@ -47,7 +47,7 @@ export class MainUI {
         tool_box_div.style.width = "18%";
         tool_box_div.style.height = "80%";
         tool_box_div.style.border = "solid black";
-        tool_box_div.innerHTML = "Toolbox";
+        tool_box_div.innerHTML = "ToolboxN";
         this.body.appendChild(tool_box_div);
         this.tool_box.create(tool_box_div);
     }
