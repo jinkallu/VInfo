@@ -12,3 +12,5 @@ class MenuBar{
         //this.body.innerHTML = Date();        
     }
 }
+
+
