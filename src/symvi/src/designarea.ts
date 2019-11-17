@@ -5,16 +5,15 @@ class DesignArea{
         this.svg.setAttribute("height", '100%');
         this.svg.setAttribute("width", '100%');
         this.svg.style.position = "absolute";
-
-
-        let rect = new Block(this.svg);
-
-        this.svg.appendChild(rect.get());
          
         //var rect = draw.rect(100, 100).attr({ fill: '#f06' })
     }
 
-    create(desing_area:any){
+    create(desing_area:any, pos:any){
+        let rect = new Block(this.svg, pos);
+
+        this.svg.appendChild(rect.get());
+
         let div:HTMLDivElement = desing_area;
         div.appendChild(this.svg);
     }

@@ -1,6 +1,6 @@
 "use strict";
 class Block {
-    constructor(svg) {
+    constructor(svg, pos) {
         this.dragStart = (event) => {
             console.log("Drag Start" + event.pageX + " " + event.pageY);
             this.drag_started = true;
@@ -21,7 +21,10 @@ class Block {
         this.rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.rect.setAttribute("width", "10%");
         this.rect.setAttribute("height", "6%");
-        this.rect.setAttribute("fill", "red");
+        this.rect.setAttribute("fill", "white");
+        this.rect.setAttribute("stroke", "red");
+        this.rect.setAttribute("x", pos.x);
+        this.rect.setAttribute("y", pos.y);
         this.rect.addEventListener("mousedown", this.dragStart);
         this.rect.addEventListener("mousemove", this.dragging);
         this.rect.addEventListener("mouseup", this.dragStop);
