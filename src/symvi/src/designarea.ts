@@ -8,9 +8,7 @@ export class DesignArea{
         this.svg.style.position = "absolute";
 
 
-        let rect = new Block(this.svg);
-
-        this.svg.appendChild(rect.get());
+        
          
         //var rect = draw.rect(100, 100).attr({ fill: '#f06' })
     }
@@ -18,5 +16,10 @@ export class DesignArea{
     create(desing_area:any){
         let div:HTMLDivElement = desing_area;
         div.appendChild(this.svg);
+    }
+
+    addBlock(pos:any, inputs:number, outputs:number){
+        let rect = new Block(this.svg, pos, inputs, outputs);
+        this.svg.appendChild(rect.get());
     }
 }

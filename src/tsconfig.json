@@ -10,6 +10,7 @@
         "target": "es6"
      },
      "files": [
+         "../src/symvi/src/node.ts",
          "../src/symvi/src/block.ts",
          "../src/symvi/src/designarea.ts",
          "../src/symvi/src/main.ts",
