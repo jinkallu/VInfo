@@ -1,20 +1,20 @@
+<<<<<<< HEAD
 import {Menu} from './menu';
 export class MenuBar{
     fileMenu:Menu[];
+=======
+class MenuBar{
+    fileMenu:Menu;
+>>>>>>> parent of 60e3e10c... AB#30 added new menu Help
 
     constructor(){
-        this.fileMenu = new Array(2);
-        this.fileMenu[0] = new Menu('File', ['Open', 'Save', 'Save as']);
-        this.fileMenu[1] = new Menu('Help', ['About']);
+        this.fileMenu = new Menu('File', ['Open', 'Save', 'Save as']);
     }
 
     create(menuBarDiv:HTMLDivElement){
         let div:HTMLDivElement = menuBarDiv;
         div.style.display = "flex";
-        for (let i = 0; i < this.fileMenu.length; i++){
-            div.appendChild(this.fileMenu[i].get());
-        }
-        
+        div.appendChild(this.fileMenu.get());
         //this.body.innerHTML = Date();        
     }
 }
