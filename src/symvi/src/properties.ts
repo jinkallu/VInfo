@@ -1,3 +1,3 @@
-class Properties{
+export class Properties{
     
 }

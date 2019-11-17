@@ -1,6 +1,10 @@
-"use strict";
 // this is an edit check...
-class MainUI {
+import { ToolBox } from './toolbox.js';
+import { MenuBar } from './menubar.js';
+import { ToolBar } from './toolbar.js';
+import { DesignArea } from './designarea.js';
+import { Properties } from './properties.js';
+export class MainUI {
     constructor(body) {
         this.body = body;
         body.style.width = "100%";
@@ -46,6 +50,7 @@ class MainUI {
         tool_box_div.style.border = "solid black";
         tool_box_div.innerHTML = "Toolbox";
         this.body.appendChild(tool_box_div);
+        this.tool_box.create(tool_box_div);
     }
     createDesignArea() {
         let design_area_div = document.createElement("div");

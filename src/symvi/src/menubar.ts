@@ -1,4 +1,5 @@
-class MenuBar{
+import {Menu} from './menu';
+export class MenuBar{
     fileMenu:Menu;
 
     constructor(){

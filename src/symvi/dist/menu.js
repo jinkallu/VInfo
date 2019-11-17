@@ -1,5 +1,4 @@
-"use strict";
-class Menu {
+export class Menu {
     constructor(menu, menuitems) {
         this.menu_div = document.createElement("div");
         this.menu_items = menuitems;

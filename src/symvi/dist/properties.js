@@ -1,3 +1,2 @@
-"use strict";
-class Properties {
+export class Properties {
 }

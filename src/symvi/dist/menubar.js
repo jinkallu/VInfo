@@ -1,5 +1,5 @@
-"use strict";
-class MenuBar {
+import { Menu } from './menu.js';
+export class MenuBar {
     constructor() {
         this.fileMenu = new Menu('File', ['Open', 'Save', 'Save as']);
     }

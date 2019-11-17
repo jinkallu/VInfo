@@ -1,5 +1,10 @@
 // this is an edit check...
-class MainUI {
+import {ToolBox } from './toolbox';
+import {MenuBar} from './menubar';
+import {ToolBar} from './toolbar';
+import {DesignArea} from './designarea';
+import {Properties} from './properties';
+ export class MainUI {
     body:HTMLBodyElement;
     menu_bar:MenuBar;
     tool_bar:ToolBar;
@@ -56,6 +61,7 @@ class MainUI {
         tool_box_div.style.border = "solid black";
         tool_box_div.innerHTML = "Toolbox";
         this.body.appendChild(tool_box_div);
+        this.tool_box.create(tool_box_div);
     }
 
     createDesignArea(){

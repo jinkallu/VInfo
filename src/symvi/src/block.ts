@@ -1,4 +1,4 @@
-class Block{
+export class Block{
     rect:any;
     constructor(){
         this.rect = document.createElementNS("http://www.w3.org/2000/svg","rect");

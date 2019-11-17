@@ -1,3 +1,2 @@
-"use strict";
-class ToolBar {
+export class ToolBar {
 }
