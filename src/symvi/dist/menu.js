@@ -30,13 +30,15 @@ class Menu {
             this.button.innerHTML = menu;
             this.menu_div.appendChild(this.button);
             let menuItemsDiv = document.createElement("div");
+            menuItemsDiv.style.background = "white";
+            menuItemsDiv.setAttribute("z-index", "1");
             let tmp_div = [];
             for (var i = 0; i < this.menu_items.length; i++) {
                 let elmA = document.createElement("a");
                 //let menu_item_elm.push(elmA);
                 elmA.href = this.menu_items[i];
                 elmA.innerHTML = this.menu_items[i];
-                elmA.style.display = 'block';
+                elmA.style.display = 'none';
                 menuItemsDiv.appendChild(elmA);
                 tmp_div.push(elmA);
                 console.log(tmp_div.length);
