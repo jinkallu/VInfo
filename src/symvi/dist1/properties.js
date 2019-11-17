@@ -1,7 +1,3 @@
-var Properties = (function () {
-    function Properties() {
-    }
-    return Properties;
-}());
-export { Properties };
+export class Properties {
+}
 //# sourceMappingURL=properties.js.map

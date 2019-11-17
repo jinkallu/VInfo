@@ -1,7 +1,3 @@
-var ToolBar = (function () {
-    function ToolBar() {
-    }
-    return ToolBar;
-}());
-export { ToolBar };
+export class ToolBar {
+}
 //# sourceMappingURL=toolbar.js.map

@@ -1,13 +1,11 @@
 import { CategoryApi } from './Api/categoryApi.js';
-var ToolBox = (function () {
-    function ToolBox() {
+export class ToolBox {
+    constructor() {
         this._categories = CategoryApi.getCategories();
         console.log(this._categories);
     }
-    ToolBox.prototype.create = function (parentToolBox) {
+    create(parentToolBox) {
         console.log('create called');
-    };
-    return ToolBox;
-}());
-export { ToolBox };
+    }
+}
 //# sourceMappingURL=toolbox.js.map

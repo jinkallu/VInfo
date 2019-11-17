@@ -8,8 +8,8 @@ export class Block{
         this.rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
         this.rect.setAttribute("width", "10%");
         this.rect.setAttribute("height", "6%");
-        this.rect.setAttribute("fill", "red");
-
+        this.rect.setAttribute("fill", "white");
+        this.rect.setAttribute("stroke", "red");
 
 
         this.rect.addEventListener("mousedown", this.dragStart); 

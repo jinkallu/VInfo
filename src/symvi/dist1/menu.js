@@ -1,19 +1,18 @@
-var Menu = (function () {
-    function Menu(menu, menuitems) {
-        var _this = this;
-        this.toggleMenuItems = function () {
-            if (_this.menu_item_elm === undefined) {
+export class Menu {
+    constructor(menu, menuitems) {
+        this.toggleMenuItems = () => {
+            if (this.menu_item_elm === undefined) {
             }
-            console.log('Menu items ' + _this.menu_item_elm.length);
+            console.log('Menu items ' + this.menu_item_elm.length);
             console.log('hii');
-            if (_this.menu_item_elm[0].style.display === 'none') {
-                for (var i = 0; i < _this.menu_item_elm.length; i++) {
-                    _this.menu_item_elm[i].style.display = 'block';
+            if (this.menu_item_elm[0].style.display === 'none') {
+                for (var i = 0; i < this.menu_item_elm.length; i++) {
+                    this.menu_item_elm[i].style.display = 'block';
                 }
             }
             else {
-                for (var i = 0; i < _this.menu_item_elm.length; i++) {
-                    _this.menu_item_elm[i].style.display = 'none';
+                for (var i = 0; i < this.menu_item_elm.length; i++) {
+                    this.menu_item_elm[i].style.display = 'none';
                 }
             }
         };
@@ -25,12 +24,12 @@ var Menu = (function () {
             this.button = document.createElement("button");
             this.button.innerHTML = menu;
             this.menu_div.appendChild(this.button);
-            var menuItemsDiv = document.createElement("div");
+            let menuItemsDiv = document.createElement("div");
             menuItemsDiv.style.background = "white";
             menuItemsDiv.setAttribute("z-index", "1");
-            var tmp_div = [];
+            let tmp_div = [];
             for (var i = 0; i < this.menu_items.length; i++) {
-                var elmA = document.createElement("a");
+                let elmA = document.createElement("a");
                 elmA.href = this.menu_items[i];
                 elmA.innerHTML = this.menu_items[i];
                 elmA.style.display = 'none';
@@ -44,10 +43,8 @@ var Menu = (function () {
             this.button.addEventListener("click", this.toggleMenuItems);
         }
     }
-    Menu.prototype.get = function () {
+    get() {
         return this.menu_div;
-    };
-    return Menu;
-}());
-export { Menu };
+    }
+}
 //# sourceMappingURL=menu.js.map

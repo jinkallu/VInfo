@@ -1,9 +1,9 @@
 // this is an edit check...
-import {ToolBox } from './toolbox';
-import {MenuBar} from './menubar';
-import {ToolBar} from './toolbar';
-import {DesignArea} from './designarea';
-import {Properties} from './properties';
+import {ToolBox } from './toolbox.js';
+import {MenuBar} from './menubar.js';
+import {ToolBar} from './toolbar.js';
+import {DesignArea} from './designarea.js';
+import {Properties} from './properties.js';
  export class MainUI {
     body:HTMLBodyElement;
     menu_bar:MenuBar;

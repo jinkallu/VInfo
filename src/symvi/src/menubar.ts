@@ -1,4 +1,4 @@
-import {Menu} from './menu';
+import {Menu} from './menu.js';
 export class MenuBar{
     fileMenu:Menu[];
 
