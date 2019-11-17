@@ -1,7 +1,25 @@
-"use strict";
-exports.__esModule = true;
-var Menu = /** @class */ (function () {
-    function Menu(menu, menuitems) {
+export class Menu {
+    constructor(menu, menuitems) {
+        this.toggleMenuItems = () => {
+            if (this.menu_item_elm === undefined) {
+                //return;
+            }
+            console.log('Menu items ' + this.menu_item_elm.length);
+            console.log('hii');
+            //if (this.menuitemElm.length < 1){
+            //    return;
+            //}
+            if (this.menu_item_elm[0].style.display === 'none') {
+                for (var i = 0; i < this.menu_item_elm.length; i++) {
+                    this.menu_item_elm[i].style.display = 'block';
+                }
+            }
+            else {
+                for (var i = 0; i < this.menu_item_elm.length; i++) {
+                    this.menu_item_elm[i].style.display = 'none';
+                }
+            }
+        };
         this.menu_div = document.createElement("div");
         this.menu_items = menuitems;
         this.button = undefined;
@@ -10,14 +28,16 @@ var Menu = /** @class */ (function () {
             this.button = document.createElement("button");
             this.button.innerHTML = menu;
             this.menu_div.appendChild(this.button);
-            var menuItemsDiv = document.createElement("div");
-            var tmp_div = [];
+            let menuItemsDiv = document.createElement("div");
+            menuItemsDiv.style.background = "white";
+            menuItemsDiv.setAttribute("z-index", "1");
+            let tmp_div = [];
             for (var i = 0; i < this.menu_items.length; i++) {
-                var elmA = document.createElement("a");
+                let elmA = document.createElement("a");
                 //let menu_item_elm.push(elmA);
                 elmA.href = this.menu_items[i];
                 elmA.innerHTML = this.menu_items[i];
-                elmA.style.display = 'block';
+                elmA.style.display = 'none';
                 menuItemsDiv.appendChild(elmA);
                 tmp_div.push(elmA);
                 console.log(tmp_div.length);
@@ -25,32 +45,10 @@ var Menu = /** @class */ (function () {
             this.menu_div.appendChild(menuItemsDiv);
             this.menu_item_elm = tmp_div;
             console.log(this.menu_item_elm.length);
-            this.button.onclick = this.toggleMenuItems;
+            this.button.addEventListener("click", this.toggleMenuItems);
         }
     }
-    Menu.prototype.get = function () {
+    get() {
         return this.menu_div;
-    };
-    Menu.prototype.toggleMenuItems = function () {
-        if (this.menu_item_elm === undefined) {
-            return;
-        }
-        console.log('Menu items ' + this.menu_item_elm.length);
-        console.log('hii');
-        //if (this.menuitemElm.length < 1){
-        //    return;
-        //}
-        if (this.menu_item_elm[0].style.display === 'none') {
-            for (var i = 0; i < this.menu_item_elm.length; i++) {
-                this.menu_item_elm[i].style.display = 'block';
-            }
-        }
-        else {
-            for (var i = 0; i < this.menu_item_elm.length; i++) {
-                this.menu_item_elm[i].style.display = 'none';
-            }
-        }
-    };
-    return Menu;
-}());
-exports.Menu = Menu;
+    }
+}
