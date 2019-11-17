@@ -1,3 +1,4 @@
+// this is an edit check...
 class MainUI {
     body:HTMLBodyElement;
     menu_bar:MenuBar;
