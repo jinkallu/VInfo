@@ -16,6 +16,8 @@ export class Menu{
 
             this.menu_div.appendChild(this.button);
             let menuItemsDiv = document.createElement("div");
+            menuItemsDiv.style.background = "white";
+            menuItemsDiv.setAttribute("z-index", "1");
 
             let tmp_div = [];
             for(var i = 0; i < this.menu_items.length; i++){
@@ -23,7 +25,7 @@ export class Menu{
                 //let menu_item_elm.push(elmA);
                 elmA.href = this.menu_items[i]; 
                 elmA.innerHTML = this.menu_items[i]; 
-                elmA.style.display = 'block';
+                elmA.style.display = 'none';
                 menuItemsDiv.appendChild(elmA);
                 tmp_div.push(elmA);
                 console.log(tmp_div.length);
@@ -32,7 +34,7 @@ export class Menu{
             this.menu_item_elm = tmp_div;
             console.log(this.menu_item_elm.length);
 
-            this.button.onclick = this.toggleMenuItems;
+            this.button.addEventListener("click", this.toggleMenuItems); 
         }
     }
 
@@ -40,10 +42,10 @@ export class Menu{
         return this.menu_div;
     }
 
-    toggleMenuItems():void{
+    toggleMenuItems = () => {
 
         if (this.menu_item_elm === undefined) {
-            return;
+            //return;
         }
         console.log('Menu items ' +  this.menu_item_elm.length);
 

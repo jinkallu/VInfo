@@ -1,5 +1,7 @@
-export class Menu {
-    constructor(menu, menuitems) {
+"use strict";
+exports.__esModule = true;
+var Menu = /** @class */ (function () {
+    function Menu(menu, menuitems) {
         this.menu_div = document.createElement("div");
         this.menu_items = menuitems;
         this.button = undefined;
@@ -8,10 +10,10 @@ export class Menu {
             this.button = document.createElement("button");
             this.button.innerHTML = menu;
             this.menu_div.appendChild(this.button);
-            let menuItemsDiv = document.createElement("div");
-            let tmp_div = [];
+            var menuItemsDiv = document.createElement("div");
+            var tmp_div = [];
             for (var i = 0; i < this.menu_items.length; i++) {
-                let elmA = document.createElement("a");
+                var elmA = document.createElement("a");
                 //let menu_item_elm.push(elmA);
                 elmA.href = this.menu_items[i];
                 elmA.innerHTML = this.menu_items[i];
@@ -26,10 +28,10 @@ export class Menu {
             this.button.onclick = this.toggleMenuItems;
         }
     }
-    get() {
+    Menu.prototype.get = function () {
         return this.menu_div;
-    }
-    toggleMenuItems() {
+    };
+    Menu.prototype.toggleMenuItems = function () {
         if (this.menu_item_elm === undefined) {
             return;
         }
@@ -48,5 +50,7 @@ export class Menu {
                 this.menu_item_elm[i].style.display = 'none';
             }
         }
-    }
-}
+    };
+    return Menu;
+}());
+exports.Menu = Menu;
