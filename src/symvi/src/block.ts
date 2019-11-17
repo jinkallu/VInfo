@@ -1,3 +1,4 @@
+
 export class Block{
     rect:any;
     drag_started:boolean;
@@ -9,9 +10,6 @@ export class Block{
         this.rect.setAttribute("width", "10%");
         this.rect.setAttribute("height", "6%");
         this.rect.setAttribute("fill", "red");
-
-
-
         this.rect.addEventListener("mousedown", this.dragStart); 
         this.rect.addEventListener("mousemove", this.dragging); 
         this.rect.addEventListener("mouseup", this.dragStop);

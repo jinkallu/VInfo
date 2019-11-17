@@ -1,9 +1,9 @@
 // this is an edit check...
-import {ToolBox } from './toolbox';
-import {MenuBar} from './menubar';
-import {ToolBar} from './toolbar';
-import {DesignArea} from './designarea';
-import {Properties} from './properties';
+import {ToolBox } from './toolbox.js';
+import {MenuBar} from './menubar.js';
+import {ToolBar} from './toolbar.js';
+import {DesignArea} from './designarea.js';
+import {Properties} from './properties.js';
  export class MainUI {
     body:HTMLBodyElement;
     menu_bar:MenuBar;
@@ -59,7 +59,7 @@ import {Properties} from './properties';
         tool_box_div.style.width = "18%";
         tool_box_div.style.height = "80%";
         tool_box_div.style.border = "solid black";
-        tool_box_div.innerHTML = "Toolbox";
+        tool_box_div.innerHTML = "ToolboxN";
         this.body.appendChild(tool_box_div);
         this.tool_box.create(tool_box_div);
     }
