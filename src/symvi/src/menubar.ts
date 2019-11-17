@@ -1,8 +1,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {Menu} from './menu';
 export class MenuBar{
     fileMenu:Menu[];
+=======
+class MenuBar{
+    fileMenu:Menu;
+>>>>>>> parent of 60e3e10c... AB#30 added new menu Help
 =======
 class MenuBar{
     fileMenu:Menu;
