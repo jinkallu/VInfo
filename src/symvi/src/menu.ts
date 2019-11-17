@@ -32,7 +32,7 @@ class Menu{
             this.menu_item_elm = tmp_div;
             console.log(this.menu_item_elm.length);
 
-            this.button.onclick = this.toggleMenuItems;
+            this.button.addEventListener("click", this.toggleMenuItems); 
         }
     }
 
@@ -40,10 +40,10 @@ class Menu{
         return this.menu_div;
     }
 
-    toggleMenuItems():void{
+    toggleMenuItems = () => {
 
         if (this.menu_item_elm === undefined) {
-            return;
+            //return;
         }
         console.log('Menu items ' +  this.menu_item_elm.length);
 

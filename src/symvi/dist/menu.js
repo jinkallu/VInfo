@@ -1,6 +1,26 @@
 "use strict";
 class Menu {
     constructor(menu, menuitems) {
+        this.toggleMenuItems = () => {
+            if (this.menu_item_elm === undefined) {
+                //return;
+            }
+            console.log('Menu items ' + this.menu_item_elm.length);
+            console.log('hii');
+            //if (this.menuitemElm.length < 1){
+            //    return;
+            //}
+            if (this.menu_item_elm[0].style.display === 'none') {
+                for (var i = 0; i < this.menu_item_elm.length; i++) {
+                    this.menu_item_elm[i].style.display = 'block';
+                }
+            }
+            else {
+                for (var i = 0; i < this.menu_item_elm.length; i++) {
+                    this.menu_item_elm[i].style.display = 'none';
+                }
+            }
+        };
         this.menu_div = document.createElement("div");
         this.menu_items = menuitems;
         this.button = undefined;
@@ -24,30 +44,10 @@ class Menu {
             this.menu_div.appendChild(menuItemsDiv);
             this.menu_item_elm = tmp_div;
             console.log(this.menu_item_elm.length);
-            this.button.onclick = this.toggleMenuItems;
+            this.button.addEventListener("click", this.toggleMenuItems);
         }
     }
     get() {
         return this.menu_div;
-    }
-    toggleMenuItems() {
-        if (this.menu_item_elm === undefined) {
-            return;
-        }
-        console.log('Menu items ' + this.menu_item_elm.length);
-        console.log('hii');
-        //if (this.menuitemElm.length < 1){
-        //    return;
-        //}
-        if (this.menu_item_elm[0].style.display === 'none') {
-            for (var i = 0; i < this.menu_item_elm.length; i++) {
-                this.menu_item_elm[i].style.display = 'block';
-            }
-        }
-        else {
-            for (var i = 0; i < this.menu_item_elm.length; i++) {
-                this.menu_item_elm[i].style.display = 'none';
-            }
-        }
     }
 }

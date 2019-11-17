@@ -7,13 +7,7 @@ class DesignArea{
         this.svg.style.position = "absolute";
 
 
-
-        /*let rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
-        rect.setAttribute("width", "80%");
-        rect.setAttribute("height", "80%");
-        rect.setAttribute("fill", "red");*/
-
-        let rect = new Block();
+        let rect = new Block(this.svg);
 
         this.svg.appendChild(rect.get());
          
