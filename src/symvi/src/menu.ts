@@ -1,4 +1,4 @@
-class Menu{
+export class Menu{
     menu_div:HTMLDivElement;
     button:any;
     menu_items:any;

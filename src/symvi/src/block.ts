@@ -1,4 +1,4 @@
-class Block{
+export class Block{
     rect:any;
     drag_started:boolean;
     svg:any;

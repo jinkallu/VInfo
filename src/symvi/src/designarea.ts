@@ -1,4 +1,5 @@
-class DesignArea{
+import {Block } from './block';
+export class DesignArea{
     svg:any;
     constructor(){
         this.svg = document.createElementNS("http://www.w3.org/2000/svg","svg");

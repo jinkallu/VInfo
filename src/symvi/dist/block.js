@@ -1,20 +1,22 @@
 "use strict";
-class Block {
-    constructor(svg) {
-        this.dragStart = (event) => {
+exports.__esModule = true;
+var Block = /** @class */ (function () {
+    function Block(svg) {
+        var _this = this;
+        this.dragStart = function (event) {
             console.log("Drag Start" + event.pageX + " " + event.pageY);
-            this.drag_started = true;
+            _this.drag_started = true;
         };
-        this.dragStop = (event) => {
+        this.dragStop = function (event) {
             //console.log("Drag Start" + event.pageX + " " + event.pageY);
-            if (this.drag_started) {
-                this.drag_started = false;
+            if (_this.drag_started) {
+                _this.drag_started = false;
             }
         };
-        this.dragging = (event) => {
-            if (this.drag_started) {
-                let pos = this.getMousePosition(event);
-                this.setPosition(pos.x, pos.y);
+        this.dragging = function (event) {
+            if (_this.drag_started) {
+                var pos = _this.getMousePosition(event);
+                _this.setPosition(pos.x, pos.y);
             }
         };
         this.svg = svg;
@@ -30,17 +32,17 @@ class Block {
         //this.rect.onmousemove = this.dragging;
         this.drag_started = false;
     }
-    get() {
+    Block.prototype.get = function () {
         return this.rect;
-    }
-    setPosition(x, y) {
+    };
+    Block.prototype.setPosition = function (x, y) {
         if (x < 0 || y < 0) {
             return;
         }
         this.rect.setAttributeNS(null, "x", x);
         this.rect.setAttributeNS(null, "y", y);
-    }
-    getMousePosition(event) {
+    };
+    Block.prototype.getMousePosition = function (event) {
         if (this.ctm === undefined) {
             this.ctm = this.rect.getScreenCTM();
         }
@@ -48,5 +50,7 @@ class Block {
             x: (event.clientX - this.ctm.e) / this.ctm.a - this.rect.width.baseVal.value / 2,
             y: (event.clientY - this.ctm.f) / this.ctm.d - this.rect.height.baseVal.value / 2
         };
-    }
-}
+    };
+    return Block;
+}());
+exports.Block = Block;
