@@ -1,4 +1,3 @@
-"use strict";
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -6,17 +5,17 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
-exports.__esModule = true;
-var category_1 = require("../models/category");
-var CategoryApi = /** @class */ (function () {
+import { Category } from '../models/category.js';
+var CategoryApi = (function () {
     function CategoryApi() {
     }
     CategoryApi.getCategories = function () {
         return __spreadArrays(this.categories);
     };
-    CategoryApi.categories = [new category_1.Category('c1', 'Category1', 1, 'url'),
-        new category_1.Category('c2', 'Category3', 2, 'url'),
-        new category_1.Category('c3', 'Category3', 2, 'url')];
+    CategoryApi.categories = [new Category('c1', 'Category1', 1, 'url'),
+        new Category('c2', 'Category3', 2, 'url'),
+        new Category('c3', 'Category3', 2, 'url')];
     return CategoryApi;
 }());
-exports.CategoryApi = CategoryApi;
+export { CategoryApi };
+//# sourceMappingURL=categoryApi.js.map

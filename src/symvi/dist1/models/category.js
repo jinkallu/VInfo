@@ -1,6 +1,4 @@
-"use strict";
-exports.__esModule = true;
-var Category = /** @class */ (function () {
+var Category = (function () {
     function Category(_categoryId, _categoryName, _categoryOrder, _categoryImgUrl) {
         this._categoryId = _categoryId;
         this._categoryName = _categoryName;
@@ -9,4 +7,5 @@ var Category = /** @class */ (function () {
     }
     return Category;
 }());
-exports.Category = Category;
+export { Category };
+//# sourceMappingURL=category.js.map

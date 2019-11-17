@@ -1,7 +1,23 @@
 {
      "compilerOptions": {
-       "target": "es5",
-       "module": "commonjs",
-       "sourceMap": true
-     }
-   }
+         "module": "ES6",
+         "noImplicitAny": true,
+         "removeComments": true,
+         "preserveConstEnums": true,
+         "sourceMap": true,
+         "outDir": "../src/symvi/dist1",
+         "target": "es5"
+     },
+     "files": [
+         "../src/symvi/src/block.ts",
+         "../src/symvi/src/designarea.ts",
+         "../src/symvi/src/main.ts",
+         "../src/symvi/src/mainui.ts",
+         "../src/symvi/src/menu.ts",
+         "../src/symvi/src/menubar.ts",
+         "../src/symvi/src/properties.ts",
+         "../src/symvi/src/toolbar.ts",
+         "../src/symvi/src/Api/categoryApi.ts",
+         "../src/symvi/src/models/category.ts",
+     ]
+ }

@@ -1,21 +1,18 @@
-"use strict";
-exports.__esModule = true;
-// this is an edit check...
-var toolbox_1 = require("../src/toolbox.js");
-var menubar_1 = require("../src/menubar.js");
-var toolbar_1 = require("../src/toolbar.js");
-var designarea_1 = require("../src/designarea.js");
-var properties_1 = require("../src/properties.js");
-var MainUI = /** @class */ (function () {
+import { ToolBox } from './toolbox.js';
+import { MenuBar } from './menubar.js';
+import { ToolBar } from './toolbar.js';
+import { DesignArea } from './designarea.js';
+import { Properties } from './properties.js';
+var MainUI = (function () {
     function MainUI(body) {
         this.body = body;
         body.style.width = "100%";
         body.style.height = "100%";
-        this.menu_bar = new menubar_1.MenuBar();
-        this.tool_bar = new toolbar_1.ToolBar();
-        this.tool_box = new toolbox_1.ToolBox();
-        this.design_area = new designarea_1.DesignArea();
-        this.properties = new properties_1.Properties();
+        this.menu_bar = new MenuBar();
+        this.tool_bar = new ToolBar();
+        this.tool_box = new ToolBox();
+        this.design_area = new DesignArea();
+        this.properties = new Properties();
     }
     MainUI.prototype.createUI = function () {
         this.createMenuBar();
@@ -62,7 +59,6 @@ var MainUI = /** @class */ (function () {
         design_area_div.style.width = "60%";
         design_area_div.style.left = "20%";
         design_area_div.style.minHeight = "80%";
-        //design_area_div.innerHTML = "DesignArea";
         this.body.appendChild(design_area_div);
         this.design_area.create(design_area_div);
     };
@@ -79,4 +75,5 @@ var MainUI = /** @class */ (function () {
     };
     return MainUI;
 }());
-exports.MainUI = MainUI;
+export { MainUI };
+//# sourceMappingURL=mainui.js.map

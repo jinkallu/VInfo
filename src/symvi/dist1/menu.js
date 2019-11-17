@@ -1,17 +1,11 @@
-"use strict";
-exports.__esModule = true;
-var Menu = /** @class */ (function () {
+var Menu = (function () {
     function Menu(menu, menuitems) {
         var _this = this;
         this.toggleMenuItems = function () {
             if (_this.menu_item_elm === undefined) {
-                //return;
             }
             console.log('Menu items ' + _this.menu_item_elm.length);
             console.log('hii');
-            //if (this.menuitemElm.length < 1){
-            //    return;
-            //}
             if (_this.menu_item_elm[0].style.display === 'none') {
                 for (var i = 0; i < _this.menu_item_elm.length; i++) {
                     _this.menu_item_elm[i].style.display = 'block';
@@ -37,7 +31,6 @@ var Menu = /** @class */ (function () {
             var tmp_div = [];
             for (var i = 0; i < this.menu_items.length; i++) {
                 var elmA = document.createElement("a");
-                //let menu_item_elm.push(elmA);
                 elmA.href = this.menu_items[i];
                 elmA.innerHTML = this.menu_items[i];
                 elmA.style.display = 'none';
@@ -56,4 +49,5 @@ var Menu = /** @class */ (function () {
     };
     return Menu;
 }());
-exports.Menu = Menu;
+export { Menu };
+//# sourceMappingURL=menu.js.map
