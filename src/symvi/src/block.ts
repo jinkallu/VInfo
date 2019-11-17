@@ -3,15 +3,13 @@ class Block{
     drag_started:boolean;
     svg:any;
     ctm:any;
-    constructor(svg:any, pos:any){
+    constructor(svg:any){
         this.svg = svg;
         this.rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
         this.rect.setAttribute("width", "10%");
         this.rect.setAttribute("height", "6%");
-        this.rect.setAttribute("fill", "white");
-        this.rect.setAttribute("stroke", "red");
-        this.rect.setAttribute("x", pos.x);
-        this.rect.setAttribute("y", pos.y);
+        this.rect.setAttribute("fill", "red");
+
 
 
         this.rect.addEventListener("mousedown", this.dragStart); 

@@ -68,8 +68,7 @@ class MainUI {
         design_area_div.style.minHeight = "80%";
         //design_area_div.innerHTML = "DesignArea";
         this.body.appendChild(design_area_div);
-        this.design_area.create(design_area_div, {x: 10, y:10});
-        this.design_area.create(design_area_div, {x: 180, y:10});
+        this.design_area.create(design_area_div);
     }
 
     createProperties(){
