@@ -4,6 +4,7 @@ export class Block{
     rect:any;
     drag_started:boolean;
     svg:any;
+    group:any;
     ctm:any;
     inputs:number;
     outputs:number;
@@ -13,9 +14,11 @@ export class Block{
 
         this.svg = svg;
 
+        this.group = document.createElementNS("http://www.w3.org/2000/svg","g");
+
         this.rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
-        this.rect.setAttribute("width", "10%");
-        this.rect.setAttribute("height", "6%");
+        this.rect.setAttribute("width", "60");
+        this.rect.setAttribute("height", "40");
         this.rect.setAttribute("fill", "white");
         this.rect.setAttribute("stroke", "red");
         this.rect.setAttribute("x", pos.x);
@@ -29,32 +32,34 @@ export class Block{
         //this.rect.onmousedown = this.dragStart;
         //this.rect.onmousemove = this.dragging;
 
+        this.group.appendChild(this.rect);
+
         this.drag_started = false;
 
         this.addInputs();
     }
 
     get(){
-        return this.rect;
+        return this.group;
+    }
+
+    nodePos(){
+        let x = this.rect.getAttribute("x");
+        let y = this.rect.getAttribute("y");
+        let width = parseInt(this.rect.width.baseVal.value);
+        let height = parseInt(this.rect.height.baseVal.value);
+
+        console.log(y);
+        
+        let xpos = +x; // +unary operator, convert string to number
+        let ypos = +y + +height / 2;
+
+        return {x: xpos, y:ypos};
     }
 
     addInputs(){
-        let x = this.rect.getAttribute("x");
-        let y = this.rect.getAttribute("y");
-        let width = parseInt(this.rect.getAttribute("width"));
-        let height = parseInt(this.rect.getAttribute("height"));
-
-        let parent_width = parseInt(this.svg.getAttribute("width"));
-        let parent_height = parseInt(this.svg.getAttribute("height"));
-
-        let xpos = x;
-        let ypos = y + parent_height * height / 100 / 2;
-
-        console.log('width ' + width);
-
-
-        let node = new Node({x: xpos, y: ypos});
-        this.svg.appendChild(node.get());
+        let node = new Node(this.nodePos());
+        this.group.appendChild(node.get());
     }
 
     dragStart = (event: MouseEvent) => {
@@ -73,15 +78,26 @@ export class Block{
         if(x < 0 || y < 0){
             return;
         }
-        
-        this.rect.setAttributeNS(null, "x", x);
-        this.rect.setAttributeNS(null, "y", y);
+        console.log("Set pos");
+
+        //this.group.setAttributeNS(null, "x", x);
+        //this.group.setAttributeNS(null, "y", y);
+
+        //let transform = this.group.transform.baseVal.getItem(0);   
+        //let mat = transform.matrix;   
+
+        //mat = mat.translate( x, y );  
+        //transform.setMatrix( mat );
+        this.group.setAttributeNS(null, "transform", "translate(" + x + "," + y + ")" );
+        //this.group.transform.baseVal.appendItem(this.svg.createSVGTransformFromMatrix(this.svg.createSVGMatrix().translate(x,y)));
     }
 
     dragging = (event: MouseEvent) => {
         if(this.drag_started){
             let pos = this.getMousePosition(event);
             this.setPosition(pos.x, pos.y);
+
+
         }
     }
 
@@ -91,8 +107,8 @@ export class Block{
         }
 
         return {
-            x : (event.clientX - this.ctm.e) / this.ctm.a - this.rect.width.baseVal.value / 2,
-            y : (event.clientY - this.ctm.f) / this.ctm.d - this.rect.height.baseVal.value / 2
+            x : (event.clientX - this.ctm.e / this.ctm.a) - this.rect.width.baseVal.value / 2,
+            y : (event.clientY - this.ctm.f / this.ctm.d) - this.rect.height.baseVal.value / 2
         };
     }
 }
