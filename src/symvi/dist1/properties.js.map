@@ -1,1 +1,1 @@
-{"version":3,"file":"properties.js","sourceRoot":"","sources":["../src/properties.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,UAAU;CAEtB"}
+{"version":3,"file":"properties.js","sourceRoot":"","sources":["../src/properties.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,UAAU;IAClB,MAAM,CAAE,cAA8B;QACjC,OAAO,CAAC,GAAG,CAAC,cAAc,CAAC,CAAC;IACjC,CAAC;CAEL"}

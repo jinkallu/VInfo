@@ -1,6 +1,7 @@
 import { Category } from './models/category.js';
 import { CategoryApi } from './Api/categoryApi.js';
 import { CategoryItem } from './models/categoryItem.js';
+import { ItemProp } from './models/itemProp.js';
 // import * as  $ from './js/jquery.js';
 // import  './styles/toolbox_dd.css';
 export class ToolBox {
@@ -11,9 +12,68 @@ export class ToolBox {
     constructor() {
         this._categories = CategoryApi.getCategories();
     }
+    addProperties(itemProp: ItemProp) {
+        console.log(itemProp.propType);
+        let divEl = document.createElement('div');
+        divEl.style.display = "flex";
+        divEl.style.justifyContent="space-between";
+        divEl.style.flexDirection = 'row';
+        divEl.style.margin='5px';
 
-    onImgClicked = (event: MouseEvent) => {
-        console.log(event);
+        let inEl = document.createElement('input');
+        inEl.setAttribute('id',itemProp.propId);
+        inEl.setAttribute('placeholder',itemProp.propName);
+        let lblEl=document.createElement('label');
+        lblEl.textContent=itemProp.propName.toUpperCase();
+        switch (itemProp.propType) {
+
+            case 'string':
+                inEl.setAttribute('type', 'text');
+
+                break;
+            case 'number':
+                inEl.setAttribute('type', 'number');
+                break;
+                case 'date':
+                        inEl.setAttribute('type', 'date');
+                        break;
+
+        }
+        divEl.appendChild(lblEl)
+        divEl.appendChild(inEl)
+        return divEl;
+
+
+    }
+
+    createProperties(catItemId: string, catItemName: string) {
+        let itemProps = CategoryApi.getItemPropsByItemId(catItemId);
+        // console.log(itemProps);
+        let propEl = document.getElementById('properties');
+        let propDiv = document.getElementById('propDiv');
+        let itemNameDiv= document.getElementById('itemName');
+        itemNameDiv.textContent=catItemName.toUpperCase();
+        propDiv.innerHTML = null;
+
+        for (let itemProp of itemProps) {
+            propDiv.appendChild(this.addProperties(itemProp));
+        }
+
+
+
+
+
+
+        // propDiv.textContent = catItemId;
+        propEl.appendChild(itemNameDiv);
+
+        propEl.appendChild(propDiv);
+
+        // propEl.textContent = "working";
+    }
+    onImgClicked = (event: MouseEvent, id: string,name : string) => {
+
+        this.createProperties(id, name);
     }
     onImgMouseEnter = (event: MouseEvent) => {
         console.log(event);
@@ -24,10 +84,8 @@ export class ToolBox {
 
         for (i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function () {
-                console.log("clicked");
                 this.classList.toggle("active");
                 var panel = this.nextElementSibling;
-                console.log(panel);
                 if (panel.style.display === "block") {
                     panel.style.display = "none";
                 } else {
@@ -42,7 +100,6 @@ export class ToolBox {
         let imgDiv = document.createElement('div');
 
         let categoryItems = CategoryApi.getCategoryItemsByCatId(catId);
-        // let imgDivWrapper = document.createElement('div');
         for (let catItems of categoryItems) {
             imgDiv.setAttribute("class", "flex-container");
             let imgEl = document.createElement('img');
@@ -51,10 +108,10 @@ export class ToolBox {
             imgEl.setAttribute('title', catItems.categoryName);
             imgEl.setAttribute('id', catItems.catItemId);
             imgDiv.appendChild(imgEl);
-            imgEl.addEventListener('click', this.onImgClicked.bind(this, catItems.catItemId))
-            imgEl.addEventListener('onmouseenter', this.onImgMouseEnter.bind(this, catItems.catItemId))
+            imgEl.addEventListener('click', this.onImgClicked.bind(null, this, catItems.catItemId,catItems.categoryName))
+            imgEl.addEventListener('onmouseenter', this.onImgMouseEnter.bind(this, { id: catItems.catItemId }))
         }
-                return imgDiv;
+        return imgDiv;
     }
 
     createCategories(category: Category) {
@@ -66,15 +123,14 @@ export class ToolBox {
         divEl.setAttribute('class', 'panel');
         let ulEl = document.createElement('ul');
         divEl.appendChild(this.craeteCatItems(category.categoryId));
-        // divEl.appendChild(imgDiv);
         categoryUi.appendChild(categoryBtn);
         categoryUi.appendChild(divEl);
         return categoryUi;
 
     }
 
-    create(parentToolBox: HTMLDivElement) {
 
+    create(parentToolBox: HTMLDivElement) {
         var head = document.getElementsByTagName('HEAD')[0];
         var link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -85,7 +141,10 @@ export class ToolBox {
             parentToolBox.appendChild(this.createCategories(category));
             this.setAccordion();
         }
+        // this.createProperties();
     }
+
+
 }
 
 
