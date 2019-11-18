@@ -1,4 +1,6 @@
 import {Node } from './node.js';
+import {Edges } from './edges.js';
+
 
 export class Block{
     rect:any;
@@ -10,11 +12,15 @@ export class Block{
     outputs:number;
     input_nodes:any[];
     output_nodes:any[];
-    constructor(svg:any, pos:any, _inputs:number, _outputs:number){
+    edges:Edges;
+
+    constructor(svg:any, pos:any, _inputs:number, _outputs:number, _edges:Edges){
         this.inputs = _inputs;
         this.outputs = _outputs;
 
         this.svg = svg;
+
+        this.edges = _edges;
 
         this.input_nodes = [];
         this.output_nodes = [];

@@ -12,6 +12,10 @@ export class Node{
         this.circle.setAttributeNS(null, "r", this.rad);
         this.circle.setAttributeNS(null, "stroke", "black");
         this.circle.setAttributeNS(null, "fill", "white");
+
+        this.circle.addEventListener("click", this.connectStart); 
+        this.circle.addEventListener("click", this.connectEnd); 
+
     }
 
     get(){
@@ -28,5 +32,13 @@ export class Node{
             this.circle.setAttributeNS(null, "cx", pos.x + this.rad);
         }
         this.circle.setAttributeNS(null, "cy", pos.y);
+    }
+
+    connectStart(){
+
+    }
+
+    connectEnd(){
+
     }
 }

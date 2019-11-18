@@ -1,6 +1,6 @@
 import { Node } from './node.js';
 export class Block {
-    constructor(svg, pos, _inputs, _outputs) {
+    constructor(svg, pos, _inputs, _outputs, _edges) {
         this.dragStart = (event) => {
             console.log("Drag Start" + event.pageX + " " + event.pageY);
             this.drag_started = true;
@@ -19,6 +19,7 @@ export class Block {
         this.inputs = _inputs;
         this.outputs = _outputs;
         this.svg = svg;
+        this.edges = _edges;
         this.input_nodes = [];
         this.output_nodes = [];
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
