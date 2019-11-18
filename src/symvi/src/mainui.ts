@@ -1,18 +1,18 @@
 // this is an edit check...
-import {ToolBox } from './toolbox.js';
-import {MenuBar} from './menubar.js';
-import {ToolBar} from './toolbar.js';
-import {DesignArea} from './designarea.js';
-import {Properties} from './properties.js';
- export class MainUI {
-    body:HTMLBodyElement;
-    menu_bar:MenuBar;
-    tool_bar:ToolBar;
-    tool_box:ToolBox;
-    design_area:DesignArea;
-    properties:Properties;
+import { ToolBox } from './toolbox.js';
+import { MenuBar } from './menubar.js';
+import { ToolBar } from './toolbar.js';
+import { DesignArea } from './designarea.js';
+import { Properties } from './properties.js';
+export class MainUI {
+    body: HTMLBodyElement;
+    menu_bar: MenuBar;
+    tool_bar: ToolBar;
+    tool_box: ToolBox;
+    design_area: DesignArea;
+    properties: Properties;
 
-    constructor(body:HTMLBodyElement) {
+    constructor(body: HTMLBodyElement) {
         this.body = body;
         body.style.width = "100%";
         body.style.height = "100%";
@@ -23,15 +23,15 @@ import {Properties} from './properties.js';
         this.properties = new Properties();
     }
 
-    createUI(){
+    createUI() {
         this.createMenuBar();
         this.createToolBar();
-        this.createToolBox();
         this.createDesignArea();
         this.createProperties();
+        this.createToolBox();
     }
 
-    createMenuBar(){
+    createMenuBar() {
         let menuBarDiv = document.createElement("div");
         menuBarDiv.style.position = "absolute";
         menuBarDiv.style.width = "100%";
@@ -41,7 +41,7 @@ import {Properties} from './properties.js';
         this.menu_bar.create(menuBarDiv);
     }
 
-    createToolBar(){
+    createToolBar() {
         let tool_bar_div = document.createElement("div");
         tool_bar_div.style.width = "100%";
         tool_bar_div.style.top = "10%";
@@ -52,7 +52,7 @@ import {Properties} from './properties.js';
         this.body.appendChild(tool_bar_div);
     }
 
-    createToolBox(){
+    createToolBox() {
         let tool_box_div = document.createElement("div");
         tool_box_div.style.position = "absolute";
         tool_box_div.style.top = "20%";
@@ -64,7 +64,7 @@ import {Properties} from './properties.js';
         this.tool_box.create(tool_box_div);
     }
 
-    createDesignArea(){
+    createDesignArea() {
         let design_area_div = document.createElement("div");
         design_area_div.style.position = "absolute";
         design_area_div.style.border = "solid black";
@@ -75,12 +75,13 @@ import {Properties} from './properties.js';
         //design_area_div.innerHTML = "DesignArea";
         this.body.appendChild(design_area_div);
         this.design_area.create(design_area_div);
-        this.design_area.addBlock({x:10, y:10}, 1, 2);
-        this.design_area.addBlock({x:200, y:10}, 2, 2);
+        this.design_area.addBlock({ x: 10, y: 10 }, 1, 2);
+        this.design_area.addBlock({ x: 200, y: 10 }, 2, 2);
     }
 
-    createProperties(){
+    createProperties() {
         let properties_div = document.createElement("div");
+        properties_div.setAttribute('id','properties');
         properties_div.style.position = "absolute";
         properties_div.style.border = "solid black";
         properties_div.style.top = "20%";
@@ -88,6 +89,24 @@ import {Properties} from './properties.js';
         properties_div.style.left = "82%";
         properties_div.style.minHeight = "80%";
         properties_div.innerHTML = "PropertiesArea";
+        let itemDiv = document.createElement('div');
+        itemDiv.setAttribute('id', 'itemName');
+        itemDiv.style.margin="5px";
+        itemDiv.style.fontSize='12px';
+        itemDiv.style.fontWeight="bold";
+        itemDiv.style.textAlign='center';
+        let propDiv = document.createElement('div');
+
+        propDiv.style.background='lightgrey';
+        propDiv.style.minHeight = "40%";
+        propDiv.style.width = "90";
+        propDiv.style.margin = "3%";
+        propDiv.setAttribute('id', 'propDiv');
+        propDiv.style.display="flex";
+        propDiv.style.flexDirection="column";
+        properties_div.appendChild(itemDiv);
+        properties_div.appendChild(propDiv);
         this.body.appendChild(properties_div);
+        this.properties.create(properties_div);
     }
 }
