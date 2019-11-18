@@ -19,7 +19,8 @@ export class Block {
         this.inputs = _inputs;
         this.outputs = _outputs;
         this.svg = svg;
-        this.nodes = [];
+        this.input_nodes = [];
+        this.output_nodes = [];
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         this.rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.rect.setAttribute("width", "60");
@@ -35,41 +36,77 @@ export class Block {
         this.group.appendChild(this.rect);
         this.drag_started = false;
         this.addInputs();
+        this.addOutputs();
     }
     get() {
         return this.group;
     }
-    calculateNodePos() {
+    calculateNodePos(io) {
+        let ios = 0;
+        if (io) {
+            ios = this.inputs;
+        }
+        else {
+            ios = this.outputs;
+        }
         let y = +this.rect.getAttribute("y");
         let x = +this.rect.getAttribute("x");
         console.log("rect " + x + " " + y);
-        let width = +parseInt(this.rect.width.baseVal.value);
         let height = +parseInt(this.rect.height.baseVal.value);
-        let dy_init = height / this.inputs;
-        let dy = (height - dy_init) / this.inputs;
+        let dy_init = height / ios;
+        let dy = (height - dy_init) / ios;
         let y_start = y + dy_init / 2;
         return { x: x, y: y_start, dy: dy };
     }
-    setNodPos() {
-        if (this.nodes.length < 1) {
+    setOutNodesPos() {
+        if (this.output_nodes.length < 1) {
             return;
         }
-        let node_pos = this.calculateNodePos();
-        for (let i = 0; i < this.nodes.length; i++) {
+        let node_pos = this.calculateNodePos(false);
+        let width = +parseInt(this.rect.width.baseVal.value);
+        node_pos.x += width;
+        for (let i = 0; i < this.output_nodes.length; i++) {
             let y_i = node_pos.y + i * node_pos.dy;
-            console.log("Pos before " + node_pos.x + " " + y_i);
-            this.nodes[i].setPos({ x: node_pos.x, y: y_i });
+            this.output_nodes[i].setPos({ x: node_pos.x, y: y_i });
         }
+    }
+    setInputNodesPos() {
+        if (this.input_nodes.length < 1) {
+            return;
+        }
+        let node_pos = this.calculateNodePos(true);
+        for (let i = 0; i < this.input_nodes.length; i++) {
+            let y_i = node_pos.y + i * node_pos.dy;
+            this.input_nodes[i].setPos({ x: node_pos.x, y: y_i });
+        }
+    }
+    setNodPos() {
+        this.setInputNodesPos();
+        this.setOutNodesPos();
     }
     addInputs() {
         if (this.inputs < 1) {
             return;
         }
-        let node_pos = this.calculateNodePos();
+        let node_pos = this.calculateNodePos(true);
         for (let i = 0; i < this.inputs; i++) {
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({ x: node_pos.x, y: y_i });
-            this.nodes.push(node);
+            let node = new Node({ x: node_pos.x, y: y_i }, true);
+            this.input_nodes.push(node);
+            this.group.appendChild(node.get());
+        }
+    }
+    addOutputs() {
+        if (this.outputs < 1) {
+            return;
+        }
+        let node_pos = this.calculateNodePos(false);
+        let width = +parseInt(this.rect.width.baseVal.value);
+        node_pos.x += width;
+        for (let i = 0; i < this.outputs; i++) {
+            let y_i = node_pos.y + i * node_pos.dy;
+            let node = new Node({ x: node_pos.x, y: y_i }, false);
+            this.output_nodes.push(node);
             this.group.appendChild(node.get());
         }
     }

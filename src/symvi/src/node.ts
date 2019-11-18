@@ -1,11 +1,14 @@
 export class Node{
     circle:any;
     rad:number;
-    constructor(pos:any){
+    io:boolean; // 0 output, 1 input
+    constructor(pos:any, _io:boolean){
         this.rad = 5;
+        this.io = _io; 
         this.circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
-        this.circle.setAttributeNS(null, "cx", pos.x - this.rad);
-        this.circle.setAttributeNS(null, "cy", pos.y);
+        //this.circle.setAttributeNS(null, "cx", pos.x - this.rad);
+        //this.circle.setAttributeNS(null, "cy", pos.y);
+        this.setPos(pos);
         this.circle.setAttributeNS(null, "r", this.rad);
         this.circle.setAttributeNS(null, "stroke", "black");
         this.circle.setAttributeNS(null, "fill", "white");
@@ -16,9 +19,14 @@ export class Node{
     }
 
     setPos(pos:any){
-        console.log("setting nod pos " + pos.x + " " + pos.y);
+        //console.log("setting nod pos " + pos.x + " " + pos.y);
         //this.circle.setAttributeNS(null, "transform", "translate(" + (pos.x - this.rad) + "," + pos.y + ")" );
-        this.circle.setAttributeNS(null, "cx", pos.x - this.rad);
+        if(this.io){
+            this.circle.setAttributeNS(null, "cx", pos.x - this.rad);
+        }
+        else{
+            this.circle.setAttributeNS(null, "cx", pos.x + this.rad);
+        }
         this.circle.setAttributeNS(null, "cy", pos.y);
     }
 }
