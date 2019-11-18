@@ -8,11 +8,14 @@ export class Block{
     ctm:any;
     inputs:number;
     outputs:number;
+    nodes:any[];
     constructor(svg:any, pos:any, _inputs:number, _outputs:number){
         this.inputs = _inputs;
         this.outputs = _outputs;
 
         this.svg = svg;
+
+        this.nodes = [];
 
         this.group = document.createElementNS("http://www.w3.org/2000/svg","g");
 
@@ -43,23 +46,51 @@ export class Block{
         return this.group;
     }
 
-    nodePos(){
-        let x = this.rect.getAttribute("x");
-        let y = this.rect.getAttribute("y");
-        let width = parseInt(this.rect.width.baseVal.value);
-        let height = parseInt(this.rect.height.baseVal.value);
+    calculateNodePos(){
+        let y:number = +this.rect.getAttribute("y"); // + convert string to number
+        let x:number = +this.rect.getAttribute("x");
 
-        console.log(y);
+        console.log("rect " + x + " " + y);
+
+        let width:number = +parseInt(this.rect.width.baseVal.value);
+        let height:number = +parseInt(this.rect.height.baseVal.value);
+
         
-        let xpos = +x; // +unary operator, convert string to number
-        let ypos = +y + +height / 2;
+       
+        let dy_init:number = height / this.inputs;
+        let dy:number = (height - dy_init) / this.inputs;
+        let y_start:number = y + dy_init / 2;
 
-        return {x: xpos, y:ypos};
+        return {x: x, y: y_start, dy: dy};
+    }
+
+    setNodPos(){
+        if(this.nodes.length < 1){
+            return;
+        }
+
+        let node_pos = this.calculateNodePos();
+
+        for (let i = 0; i <  this.nodes.length; i++){
+            let y_i = node_pos.y + i * node_pos.dy;
+            console.log("Pos before " + node_pos.x + " " + y_i);
+            this.nodes[i].setPos({x: node_pos.x, y: y_i});
+        }
     }
 
     addInputs(){
-        let node = new Node(this.nodePos());
-        this.group.appendChild(node.get());
+        if(this.inputs < 1){
+            return;
+        }
+
+        let node_pos = this.calculateNodePos();
+
+        for (let i = 0; i <  this.inputs; i++){
+            let y_i = node_pos.y + i * node_pos.dy;
+            let node = new Node({x: node_pos.x, y: y_i});
+            this.nodes.push(node);
+            this.group.appendChild(node.get());    
+        }
     }
 
     dragStart = (event: MouseEvent) => {
@@ -80,15 +111,16 @@ export class Block{
         }
         console.log("Set pos");
 
-        //this.group.setAttributeNS(null, "x", x);
-        //this.group.setAttributeNS(null, "y", y);
+        this.rect.setAttributeNS(null, "x", x);
+        this.rect.setAttributeNS(null, "y", y);
 
         //let transform = this.group.transform.baseVal.getItem(0);   
         //let mat = transform.matrix;   
 
         //mat = mat.translate( x, y );  
         //transform.setMatrix( mat );
-        this.group.setAttributeNS(null, "transform", "translate(" + x + "," + y + ")" );
+        //this.rect.setAttributeNS(null, "transform", "translate(" + x + "," + y + ")" );
+        this.setNodPos();
         //this.group.transform.baseVal.appendItem(this.svg.createSVGTransformFromMatrix(this.svg.createSVGMatrix().translate(x,y)));
     }
 
@@ -96,8 +128,6 @@ export class Block{
         if(this.drag_started){
             let pos = this.getMousePosition(event);
             this.setPosition(pos.x, pos.y);
-
-
         }
     }
 

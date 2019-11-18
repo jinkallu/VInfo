@@ -61,7 +61,7 @@ export class MainUI {
         design_area_div.style.minHeight = "80%";
         this.body.appendChild(design_area_div);
         this.design_area.create(design_area_div);
-        this.design_area.addBlock({ x: 10, y: 10 }, 1, 2);
+        this.design_area.addBlock({ x: 10, y: 10 }, 4, 2);
         this.design_area.addBlock({ x: 200, y: 10 }, 2, 2);
     }
     createProperties() {

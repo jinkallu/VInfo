@@ -20,6 +20,6 @@
          "../src/symvi/src/properties.ts",
          "../src/symvi/src/toolbar.ts",
          "../src/symvi/src/Api/categoryApi.ts",
-         "../src/symvi/src/models/category.ts",
+         "../src/symvi/src/models/category.ts"
      ]
  }

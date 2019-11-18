@@ -75,7 +75,7 @@ export class MainUI {
         //design_area_div.innerHTML = "DesignArea";
         this.body.appendChild(design_area_div);
         this.design_area.create(design_area_div);
-        this.design_area.addBlock({ x: 10, y: 10 }, 1, 2);
+        this.design_area.addBlock({ x: 10, y: 10 }, 4, 2);
         this.design_area.addBlock({ x: 200, y: 10 }, 2, 2);
     }
 
