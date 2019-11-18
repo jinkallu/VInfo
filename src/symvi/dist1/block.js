@@ -92,7 +92,7 @@ export class Block {
         let node_pos = this.calculateNodePos(true);
         for (let i = 0; i < this.inputs; i++) {
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({ x: node_pos.x, y: y_i }, true);
+            let node = new Node({ x: node_pos.x, y: y_i }, true, this.edges);
             this.input_nodes.push(node);
             this.group.appendChild(node.get());
         }
@@ -106,7 +106,7 @@ export class Block {
         node_pos.x += width;
         for (let i = 0; i < this.outputs; i++) {
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({ x: node_pos.x, y: y_i }, false);
+            let node = new Node({ x: node_pos.x, y: y_i }, false, this.edges);
             this.output_nodes.push(node);
             this.group.appendChild(node.get());
         }

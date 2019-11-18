@@ -12,8 +12,8 @@ export class DesignArea{
         this.svg.style.position = "absolute";
 
         this.edges = new Edges(this.svg); 
-        this.edges.addEdge({block_id: 0, node_id: 0, pos:{x: 0, y:100}}, 
-            {block_id: 1, node_id: 0, pos:{x: 100, y:100}});       
+        //this.edges.addEdge({block_id: 0, node_id: 0}, 
+          //  {block_id: 1, node_id: 0});       
          
         //var rect = draw.rect(100, 100).attr({ fill: '#f06' })
     }
