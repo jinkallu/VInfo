@@ -33,27 +33,19 @@ export class Node{
 
     setPos(pos:any){
         this.pos = pos;
-        //console.log("setting nod pos " + pos.x + " " + pos.y);
-        //this.circle.setAttributeNS(null, "transform", "translate(" + (pos.x - this.rad) + "," + pos.y + ")" );
-        console.log("Edge *** " + this.edge);
         if(this.io === true){
             this.circle.setAttributeNS(null, "cx", pos.x - this.rad)
-            console.log("Edge Tgt " + this.edge);
 
             if(this.edge){
                 if(this.edge.active){
-                    console.log("Tgt");
                     this.edge.setPointTgt(pos);
                 }
             }
         }
         else{
             this.circle.setAttributeNS(null, "cx", pos.x + this.rad);
-            console.log("Edge " + this.edge);
             if(this.edge){
-
                 if(this.edge.active){
-                    console.log("Src");
                     this.edge.setPointSrc(pos);
                 }
             }
@@ -71,7 +63,6 @@ export class Node{
     }
 
     connectStart(){
-        console.log("connection started");
         if(!this.edges.connectionStarted()){
             this.edges.setConnectionStarted(true);
             this.edges.setConnectionSrc({src_node: this, block_id: 0, node_id: 0, pos:{x: this.pos.x, y:this.pos.y}});
@@ -79,12 +70,11 @@ export class Node{
     }
 
     connectEnd(){
-        console.log("End of connection");
         if(this.edges.connectionStarted()){
-            this.edges.setConnectionStarted(false);
             this.edges.setConnectionTgt({block_id: 0, node_id: 0, pos:{x: this.pos.x, y:this.pos.y}});
             this.edge = this.edges.addEdge();
             this.edges.setEdgeForSrc(this.edge);
+            this.edges.setConnectionStarted(false);
         }
     }
 

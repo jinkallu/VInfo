@@ -1,7 +1,8 @@
 import {Edge } from './edge.js';
 
 export class Edges{
-    edges:any[];
+    edges:Edge[];
+    tmp_edge:Edge;
     svg:any;
 
     connection_started:boolean;
@@ -31,10 +32,15 @@ export class Edges{
 
     setConnectionStarted(flag:boolean){
         this.connection_started = flag;
+        if(!flag){
+            this.removeTempEdge();
+        }
     }
 
     setConnectionSrc(src:any){
         this.connection_src = src;
+        this.tmp_edge = new Edge(this.connection_src, this.connection_src);
+        this.svg.appendChild(this.tmp_edge.getPolyLine());
     }
 
     getConnectionSrc(){
@@ -43,6 +49,11 @@ export class Edges{
 
     setConnectionTgt(tgt:any){
         this.connection_tgt = tgt;
+    }
+
+    removeTempEdge(){
+        this.tmp_edge.getPolyLine().parentNode.removeChild(this.tmp_edge.getPolyLine());
+        this.tmp_edge = null;
     }
 
     getConnectioTgt(){
