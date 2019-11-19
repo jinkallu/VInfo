@@ -10,7 +10,6 @@ export class ToolBox {
         this._categories = CategoryApi.getCategories();
     }
     addProperties(itemProp) {
-        console.log(itemProp.propType);
         let divEl = document.createElement('div');
         divEl.style.display = "flex";
         divEl.style.justifyContent = "space-between";
@@ -70,6 +69,8 @@ export class ToolBox {
         let categoryItems = CategoryApi.getCategoryItemsByCatId(catId);
         for (let catItems of categoryItems) {
             imgDiv.setAttribute("class", "flex-container");
+            imgDiv.style.width = "100%";
+            imgDiv.style.justifyContent = "space-between";
             let imgEl = document.createElement('img');
             imgEl.setAttribute('src', 'https://www.w3schools.com/howto/img_snow.jpg');
             imgEl.setAttribute("class", "flex-elem");
@@ -83,9 +84,11 @@ export class ToolBox {
     }
     createCategories(category) {
         let categoryUi = document.createElement("div");
-        let categoryBtn = document.createElement("button");
+        categoryUi.style.width = "90%";
+        let categoryBtn = document.createElement("div");
         categoryBtn.setAttribute('class', "accordion");
-        categoryBtn.textContent = category.categoryName;
+        categoryBtn.textContent = category.categoryName.toUpperCase();
+        categoryBtn.style.margin = '2px';
         let divEl = document.createElement('div');
         divEl.setAttribute('class', 'panel');
         let ulEl = document.createElement('ul');
@@ -103,8 +106,8 @@ export class ToolBox {
         head.appendChild(link);
         for (let category of this._categories) {
             parentToolBox.appendChild(this.createCategories(category));
-            this.setAccordion();
         }
+        this.setAccordion();
     }
 }
 //# sourceMappingURL=toolbox.js.map

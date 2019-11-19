@@ -13,7 +13,6 @@ export class ToolBox {
         this._categories = CategoryApi.getCategories();
     }
     addProperties(itemProp: ItemProp) {
-        console.log(itemProp.propType);
         let divEl = document.createElement('div');
         divEl.style.display = "flex";
         divEl.style.justifyContent="space-between";
@@ -48,7 +47,6 @@ export class ToolBox {
 
     createProperties(catItemId: string, catItemName: string) {
         let itemProps = CategoryApi.getItemPropsByItemId(catItemId);
-        // console.log(itemProps);
         let propEl = document.getElementById('properties');
         let propDiv = document.getElementById('propDiv');
         let itemNameDiv= document.getElementById('itemName');
@@ -58,12 +56,6 @@ export class ToolBox {
         for (let itemProp of itemProps) {
             propDiv.appendChild(this.addProperties(itemProp));
         }
-
-
-
-
-
-
         // propDiv.textContent = catItemId;
         propEl.appendChild(itemNameDiv);
 
@@ -102,6 +94,8 @@ export class ToolBox {
         let categoryItems = CategoryApi.getCategoryItemsByCatId(catId);
         for (let catItems of categoryItems) {
             imgDiv.setAttribute("class", "flex-container");
+            imgDiv.style.width="100%";
+            imgDiv.style.justifyContent="space-between";
             let imgEl = document.createElement('img');
             imgEl.setAttribute('src', 'https://www.w3schools.com/howto/img_snow.jpg');
             imgEl.setAttribute("class", "flex-elem");
@@ -116,9 +110,11 @@ export class ToolBox {
 
     createCategories(category: Category) {
         let categoryUi = document.createElement("div");
-        let categoryBtn = document.createElement("button");
+        categoryUi.style.width="90%";
+        let categoryBtn = document.createElement("div");
         categoryBtn.setAttribute('class', "accordion");
-        categoryBtn.textContent = category.categoryName;
+        categoryBtn.textContent = category.categoryName.toUpperCase();
+        categoryBtn.style.margin='2px';
         let divEl = document.createElement('div');
         divEl.setAttribute('class', 'panel');
         let ulEl = document.createElement('ul');
@@ -139,8 +135,9 @@ export class ToolBox {
         head.appendChild(link);
         for (let category of this._categories) {
             parentToolBox.appendChild(this.createCategories(category));
-            this.setAccordion();
         }
+        this.setAccordion();
+
         // this.createProperties();
     }
 

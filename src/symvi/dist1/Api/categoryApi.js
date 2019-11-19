@@ -17,7 +17,7 @@ export class CategoryApi {
     }
 }
 CategoryApi.categories = [new Category('c1', 'Category1', 1, 'url'),
-    new Category('c2', 'Category3', 2, 'url'),
+    new Category('c2', 'Category2', 2, 'url'),
     new Category('c3', 'Category3', 2, 'url')];
 CategoryApi.categoryItems = [
     new CategoryItem('c1', 'i1', 'item1', 'url'),
@@ -27,7 +27,8 @@ CategoryApi.categoryItems = [
     new CategoryItem('c1', 'i5', 'item5', 'url'),
     new CategoryItem('c1', 'i6', 'item6', 'url'),
     new CategoryItem('c1', 'i7', 'item7', 'url'),
-    new CategoryItem('c3', 'i8', 'item8', 'url'),
+    new CategoryItem('c2', 'i8', 'item8', 'url'),
+    new CategoryItem('c3', 'i9', 'item9', 'url'),
 ];
 CategoryApi.categoryProps = [
     new ItemProp('i1', 'p1', 'count', 'number', "10", 1, true),

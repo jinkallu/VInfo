@@ -9,7 +9,7 @@ export class CategoryApi {
           'url'),
      new Category(
           'c2',
-          'Category3',
+          'Category2',
           2,
           'url'),
      new Category(
@@ -25,7 +25,8 @@ export class CategoryApi {
           new CategoryItem('c1', 'i5', 'item5', 'url'),
           new CategoryItem('c1', 'i6', 'item6', 'url'),
           new CategoryItem('c1', 'i7', 'item7', 'url'),
-          new CategoryItem('c3', 'i8', 'item8', 'url'),
+          new CategoryItem('c2', 'i8', 'item8', 'url'),
+          new CategoryItem('c3', 'i9', 'item9', 'url'),
      ];
 
      static categoryProps=[
