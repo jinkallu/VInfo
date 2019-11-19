@@ -4,8 +4,36 @@ export class ToolBox {
         this.onImgClicked = (event, id, name) => {
             this.createProperties(id, name);
         };
-        this.onImgMouseEnter = (event) => {
-            console.log(event);
+        this.onImgMouseEnter = (event, catItem) => {
+            let divEl = document.getElementById("divFullItem");
+            if (divEl === null) {
+                divEl = document.createElement('div');
+                divEl.setAttribute('id', 'divFullItem');
+            }
+            divEl.innerHTML = null;
+            divEl.setAttribute('class', 'modal');
+            let imgEl = document.getElementById(catItem.catItemId);
+            divEl.style.display = 'flex';
+            divEl.style.flexDirection = 'column';
+            divEl.style.textAlign = "center";
+            let imgModalEl = document.createElement('img');
+            imgModalEl.setAttribute('src', imgEl.getAttribute('src'));
+            imgModalEl.style.width = "90%";
+            let lblEl = document.createElement('label');
+            lblEl.textContent = catItem.categoryName;
+            let designArea = document.getElementById('designArea');
+            divEl.style.top = designArea.style.top;
+            divEl.style.left = designArea.style.left;
+            divEl.appendChild(imgModalEl);
+            divEl.appendChild(lblEl);
+            designArea.appendChild(divEl);
+            divEl.style.display = 'block';
+        };
+        this.onImgMouseLeave = (event, catItem) => {
+            let divEl = document.getElementById("divFullItem");
+            if (divEl !== null) {
+                divEl.style.display = 'none';
+            }
         };
         this._categories = CategoryApi.getCategories();
     }
@@ -67,18 +95,19 @@ export class ToolBox {
     craeteCatItems(catId) {
         let imgDiv = document.createElement('div');
         let categoryItems = CategoryApi.getCategoryItemsByCatId(catId);
-        for (let catItems of categoryItems) {
+        for (let catItem of categoryItems) {
             imgDiv.setAttribute("class", "flex-container");
             imgDiv.style.width = "100%";
             imgDiv.style.justifyContent = "space-between";
             let imgEl = document.createElement('img');
             imgEl.setAttribute('src', 'https://www.w3schools.com/howto/img_snow.jpg');
             imgEl.setAttribute("class", "flex-elem");
-            imgEl.setAttribute('title', catItems.categoryName);
-            imgEl.setAttribute('id', catItems.catItemId);
+            imgEl.setAttribute('title', catItem.categoryName);
+            imgEl.setAttribute('id', catItem.catItemId);
             imgDiv.appendChild(imgEl);
-            imgEl.addEventListener('click', this.onImgClicked.bind(null, this, catItems.catItemId, catItems.categoryName));
-            imgEl.addEventListener('onmouseenter', this.onImgMouseEnter.bind(this, { id: catItems.catItemId }));
+            imgEl.addEventListener('click', this.onImgClicked.bind(null, this, catItem.catItemId, catItem.categoryName));
+            imgEl.addEventListener('mouseenter', this.onImgMouseEnter.bind(null, this, catItem));
+            imgEl.addEventListener('mouseleave', this.onImgMouseLeave.bind(null, this, catItem));
         }
         return imgDiv;
     }
