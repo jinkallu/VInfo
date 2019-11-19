@@ -11,6 +11,7 @@ export class Edge{
     tgt_node_id:number;
 
     polyline:any;
+    pos:any;
 
     constructor(_src:any, _tgt:any){
         this.id = Edge.static_id;
@@ -22,16 +23,31 @@ export class Edge{
         this.tgt_block_id = _tgt.block_id;
         this.tgt_node_id = _tgt.node_id;
 
+        this.pos = {x1: _src.pos.x, y1: _src.pos.y, x2: _tgt.pos.x, y2: _tgt.pos.y};
+
         this.polyline = document.createElementNS("http://www.w3.org/2000/svg","polyline");
         this.polyline.setAttribute("stroke", "blue");
-        this.setPoints("" + _src.pos.x + "," + _src.pos.y + " " + _tgt.pos.x + "," + _tgt.pos.y + "");
+        this.updatePoints();
 
         this.active = true;
     }
 
-    setPoints(points:any){
+    updatePoints(){
+        let points = "" + this.pos.x1 + "," + this.pos.y1 + " " + this.pos.x2 + "," + this.pos.y2 + "";
         console.log("points " + points);
         this.polyline.setAttributeNS(null, "points", points);
+    }
+
+    setPointSrc(src:any){
+        this.pos.x1 = src.x;
+        this.pos.y1 = src.y;
+        this.updatePoints();
+    }
+
+    setPointTgt(src:any){
+        this.pos.x2 = src.x;
+        this.pos.y2 = src.y;
+        this.updatePoints();
     }
 
     getPolyLine(){

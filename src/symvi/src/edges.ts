@@ -18,6 +18,11 @@ export class Edges{
     addEdge(){
         this.edges.push(new Edge(this.connection_src, this.connection_tgt));
         this.svg.appendChild(this.edges[this.edges.length - 1].getPolyLine());
+        return this.edges[this.edges.length - 1];
+    }
+
+    setEdgeForSrc(edge:Edge){
+        this.connection_src.src_node.setEdge(edge);
     }
 
     connectionStarted(){
@@ -32,7 +37,15 @@ export class Edges{
         this.connection_src = src;
     }
 
+    getConnectionSrc(){
+        return this.connection_src;
+    }
+
     setConnectionTgt(tgt:any){
         this.connection_tgt = tgt;
+    }
+
+    getConnectioTgt(){
+        return this.connection_tgt;
     }
 }
