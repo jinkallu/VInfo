@@ -27,13 +27,20 @@ export class Edge{
 
         this.polyline = document.createElementNS("http://www.w3.org/2000/svg","polyline");
         this.polyline.setAttribute("stroke", "blue");
+        this.polyline.setAttribute("fill", "white");
+        this.polyline.setAttribute("fill-opacity", "0");
         this.updatePoints();
 
         this.active = true;
     }
 
     updatePoints(){
-        let points = "" + this.pos.x1 + "," + this.pos.y1 + " " + this.pos.x2 + "," + this.pos.y2 + "";
+        let x_mid = (Math.max(this.pos.x2, this.pos.x1) - Math.min(this.pos.x2, this.pos.x1)) / 2;
+        let points = this.pos.x1 + "," + this.pos.y1 + " " + 
+                     x_mid + "," + this.pos.y1 + " " +
+                     x_mid + "," + this.pos.y2 + " " +
+                     this.pos.x2 + "," + this.pos.y2;
+        //let points = "" + this.pos.x1 + "," + this.pos.y1 + " " + this.pos.x2 + "," + this.pos.y2 + "";
         console.log("points " + points);
         this.polyline.setAttributeNS(null, "points", points);
     }

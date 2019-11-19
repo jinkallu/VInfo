@@ -20,6 +20,7 @@ export class DesignArea {
         this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.svg.setAttribute("height", '100%');
         this.svg.setAttribute("width", '100%');
+        this.svg.overflow = 'auto';
         this.svg.style.position = "absolute";
         this.edges = new Edges(this.svg);
         this.svg.addEventListener("mousemove", this.mouseMove);

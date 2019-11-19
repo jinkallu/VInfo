@@ -4,6 +4,8 @@ import { MenuBar } from './menubar.js';
 import { ToolBar } from './toolbar.js';
 import { DesignArea } from './designarea.js';
 import { Properties } from './properties.js';
+import { Console } from './console.js'
+
 export class MainUI {
     body: HTMLBodyElement;
     menu_bar: MenuBar;
@@ -11,6 +13,7 @@ export class MainUI {
     tool_box: ToolBox;
     design_area: DesignArea;
     properties: Properties;
+    console: Console;
 
     constructor(body: HTMLBodyElement) {
         this.body = body;
@@ -21,6 +24,7 @@ export class MainUI {
         this.tool_box = new ToolBox();
         this.design_area = new DesignArea();
         this.properties = new Properties();
+        this.console = new Console();
     }
 
     createUI() {
@@ -29,6 +33,7 @@ export class MainUI {
         this.createDesignArea();
         this.createProperties();
         this.createToolBox();
+        this.creatConsole();
     }
 
     createMenuBar() {
@@ -71,7 +76,7 @@ export class MainUI {
         design_area_div.style.top = "20%";
         design_area_div.style.width = "60%";
         design_area_div.style.left = "20%";
-        design_area_div.style.minHeight = "80%";
+        design_area_div.style.height = "60%";
         design_area_div.setAttribute('id','designArea');
         //design_area_div.innerHTML = "DesignArea";
         this.body.appendChild(design_area_div);
@@ -109,5 +114,18 @@ export class MainUI {
         properties_div.appendChild(propDiv);
         this.body.appendChild(properties_div);
         this.properties.create(properties_div);
+    }
+
+    creatConsole(){
+        let console_div = document.createElement("div");
+        console_div.style.position = "absolute";
+        console_div.style.border = "solid black";
+        console_div.style.top = "81%";
+        console_div.style.width = "60%";
+        console_div.style.left = "20%";
+        console_div.style.height = "19%";
+        console_div.setAttribute('id','console');
+        console_div.innerHTML = "Console";
+        this.body.appendChild(console_div);
     }
 }

@@ -186,9 +186,9 @@ export class Block{
     }
 
     getMousePosition(event:any) {
-        if(this.ctm === undefined){
-            this.ctm = this.rect.getScreenCTM();
-        }
+        //if(this.ctm === undefined){
+            this.ctm = this.svg.getScreenCTM();
+        //}
 
         return {
             x : (event.clientX - this.ctm.e / this.ctm.a) - this.rect.width.baseVal.value / 2,
