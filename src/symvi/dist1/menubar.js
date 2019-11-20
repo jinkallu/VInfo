@@ -1,4 +1,4 @@
-import { MenuApi } from './Api/menuApi.js';
+import { MenuApi } from './Api/menuApi';
 export class MenuBar {
     constructor() {
         this.menus = MenuApi.getMenus();

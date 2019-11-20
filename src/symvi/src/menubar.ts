@@ -1,6 +1,6 @@
 // import { Menu } from './menu.js';
-import { MenuApi } from './Api/menuApi.js';
-import { Menu } from './models/menu.js';
+import { MenuApi } from './Api/menuApi';
+import { Menu } from './models/menu';
 
 export class MenuBar {
     menus: Menu[];

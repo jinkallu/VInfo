@@ -1,4 +1,4 @@
-import { CategoryApi } from './Api/categoryApi.js';
+import { CategoryApi } from './Api/categoryApi';
 export class ToolBox {
     constructor() {
         this.onImgClicked = (event, id, name) => {

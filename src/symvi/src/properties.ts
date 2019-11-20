@@ -1,8 +1,8 @@
-import {Histogram} from './histogram.js';
+import {Histogram} from './histogram';
 
 export class Properties{
      constructor(){
-          
+
      }
      create( parentProperty: HTMLDivElement){
           console.log(parentProperty);

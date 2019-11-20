@@ -20,5 +20,9 @@
          "../src/symvi/src/toolbar.ts",
          "../src/symvi/src/Api/categoryApi.ts",
          "../src/symvi/src/models/category.ts"
-     ]
+     ],
+     "typesRoots": [
+        "./typings",
+        "../node_modules/@types"
+      ]
  }

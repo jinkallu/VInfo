@@ -1,5 +1,5 @@
-import {Node } from './node.js';
-import {Edges } from './edges.js';
+import {Node } from './node';
+import {Edges } from './edges';
 
 
 export class Block{

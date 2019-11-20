@@ -1,6 +1,6 @@
-import { Category } from '../models/category.js';
-import { CategoryItem } from '../models/categoryItem.js';
-import {ItemProp} from '../models/itemProp.js';
+import { Category } from '../models/category';
+import { CategoryItem } from '../models/categoryItem';
+import {ItemProp} from '../models/itemProp';
 export class CategoryApi {
      static categories = [new Category(
           'c1',

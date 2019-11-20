@@ -1,7 +1,7 @@
-import { Category } from './models/category.js';
-import { CategoryApi } from './Api/categoryApi.js';
-import { CategoryItem } from './models/categoryItem.js';
-import { ItemProp } from './models/itemProp.js';
+import { Category } from './models/category';
+import { CategoryApi } from './Api/categoryApi';
+import { CategoryItem } from './models/categoryItem';
+import { ItemProp } from './models/itemProp';
 // import * as  $ from './js/jquery.js';
 // import  './styles/toolbox_dd.css';
 export class ToolBox {

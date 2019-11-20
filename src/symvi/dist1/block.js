@@ -1,4 +1,4 @@
-import { Node } from './node.js';
+import { Node } from './node';
 export class Block {
     constructor(svg, pos, _inputs, _outputs, _edges) {
         this.dragStart = (event) => {

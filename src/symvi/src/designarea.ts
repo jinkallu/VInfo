@@ -1,5 +1,5 @@
-import {Block } from './block.js';
-import {Edges } from './edges.js';
+import {Block } from './block';
+import {Edges } from './edges';
 
 export class DesignArea{
     svg:any;

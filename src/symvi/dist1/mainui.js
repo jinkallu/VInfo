@@ -1,9 +1,9 @@
-import { ToolBox } from './toolbox.js';
-import { MenuBar } from './menubar.js';
-import { ToolBar } from './toolbar.js';
-import { DesignArea } from './designarea.js';
-import { Properties } from './properties.js';
-import { Console } from './console.js';
+import { ToolBox } from './toolbox';
+import { MenuBar } from './menubar';
+import { ToolBar } from './toolbar';
+import { DesignArea } from './designarea';
+import { Properties } from './properties';
+import { Console } from './console';
 export class MainUI {
     constructor(body) {
         this.body = body;

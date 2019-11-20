@@ -1,4 +1,4 @@
-import { Menu } from '../models/menu.js';
+import { Menu } from '../models/menu';
 export class MenuApi {
      static menus: Menu[]
           = [

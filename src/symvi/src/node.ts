@@ -1,5 +1,5 @@
-import {Edges} from './edges.js';
-import { Edge } from './edge.js';
+import {Edges} from './edges';
+import { Edge } from './edge';
 
 export class Node{
     circle:any;
