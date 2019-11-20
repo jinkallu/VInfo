@@ -15,7 +15,6 @@
          "../src/symvi/src/designarea.ts",
          "../src/symvi/src/main.ts",
          "../src/symvi/src/mainui.ts",
-         "../src/symvi/src/menu.ts",
          "../src/symvi/src/menubar.ts",
          "../src/symvi/src/properties.ts",
          "../src/symvi/src/toolbar.ts",
