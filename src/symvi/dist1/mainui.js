@@ -30,6 +30,7 @@ export class MainUI {
         menuBarDiv.style.width = "100%";
         menuBarDiv.style.height = "3em";
         menuBarDiv.style.border = "solid black";
+        menuBarDiv.setAttribute('id', 'menubar');
         this.body.appendChild(menuBarDiv);
         this.menu_bar.create(menuBarDiv);
     }

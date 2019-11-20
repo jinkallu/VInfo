@@ -84,11 +84,10 @@ export class ToolBox {
         let imgModalEl=document.createElement('img');
         imgModalEl.setAttribute('src',imgEl.getAttribute('src'));
         imgModalEl.style.width="90%";
+        imgModalEl.style.height="70%";
 
         let lblEl=document.createElement('label');
         lblEl.textContent=catItem.categoryName
-
-        // imgModalEl.
         let designArea=document.getElementById('designArea');
         divEl.style.top=designArea.style.top;
         divEl.style.left=designArea.style.left;

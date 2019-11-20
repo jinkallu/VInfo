@@ -19,6 +19,7 @@ export class ToolBox {
             let imgModalEl = document.createElement('img');
             imgModalEl.setAttribute('src', imgEl.getAttribute('src'));
             imgModalEl.style.width = "90%";
+            imgModalEl.style.height = "70%";
             let lblEl = document.createElement('label');
             lblEl.textContent = catItem.categoryName;
             let designArea = document.getElementById('designArea');
