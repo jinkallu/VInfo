@@ -13,9 +13,12 @@ export class MenuApi {
 
                ), new Menu(
                     "View",
-                    ["Toolbox", "next", "next"]
+                    ["Toolbox", "next", "next"]),
+                    new Menu(
+                         "Window",
+                         ["Item1", "Item2", "Item3"])
 
-               )];
+               ];
 
 
      static getMenus() {

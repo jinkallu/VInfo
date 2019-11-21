@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- <script src = "menu.js"> </script>
+        <script src = "menubar.js"> </script>
+        <script src = "toolbar.js"> </script>
+        <script src = "toolbox.js"> </script>
+        <script src = "block.js"> </script>
+        <script src = "designarea.js"> </script>
+        <script src = "properties.js"> </script>
+        <script src = "mainui.js"> </script>
+        <script src = "main.js"> </script> -->
+</head>
+
+<body>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/toolbox_dd.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/jquery-ui.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/jquery-ui.min.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootGeoPainter.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootGeoPainter.min.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootPainter.min.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootPainter.css') }}">
+    <script src="{{ url_for('static', filename='dist/scripts/JSRootCore.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='dist/bundle.js') }}">
+
+
+        //   <!-- import { init } from "/static/js/dist1/main.js"; -->
+        init();
+    </script>
+</body>
+
+</html>

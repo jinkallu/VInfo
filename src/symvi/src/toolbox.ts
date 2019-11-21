@@ -6,6 +6,7 @@ import { ItemProp } from './models/itemProp';
 // import  './styles/toolbox_dd.css';
 export class ToolBox {
 
+    //test comment
 
     private _categories: Category[];
 
@@ -163,12 +164,12 @@ export class ToolBox {
 
 
     create(parentToolBox: HTMLDivElement) {
-        var head = document.getElementsByTagName('HEAD')[0];
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = './styles/toolbox_dd.css';
-        head.appendChild(link);
+        // var head = document.getElementsByTagName('HEAD')[0];
+        // var link = document.createElement('link');
+        // link.rel = 'stylesheet';
+        // link.type = 'text/css';
+        // link.href = '../static/styles/toolbox_dd.css';
+        // head.appendChild(link);
         for (let category of this._categories) {
             parentToolBox.appendChild(this.createCategories(category));
         }
