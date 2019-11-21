@@ -1,5 +1,10 @@
 from flask import Flask, render_template, jsonify,send_from_directory
 
+from python.hist import getHist 
+from python.f1 import getF1 
+
+
+
 app = Flask(__name__)
 
 
@@ -28,6 +33,9 @@ def es6_static(filename):
                                mimetype='text/javascript'
     )
 
+@app.route("/api/calc")
+def add():
+    return getF1()
 
 if __name__ == '__main__':
     app.run(debug=True)
