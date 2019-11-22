@@ -21,7 +21,7 @@
          "./src/toolbar.ts",
          "./src/Api/categoryApi.ts",
          "./src/models/category.ts",
-         "./src/toolbox.ts"
+         "src/toolbox/toolbox.ts"
      ],
      "typesRoots": [
         "./typings",

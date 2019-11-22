@@ -20,6 +20,11 @@ export class DesignArea{
 
         this.svg.addEventListener("mousemove", this.mouseMove); 
         this.svg.addEventListener("contextmenu", this.contextMenu); 
+
+        this.svg.addEventListener("dragenter", this.dragEnter);
+        this.svg.addEventListener("dragover", this.dragOver);  
+        this.svg.addEventListener("drop", this.drop); 
+
     }
 
     create(desing_area:any){
@@ -47,5 +52,22 @@ export class DesignArea{
             this.edges.setConnectionStarted(false);
             event.preventDefault();
         }
+    }
+
+    dragEnter = (event: MouseEvent) => {
+        console.log("Drag enter from SVG");
+    }
+
+    dragOver = (event: MouseEvent) => {
+        console.log("Drag over");
+        event.preventDefault();
+    }
+
+    drop = (event: MouseEvent) => {
+        console.log("Drop");
+        let ctm = this.svg.getScreenCTM();
+        let x = event.clientX - ctm.e / ctm.a;
+        let y = event.clientY - ctm.f / ctm.d;
+        this.addBlock({ x: x, y: y }, 4, 2);
     }
 }

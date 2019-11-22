@@ -1,63 +1,45 @@
-import {Edge } from './edge';
-
-export class Edges{
-    edges:Edge[];
-    tmp_edge:Edge;
-    svg:any;
-
-    connection_started:boolean;
-    connection_src:any;
-    connection_tgt:any;
-
-    constructor(_svg:any){
+import { Edge } from './edge';
+export class Edges {
+    constructor(_svg) {
         this.edges = [];
         this.svg = _svg;
-
         this.connection_started = false;
     }
-
-    addEdge(){
+    addEdge() {
         this.edges.push(new Edge(this.connection_src, this.connection_tgt));
         this.svg.appendChild(this.edges[this.edges.length - 1].getPolyLine());
         return this.edges[this.edges.length - 1];
     }
-
-    setEdgeForSrc(edge:Edge){
+    setEdgeForSrc(edge) {
         this.connection_src.src_node.setEdge(edge);
     }
-
-    connectionStarted(){
+    connectionStarted() {
         return this.connection_started;
     }
-
-    setConnectionStarted(flag:boolean){
+    setConnectionStarted(flag) {
         this.connection_started = flag;
-        if(!flag){
+        if (!flag) {
             this.removeTempEdge();
         }
     }
-
-    setConnectionSrc(src:any){
+    setConnectionSrc(src) {
         this.connection_src = src;
         this.tmp_edge = null;
         this.tmp_edge = new Edge(this.connection_src, this.connection_src);
         this.svg.appendChild(this.tmp_edge.getPolyLine());
     }
-
-    getConnectionSrc(){
+    getConnectionSrc() {
         return this.connection_src;
     }
-
-    setConnectionTgt(tgt:any){
+    setConnectionTgt(tgt) {
         this.connection_tgt = tgt;
     }
-
-    removeTempEdge(){
+    removeTempEdge() {
         this.tmp_edge.getPolyLine().parentNode.removeChild(this.tmp_edge.getPolyLine());
         this.tmp_edge = null;
     }
-
-    getConnectioTgt(){
+    getConnectioTgt() {
         return this.connection_tgt;
     }
 }
+//# sourceMappingURL=edges.js.map

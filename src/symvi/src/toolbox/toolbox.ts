@@ -1,11 +1,23 @@
-import { Category } from './models/category';
-import { CategoryApi } from './Api/categoryApi';
-import { CategoryItem } from './models/categoryItem';
-import { ItemProp } from './models/itemProp';
+//import { Category } from '../models/category';
+//import { CategoryApi } from './Api/categoryApi';
+//import { CategoryItem } from './models/categoryItem';
+//import { ItemProp } from './models/itemProp';
 // import * as  $ from './js/jquery.js';
 // import  './styles/toolbox_dd.css';
-export class ToolBox {
+import { Categories } from './categories';
 
+export class ToolBox {
+    categories:Categories;
+
+    constructor(){
+        this.categories = new Categories();
+    }
+
+    create(parentToolBox: HTMLDivElement) {
+        parentToolBox.appendChild(this.categories.create());
+    }
+}
+/*
     //test comment
 
     private _categories: Category[];
@@ -164,12 +176,6 @@ export class ToolBox {
 
 
     create(parentToolBox: HTMLDivElement) {
-        // var head = document.getElementsByTagName('HEAD')[0];
-        // var link = document.createElement('link');
-        // link.rel = 'stylesheet';
-        // link.type = 'text/css';
-        // link.href = '../static/styles/toolbox_dd.css';
-        // head.appendChild(link);
         for (let category of this._categories) {
             parentToolBox.appendChild(this.createCategories(category));
         }
@@ -180,5 +186,7 @@ export class ToolBox {
 
 
 }
+
+*/
 
 
