@@ -18,10 +18,10 @@ export class CategoryApi {
           2,
           'url')];
      static categoryItems = [
-          new CategoryItem('c1', 'i1', 'item1', 'url', 2, 2),
-          new CategoryItem('c1', 'i2', 'item2', 'url', 0, 1),
-          new CategoryItem('c1', 'i3', 'item3', 'url', 1, 1),
-          new CategoryItem('c1', 'i4', 'item4', 'url', 0, 2),
+          new CategoryItem('c1', 'i1', 'Array', 'url', 0, 1),
+          new CategoryItem('c1', 'i2', 'Formula', 'url', 1, 1),
+          new CategoryItem('c1', 'i3', 'Graph', 'url', 2, 0),
+          new CategoryItem('c1', 'i4', 'Duplicate', 'url', 1, 2),
           new CategoryItem('c1', 'i5', 'item5', 'url', 1, 2),
           new CategoryItem('c1', 'i6', 'item6', 'url', 2, 3),
           new CategoryItem('c1', 'i7', 'item7', 'url', 3, 2),

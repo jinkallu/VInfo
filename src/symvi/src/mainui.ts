@@ -1,7 +1,7 @@
 // this is an edit check...
 import { ToolBox } from './toolbox/toolbox';
 import { MenuBar } from './menubar';
-import { ToolBar } from './toolbar';
+import { ToolBar } from './toolbar/toolbar';
 import { DesignArea } from './designarea';
 import { Properties } from './properties';
 import { Console } from './console'
@@ -20,9 +20,9 @@ export class MainUI {
         body.style.width = "100%";
         body.style.height = "100%";
         this.menu_bar = new MenuBar();
-        this.tool_bar = new ToolBar();
         this.tool_box = new ToolBox();
         this.design_area = new DesignArea();
+        this.tool_bar = new ToolBar(this.design_area); // toolbar after designarea
         this.properties = new Properties();
         this.console = new Console();
     }
@@ -48,14 +48,7 @@ export class MainUI {
     }
 
     createToolBar() {
-        let tool_bar_div = document.createElement("div");
-        tool_bar_div.style.width = "100%";
-        tool_bar_div.style.top = "10%";
-        tool_bar_div.style.height = "8%";
-        tool_bar_div.style.border = "solid black";
-        tool_bar_div.style.position = "absolute";
-        tool_bar_div.innerHTML = "Toolbar";
-        this.body.appendChild(tool_bar_div);
+        this.body.appendChild(this.tool_bar.create());
     }
 
     createToolBox() {
@@ -65,7 +58,6 @@ export class MainUI {
         tool_box_div.style.width = "18%";
         tool_box_div.style.height = "80%";
         tool_box_div.style.border = "solid black";
-        tool_box_div.innerHTML = "ToolboxN";
         this.body.appendChild(tool_box_div);
         this.tool_box.create(tool_box_div);
     }
@@ -94,7 +86,6 @@ export class MainUI {
         properties_div.style.width = "18%";
         properties_div.style.left = "82%";
         properties_div.style.minHeight = "80%";
-        properties_div.innerHTML = "PropertiesArea";
         let itemDiv = document.createElement('div');
         itemDiv.setAttribute('id', 'itemName');
         itemDiv.style.margin="5px";

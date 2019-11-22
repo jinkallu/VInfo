@@ -6,6 +6,7 @@ import { CategoryApi } from './Api/categoryApi';
 export class DesignArea{
     svg:any;
     edges:Edges;
+    blocks:Block[];
 
     constructor(){
         this.svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
@@ -14,6 +15,7 @@ export class DesignArea{
         this.svg.overflow = 'auto';
         this.svg.style.position = "absolute";
 
+        this.blocks = [];
         this.edges = new Edges(this.svg); 
         //this.edges.addEdge({block_id: 0, node_id: 0}, 
           //  {block_id: 1, node_id: 0});       
@@ -34,9 +36,10 @@ export class DesignArea{
         div.appendChild(this.svg);
     }
 
-    addBlock(pos:any, inputs:number, outputs:number){
-        let rect = new Block(this.svg, pos, inputs, outputs, this.edges);
+    addBlock(pos:any, inputs:number, outputs:number, name:string){
+        let rect = new Block(this.svg, pos, inputs, outputs, this.edges, name);
         this.svg.appendChild(rect.get());
+        this.blocks.push(rect);
     }
 
     mouseMove = (event: MouseEvent) => {
@@ -75,6 +78,7 @@ export class DesignArea{
             console.log(cat_item);
             let inputs = cat_item._inputs;
             let outputs = cat_item._outputs;
+            let name = cat_item._catItemName;
 
             console.log(inputs + " " + outputs);
 
@@ -83,7 +87,15 @@ export class DesignArea{
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
 
-            this.addBlock({ x: x, y: y }, inputs, outputs);
+            this.addBlock({ x: x, y: y }, inputs, outputs, name);
         //}
+    }
+
+    getBlocks(){
+        return this.blocks;
+    }
+
+    getEdges(){
+        return this.edges;
     }
 }

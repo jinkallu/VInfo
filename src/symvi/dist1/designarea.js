@@ -32,17 +32,19 @@ export class DesignArea {
             console.log(cat_item);
             let inputs = cat_item._inputs;
             let outputs = cat_item._outputs;
+            let name = cat_item._catItemName;
             console.log(inputs + " " + outputs);
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
-            this.addBlock({ x: x, y: y }, inputs, outputs);
+            this.addBlock({ x: x, y: y }, inputs, outputs, name);
         };
         this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.svg.setAttribute("height", '100%');
         this.svg.setAttribute("width", '100%');
         this.svg.overflow = 'auto';
         this.svg.style.position = "absolute";
+        this.blocks = [];
         this.edges = new Edges(this.svg);
         this.svg.addEventListener("mousemove", this.mouseMove);
         this.svg.addEventListener("contextmenu", this.contextMenu);
@@ -54,9 +56,16 @@ export class DesignArea {
         let div = desing_area;
         div.appendChild(this.svg);
     }
-    addBlock(pos, inputs, outputs) {
-        let rect = new Block(this.svg, pos, inputs, outputs, this.edges);
+    addBlock(pos, inputs, outputs, name) {
+        let rect = new Block(this.svg, pos, inputs, outputs, this.edges, name);
         this.svg.appendChild(rect.get());
+        this.blocks.push(rect);
+    }
+    getBlocks() {
+        return this.blocks;
+    }
+    getEdges() {
+        return this.edges;
     }
 }
 //# sourceMappingURL=designarea.js.map

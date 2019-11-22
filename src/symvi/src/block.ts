@@ -3,6 +3,8 @@ import {Edges } from './edges';
 
 
 export class Block{
+    static static_id:number = 0;
+    id:number;
     rect:any;
     drag_started:boolean;
     svg:any;
@@ -13,8 +15,13 @@ export class Block{
     input_nodes:any[];
     output_nodes:any[];
     edges:Edges;
+    text:any;
+    name:string;
 
-    constructor(svg:any, pos:any, _inputs:number, _outputs:number, _edges:Edges){
+    constructor(svg:any, pos:any, _inputs:number, _outputs:number, _edges:Edges, _name:string){
+        this.id = Block.static_id;
+        Block.static_id++;
+
         this.inputs = _inputs;
         this.outputs = _outputs;
 
@@ -24,6 +31,8 @@ export class Block{
 
         this.input_nodes = [];
         this.output_nodes = [];
+
+        this.name = _name;
 
         this.group = document.createElementNS("http://www.w3.org/2000/svg","g");
 
@@ -35,6 +44,12 @@ export class Block{
         this.rect.setAttribute("x", pos.x);
         this.rect.setAttribute("y", pos.y);
 
+        // text
+        this.text = document.createElementNS("http://www.w3.org/2000/svg","text");
+        this.text.textContent = _name;
+        this.text.setAttribute("x", pos.x);
+        this.text.setAttribute("y", pos.y - 10);
+
         this.rect.addEventListener("mousedown", this.dragStart); 
         this.rect.addEventListener("mousemove", this.dragging); 
         this.rect.addEventListener("mouseup", this.dragStop);
@@ -44,6 +59,7 @@ export class Block{
         //this.rect.onmousemove = this.dragging;
 
         this.group.appendChild(this.rect);
+        this.group.appendChild(this.text);
 
         this.drag_started = false;
 
@@ -168,6 +184,9 @@ export class Block{
         this.rect.setAttributeNS(null, "x", x);
         this.rect.setAttributeNS(null, "y", y);
 
+        this.text.setAttribute("x", x);
+        this.text.setAttribute("y", y -10 );
+
         //let transform = this.group.transform.baseVal.getItem(0);   
         //let mat = transform.matrix;   
 
@@ -194,5 +213,9 @@ export class Block{
             x : (event.clientX - this.ctm.e / this.ctm.a) - this.rect.width.baseVal.value / 2,
             y : (event.clientY - this.ctm.f / this.ctm.d) - this.rect.height.baseVal.value / 2
         };
+    }
+
+    getData(){
+        return {id: this.id, name: this.name};
     }
 }
