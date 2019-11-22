@@ -10,6 +10,11 @@ export class CategoryApi {
                 return i.categoryId === categoryId;
             })];
     }
+    static getCategoryItemByItemId(catItemId) {
+        return { ...this.categoryItems.find(i => {
+                return i.catItemId === catItemId;
+            }) };
+    }
     static getItemPropsByItemId(catItemId) {
         return [...this.categoryProps.filter(i => {
                 return i.catItemId === catItemId;
@@ -20,15 +25,15 @@ CategoryApi.categories = [new Category('c1', 'Category1', 1, 'url'),
     new Category('c2', 'Category2', 2, 'url'),
     new Category('c3', 'Category3', 2, 'url')];
 CategoryApi.categoryItems = [
-    new CategoryItem('c1', 'i1', 'item1', 'url'),
-    new CategoryItem('c1', 'i2', 'item2', 'url'),
-    new CategoryItem('c1', 'i3', 'item3', 'url'),
-    new CategoryItem('c1', 'i4', 'item4', 'url'),
-    new CategoryItem('c1', 'i5', 'item5', 'url'),
-    new CategoryItem('c1', 'i6', 'item6', 'url'),
-    new CategoryItem('c1', 'i7', 'item7', 'url'),
-    new CategoryItem('c2', 'i8', 'item8', 'url'),
-    new CategoryItem('c3', 'i9', 'item9', 'url'),
+    new CategoryItem('c1', 'i1', 'item1', 'url', 2, 2),
+    new CategoryItem('c1', 'i2', 'item2', 'url', 0, 1),
+    new CategoryItem('c1', 'i3', 'item3', 'url', 1, 1),
+    new CategoryItem('c1', 'i4', 'item4', 'url', 0, 2),
+    new CategoryItem('c1', 'i5', 'item5', 'url', 1, 2),
+    new CategoryItem('c1', 'i6', 'item6', 'url', 2, 3),
+    new CategoryItem('c1', 'i7', 'item7', 'url', 3, 2),
+    new CategoryItem('c2', 'i8', 'item8', 'url', 3, 3),
+    new CategoryItem('c3', 'i9', 'item9', 'url', 2, 0),
 ];
 CategoryApi.categoryProps = [
     new ItemProp('i1', 'p1', 'count', 'number', "10", 1, true),

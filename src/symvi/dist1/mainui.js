@@ -66,8 +66,6 @@ export class MainUI {
         design_area_div.setAttribute('id', 'designArea');
         this.body.appendChild(design_area_div);
         this.design_area.create(design_area_div);
-        this.design_area.addBlock({ x: 10, y: 10 }, 4, 2);
-        this.design_area.addBlock({ x: 200, y: 10 }, 2, 2);
     }
     createProperties() {
         let properties_div = document.createElement("div");

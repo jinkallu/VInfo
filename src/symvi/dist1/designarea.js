@@ -1,5 +1,6 @@
 import { Block } from './block';
 import { Edges } from './edges';
+import { CategoryApi } from './Api/categoryApi';
 export class DesignArea {
     constructor() {
         this.mouseMove = (event) => {
@@ -25,11 +26,17 @@ export class DesignArea {
             event.preventDefault();
         };
         this.drop = (event) => {
-            console.log("Drop");
+            event.preventDefault();
+            let item_id = event.dataTransfer.getData("Text");
+            let cat_item = CategoryApi.getCategoryItemByItemId(item_id);
+            console.log(cat_item);
+            let inputs = cat_item._inputs;
+            let outputs = cat_item._outputs;
+            console.log(inputs + " " + outputs);
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
-            this.addBlock({ x: x, y: y }, 4, 2);
+            this.addBlock({ x: x, y: y }, inputs, outputs);
         };
         this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.svg.setAttribute("height", '100%');

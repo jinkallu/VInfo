@@ -10,17 +10,14 @@ export class CategoryItem{
         this.cat_item_img.setAttribute('id', cat_item_data.catItemId);
 
         this.cat_item_img.draggable = true;
-        this.cat_item_img.addEventListener("ondrop", this.dragStart); 
-        this.cat_item_img.addEventListener("ondragstart", this.dragStop); 
+        this.cat_item_img.addEventListener("dragstart", this.dragStart); 
 
         this.drag_start = false;
     }
 
-    dragStart = (event: MouseEvent) => {
-        this.drag_start = true;
-    }
-
-    dragging = (event: MouseEvent) => {
+    dragStart = (event:any) => {
+        event.dataTransfer.setData("Text", event.target.id);
+        console.log(event.target.id);
     }
 
     dragStop = (event: MouseEvent) => {
