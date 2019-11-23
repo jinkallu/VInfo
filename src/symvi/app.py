@@ -4,6 +4,7 @@ from flask import request, jsonify, make_response
 from python.hist import getHist 
 from python.f1 import getF1 
 from python.modeltree import ModelTree 
+from python.processtree import ProcessTree
 
 
 app = Flask(__name__)
@@ -45,6 +46,8 @@ def add():
         # Print the dictionary
         #print(len(req['edges']))
         modelTree = ModelTree(req)
+        processTree = ProcessTree()
+        processTree.process(modelTree.getTree())
         #makeTree(req)
 
         # Return a string along with an HTTP status code

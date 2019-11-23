@@ -52,6 +52,9 @@ class ModelTree:
                         self.findNextNode(child.child[-1], req)
                         break
 
+    def getTree(self):
+        return self.tree
+
     def print_recurse(self, tree_child, level):
         print ('level ' , level)
         print (tree_child.data)
