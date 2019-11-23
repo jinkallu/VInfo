@@ -3,7 +3,6 @@ import { Id } from './id';
 export class Block {
     constructor(svg, pos, _inputs, _outputs, _edges, _name) {
         this.dragStart = (event) => {
-            console.log("Drag Start" + event.pageX + " " + event.pageY);
             this.drag_started = true;
         };
         this.dragStop = (event) => {
@@ -61,7 +60,6 @@ export class Block {
         }
         let y = +this.rect.getAttribute("y");
         let x = +this.rect.getAttribute("x");
-        console.log("rect " + x + " " + y);
         let height = +parseInt(this.rect.height.baseVal.value);
         let dy_init = height / ios;
         let dy = (height - dy_init) / ios;
@@ -101,7 +99,7 @@ export class Block {
         let node_pos = this.calculateNodePos(true);
         for (let i = 0; i < this.inputs; i++) {
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({ x: node_pos.x, y: y_i }, true, this.edges);
+            let node = new Node({ x: node_pos.x, y: y_i }, true, this.edges, this.id, i);
             this.input_nodes.push(node);
             this.group.appendChild(node.get());
         }
@@ -115,7 +113,7 @@ export class Block {
         node_pos.x += width;
         for (let i = 0; i < this.outputs; i++) {
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({ x: node_pos.x, y: y_i }, false, this.edges);
+            let node = new Node({ x: node_pos.x, y: y_i }, false, this.edges, this.id, (this.inputs + i));
             this.output_nodes.push(node);
             this.group.appendChild(node.get());
         }
@@ -124,7 +122,6 @@ export class Block {
         if (x < 0 || y < 0) {
             return;
         }
-        console.log("Set pos");
         this.rect.setAttributeNS(null, "x", x);
         this.rect.setAttributeNS(null, "y", y);
         this.text.setAttribute("x", x);

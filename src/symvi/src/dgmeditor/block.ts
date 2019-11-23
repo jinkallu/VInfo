@@ -85,8 +85,6 @@ export class Block{
         let y:number = +this.rect.getAttribute("y"); // + convert string to number
         let x:number = +this.rect.getAttribute("x");
 
-        console.log("rect " + x + " " + y);
-
         let height:number = +parseInt(this.rect.height.baseVal.value);
 
         
@@ -142,7 +140,7 @@ export class Block{
 
         for (let i = 0; i <  this.inputs; i++){
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({x: node_pos.x, y: y_i}, true, this.edges);
+            let node = new Node({x: node_pos.x, y: y_i}, true, this.edges, this.id, i);
             this.input_nodes.push(node);
             this.group.appendChild(node.get());    
         }
@@ -159,14 +157,14 @@ export class Block{
 
         for (let i = 0; i <  this.outputs; i++){
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({x: node_pos.x, y: y_i}, false, this.edges);
+            let node = new Node({x: node_pos.x, y: y_i}, false, this.edges, this.id, (this.inputs + i));
             this.output_nodes.push(node);
             this.group.appendChild(node.get());    
         }
     }
 
     dragStart = (event: MouseEvent) => {
-        console.log("Drag Start" + event.pageX + " " + event.pageY);
+        //console.log("Drag Start" + event.pageX + " " + event.pageY);
         this.drag_started = true;
     }
 
@@ -181,7 +179,7 @@ export class Block{
         if(x < 0 || y < 0){
             return;
         }
-        console.log("Set pos");
+        //console.log("Set pos");
 
         this.rect.setAttributeNS(null, "x", x);
         this.rect.setAttributeNS(null, "y", y);

@@ -17,6 +17,7 @@ export class Edges{
     }
 
     addEdge(){
+        
         this.edges.push(new Edge(this.connection_src, this.connection_tgt));
         this.svg.appendChild(this.edges[this.edges.length - 1].getPolyLine());
         return this.edges[this.edges.length - 1];

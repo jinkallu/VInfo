@@ -2,6 +2,8 @@ import {Edges} from './edges';
 import { Edge } from './edge';
 
 export class Node{
+    block_id:number;
+    node_id:number;
     circle:any;
     rad:number;
     io:boolean; // 0 output, 1 input
@@ -9,16 +11,17 @@ export class Node{
     pos:any;
     edge:Edge;
 
-    constructor(_pos:any, _io:boolean, _edges:Edges){
+    constructor(_pos:any, _io:boolean, _edges:Edges, _block_id:number, _node_id:number){
+        this.block_id = _block_id;
+        this.node_id = _node_id;
         this.rad = 5;
         this.io = _io; 
         this.edges = _edges;
         this.pos = _pos;
         this.edge = undefined;
 
+
         this.circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
-        //this.circle.setAttributeNS(null, "cx", pos.x - this.rad);
-        //this.circle.setAttributeNS(null, "cy", pos.y);
         this.setPos(this.pos);
         this.circle.setAttributeNS(null, "r", this.rad);
         this.circle.setAttributeNS(null, "stroke", "black");
@@ -65,13 +68,27 @@ export class Node{
     connectStart(){
         if(!this.edges.connectionStarted()){
             this.edges.setConnectionStarted(true);
-            this.edges.setConnectionSrc({src_node: this, block_id: 0, node_id: 0, pos:{x: this.pos.x, y:this.pos.y}});
+            this.edges.setConnectionSrc({   src_node: this, 
+                                            block_id: this.block_id, 
+                                            node_id: this.node_id, 
+                                            pos:{
+                                                    x: this.pos.x, 
+                                                    y:this.pos.y
+                                                },
+                                        });
         }
     }
 
     connectEnd(){
         if(this.edges.connectionStarted()){
-            this.edges.setConnectionTgt({block_id: 0, node_id: 0, pos:{x: this.pos.x, y:this.pos.y}});
+            this.edges.setConnectionTgt({
+                                            block_id: this.block_id, 
+                                            node_id: this.node_id, 
+                                            pos:{
+                                                    x: this.pos.x, 
+                                                    y:this.pos.y
+                                                }
+                                        });
             this.edge = this.edges.addEdge();
             this.edges.setEdgeForSrc(this.edge);
             this.edges.setConnectionStarted(false);

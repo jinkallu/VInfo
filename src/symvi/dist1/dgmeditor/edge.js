@@ -26,7 +26,6 @@ export class Edge {
             x_mid + "," + this.pos.y1 + " " +
             x_mid + "," + this.pos.y2 + " " +
             this.pos.x2 + "," + this.pos.y2;
-        console.log("points " + points);
         this.polyline.setAttributeNS(null, "points", points);
     }
     setPointSrc(src) {
@@ -48,7 +47,7 @@ export class Edge {
             type: 'Edge',
             src_blk_id: this.src_block_id,
             src_node_id: this.src_node_id,
-            tgt_block_id: this.tgt_block_id,
+            tgt_blk_id: this.tgt_block_id,
             tgt_node_id: this.tgt_node_id
         };
         return data;

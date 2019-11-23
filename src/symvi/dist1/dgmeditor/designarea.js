@@ -5,7 +5,6 @@ export class DesignArea {
     constructor() {
         this.mouseMove = (event) => {
             if (this.edges.connectionStarted()) {
-                console.log("moving temp");
                 let ctm = this.svg.getScreenCTM();
                 let x = event.clientX - ctm.e / ctm.a;
                 let y = event.clientY - ctm.f / ctm.d;
@@ -19,21 +18,17 @@ export class DesignArea {
             }
         };
         this.dragEnter = (event) => {
-            console.log("Drag enter from SVG");
         };
         this.dragOver = (event) => {
-            console.log("Drag over");
             event.preventDefault();
         };
         this.drop = (event) => {
             event.preventDefault();
             let item_id = event.dataTransfer.getData("Text");
             let cat_item = CategoryApi.getCategoryItemByItemId(item_id);
-            console.log(cat_item);
             let inputs = cat_item._inputs;
             let outputs = cat_item._outputs;
             let name = cat_item._catItemName;
-            console.log(inputs + " " + outputs);
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;

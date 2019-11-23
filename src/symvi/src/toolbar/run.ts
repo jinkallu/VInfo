@@ -22,12 +22,54 @@ export class Run{
     }
 
     execute = () => {
+        this.submit({edges: this.createEdgesData(), 
+                     blocks: this.createBlocksData()});
+    } 
+
+    createEdgesData(){
+        let edges:Edge[] = this.design_area.getEdges().getEdges();
+        let edge:Edge;
+        let edges_data:any = [];
+
+        for(edge of edges){
+            let data:any = edge.getData();
+            let edge_data = {
+                                id: data.id,
+                                type: data.type,
+                                src_blk_id: data.src_blk_id,
+                                src_node_id: data.src_node_id,
+                                tgt_blk_id: data.tgt_blk_id,
+                                tgt_node_id: data.tgt_node_id
+                            };
+            edges_data.push(edge_data);
+            console.log(
+                            data.id + ' ' + 
+                            data.type + ' ' +
+                            data.src_blk_id + ' ' + 
+                            data.src_node_id + ' ' + 
+                            data.tgt_blk_id + ' ' + 
+                            data.tgt_node_id
+                        );
+        }
+
+        return edges_data;
+    }
+
+    createBlocksData(){
         let blocks = this.design_area.getBlocks();
 
+        let blocks_data:any = [];
 
         let block:Block;
         for(block of blocks){
             let data:any = block.getData();
+            let block_data = {
+                                id: data.id,
+                                type: data.type,
+                                name: data.name,
+                                outputs:data.outputs 
+                            };
+            blocks_data.push(block_data);
             console.log(
                         data.id + " " + 
                         data.type + " " + 
@@ -37,14 +79,19 @@ export class Run{
                         );
         }
 
-        let edges:Edge[] = this.design_area.getEdges().getEdges();
-        let edge:Edge;
-        for(edge of edges){
-            let edge_data:any = edge.getData();
-            console.log(edge_data.id + ' ' + edge_data.type);
-        }
+        return blocks_data;
+    }
 
-    } 
-
-
+    async submit(send_data:any) 
+    {
+            let response = await fetch('http://127.0.0.1:5000/api/calc', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(send_data)
+            });
+            let data = await response.json()
+            //return data;
+    }
 }

@@ -1,5 +1,5 @@
 export class Node {
-    constructor(_pos, _io, _edges) {
+    constructor(_pos, _io, _edges, _block_id, _node_id) {
         this.connecting = () => {
             if (this.io) {
                 this.connectEnd();
@@ -8,6 +8,8 @@ export class Node {
                 this.connectStart();
             }
         };
+        this.block_id = _block_id;
+        this.node_id = _node_id;
         this.rad = 5;
         this.io = _io;
         this.edges = _edges;
@@ -46,12 +48,26 @@ export class Node {
     connectStart() {
         if (!this.edges.connectionStarted()) {
             this.edges.setConnectionStarted(true);
-            this.edges.setConnectionSrc({ src_node: this, block_id: 0, node_id: 0, pos: { x: this.pos.x, y: this.pos.y } });
+            this.edges.setConnectionSrc({ src_node: this,
+                block_id: this.block_id,
+                node_id: this.node_id,
+                pos: {
+                    x: this.pos.x,
+                    y: this.pos.y
+                },
+            });
         }
     }
     connectEnd() {
         if (this.edges.connectionStarted()) {
-            this.edges.setConnectionTgt({ block_id: 0, node_id: 0, pos: { x: this.pos.x, y: this.pos.y } });
+            this.edges.setConnectionTgt({
+                block_id: this.block_id,
+                node_id: this.node_id,
+                pos: {
+                    x: this.pos.x,
+                    y: this.pos.y
+                }
+            });
             this.edge = this.edges.addEdge();
             this.edges.setEdgeForSrc(this.edge);
             this.edges.setConnectionStarted(false);

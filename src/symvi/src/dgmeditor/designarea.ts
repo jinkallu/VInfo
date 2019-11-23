@@ -17,10 +17,6 @@ export class DesignArea{
 
         this.blocks = [];
         this.edges = new Edges(this.svg); 
-        //this.edges.addEdge({block_id: 0, node_id: 0}, 
-          //  {block_id: 1, node_id: 0});       
-         
-        //var rect = draw.rect(100, 100).attr({ fill: '#f06' })
 
         this.svg.addEventListener("mousemove", this.mouseMove); 
         this.svg.addEventListener("contextmenu", this.contextMenu); 
@@ -44,7 +40,7 @@ export class DesignArea{
 
     mouseMove = (event: MouseEvent) => {
         if(this.edges.connectionStarted()){
-            console.log("moving temp");
+            //console.log("moving temp");
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
@@ -60,11 +56,11 @@ export class DesignArea{
     }
 
     dragEnter = (event: MouseEvent) => {
-        console.log("Drag enter from SVG");
+        //console.log("Drag enter from SVG");
     }
 
     dragOver = (event: MouseEvent) => {
-        console.log("Drag over");
+        //console.log("Drag over");
         event.preventDefault();
     }
 
@@ -75,12 +71,12 @@ export class DesignArea{
             let item_id = event.dataTransfer.getData("Text");
 
             let cat_item:any = CategoryApi.getCategoryItemByItemId(item_id);
-            console.log(cat_item);
+            //console.log(cat_item);
             let inputs = cat_item._inputs;
             let outputs = cat_item._outputs;
             let name = cat_item._catItemName;
 
-            console.log(inputs + " " + outputs);
+            //console.log(inputs + " " + outputs);
 
 
             let ctm = this.svg.getScreenCTM();
