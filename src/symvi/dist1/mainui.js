@@ -1,7 +1,7 @@
 import { ToolBox } from './toolbox/toolbox';
 import { MenuBar } from './menubar';
 import { ToolBar } from './toolbar/toolbar';
-import { DesignArea } from './designarea';
+import { DesignArea } from './dgmeditor/designarea';
 import { Properties } from './properties';
 import { Console } from './console';
 export class MainUI {

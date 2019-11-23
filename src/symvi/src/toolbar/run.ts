@@ -1,4 +1,5 @@
-import { Block } from '../block';
+import { Block } from '../dgmeditor/block';
+import { Edge } from '../dgmeditor/edge';
 
 export class Run{
     run_div:HTMLDivElement;
@@ -23,10 +24,27 @@ export class Run{
     execute = () => {
         let blocks = this.design_area.getBlocks();
 
+
         let block:Block;
         for(block of blocks){
             let data:any = block.getData();
-            console.log(block.id + " " + block.name);
+            console.log(
+                        data.id + " " + 
+                        data.type + " " + 
+                        data.name + " " +
+                        data.inputs + " " + 
+                        data.outputs
+                        );
         }
+
+        let edges:Edge[] = this.design_area.getEdges().getEdges();
+        let edge:Edge;
+        for(edge of edges){
+            let edge_data:any = edge.getData();
+            console.log(edge_data.id + ' ' + edge_data.type);
+        }
+
     } 
+
+
 }

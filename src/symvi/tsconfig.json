@@ -11,9 +11,9 @@
      },
      "files": [
         
-         "./src/node.ts",
-         "./src/block.ts",
-         "./src/designarea.ts",
+         "src/dgmeditor/node.ts",
+         "src/dgmeditor/block.ts",
+         "src/dgmeditor/designarea.ts",
          "./src/main.ts",
          "./src/mainui.ts",
          "./src/menubar.ts",

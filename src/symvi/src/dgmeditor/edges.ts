@@ -40,7 +40,7 @@ export class Edges{
     setConnectionSrc(src:any){
         this.connection_src = src;
         this.tmp_edge = null;
-        this.tmp_edge = new Edge(this.connection_src, this.connection_src);
+        this.tmp_edge = new Edge(this.connection_src, this.connection_src, true);
         this.svg.appendChild(this.tmp_edge.getPolyLine());
     }
 
@@ -59,5 +59,9 @@ export class Edges{
 
     getConnectioTgt(){
         return this.connection_tgt;
+    }
+
+    getEdges(){
+        return this.edges;
     }
 }

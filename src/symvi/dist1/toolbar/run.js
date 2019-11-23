@@ -5,7 +5,17 @@ export class Run {
             let block;
             for (block of blocks) {
                 let data = block.getData();
-                console.log(block.id + " " + block.name);
+                console.log(data.id + " " +
+                    data.type + " " +
+                    data.name + " " +
+                    data.inputs + " " +
+                    data.outputs);
+            }
+            let edges = this.design_area.getEdges().getEdges();
+            let edge;
+            for (edge of edges) {
+                let edge_data = edge.getData();
+                console.log(edge_data.id + ' ' + edge_data.type);
             }
         };
         this.design_area = _design_area;

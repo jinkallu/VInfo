@@ -1,9 +1,10 @@
 import {Node } from './node';
 import {Edges } from './edges';
+import { Id } from './id';
+import { Script } from 'vm';
 
 
 export class Block{
-    static static_id:number = 0;
     id:number;
     rect:any;
     drag_started:boolean;
@@ -17,10 +18,11 @@ export class Block{
     edges:Edges;
     text:any;
     name:string;
+    type:string;
 
     constructor(svg:any, pos:any, _inputs:number, _outputs:number, _edges:Edges, _name:string){
-        this.id = Block.static_id;
-        Block.static_id++;
+        this.id = Id.getID();
+        this.type = 'Block';
 
         this.inputs = _inputs;
         this.outputs = _outputs;
@@ -216,6 +218,13 @@ export class Block{
     }
 
     getData(){
-        return {id: this.id, name: this.name};
+        let data = {
+                        id: this.id,
+                        type: this.type, 
+                        name: this.name,
+                        inputs: this.inputs,
+                        outputs: this.outputs
+                    };
+        return data;
     }
 }

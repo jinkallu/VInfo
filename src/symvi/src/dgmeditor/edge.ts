@@ -1,7 +1,8 @@
-export class Edge{
-    static static_id:number = 0;
+import { Id } from './id';
 
+export class Edge{
     id:number;
+    type:string;
 
     active:boolean;
     src_block_id:number;
@@ -13,9 +14,15 @@ export class Edge{
     polyline:any;
     pos:any;
 
-    constructor(_src:any, _tgt:any){
-        this.id = Edge.static_id;
-        Edge.static_id++;
+    constructor(_src:any, _tgt:any, flag_temp = false){
+        if(!flag_temp){
+            this.id = Id.getID();
+        }
+        else{
+            this.id = -1;
+        }
+
+        this.type = 'Edge';
 
         this.src_block_id = _src.block_id;
         this.src_node_id = _src.node_id;
@@ -59,5 +66,17 @@ export class Edge{
 
     getPolyLine(){
         return this.polyline;
+    }
+
+    getData(){
+        let data:any = {    
+                            id: this.id, 
+                            type: 'Edge', 
+                            src_blk_id: this.src_block_id,
+                            src_node_id: this.src_node_id,
+                            tgt_block_id: this.tgt_block_id,
+                            tgt_node_id: this.tgt_node_id
+                        };
+        return data;
     }
 }

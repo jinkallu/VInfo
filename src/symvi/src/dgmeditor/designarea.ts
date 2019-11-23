@@ -1,6 +1,6 @@
 import {Block } from './block';
 import {Edges } from './edges';
-import { CategoryApi } from './Api/categoryApi';
+import { CategoryApi } from '../Api/categoryApi';
 
 
 export class DesignArea{
