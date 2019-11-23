@@ -1,3 +1,4 @@
+import JSROOT from 'JSROOT';
 export class Run {
     constructor(_design_area) {
         this.execute = () => {
@@ -69,6 +70,10 @@ export class Run {
             body: JSON.stringify(send_data)
         });
         let data = await response.json();
+        console.log(data);
+        let data_draw = JSROOT.parse(data);
+        JSROOT.draw("properties", data_draw, "hist");
+        return data;
     }
 }
 //# sourceMappingURL=run.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"histogram.js","sourceRoot":"","sources":["../src/histogram.ts"],"names":[],"mappings":"AACA,OAAO,MAAM,MAAM,QAAQ,CAAA;AAC3B,MAAM,OAAO,SAAS;IAClB;QACI,MAAM,CAAC,cAAc,CAAC,gCAAgC,EAAE,QAAQ,EAAE,UAAS,GAAO;YAC9E,MAAM,CAAC,IAAI,CAAC,YAAY,EAAE,GAAG,EAAE,MAAM,CAAC,CAAC;QAC1C,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC;IACf,CAAC;CACJ"}
+{"version":3,"file":"histogram.js","sourceRoot":"","sources":["../src/histogram.ts"],"names":[],"mappings":"AAEA,MAAM,OAAO,SAAS;IAClB;IAIA,CAAC;CACJ"}

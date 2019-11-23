@@ -10,6 +10,7 @@ export class Node{
     edges:Edges;
     pos:any;
     edge:Edge;
+    connected:boolean;
 
     constructor(_pos:any, _io:boolean, _edges:Edges, _block_id:number, _node_id:number){
         this.block_id = _block_id;
@@ -19,6 +20,7 @@ export class Node{
         this.edges = _edges;
         this.pos = _pos;
         this.edge = undefined;
+        this.connected = false;
 
 
         this.circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
@@ -28,6 +30,9 @@ export class Node{
         this.circle.setAttributeNS(null, "fill", "white");
 
         this.circle.addEventListener("click", this.connecting); 
+        this.circle.addEventListener("mouseover", this.mouseOver); 
+        this.circle.addEventListener("mouseleave", this.mouseLeave); 
+
     }
 
     get(){
@@ -57,6 +62,11 @@ export class Node{
     }
 
     connecting = () => {
+        if(this.connected){
+            // calready connected
+            return;
+        }
+
         if(this.io){
             this.connectEnd();
         }
@@ -92,10 +102,26 @@ export class Node{
             this.edge = this.edges.addEdge();
             this.edges.setEdgeForSrc(this.edge);
             this.edges.setConnectionStarted(false);
+            this.connected = true;
         }
     }
 
     setEdge(_edge:Edge){
         this.edge = _edge;
+        this.connected = true;
     }
+
+    mouseOver = () => {
+        if(this.connected){
+            this.circle.setAttributeNS(null, "fill", "red");
+        }
+        else{
+            this.circle.setAttributeNS(null, "fill", "green");
+        }
+    }
+
+    mouseLeave = () => {
+        this.circle.setAttributeNS(null, "fill", "white");
+    }
+
 }

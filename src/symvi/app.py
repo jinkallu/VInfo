@@ -3,7 +3,7 @@ from flask import request, jsonify, make_response
 
 from python.hist import getHist 
 from python.f1 import getF1 
-
+from python.modeltree import ModelTree 
 
 
 app = Flask(__name__)
@@ -43,10 +43,13 @@ def add():
         req = request.get_json()
 
         # Print the dictionary
-        print(req)
+        #print(len(req['edges']))
+        modelTree = ModelTree(req)
+        #makeTree(req)
 
         # Return a string along with an HTTP status code
-        return make_response(jsonify({"message": "JSON message recieved"}), 200)
+        #return make_response(jsonify({"message": "JSON message recieved"}), 200)
+        return make_response(jsonify(getF1()))
 
     else:
 

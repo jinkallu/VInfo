@@ -1,12 +1,26 @@
 export class Node {
     constructor(_pos, _io, _edges, _block_id, _node_id) {
         this.connecting = () => {
+            if (this.connected) {
+                return;
+            }
             if (this.io) {
                 this.connectEnd();
             }
             else {
                 this.connectStart();
             }
+        };
+        this.mouseOver = () => {
+            if (this.connected) {
+                this.circle.setAttributeNS(null, "fill", "red");
+            }
+            else {
+                this.circle.setAttributeNS(null, "fill", "green");
+            }
+        };
+        this.mouseLeave = () => {
+            this.circle.setAttributeNS(null, "fill", "white");
         };
         this.block_id = _block_id;
         this.node_id = _node_id;
@@ -15,12 +29,15 @@ export class Node {
         this.edges = _edges;
         this.pos = _pos;
         this.edge = undefined;
+        this.connected = false;
         this.circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         this.setPos(this.pos);
         this.circle.setAttributeNS(null, "r", this.rad);
         this.circle.setAttributeNS(null, "stroke", "black");
         this.circle.setAttributeNS(null, "fill", "white");
         this.circle.addEventListener("click", this.connecting);
+        this.circle.addEventListener("mouseover", this.mouseOver);
+        this.circle.addEventListener("mouseleave", this.mouseLeave);
     }
     get() {
         return this.circle;
@@ -71,10 +88,12 @@ export class Node {
             this.edge = this.edges.addEdge();
             this.edges.setEdgeForSrc(this.edge);
             this.edges.setConnectionStarted(false);
+            this.connected = true;
         }
     }
     setEdge(_edge) {
         this.edge = _edge;
+        this.connected = true;
     }
 }
 //# sourceMappingURL=node.js.map

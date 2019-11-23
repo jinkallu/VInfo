@@ -1,5 +1,6 @@
 import { Block } from '../dgmeditor/block';
 import { Edge } from '../dgmeditor/edge';
+import JSROOT from 'JSROOT'
 
 export class Run{
     run_div:HTMLDivElement;
@@ -91,7 +92,10 @@ export class Run{
                 },
                 body: JSON.stringify(send_data)
             });
-            let data = await response.json()
-            //return data;
+            let data = await response.json();
+            console.log(data);
+            let data_draw = JSROOT.parse(data);
+            JSROOT.draw("properties", data_draw, "hist");
+            return data;
     }
 }
