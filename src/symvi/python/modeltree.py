@@ -49,6 +49,7 @@ class ModelTree:
                     if edge['tgt_blk_id'] == block['id']:
                         child.child.append(Tree())
                         child.child[-1].data = block
+                        child.child[-1].connection = edge
                         self.findNextNode(child.child[-1], req)
                         break
 

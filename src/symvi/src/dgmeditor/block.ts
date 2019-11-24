@@ -157,7 +157,7 @@ export class Block{
 
         for (let i = 0; i <  this.outputs; i++){
             let y_i = node_pos.y + i * node_pos.dy;
-            let node = new Node({x: node_pos.x, y: y_i}, false, this.edges, this.id, (this.inputs + i));
+            let node = new Node({x: node_pos.x, y: y_i}, false, this.edges, this.id, i);
             this.output_nodes.push(node);
             this.group.appendChild(node.get());    
         }

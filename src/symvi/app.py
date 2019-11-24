@@ -47,12 +47,12 @@ def add():
         #print(len(req['edges']))
         modelTree = ModelTree(req)
         processTree = ProcessTree()
-        processTree.process(modelTree.getTree())
+        json = processTree.process(modelTree.getTree())
         #makeTree(req)
 
         # Return a string along with an HTTP status code
         #return make_response(jsonify({"message": "JSON message recieved"}), 200)
-        return make_response(jsonify(getF1()))
+        return make_response(jsonify(json))
 
     else:
 
