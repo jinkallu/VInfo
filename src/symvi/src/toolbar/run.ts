@@ -68,6 +68,7 @@ export class Run{
                                 id: data.id,
                                 type: data.type,
                                 name: data.name,
+                                inputs: data.inputs,
                                 outputs:data.outputs 
                             };
             blocks_data.push(block_data);
