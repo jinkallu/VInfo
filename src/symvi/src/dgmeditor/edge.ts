@@ -36,6 +36,7 @@ export class Edge{
         this.polyline.setAttribute("stroke", "blue");
         this.polyline.setAttribute("fill", "white");
         this.polyline.setAttribute("fill-opacity", "0");
+        this.polyline.setAttribute("pointer-events", "none");
         this.updatePoints();
 
         this.active = true;
