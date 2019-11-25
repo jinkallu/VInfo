@@ -12,11 +12,11 @@ class Array(Components):
         print("Overriding from Parent")
         data = []
         dx = 0.2 #(self.max - self.min) / self.size
-        print('dx', dx, self.max - self.min)
+        #print('dx', dx, self.max - self.min)
         for i in range(self.size):
             x = self.min + i * dx
             data.append(x)
-            print(i, x)
+            #print(i, x)
 
         self.setOutput(0, data)
-        self.setOutputReady()
+        self.setExecuted()

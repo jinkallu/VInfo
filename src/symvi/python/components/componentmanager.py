@@ -5,7 +5,7 @@ from .graph import Graph
 class ComponentManager:
     def __init__(self):
         self.components = []
-        self.cmp_output = None
+        self.cmp_output = []
 
 
     def addComponent(self, block):
@@ -47,17 +47,33 @@ class ComponentManager:
         for child in tree.child:
             cmp = child.component
             print(cmp.getNoInputs(), cmp.filledInputs())
-            if cmp.getNoInputs() == cmp.filledInputs() and not cmp.outputReady():
+            if cmp.getNoInputs() == cmp.filledInputs() and not cmp.executed():
                 # execute the code for component
                 cmp.execute()
                 if cmp.getNoOutputs() == 0:
-                    self.cmp_output = cmp
-                if cmp.outputReady():
+                    self.cmp_output.append(cmp)
+                if cmp.executed():
                     for child_of_child in child.child:
-                        print(child_of_child.connection)
+                        #print(child_of_child.connection)
                         data = cmp.getOutput(child_of_child.connection['src_node_id'])
                         child_of_child.component.setInput(child_of_child.connection['tgt_node_id'], data)
 
             self.run(child)
-        
 
+    def executedAll(self, tree):
+        flag = True
+        for child in tree.child:
+            cmp = child.component
+            if(cmp.executed() == False):
+                return False
+            else:
+                flag = flag and self.executedAll(child)
+
+        return flag
+
+    def getOutputData(self):
+        out_data = []
+        for cmp in self.cmp_output:
+            out_data.append({'id': cmp.getId(), 'data': cmp.getJson()})
+
+        return out_data

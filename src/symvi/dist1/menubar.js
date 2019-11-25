@@ -11,8 +11,9 @@ export class MenuBar {
             let menuBtn = document.createElement('div');
             menuBtn.setAttribute('class', 'dropbtn');
             menuBtn.textContent = menuele.menuId;
-            menuBtn.style.height = '20px';
+            menuBtn.style.height = '1rem';
             menuBtn.style.padding = "2px";
+            menuBtn.style.background = "#404040";
             menueleDiv.setAttribute('id', menuele.menuId);
             let divContent = document.createElement('div');
             divContent.setAttribute('class', 'dropdown-content');

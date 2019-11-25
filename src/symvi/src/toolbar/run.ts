@@ -52,6 +52,7 @@ export class Run{
                             data.tgt_node_id
                         );
         }
+        console.log(edges_data);
 
         return edges_data;
     }
@@ -81,6 +82,8 @@ export class Run{
                         );
         }
 
+        console.log(blocks_data);
+
         return blocks_data;
     }
 
@@ -94,7 +97,7 @@ export class Run{
                 body: JSON.stringify(send_data)
             });
             let data = await response.json();
-            let data_draw = JSROOT.parse(data);
+            let data_draw = JSROOT.parse(data[0]['data']);
             JSROOT.draw("properties", data_draw, "hist");
             return data;
     }

@@ -8,7 +8,7 @@ class Components:
         self.input_data = no_inputs * [None]
         self.output_data = no_outputs * [None]
 
-        self.output_ready = False
+        self.flag_executed = False
         self.connections_map = {k: None for k in range(no_inputs)}
 
     def getNoInputs(self):
@@ -25,6 +25,7 @@ class Components:
 
     def execute(self):
         print ('Must override this function in child')
+        self.setExecuted()
 
     def setInput(self, index, data):
         if index < self.no_inputs:
@@ -45,11 +46,11 @@ class Components:
         else:
             print("Error! index > no_outputs, must handle this")
 
-    def setOutputReady(self):
-        self.output_ready = True
+    def setExecuted(self):
+        self.flag_executed = True
 
-    def outputReady(self):
-        return self.output_ready
+    def executed(self):
+        return self.flag_executed
 
     def getId(self):
         return self.id

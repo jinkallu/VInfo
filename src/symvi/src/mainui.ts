@@ -40,8 +40,9 @@ export class MainUI {
         let menuBarDiv = document.createElement("div");
         menuBarDiv.style.position = "absolute";
         menuBarDiv.style.width = "100%";
-        menuBarDiv.style.height = "3em";
-        menuBarDiv.style.border = "solid black";
+        menuBarDiv.style.height = "2em";
+        //menuBarDiv.style.border = "solid black";
+        menuBarDiv.style.background = " #404040";
         menuBarDiv.setAttribute('id','menubar');
         this.body.appendChild(menuBarDiv);
         this.menu_bar.create(menuBarDiv);

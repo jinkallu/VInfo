@@ -13,7 +13,7 @@ class Formula(Components):
             x = self.input_data[0][i]
             y = sin(x) 
             data.append(y)
-            print(x, y)
+            #print(x, y)
         
         self.setOutput(0, data)
-        self.setOutputReady()
+        self.setExecuted()
