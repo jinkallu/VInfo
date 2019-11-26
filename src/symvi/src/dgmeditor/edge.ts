@@ -36,10 +36,19 @@ export class Edge{
         this.polyline.setAttribute("stroke", "blue");
         this.polyline.setAttribute("fill", "white");
         this.polyline.setAttribute("fill-opacity", "0");
-        this.polyline.setAttribute("pointer-events", "none");
+        if(!flag_temp){
+            this.polyline.setAttribute("pointer-events", "auto");
+        }
+        else{
+            this.polyline.setAttribute("pointer-events", "none");
+        }
         this.updatePoints();
 
         this.active = true;
+
+        this.polyline.addEventListener("mouseover", this.mouseOver); 
+        this.polyline.addEventListener("mouseout", this.mouseOut); 
+        this.polyline.addEventListener("contextmenu", this.delete); 
     }
 
     updatePoints(){
@@ -65,7 +74,26 @@ export class Edge{
         this.updatePoints();
     }
 
+    mouseOver = () =>{
+        this.polyline.setAttribute("stroke", "red");
+        this.polyline.setAttribute("stroke-width", "3");
+    }
+
+    mouseOut = () => {
+        this.polyline.setAttribute("stroke", "blue");
+        this.polyline.setAttribute("stroke-width", "1");
+    }
+
+    delete = (event:any) => {
+        event.preventDefault();
+        this.active = false;
+        this.polyline.parentNode.removeChild(this.polyline);
+        //console.log("delete");
+        // also reset the block nodes
+    }
+
     getPolyLine(){
+        //this.polyline.setAttribute("pointer-events", "auto");
         return this.polyline;
     }
 

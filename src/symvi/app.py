@@ -39,26 +39,33 @@ def es6_static(filename):
 def add():
     # Validate the request body contains JSON
     if request.is_json:
+        try:
+            # Parse the JSON into a Python dictionary
+            req = request.get_json()
 
-        # Parse the JSON into a Python dictionary
-        req = request.get_json()
+            # Print the dictionary
+            #print(len(req['edges']))
+            modelTree = ModelTree(req)
+            processTree = ProcessTree()
+            json = processTree.process(modelTree.getTree())
+            #makeTree(req)
 
-        # Print the dictionary
-        #print(len(req['edges']))
-        modelTree = ModelTree(req)
-        processTree = ProcessTree()
-        json = processTree.process(modelTree.getTree())
-        #makeTree(req)
+            # Return a string along with an HTTP status code
+            #return make_response(jsonify({"message": "JSON message recieved"}), 200)
+            msg = "Output generated successfully"
+            data = {'output': json, 'message': msg}
+            return make_response(jsonify(data))
 
-        # Return a string along with an HTTP status code
-        #return make_response(jsonify({"message": "JSON message recieved"}), 200)
-        return make_response(jsonify(json))
+        except:
+            msg = "There were errors, output could not be generated"
+            data = {'output': None, 'message': msg}
+            return make_response(jsonify(data))
 
     else:
-
         # The request body wasn't JSON so return a 400 HTTP status code
-        print ("Request was not JSON")
-        return make_response(jsonify({"message": "Request body must be JSON"}), 400)
+        msg = "Request body must be JSON"
+        data = {'output': None, 'message': msg}
+        return make_response(jsonify(data), 400)
     #return getF1()
 
 if __name__ == '__main__':

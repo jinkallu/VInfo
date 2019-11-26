@@ -12,9 +12,9 @@ export class MainUI {
         this.menu_bar = new MenuBar();
         this.tool_box = new ToolBox();
         this.design_area = new DesignArea();
-        this.tool_bar = new ToolBar(this.design_area);
-        this.properties = new Properties();
         this.console = new Console();
+        this.tool_bar = new ToolBar(this.design_area, this.console);
+        this.properties = new Properties();
     }
     createUI() {
         this.createMenuBar();

@@ -5,9 +5,11 @@ import JSROOT from 'JSROOT'
 export class Run{
     run_div:HTMLDivElement;
     design_area:any;
+    console_area:any;
 
-    constructor(_design_area:any){
+    constructor(_design_area:any, _console:any){
         this.design_area = _design_area;
+        this.console_area = _console;
 
         this.run_div = document.createElement("div");
         this.run_div.innerHTML = 'Run';
@@ -96,9 +98,13 @@ export class Run{
                 },
                 body: JSON.stringify(send_data)
             });
-            let data = await response.json();
-            let data_draw = JSROOT.parse(data[0]['data']);
-            JSROOT.draw("properties", data_draw, "hist");
-            return data;
+            let data:any = await response.json();
+            if (data['output'] !== null){
+                let data_draw = JSROOT.parse(data['output'][0]['data']);
+                JSROOT.draw("properties", data_draw, "hist");
+            }
+            this.console_area.innerHTML = data['message'];
+                
+                return data;
     }
 }

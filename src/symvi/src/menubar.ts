@@ -9,7 +9,7 @@ export class MenuBar {
     }
 
     create(menuBarDiv: HTMLDivElement) {
-        let mainDiv = document.getElementById('menubar');
+        let mainDiv = menuBarDiv;
         for (let menuele of this.menus) {
             let menueleDiv = document.createElement('div');
             menueleDiv.setAttribute('class', 'dropdown');

@@ -1,11 +1,12 @@
 import JSROOT from 'JSROOT';
 export class Run {
-    constructor(_design_area) {
+    constructor(_design_area, _console) {
         this.execute = () => {
             this.submit({ edges: this.createEdgesData(),
                 blocks: this.createBlocksData() });
         };
         this.design_area = _design_area;
+        this.console_area = _console;
         this.run_div = document.createElement("div");
         this.run_div.innerHTML = 'Run';
         this.run_div.style.background = 'red';
@@ -73,8 +74,11 @@ export class Run {
             body: JSON.stringify(send_data)
         });
         let data = await response.json();
-        let data_draw = JSROOT.parse(data[0]['data']);
-        JSROOT.draw("properties", data_draw, "hist");
+        if (data['output'] !== null) {
+            let data_draw = JSROOT.parse(data['output'][0]['data']);
+            JSROOT.draw("properties", data_draw, "hist");
+        }
+        this.console_area.innerHTML = data['message'];
         return data;
     }
 }

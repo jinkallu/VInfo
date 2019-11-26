@@ -3,7 +3,7 @@ import { Run } from './run'
 export class ToolBar{
     tool_bar_div:HTMLDivElement;
     run:Run;
-    constructor(design_area:any){
+    constructor(design_area:any, console:any){
         this.tool_bar_div = document.createElement("div");
         this.tool_bar_div.style.width = "100%";
         this.tool_bar_div.style.top = "10%";
@@ -11,7 +11,7 @@ export class ToolBar{
         this.tool_bar_div.style.border = "solid black";
         this.tool_bar_div.style.position = "absolute";
 
-        this.run = new Run(design_area);
+        this.run = new Run(design_area, console);
     }
 
     create(){
