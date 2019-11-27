@@ -3,7 +3,8 @@ import { ToolBox } from './toolbox/toolbox';
 import { MenuBar } from './menubar';
 import { ToolBar } from './toolbar/toolbar';
 import { DesignArea } from './dgmeditor/designarea';
-import { Properties } from './properties';
+//import { Properties } from './properties';
+import { IOPanel } from './iopanel/iopanel';
 import { Console } from './console'
 
 export class MainUI {
@@ -12,74 +13,62 @@ export class MainUI {
     tool_bar: ToolBar;
     tool_box: ToolBox;
     design_area: DesignArea;
-    properties: Properties;
+    //properties: Properties;
+    iopanel: IOPanel;
     console: Console;
 
     constructor(body: HTMLBodyElement) {
         this.body = body;
-        body.style.width = "100%";
-        body.style.height = "100%";
-        this.menu_bar = new MenuBar();
-        this.tool_box = new ToolBox();
-        this.design_area = new DesignArea();
-        this.console = new Console();
-        this.tool_bar = new ToolBar(this.design_area, this.console); // toolbar after designarea
-        this.properties = new Properties();
+        
+        this.menu_bar = new MenuBar("99%", "2em");
+        this.tool_box = new ToolBox("13%", "18%", "86%");
+
+
+        this.design_area = new DesignArea({"left": "19%", "top": "13%", "width": "62%", "height": "64%"});
+        this.console = new Console({'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%"});
+        this.tool_bar = new ToolBar("99%", "2em", "8%", this.design_area, this.console); // toolbar after designarea
+
+        this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "18%", "height": "80%"});
+        //this.properties = new Properties();
     }
 
     createUI() {
         this.createMenuBar();
         this.createToolBar();
         this.createDesignArea();
-        this.createProperties();
+        //this.createProperties();
         this.createToolBox();
         this.creatConsole();
+        this.createIOPanel();
     }
 
     createMenuBar() {
-        let menuBarDiv = document.createElement("div");
-        menuBarDiv.style.position = "absolute";
-        menuBarDiv.style.width = "100%";
-        menuBarDiv.style.height = "2em";
-        //menuBarDiv.style.border = "solid black";
-        menuBarDiv.style.background = " #404040";
-        menuBarDiv.setAttribute('id','menubar');
-        this.body.appendChild(menuBarDiv);
-        this.menu_bar.create(menuBarDiv);
+        let menubar_div = this.menu_bar.get();
+        this.body.appendChild(menubar_div);
     }
 
     createToolBar() {
-        this.body.appendChild(this.tool_bar.create());
+        let toolbar_div = this.tool_bar.get();
+        this.body.appendChild(toolbar_div);
     }
 
     createToolBox() {
-        let tool_box_div = document.createElement("div");
-        tool_box_div.style.position = "absolute";
-        tool_box_div.style.top = "20%";
-        tool_box_div.style.width = "18%";
-        tool_box_div.style.height = "80%";
-        tool_box_div.style.border = "solid black";
+        let tool_box_div = this.tool_box.get();
         this.body.appendChild(tool_box_div);
-        this.tool_box.create(tool_box_div);
     }
 
     createDesignArea() {
-        let design_area_div = document.createElement("div");
-        design_area_div.style.position = "absolute";
-        design_area_div.style.border = "solid black";
-        design_area_div.style.top = "20%";
-        design_area_div.style.width = "60%";
-        design_area_div.style.left = "20%";
-        design_area_div.style.height = "60%";
-        design_area_div.setAttribute('id','designArea');
-        //design_area_div.innerHTML = "DesignArea";
-        
+        let design_area_div = this.design_area.get();        
         this.body.appendChild(design_area_div);
-        this.design_area.create(design_area_div);
+    }
+
+    createIOPanel(){
+        let iopanel_div = this.iopanel.get();
+        this.body.appendChild(iopanel_div);
     }
 
     createProperties() {
-        let properties_div = document.createElement("div");
+        /*let properties_div = document.createElement("div");
         properties_div.setAttribute('id','properties');
         properties_div.style.position = "absolute";
         properties_div.style.border = "solid black";
@@ -105,19 +94,11 @@ export class MainUI {
         properties_div.appendChild(itemDiv);
         properties_div.appendChild(propDiv);
         this.body.appendChild(properties_div);
-        this.properties.create(properties_div);
+        this.properties.create(properties_div);*/
     }
 
     creatConsole(){
-        let console_div = document.createElement("div");
-        console_div.style.position = "absolute";
-        console_div.style.border = "solid black";
-        console_div.style.top = "81%";
-        console_div.style.width = "60%";
-        console_div.style.left = "20%";
-        console_div.style.height = "19%";
-        console_div.setAttribute('id','console');
-        console_div.innerHTML = "Console";
+        let console_div = this.console.get();
         this.body.appendChild(console_div);
     }
 }

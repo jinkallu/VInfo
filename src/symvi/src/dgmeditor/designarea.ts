@@ -4,11 +4,21 @@ import { CategoryApi } from '../Api/categoryApi';
 
 
 export class DesignArea{
+    design_area_div:HTMLDivElement;
     svg:any;
     edges:Edges;
     blocks:Block[];
 
-    constructor(){
+    constructor(pos:any){
+        this.design_area_div = document.createElement("div");
+        this.design_area_div.style.position = "absolute";
+        this.design_area_div.style.border = "solid black";
+        this.design_area_div.style.top = pos.top;
+        this.design_area_div.style.width = pos.width;
+        this.design_area_div.style.left = pos.left;
+        this.design_area_div.style.height = pos.height;
+        this.design_area_div.setAttribute('id','designArea');
+
         this.svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
         this.svg.setAttribute("height", '100%');
         this.svg.setAttribute("width", '100%');
@@ -25,11 +35,16 @@ export class DesignArea{
         this.svg.addEventListener("dragover", this.dragOver);  
         this.svg.addEventListener("drop", this.drop); 
 
+        this.create();
+
     }
 
-    create(desing_area:any){
-        let div:HTMLDivElement = desing_area;
-        div.appendChild(this.svg);
+    create(){
+        this.design_area_div.appendChild(this.svg);
+    }
+
+    get(){
+        return this.design_area_div;
     }
 
     addBlock(pos:any, inputs:number, outputs:number, name:string){

@@ -7,14 +7,27 @@
 import { Categories } from './categories';
 
 export class ToolBox {
+    tool_box_div:HTMLDivElement;
     categories:Categories;
 
-    constructor(){
+    constructor(top:any, width:any, height:any){
+        this.tool_box_div = document.createElement("div");
+        this.tool_box_div.style.position = "absolute";
+        this.tool_box_div.style.top = top;
+        this.tool_box_div.style.width = width;
+        this.tool_box_div.style.height = height;
+        this.tool_box_div.style.background = "#808080";
+
         this.categories = new Categories();
+        this.create();
     }
 
-    create(parentToolBox: HTMLDivElement) {
-        parentToolBox.appendChild(this.categories.create());
+    create() {
+        this.tool_box_div.appendChild(this.categories.create());
+    }
+
+    get(){
+        return this.tool_box_div;
     }
 }
 /*

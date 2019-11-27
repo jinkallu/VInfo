@@ -3,13 +3,28 @@ import { MenuApi } from './Api/menuApi';
 import { Menu } from './models/menu';
 
 export class MenuBar {
+    menubar_div:HTMLDivElement;
     menus: Menu[];
-    constructor() {
+
+    constructor(width:any, height:any) {
+
+        this.menubar_div = document.createElement("div");
+        this.menubar_div.style.position = "absolute";
+        this.menubar_div.style.width = width;
+        this.menubar_div.style.height = height;
+        this.menubar_div.style.background = " #404040";
+        this.menubar_div.setAttribute('id','menubar');
+
         this.menus = MenuApi.getMenus();
+
+        this.create();
+    }
+    
+    get(){
+        return this.menubar_div;
     }
 
-    create(menuBarDiv: HTMLDivElement) {
-        let mainDiv = menuBarDiv;
+    create() {
         for (let menuele of this.menus) {
             let menueleDiv = document.createElement('div');
             menueleDiv.setAttribute('class', 'dropdown');
@@ -33,7 +48,7 @@ export class MenuBar {
                 aele.innerText = menuItem;
                 divContent.appendChild(aele);
             }
-            mainDiv.appendChild(menueleDiv);
+            this.menubar_div.appendChild(menueleDiv);
         }
     }
 }
