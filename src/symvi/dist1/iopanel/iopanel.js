@@ -1,3 +1,4 @@
+import { IOControl } from './iocontrol';
 export class IOPanel {
     constructor(pos) {
         this.mouseClick = (evt) => {
@@ -20,14 +21,18 @@ export class IOPanel {
             }
         };
         this.mouseMoveW = (evt) => {
-            const width = this.original_width - (evt.pageX - this.original_mouse_x);
-            if (width > this.minimum_size) {
+            let x_diff = evt.pageX - this.original_mouse_x;
+            const width = this.original_width - x_diff;
+            if (width > this.minimum_size && width < this.maximum_size) {
                 this.iopanel_div.style.width = width + 'px';
-                this.iopanel_div.style.left = this.original_x + (evt.pageX - this.original_mouse_x) + 'px';
+                let left = this.original_x + x_diff;
+                this.iopanel_div.style.left = left + 'px';
+                this.iopanel_div.dispatchEvent(new CustomEvent("resize", {
+                    detail: { left: left }
+                }));
             }
         };
         this.iopanel_div = document.createElement("div");
-        this.iopanel_div.setAttribute('id', 'properties');
         this.iopanel_div.style.position = "absolute";
         this.iopanel_div.style.border = "solid black";
         this.iopanel_div.style.top = pos.top;
@@ -35,6 +40,9 @@ export class IOPanel {
         this.iopanel_div.style.left = pos.left;
         this.iopanel_div.style.height = pos.height;
         this.minimum_size = 100;
+        this.maximum_size = 1000;
+        this.iocontrol = new IOControl();
+        this.iopanel_div.appendChild(this.iocontrol.get());
         this.iopanel_div.addEventListener("mousemove", this.mouseMove);
         this.iopanel_div.addEventListener("mousedown", this.mouseClick);
         window.addEventListener("mouseup", this.mouseUp);

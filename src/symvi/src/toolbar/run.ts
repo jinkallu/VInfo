@@ -101,7 +101,7 @@ export class Run{
             let data:any = await response.json();
             if (data['output'] !== null){
                 let data_draw = JSROOT.parse(data['output'][0]['data']);
-                JSROOT.draw("properties", data_draw, "hist");
+                JSROOT.draw("outputpanel", data_draw, "hist");
             }
             this.console_area.innerHTML = data['message'];
                 

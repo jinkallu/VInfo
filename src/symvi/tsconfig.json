@@ -17,7 +17,7 @@
          "./src/main.ts",
          "./src/mainui.ts",
          "./src/menubar.ts",
-         "./src/properties.ts",
+         "src/iopanel/properties.ts",
          "src/toolbar/toolbar.ts",
          "./src/Api/categoryApi.ts",
          "./src/models/category.ts",

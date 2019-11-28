@@ -6,7 +6,6 @@ import { DesignArea } from './dgmeditor/designarea';
 //import { Properties } from './properties';
 import { IOPanel } from './iopanel/iopanel';
 import { Console } from './console'
-import { Properties } from './properties';
 
 export class MainUI {
     body: HTMLBodyElement;
@@ -17,6 +16,7 @@ export class MainUI {
     //properties: Properties;
     iopanel: IOPanel;
     console: Console;
+
 
     constructor(body: HTMLBodyElement) {
         this.body = body;
@@ -29,7 +29,7 @@ export class MainUI {
         this.console = new Console({'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%"});
         this.tool_bar = new ToolBar("99%", "2em", "8%", this.design_area, this.console); // toolbar after designarea
 
-        this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "18%", "height": "80%"});
+        this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "17%", "height": "86%"});
         //this.properties = new Properties();
     }
 
@@ -66,11 +66,13 @@ export class MainUI {
     createIOPanel(){
         let iopanel_div = this.iopanel.get();
         this.body.appendChild(iopanel_div);
+
+        iopanel_div.addEventListener("resize", this.resize);
     }
 
     createProperties() {
-        let property:Properties=Properties.getInstance();
-        this.body.appendChild(property.create() );
+        //let property:Properties=Properties.getInstance();
+        //this.body.appendChild(property.create() );
 
 
 
@@ -106,5 +108,9 @@ export class MainUI {
     creatConsole(){
         let console_div = this.console.get();
         this.body.appendChild(console_div);
+    }
+
+    resize = (evt:any) => {
+        this.design_area.setRight(evt.detail.left);
     }
 }

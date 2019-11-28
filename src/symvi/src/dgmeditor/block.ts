@@ -2,7 +2,7 @@ import { Node } from './node';
 import { Edges } from './edges';
 import { DesignApi } from '../Api/designApi';
 import { Component } from '../models/component';
-import {Properties} from '../properties';
+import {Properties} from '../iopanel/properties';
 
 // import { Script } from 'vm';
 

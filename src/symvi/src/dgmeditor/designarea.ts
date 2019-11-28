@@ -5,7 +5,7 @@ import { CategoryItem } from '../models/categoryItem';
 import { Id } from './id';
 import{Component} from '../models/component';
 import{DesignApi} from '../Api/designApi';
-import {Properties} from '../properties';
+import {Properties} from '../iopanel/properties';
 
 
 
@@ -135,5 +135,10 @@ export class DesignArea{
 
     getEdges(){
         return this.edges;
+    }
+
+    setRight(right:number){
+        this.design_area_div.style.right = right.toFixed() + 'px';
+        console.log("Setting design area right" + right);
     }
 }

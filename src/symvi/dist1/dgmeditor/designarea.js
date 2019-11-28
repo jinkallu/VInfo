@@ -4,7 +4,7 @@ import { CategoryApi } from '../Api/categoryApi';
 import { Id } from './id';
 import { Component } from '../models/component';
 import { DesignApi } from '../Api/designApi';
-import { Properties } from '../properties';
+import { Properties } from '../iopanel/properties';
 export class DesignArea {
     constructor(pos) {
         this.mouseMove = (event) => {
@@ -86,6 +86,10 @@ export class DesignArea {
     }
     getEdges() {
         return this.edges;
+    }
+    setRight(right) {
+        this.design_area_div.style.right = right.toFixed() + 'px';
+        console.log("Setting design area right" + right);
     }
 }
 //# sourceMappingURL=designarea.js.map

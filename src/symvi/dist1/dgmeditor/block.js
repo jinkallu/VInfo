@@ -1,5 +1,5 @@
 import { Node } from './node';
-import { Properties } from '../properties';
+import { Properties } from '../iopanel/properties';
 export class Block {
     constructor(svg, pos, _id, _inputs, _outputs, _edges, _name, itemId) {
         this.dragStart = (event) => {

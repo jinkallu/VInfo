@@ -1,8 +1,8 @@
-import { Histogram } from './histogram';
-import { ItemProp } from './models/itemProp';
-import { PropertyItem } from './propertyItem';
+import { Histogram } from '../histogram';
+import { ItemProp } from '../models/itemProp';
+import { PropertyItem } from '../propertyItem';
 
-import { DesignApi } from './Api/designApi';
+import { DesignApi } from '../Api/designApi';
 
 export class Properties {
      private static instance: Properties;
@@ -23,10 +23,10 @@ export class Properties {
           this.properties_div = document.createElement("div");
           this.properties_div.setAttribute('id', 'properties');
           this.properties_div.style.position = "absolute";
-          this.properties_div.style.border = "solid black";
-          this.properties_div.style.top = "20%";
-          this.properties_div.style.width = "18%";
-          this.properties_div.style.left = "82%";
+          //this.properties_div.style.border = "solid black";
+          this.properties_div.style.top = "7%";
+          this.properties_div.style.width = "100%";
+          //this.properties_div.style.left = "82%";
           this.properties_div.style.minHeight = "80%";
 
 

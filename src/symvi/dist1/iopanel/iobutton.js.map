@@ -1,0 +1,1 @@
+{"version":3,"file":"iobutton.js","sourceRoot":"","sources":["../../src/iopanel/iobutton.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,QAAQ;IAEjB,YAAY,IAAW;QACnB,IAAI,CAAC,UAAU,GAAG,QAAQ,CAAC,aAAa,CAAC,QAAQ,CAAC,CAAC;QACnD,IAAI,CAAC,UAAU,CAAC,SAAS,GAAG,IAAI,CAAC;IACrC,CAAC;IAED,GAAG;QACC,OAAO,IAAI,CAAC,UAAU,CAAC;IAC3B,CAAC;CACJ"}
