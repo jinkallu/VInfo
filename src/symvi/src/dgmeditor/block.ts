@@ -3,6 +3,8 @@ import { Edges } from './edges';
 import { Id } from './id';
 import { DesignApi } from '../Api/designApi';
 import { Component } from '../models/component';
+import {Properties} from '../properties';
+
 // import { Script } from 'vm';
 
 
@@ -23,12 +25,9 @@ export class Block {
     type: string;
     itemId: string;
     component: Component;
+    property:Properties;
 
-    onClick() {
-        console.log("printing itemid");
-        console.log(this.itemId);
-        console.log(this.component);
-    }
+    
 
     constructor(svg: any, pos: any, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string) {
         this.id = Id.getID();
@@ -46,6 +45,8 @@ export class Block {
 
         this.name = _name;
         this.itemId = itemId;
+        this.component = new Component(this.id, this.itemId);
+        this.property=Properties.getInstance();
 
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
@@ -57,6 +58,8 @@ export class Block {
         this.rect.setAttribute("x", pos.x);
         this.rect.setAttribute("y", pos.y);
 
+
+
         // text
         this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         this.text.textContent = _name;
@@ -67,30 +70,33 @@ export class Block {
         this.rect.addEventListener("mousemove", this.dragging);
         this.rect.addEventListener("mouseup", this.dragStop);
         this.rect.addEventListener("mouseleave", this.dragStop);
-        this.rect.addEventListener("click", this.onClick);
-
-        this.component = new Component(this.id, this.itemId);
-
-        console.log(this.component);
-
-
-
+        
+        
+        // console.log(this.component);
+        
+        
+        
         //this.rect.onmousedown = this.dragStart;
         //this.rect.onmousemove = this.dragging;
-
+        
         this.group.appendChild(this.rect);
         this.group.appendChild(this.text);
-
+        
         this.drag_started = false;
-
+        
         this.addInputs();
         this.addOutputs();
+        // this.rect.addEventListener("click", this.onClick);
     }
 
     get() {
         return this.group;
     }
-    
+    onClick() {
+        console.log("printing itemid");
+        console.log(this.itemId);
+        console.log(this.component);
+    }
 
     calculateNodePos(io: boolean) {
         let ios: number = 0;
@@ -191,6 +197,8 @@ export class Block {
         //console.log("Drag Start" + event.pageX + " " + event.pageY);
         if (this.drag_started) {
             this.drag_started = false;
+            console.log(this.component);
+            this.property.addItems(this.component.itemProps,this.component.instanceId);
         }
     }
 
