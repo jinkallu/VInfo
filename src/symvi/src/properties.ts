@@ -2,6 +2,8 @@ import { Histogram } from './histogram';
 import { ItemProp } from './models/itemProp';
 import { PropertyItem } from './propertyItem';
 
+import { DesignApi } from './Api/designApi';
+
 export class Properties {
      private static instance: Properties;
      propDiv: HTMLDivElement;
@@ -57,7 +59,7 @@ export class Properties {
           console.log()
      }
 
-     addProperties(itemProp: ItemProp) {
+     addProperties(itemProp: ItemProp, instanceid: number) {
           let divEl = document.createElement('div');
           divEl.style.display = "flex";
           divEl.style.justifyContent = "space-between";
@@ -67,7 +69,10 @@ export class Properties {
           let inEl = document.createElement('input');
           inEl.setAttribute('id', itemProp.propId);
           inEl.setAttribute('placeholder', itemProp.propName);
-          inEl.addEventListener('change', function () { console.log(this.value); });
+          inEl.addEventListener('change', function () {
+               console.log(this.value);
+               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+          });
           let lblEl = document.createElement('label');
           lblEl.textContent = itemProp.propName.toUpperCase();
           switch (itemProp.propType) {
@@ -99,7 +104,7 @@ export class Properties {
           this.propDiv.innerHTML = null;
 
           for (let itemProp of itemProps) {
-               this.propDiv.appendChild(this.addProperties(itemProp));
+               this.propDiv.appendChild(this.addProperties(itemProp, instanceid));
           }
           // propDiv.textContent = catItemId;
           // this.properties_div.appendChild(itemNameDiv);

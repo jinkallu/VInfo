@@ -1,6 +1,5 @@
 import { Node } from './node';
 import { Edges } from './edges';
-import { Id } from './id';
 import { DesignApi } from '../Api/designApi';
 import { Component } from '../models/component';
 import {Properties} from '../properties';
@@ -29,8 +28,8 @@ export class Block {
 
     
 
-    constructor(svg: any, pos: any, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string) {
-        this.id = Id.getID();
+    constructor(svg: any, pos: any,_id:number, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string) {
+        this.id = _id;
         this.type = 'Block';
 
         this.inputs = _inputs;
@@ -45,7 +44,7 @@ export class Block {
 
         this.name = _name;
         this.itemId = itemId;
-        this.component = new Component(this.id, this.itemId);
+        // this.component = new Component(this.id, this.itemId);
         this.property=Properties.getInstance();
 
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -197,8 +196,8 @@ export class Block {
         //console.log("Drag Start" + event.pageX + " " + event.pageY);
         if (this.drag_started) {
             this.drag_started = false;
-            console.log(this.component);
-            this.property.addItems(this.component.itemProps,this.component.instanceId);
+            // console.log(this.component);
+            // this.property.addItems(this.component.itemProps,this.component.instanceId);
         }
     }
 
