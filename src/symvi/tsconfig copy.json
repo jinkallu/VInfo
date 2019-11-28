@@ -1,0 +1,30 @@
+{
+     "compilerOptions": {
+
+        "module": "es6",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outDir": "../src/symvi/dist1",
+        "target": "es6"
+     },
+     "files": [
+        
+         "src/dgmeditor/node.ts",
+         "src/dgmeditor/block.ts",
+         "src/dgmeditor/designarea.ts",
+         "./src/main.ts",
+         "./src/mainui.ts",
+         "./src/menubar.ts",
+         "./src/properties.ts",
+         "src/toolbar/toolbar.ts",
+         "./src/Api/categoryApi.ts",
+         "./src/models/category.ts",
+         "src/toolbox/toolbox.ts"
+     ],
+     "typesRoots": [
+        "./typings",
+        "../node_modules/@types"
+      ]
+ }

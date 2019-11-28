@@ -6,6 +6,7 @@ import { DesignArea } from './dgmeditor/designarea';
 //import { Properties } from './properties';
 import { IOPanel } from './iopanel/iopanel';
 import { Console } from './console'
+import { Properties } from './properties';
 
 export class MainUI {
     body: HTMLBodyElement;
@@ -36,7 +37,7 @@ export class MainUI {
         this.createMenuBar();
         this.createToolBar();
         this.createDesignArea();
-        //this.createProperties();
+        this.createProperties();
         this.createToolBox();
         this.creatConsole();
         this.createIOPanel();
@@ -68,6 +69,11 @@ export class MainUI {
     }
 
     createProperties() {
+        let property:Properties=Properties.getInstance();
+        this.body.appendChild(property.create() );
+
+
+
         /*let properties_div = document.createElement("div");
         properties_div.setAttribute('id','properties');
         properties_div.style.position = "absolute";
