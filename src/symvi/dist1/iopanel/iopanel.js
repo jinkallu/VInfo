@@ -2,27 +2,29 @@ export class IOPanel {
     constructor(pos) {
         this.mouseClick = (evt) => {
             if (this.resizingPos(evt)) {
-                this.flag_resizing = true;
-                this.ref_resize = evt.pageX;
-                console.log("Resizing started");
+                evt.preventDefault();
+                window.addEventListener("mousemove", this.mouseMoveW);
+                this.original_width = parseFloat(getComputedStyle(this.iopanel_div, null).getPropertyValue('width').replace('px', ''));
+                this.original_x = this.iopanel_div.getBoundingClientRect().left;
+                this.original_mouse_x = evt.pageX;
             }
         };
         this.mouseUp = () => {
-            if (this.flag_resizing) {
-                this.flag_resizing = false;
-            }
+            window.removeEventListener('mousemove', this.mouseMoveW);
         };
         this.mouseMove = (evt) => {
             if (this.resizingPos(evt)) {
                 this.iopanel_div.style.cursor = "e-resize";
-                if (this.flag_resizing) {
-                    console.log("Resizing");
-                    let new_pos = parseInt(this.iopanel_div.style.left) + evt.pageX - this.ref_resize;
-                    this.iopanel_div.style.left = new_pos.toString() + "%";
-                }
             }
             else {
                 this.iopanel_div.style.cursor = "default";
+            }
+        };
+        this.mouseMoveW = (evt) => {
+            const width = this.original_width - (evt.pageX - this.original_mouse_x);
+            if (width > this.minimum_size) {
+                this.iopanel_div.style.width = width + 'px';
+                this.iopanel_div.style.left = this.original_x + (evt.pageX - this.original_mouse_x) + 'px';
             }
         };
         this.iopanel_div = document.createElement("div");
@@ -33,12 +35,10 @@ export class IOPanel {
         this.iopanel_div.style.width = pos.width;
         this.iopanel_div.style.left = pos.left;
         this.iopanel_div.style.height = pos.height;
-        this.flag_resizing = false;
-        this.ref_resize = 0;
+        this.minimum_size = 100;
         this.iopanel_div.addEventListener("mousemove", this.mouseMove);
-        this.iopanel_div.addEventListener("mousedown", this.mouseClick);
-        this.iopanel_div.addEventListener("mouseup", this.mouseUp);
-        this.iopanel_div.addEventListener("mouseout", this.mouseUp);
+        window.addEventListener("mousedown", this.mouseClick);
+        window.addEventListener("mouseup", this.mouseUp);
     }
     get() {
         return this.iopanel_div;
