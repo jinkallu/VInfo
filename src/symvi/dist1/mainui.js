@@ -4,6 +4,7 @@ import { ToolBar } from './toolbar/toolbar';
 import { DesignArea } from './dgmeditor/designarea';
 import { IOPanel } from './iopanel/iopanel';
 import { Console } from './console';
+import { Properties } from './properties';
 export class MainUI {
     constructor(body) {
         this.body = body;
@@ -18,6 +19,7 @@ export class MainUI {
         this.createMenuBar();
         this.createToolBar();
         this.createDesignArea();
+        this.createProperties();
         this.createToolBox();
         this.creatConsole();
         this.createIOPanel();
@@ -43,6 +45,8 @@ export class MainUI {
         this.body.appendChild(iopanel_div);
     }
     createProperties() {
+        let property = Properties.getInstance();
+        this.body.appendChild(property.create());
     }
     creatConsole() {
         let console_div = this.console.get();

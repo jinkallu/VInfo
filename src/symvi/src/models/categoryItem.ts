@@ -1,8 +1,7 @@
 export class CategoryItem{
-     drag:boolean;
+    
      constructor( private  _categoryId: string, private _catItemId: string, private _catItemName: string,
-                  private _cateUrl: string, private _inputs:number, private _outputs:number){
-          this.drag = false;
+                  private _cateUrl: string, private _inputs:number, private _outputs:number,private  _drag:boolean=false){
      }
 
      get categoryId(){
@@ -22,5 +21,8 @@ export class CategoryItem{
 
      get outputs(){
           return this._outputs;
+     }
+     get drag(){
+          return this._drag;
      }
 }

@@ -1,5 +1,5 @@
 export class ItemProp {
-    constructor(_catItemId, _propId, _propName, _propType, _propDefVal = null, _propOrder, _propReqd) {
+    constructor(_catItemId, _propId, _propName, _propType, _propDefVal, _propOrder, _propReqd) {
         this._catItemId = _catItemId;
         this._propId = _propId;
         this._propName = _propName;
@@ -20,14 +20,20 @@ export class ItemProp {
     get propType() {
         return this._propType;
     }
-    get propDefVal() {
-        return this._propDefVal;
-    }
     get propOrder() {
         return this._propOrder;
     }
     get propReqd() {
         return this._propReqd;
+    }
+    get propDefVal() {
+        return this._propDefVal;
+    }
+    get propVal() {
+        return this._propVal;
+    }
+    set propVal(val) {
+        this._propVal = val;
     }
 }
 //# sourceMappingURL=itemProp.js.map

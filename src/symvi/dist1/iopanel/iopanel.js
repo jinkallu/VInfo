@@ -2,7 +2,6 @@ export class IOPanel {
     constructor(pos) {
         this.mouseClick = (evt) => {
             if (this.resizingPos(evt)) {
-                evt.preventDefault();
                 window.addEventListener("mousemove", this.mouseMoveW);
                 this.original_width = parseFloat(getComputedStyle(this.iopanel_div, null).getPropertyValue('width').replace('px', ''));
                 this.original_x = this.iopanel_div.getBoundingClientRect().left;
@@ -37,7 +36,7 @@ export class IOPanel {
         this.iopanel_div.style.height = pos.height;
         this.minimum_size = 100;
         this.iopanel_div.addEventListener("mousemove", this.mouseMove);
-        window.addEventListener("mousedown", this.mouseClick);
+        this.iopanel_div.addEventListener("mousedown", this.mouseClick);
         window.addEventListener("mouseup", this.mouseUp);
     }
     get() {

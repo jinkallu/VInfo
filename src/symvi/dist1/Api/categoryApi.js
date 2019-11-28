@@ -11,9 +11,9 @@ export class CategoryApi {
             })];
     }
     static getCategoryItemByItemId(catItemId) {
-        return { ...this.categoryItems.find(i => {
-                return i.catItemId === catItemId;
-            }) };
+        return this.categoryItems.find(i => {
+            return i.catItemId === catItemId;
+        });
     }
     static getItemPropsByItemId(catItemId) {
         return [...this.categoryProps.filter(i => {

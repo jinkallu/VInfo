@@ -54,9 +54,9 @@ export class CategoryApi {
      }
 
      static getCategoryItemByItemId(catItemId: string) {
-          return {...this.categoryItems.find(i => {
+          return this.categoryItems.find(i => {
                return i.catItemId === catItemId;
-          })};
+          });
      }
 
      static getItemPropsByItemId(catItemId: string){

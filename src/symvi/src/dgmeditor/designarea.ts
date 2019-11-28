@@ -1,6 +1,12 @@
 import {Block } from './block';
 import {Edges } from './edges';
 import { CategoryApi } from '../Api/categoryApi';
+import { CategoryItem } from '../models/categoryItem';
+import { Id } from './id';
+import{Component} from '../models/component';
+import{DesignApi} from '../Api/designApi';
+import {Properties} from '../properties';
+
 
 
 export class DesignArea{
@@ -8,6 +14,9 @@ export class DesignArea{
     svg:any;
     edges:Edges;
     blocks:Block[];
+    catItem:CategoryItem;
+    component:Component;
+    properties:Properties;
 
     constructor(pos:any){
         this.design_area_div = document.createElement("div");
@@ -36,6 +45,7 @@ export class DesignArea{
         this.svg.addEventListener("drop", this.drop); 
 
         this.create();
+        this.properties=Properties.getInstance();
 
     }
 
@@ -47,10 +57,19 @@ export class DesignArea{
         return this.design_area_div;
     }
 
-    addBlock(pos:any, inputs:number, outputs:number, name:string){
-        let rect = new Block(this.svg, pos, inputs, outputs, this.edges, name);
+    addBlock(pos:any,id:number, inputs:number, outputs:number, name:string,itemId:string){
+        let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
+        this.component = new Component(id, itemId);
+
+        DesignApi.addComponent(this.component);
+        this.properties.addItems(this.component.itemProps,id);
+        
+
+        console.log("in addblock");
+        console.log(DesignApi.getComponents());
+
     }
 
     mouseMove = (event: MouseEvent) => {
@@ -84,12 +103,18 @@ export class DesignArea{
         //console.log("Drop");
         //if ( event.target.className === "flex-elem" ) {
             let item_id = event.dataTransfer.getData("Text");
+            console.log("item_id");
+            console.log(item_id);
 
-            let cat_item:any = CategoryApi.getCategoryItemByItemId(item_id);
-            //console.log(cat_item);
-            let inputs = cat_item._inputs;
-            let outputs = cat_item._outputs;
-            let name = cat_item._catItemName;
+             let cat_item:CategoryItem = CategoryApi.getCategoryItemByItemId(item_id);
+            console.log(cat_item.inputs);
+            let inputs = cat_item.inputs;
+            let outputs = cat_item.outputs;
+            let name = cat_item.categoryName;
+            let itemId=cat_item.catItemId;
+
+
+
 
             //console.log(inputs + " " + outputs);
 
@@ -97,8 +122,10 @@ export class DesignArea{
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
+            
 
-            this.addBlock({ x: x, y: y }, inputs, outputs, name);
+            this.addBlock({ x: x, y: y },Id.getID(), inputs, outputs, name,itemId);
+
         //}
     }
 

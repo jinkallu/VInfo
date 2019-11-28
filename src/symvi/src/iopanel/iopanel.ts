@@ -22,7 +22,7 @@ export class IOPanel{
         this.minimum_size = 100;
 
         this.iopanel_div.addEventListener("mousemove", this.mouseMove);
-        window.addEventListener("mousedown", this.mouseClick); 
+        this.iopanel_div.addEventListener("mousedown", this.mouseClick); 
         window.addEventListener("mouseup", this.mouseUp);
   
         //this.iopanel_div.addEventListener("mousedown", this.mouseClick); 
@@ -37,7 +37,7 @@ export class IOPanel{
 
     mouseClick = (evt: MouseEvent) => {
         if(this.resizingPos(evt)){
-            evt.preventDefault();
+            //evt.preventDefault();
 
             window.addEventListener("mousemove", this.mouseMoveW); 
 

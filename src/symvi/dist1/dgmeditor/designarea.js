@@ -1,6 +1,10 @@
 import { Block } from './block';
 import { Edges } from './edges';
 import { CategoryApi } from '../Api/categoryApi';
+import { Id } from './id';
+import { Component } from '../models/component';
+import { DesignApi } from '../Api/designApi';
+import { Properties } from '../properties';
 export class DesignArea {
     constructor(pos) {
         this.mouseMove = (event) => {
@@ -25,14 +29,18 @@ export class DesignArea {
         this.drop = (event) => {
             event.preventDefault();
             let item_id = event.dataTransfer.getData("Text");
+            console.log("item_id");
+            console.log(item_id);
             let cat_item = CategoryApi.getCategoryItemByItemId(item_id);
-            let inputs = cat_item._inputs;
-            let outputs = cat_item._outputs;
-            let name = cat_item._catItemName;
+            console.log(cat_item.inputs);
+            let inputs = cat_item.inputs;
+            let outputs = cat_item.outputs;
+            let name = cat_item.categoryName;
+            let itemId = cat_item.catItemId;
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
-            this.addBlock({ x: x, y: y }, inputs, outputs, name);
+            this.addBlock({ x: x, y: y }, Id.getID(), inputs, outputs, name, itemId);
         };
         this.design_area_div = document.createElement("div");
         this.design_area_div.style.position = "absolute";
@@ -55,6 +63,7 @@ export class DesignArea {
         this.svg.addEventListener("dragover", this.dragOver);
         this.svg.addEventListener("drop", this.drop);
         this.create();
+        this.properties = Properties.getInstance();
     }
     create() {
         this.design_area_div.appendChild(this.svg);
@@ -62,10 +71,15 @@ export class DesignArea {
     get() {
         return this.design_area_div;
     }
-    addBlock(pos, inputs, outputs, name) {
-        let rect = new Block(this.svg, pos, inputs, outputs, this.edges, name);
+    addBlock(pos, id, inputs, outputs, name, itemId) {
+        let rect = new Block(this.svg, pos, id, inputs, outputs, this.edges, name, itemId);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
+        this.component = new Component(id, itemId);
+        DesignApi.addComponent(this.component);
+        this.properties.addItems(this.component.itemProps, id);
+        console.log("in addblock");
+        console.log(DesignApi.getComponents());
     }
     getBlocks() {
         return this.blocks;

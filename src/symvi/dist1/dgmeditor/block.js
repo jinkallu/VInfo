@@ -1,7 +1,7 @@
 import { Node } from './node';
-import { Id } from './id';
+import { Properties } from '../properties';
 export class Block {
-    constructor(svg, pos, _inputs, _outputs, _edges, _name) {
+    constructor(svg, pos, _id, _inputs, _outputs, _edges, _name, itemId) {
         this.dragStart = (event) => {
             this.drag_started = true;
         };
@@ -16,7 +16,7 @@ export class Block {
                 this.setPosition(pos.x, pos.y);
             }
         };
-        this.id = Id.getID();
+        this.id = _id;
         this.type = 'Block';
         this.inputs = _inputs;
         this.outputs = _outputs;
@@ -25,6 +25,8 @@ export class Block {
         this.input_nodes = [];
         this.output_nodes = [];
         this.name = _name;
+        this.itemId = itemId;
+        this.property = Properties.getInstance();
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         this.rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.rect.setAttribute("width", "60");
@@ -49,6 +51,11 @@ export class Block {
     }
     get() {
         return this.group;
+    }
+    onClick() {
+        console.log("printing itemid");
+        console.log(this.itemId);
+        console.log(this.component);
     }
     calculateNodePos(io) {
         let ios = 0;
