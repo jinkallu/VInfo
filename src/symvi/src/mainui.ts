@@ -114,5 +114,6 @@ export class MainUI {
 
     resize = (evt:any) => {
         this.design_area.setRight(evt.detail.left);
+        this.console.setRight(evt.detail.left);
     }
 }

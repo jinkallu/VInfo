@@ -136,8 +136,8 @@ export class DesignArea{
     }
 
     setRight(right:number){
-        this.design_area_div.style.right = right.toFixed() + 'px';
-        console.log("Setting design area right" + right);
+        let width = right - this.design_area_div.getBoundingClientRect().left;
+        this.design_area_div.style.width = width + 'px';
     }
 
     onClick = (evt:any) => {

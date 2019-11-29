@@ -13,5 +13,9 @@ export class Console {
     get() {
         return this.console_div;
     }
+    setRight(right) {
+        let width = right - this.console_div.getBoundingClientRect().left;
+        this.console_div.style.width = width + 'px';
+    }
 }
 //# sourceMappingURL=console.js.map

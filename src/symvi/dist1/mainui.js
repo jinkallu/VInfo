@@ -8,6 +8,7 @@ export class MainUI {
     constructor(body) {
         this.resize = (evt) => {
             this.design_area.setRight(evt.detail.left);
+            this.console.setRight(evt.detail.left);
         };
         this.body = body;
         this.menu_bar = new MenuBar("99%", "2em");
