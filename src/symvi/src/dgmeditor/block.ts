@@ -70,7 +70,7 @@ export class Block {
         this.rect.addEventListener("mouseup", this.dragStop);
         this.rect.addEventListener("mouseleave", this.dragStop);
 
-        this.rect.addEventListener("click",null, this.onClick,this.id );
+        this.rect.addEventListener("click", this.onClick);
 
         
         
@@ -96,14 +96,12 @@ export class Block {
     get() {
         return this.group;
     }
-    onClick(event:MouseEvent, id:string) {
 
-        // this.rect.dispatchEvent(new CustomEvent("resize", {
-        //     detail: {id }
-        //   }));
-
-
-        
+    onClick = () => {
+        this.rect.dispatchEvent(new CustomEvent("block_clicked", {
+            bubbles: true,
+            detail: { id:  this.id}
+          }));
     }
 
     calculateNodePos(io: boolean) {

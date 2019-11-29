@@ -61,12 +61,12 @@ export class DesignArea{
         let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
+        rect.get().addEventListener("block_clicked", this.onClick);
+
         this.component = new Component(id, itemId);
 
         DesignApi.addComponent(this.component);
         this.properties.addItems(this.component.itemProps,id);     
-
-       
 
     }
 
@@ -138,5 +138,11 @@ export class DesignArea{
     setRight(right:number){
         this.design_area_div.style.right = right.toFixed() + 'px';
         console.log("Setting design area right" + right);
+    }
+
+    onClick = (evt:any) => {
+        console.log("Block clicked " + evt.detail.id);
+        this.properties.addItems(DesignApi.getComponentByInstId(evt.detail.id).itemProps, evt.detail.id);
+        evt.preventDefault();      
     }
 }

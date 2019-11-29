@@ -47,7 +47,7 @@ export class Properties {
         inEl.setAttribute('id', itemProp.propId);
         inEl.setAttribute('placeholder', itemProp.propName);
         inEl.addEventListener('change', function () {
-            console.log(this.value);
+            console.log("printing component" + instanceid);
             DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
         });
         let lblEl = document.createElement('label');
@@ -68,11 +68,10 @@ export class Properties {
         return divEl;
     }
     addItems(itemProps, instanceid) {
-        this.propDiv.innerHTML = null;
+        this.propDiv.innerHTML = "";
         for (let itemProp of itemProps) {
             this.propDiv.appendChild(this.addProperties(itemProp, instanceid));
         }
-        this.properties_div.appendChild(this.propDiv);
     }
 }
 //# sourceMappingURL=properties.js.map

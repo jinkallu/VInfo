@@ -53,4 +53,12 @@ export class IOControl{
         this.input_panel_div.style.display = "none";
         this.output_panel_div.style.display = "block";
     }
+
+    getIoButtonOutput(){
+        return this.io_button_output;
+    }
+
+    getOuputPanel(){
+        return this.output_panel_div;
+    }
 }

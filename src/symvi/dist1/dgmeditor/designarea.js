@@ -42,6 +42,11 @@ export class DesignArea {
             let y = event.clientY - ctm.f / ctm.d;
             this.addBlock({ x: x, y: y }, Id.getID(), inputs, outputs, name, itemId);
         };
+        this.onClick = (evt) => {
+            console.log("Block clicked " + evt.detail.id);
+            this.properties.addItems(DesignApi.getComponentByInstId(evt.detail.id).itemProps, evt.detail.id);
+            evt.preventDefault();
+        };
         this.design_area_div = document.createElement("div");
         this.design_area_div.style.position = "absolute";
         this.design_area_div.style.border = "solid black";
@@ -75,11 +80,10 @@ export class DesignArea {
         let rect = new Block(this.svg, pos, id, inputs, outputs, this.edges, name, itemId);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
+        rect.get().addEventListener("block_clicked", this.onClick);
         this.component = new Component(id, itemId);
         DesignApi.addComponent(this.component);
         this.properties.addItems(this.component.itemProps, id);
-        console.log("in addblock");
-        console.log(DesignApi.getComponents());
     }
     getBlocks() {
         return this.blocks;

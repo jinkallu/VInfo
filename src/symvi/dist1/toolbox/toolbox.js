@@ -6,7 +6,7 @@ export class ToolBox {
         this.tool_box_div.style.top = top;
         this.tool_box_div.style.width = width;
         this.tool_box_div.style.height = height;
-        this.tool_box_div.style.background = "#808080";
+        this.tool_box_div.style.background = "#DCDCDC";
         this.categories = new Categories();
         this.create();
     }

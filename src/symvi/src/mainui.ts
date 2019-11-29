@@ -30,6 +30,8 @@ export class MainUI {
         this.tool_bar = new ToolBar("99%", "2em", "8%", this.design_area, this.console); // toolbar after designarea
 
         this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "17%", "height": "86%"});
+        let ioc = this.iopanel.getIOControl(); // for output
+        this.tool_bar.setIOControl(ioc);
         //this.properties = new Properties();
     }
 

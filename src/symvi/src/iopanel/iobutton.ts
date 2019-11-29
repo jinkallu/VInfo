@@ -8,4 +8,9 @@ export class IOButton{
     get(){
         return this.button_div;
     }
+
+    emulateClick(){
+        let event = new Event("click");
+        this.button_div.dispatchEvent(event);
+    }
 }

@@ -75,6 +75,7 @@ export class IOPanel{
 
           // dispatch resize event 
           this.iopanel_div.dispatchEvent(new CustomEvent("resize", {
+            bubbles: true,
             detail: { left:  left}
           }));
         }
@@ -89,5 +90,9 @@ export class IOPanel{
         }
 
         return false;
+    }
+
+    getIOControl(){
+        return this.iocontrol;
     }
 }

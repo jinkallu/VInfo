@@ -1,10 +1,16 @@
 from flask import Flask, render_template, jsonify,send_from_directory
 from flask import request, jsonify, make_response
 
-# from python.hist import getHist 
-# from python.f1 import getF1 
-# from python.modeltree import ModelTree 
-# from python.processtree import ProcessTree
+flag_ROOT = True
+
+try:
+    from python.hist import getHist 
+    from python.f1 import getF1 
+    from python.modeltree import ModelTree 
+    from python.processtree import ProcessTree
+except ImportError:
+    print("No ROOT Support")
+    flag_ROOT = False
 
 
 app = Flask(__name__)
@@ -26,7 +32,7 @@ def es6_static(filename):
 @app.route("/api/calc", methods=["POST"])
 def add():
     # Validate the request body contains JSON
-    if request.is_json:
+    if request.is_json and flag_ROOT:
         try:
             # Parse the JSON into a Python dictionary
             req = request.get_json()
@@ -51,7 +57,10 @@ def add():
 
     else:
         # The request body wasn't JSON so return a 400 HTTP status code
-        msg = "Request body must be JSON"
+        if flag_ROOT:
+            msg = "Request body must be JSON"
+        else:
+            msg = "No ROOT support"
         data = {'output': None, 'message': msg}
         return make_response(jsonify(data), 400)
     #return getF1()

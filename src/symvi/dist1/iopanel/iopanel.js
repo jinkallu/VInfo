@@ -28,6 +28,7 @@ export class IOPanel {
                 let left = this.original_x + x_diff;
                 this.iopanel_div.style.left = left + 'px';
                 this.iopanel_div.dispatchEvent(new CustomEvent("resize", {
+                    bubbles: true,
                     detail: { left: left }
                 }));
             }
@@ -57,6 +58,9 @@ export class IOPanel {
             return true;
         }
         return false;
+    }
+    getIOControl() {
+        return this.iocontrol;
     }
 }
 //# sourceMappingURL=iopanel.js.map

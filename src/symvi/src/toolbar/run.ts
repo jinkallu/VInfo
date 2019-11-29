@@ -1,11 +1,13 @@
 import { Block } from '../dgmeditor/block';
 import { Edge } from '../dgmeditor/edge';
 import JSROOT from 'JSROOT'
+import { IOControl } from '../iopanel/iocontrol';
 
 export class Run{
     run_div:HTMLDivElement;
     design_area:any;
     console_area:any;
+    iocontrol: IOControl;
 
     constructor(_design_area:any, _console:any){
         this.design_area = _design_area;
@@ -101,10 +103,18 @@ export class Run{
             let data:any = await response.json();
             if (data['output'] !== null){
                 let data_draw = JSROOT.parse(data['output'][0]['data']);
-                JSROOT.draw("outputpanel", data_draw, "hist");
+                if(this.iocontrol !== null){
+                    this.iocontrol.getIoButtonOutput().emulateClick();
+                    let output_panel = this.iocontrol.getOuputPanel();
+                    JSROOT.draw(output_panel.id, data_draw, "hist");
+                }
             }
             this.console_area.innerHTML = data['message'];
                 
                 return data;
+    }
+
+    setIOControl(ioc:IOControl){
+        this.iocontrol = ioc;
     }
 }

@@ -5,6 +5,7 @@ export class ToolBar {
         this.tool_bar_div.style.width = width;
         this.tool_bar_div.style.top = top;
         this.tool_bar_div.style.height = height;
+        this.tool_bar_div.style.background = "#C0C0C0";
         this.tool_bar_div.style.position = "absolute";
         this.run = new Run(design_area, console);
         this.create();
@@ -14,6 +15,9 @@ export class ToolBar {
     }
     get() {
         return this.tool_bar_div;
+    }
+    setIOControl(ioc) {
+        this.run.setIOControl(ioc);
     }
 }
 //# sourceMappingURL=toolbar.js.map

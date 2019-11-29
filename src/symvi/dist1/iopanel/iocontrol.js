@@ -31,5 +31,11 @@ export class IOControl {
     get() {
         return this.iocontrol_div;
     }
+    getIoButtonOutput() {
+        return this.io_button_output;
+    }
+    getOuputPanel() {
+        return this.output_panel_div;
+    }
 }
 //# sourceMappingURL=iocontrol.js.map

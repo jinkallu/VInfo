@@ -103,16 +103,15 @@ export class Properties {
           // let propDiv = document.getElementById('propDiv');
           // let itemNameDiv= document.getElementById('itemName');
           // // itemNameDiv.textContent=catItemName.toUpperCase();
-          this.propDiv.innerHTML = null;
+          this.propDiv.innerHTML = "";
 
           for (let itemProp of itemProps) {
                this.propDiv.appendChild(this.addProperties(itemProp, instanceid));
           }
           // propDiv.textContent = catItemId;
           // this.properties_div.appendChild(itemNameDiv);
-
-          this.properties_div.appendChild(this.propDiv);
-
+          //this.properties_div.innerHTML = "";
+          //this.properties_div.appendChild(this.propDiv);
           // propEl.textContent = "working";
      }
 

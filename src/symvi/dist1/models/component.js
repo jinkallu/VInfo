@@ -15,10 +15,11 @@ export class Component {
         return this._itemProps;
     }
     addItemPropVal(propId, val) {
-        let index = this.itemProps.findIndex(i => {
-            i.propId === propId;
-        });
-        this._itemProps[index].propVal = val;
+        for (let item of this._itemProps) {
+            if (item.propId == propId) {
+                item.propVal = val;
+            }
+        }
     }
 }
 //# sourceMappingURL=component.js.map

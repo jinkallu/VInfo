@@ -2,8 +2,17 @@ export class DesignApi {
     static getComponents() {
         return this.components;
     }
+    static getComponentByInstId(instanceId) {
+        for (let comp of this.components) {
+            if (comp.instanceId == instanceId) {
+                return comp;
+                break;
+            }
+        }
+    }
     static addComponent(component) {
         DesignApi.components.push(component);
+        console.log("added component");
         console.log(this.components);
     }
     static removeComponent(id) {

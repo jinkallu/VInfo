@@ -16,6 +16,8 @@ export class MainUI {
         this.console = new Console({ 'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%" });
         this.tool_bar = new ToolBar("99%", "2em", "8%", this.design_area, this.console);
         this.iopanel = new IOPanel({ "left": "82%", "top": "13%", "width": "17%", "height": "86%" });
+        let ioc = this.iopanel.getIOControl();
+        this.tool_bar.setIOControl(ioc);
     }
     createUI() {
         this.createMenuBar();

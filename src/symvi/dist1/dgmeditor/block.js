@@ -2,6 +2,12 @@ import { Node } from './node';
 import { Properties } from '../iopanel/properties';
 export class Block {
     constructor(svg, pos, _id, _inputs, _outputs, _edges, _name, itemId) {
+        this.onClick = () => {
+            this.rect.dispatchEvent(new CustomEvent("block_clicked", {
+                bubbles: true,
+                detail: { id: this.id }
+            }));
+        };
         this.dragStart = (event) => {
             this.drag_started = true;
         };
@@ -43,6 +49,7 @@ export class Block {
         this.rect.addEventListener("mousemove", this.dragging);
         this.rect.addEventListener("mouseup", this.dragStop);
         this.rect.addEventListener("mouseleave", this.dragStop);
+        this.rect.addEventListener("click", this.onClick);
         this.group.appendChild(this.rect);
         this.group.appendChild(this.text);
         this.drag_started = false;
@@ -51,11 +58,6 @@ export class Block {
     }
     get() {
         return this.group;
-    }
-    onClick() {
-        console.log("printing itemid");
-        console.log(this.itemId);
-        console.log(this.component);
     }
     calculateNodePos(io) {
         let ios = 0;
