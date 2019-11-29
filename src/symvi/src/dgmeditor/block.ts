@@ -69,6 +69,9 @@ export class Block {
         this.rect.addEventListener("mousemove", this.dragging);
         this.rect.addEventListener("mouseup", this.dragStop);
         this.rect.addEventListener("mouseleave", this.dragStop);
+
+        this.rect.addEventListener("click",null, this.onClick,this.id );
+
         
         
         // console.log(this.component);
@@ -88,13 +91,19 @@ export class Block {
         // this.rect.addEventListener("click", this.onClick);
     }
 
+   
+
     get() {
         return this.group;
     }
-    onClick() {
-        console.log("printing itemid");
-        console.log(this.itemId);
-        console.log(this.component);
+    onClick(event:MouseEvent, id:string) {
+
+        // this.rect.dispatchEvent(new CustomEvent("resize", {
+        //     detail: {id }
+        //   }));
+
+
+        
     }
 
     calculateNodePos(io: boolean) {

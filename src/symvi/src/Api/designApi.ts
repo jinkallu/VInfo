@@ -9,8 +9,20 @@ export class DesignApi {
         return this.components;
     }
 
+    static getComponentByInstId(instanceId: number):Component{
+
+        for (let comp of this.components){
+            if (comp.instanceId==instanceId){
+                return comp;
+                break;
+            }
+        }
+       
+    }
+
     static addComponent(component: Component) {
         DesignApi.components.push(component);
+        console.log("added component");
         console.log(this.components);
     }
 

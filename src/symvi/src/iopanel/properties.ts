@@ -70,8 +70,10 @@ export class Properties {
           inEl.setAttribute('id', itemProp.propId);
           inEl.setAttribute('placeholder', itemProp.propName);
           inEl.addEventListener('change', function () {
-               console.log(this.value);
-               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+               console.log("printing component"+instanceid);
+               // let comp=DesignApi.getComponentByInstId(instanceid);
+               // console.log(comp);
+                DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
           });
           let lblEl = document.createElement('label');
           lblEl.textContent = itemProp.propName.toUpperCase();

@@ -64,11 +64,9 @@ export class DesignArea{
         this.component = new Component(id, itemId);
 
         DesignApi.addComponent(this.component);
-        this.properties.addItems(this.component.itemProps,id);
-        
+        this.properties.addItems(this.component.itemProps,id);     
 
-        console.log("in addblock");
-        console.log(DesignApi.getComponents());
+       
 
     }
 
