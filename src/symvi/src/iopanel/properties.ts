@@ -59,7 +59,14 @@ export class Properties {
           console.log()
      }
 
+     clearProps(){
+          this.propDiv.innerHTML=null;
+     }
+
      addProperties(itemProp: ItemProp, instanceid: number) {
+         
+
+
           let divEl = document.createElement('div');
           divEl.style.display = "flex";
           divEl.style.justifyContent = "space-between";
@@ -67,13 +74,17 @@ export class Properties {
           divEl.style.margin = '5px';
 
           let inEl = document.createElement('input');
-          inEl.setAttribute('id', itemProp.propId);
+          inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
           inEl.setAttribute('placeholder', itemProp.propName);
+          if (itemProp.propVal != null) {
+
+               inEl.value = itemProp.propVal;
+          }
           inEl.addEventListener('change', function () {
-               console.log("printing component"+instanceid);
+               console.log("printing component" + instanceid);
                // let comp=DesignApi.getComponentByInstId(instanceid);
                // console.log(comp);
-                DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
           });
           let lblEl = document.createElement('label');
           lblEl.textContent = itemProp.propName.toUpperCase();
@@ -105,9 +116,22 @@ export class Properties {
           // // itemNameDiv.textContent=catItemName.toUpperCase();
           this.propDiv.innerHTML = "";
 
+          let propContainer=document.createElement('div');
+          propContainer.style.display="flex";
+          propContainer.style.justifyContent="space-around";
+          propContainer.style.flexDirection = 'column';
+
+          let instHeader=document.createElement('p');
+          instHeader.textContent=instanceid.toString();
+
+          propContainer.appendChild(instHeader);
+
           for (let itemProp of itemProps) {
-               this.propDiv.appendChild(this.addProperties(itemProp, instanceid));
+               propContainer.appendChild(this.addProperties(itemProp, instanceid));
           }
+
+          this.propDiv.appendChild(propContainer);
+
           // propDiv.textContent = catItemId;
           // this.properties_div.appendChild(itemNameDiv);
           //this.properties_div.innerHTML = "";

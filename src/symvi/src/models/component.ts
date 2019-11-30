@@ -5,7 +5,11 @@ export class Component {
 
 
     constructor(private _instanceId: number, private _itemId: string) {
-        this._itemProps = CategoryApi.getItemPropsByItemId(this._itemId);
+        console.log("instance from compoen"+_instanceId);
+        let itemPropArr=CategoryApi.getItemPropsByItemId(this._itemId);
+        this._itemProps =itemPropArr;
+        console.log(this._itemProps);
+        console.log("printing from compoent");
 
     }
     get instanceId() {
@@ -25,6 +29,7 @@ export class Component {
         for (let item of this._itemProps) {
             if (item.propId == propId) {
                 item.propVal = val;
+                console.log("value changed..."+val);
             }
 
         }
