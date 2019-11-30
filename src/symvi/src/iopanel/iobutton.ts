@@ -3,6 +3,8 @@ export class IOButton{
     constructor(name:string){
         this.button_div = document.createElement("button");
         this.button_div.innerHTML = name;
+        this.button_div.style.border = 'none';
+        this.button_div.style.outline = 'none';
     }
 
     get(){

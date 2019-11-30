@@ -6,10 +6,14 @@ export class IOControl {
         this.showInput = () => {
             this.output_panel_div.style.display = "none";
             this.input_panel_div.style.display = "block";
+            this.io_button_input.get().style.background = "#DCDCDC";
+            this.io_button_output.get().style.background = "#E8E8E8";
         };
         this.showOutput = () => {
             this.input_panel_div.style.display = "none";
             this.output_panel_div.style.display = "block";
+            this.io_button_output.get().style.background = "#DCDCDC";
+            this.io_button_input.get().style.background = "#E8E8E8";
         };
         this.iocontrol_div = document.createElement("div");
         this.io_button_input = new IOButton("Input");
@@ -25,8 +29,8 @@ export class IOControl {
         this.iocontrol_div.appendChild(this.input_panel_div);
         this.output_panel = new OutputPanel();
         this.output_panel_div = this.output_panel.get();
-        this.output_panel_div.style.display = "none";
         this.iocontrol_div.appendChild(this.output_panel_div);
+        this.showInput();
     }
     get() {
         return this.iocontrol_div;

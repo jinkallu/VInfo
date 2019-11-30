@@ -5,7 +5,7 @@ export class MenuBar {
         this.menubar_div.style.position = "absolute";
         this.menubar_div.style.width = width;
         this.menubar_div.style.height = height;
-        this.menubar_div.style.background = " #404040";
+        this.menubar_div.style.borderBottom = "solid #C0C0C0";
         this.menubar_div.setAttribute('id', 'menubar');
         this.menus = MenuApi.getMenus();
         this.create();
@@ -21,7 +21,7 @@ export class MenuBar {
             menuBtn.setAttribute('class', 'dropbtn');
             menuBtn.textContent = menuele.menuId;
             menuBtn.style.height = '1rem';
-            menuBtn.style.padding = "2px";
+            menuBtn.style.padding = "1px";
             menuBtn.style.background = "#404040";
             menueleDiv.setAttribute('id', menuele.menuId);
             let divContent = document.createElement('div');

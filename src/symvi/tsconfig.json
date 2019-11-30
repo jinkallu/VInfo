@@ -16,7 +16,7 @@
          "src/dgmeditor/designarea.ts",
          "./src/main.ts",
          "./src/mainui.ts",
-         "./src/menubar.ts",
+         "src/menubar/menubar.ts",
          "src/iopanel/properties.ts",
          "src/toolbar/toolbar.ts",
          "./src/Api/categoryApi.ts",

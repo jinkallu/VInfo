@@ -1,6 +1,6 @@
 // this is an edit check...
 import { ToolBox } from './toolbox/toolbox';
-import { MenuBar } from './menubar';
+import { MenuBar } from './menubar/menubar';
 import { ToolBar } from './toolbar/toolbar';
 import { DesignArea } from './dgmeditor/designarea';
 //import { Properties } from './properties';
@@ -21,13 +21,13 @@ export class MainUI {
     constructor(body: HTMLBodyElement) {
         this.body = body;
         
-        this.menu_bar = new MenuBar("99%", "2em");
+        this.menu_bar = new MenuBar({width: "99%", height: "2rem"});
         this.tool_box = new ToolBox("13%", "18%", "86%");
 
         
         this.design_area = new DesignArea({"left": "19%", "top": "13%", "width": "62%", "height": "66%"});
         this.console = new Console({'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%"});
-        this.tool_bar = new ToolBar("99%", "2em", "8%", this.design_area, this.console); // toolbar after designarea
+        this.tool_bar = new ToolBar({width: "99%", top: "3em", height: "5%"}, this.design_area, this.console); // toolbar after designarea
 
         this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "17.5%", "height": "86%"});
         let ioc = this.iopanel.getIOControl(); // for output
@@ -113,7 +113,8 @@ export class MainUI {
     }
 
     resize = (evt:any) => {
-        this.design_area.setRight(evt.detail.left);
-        this.console.setRight(evt.detail.left);
+        let dw = 10; // hardcoded must change
+        this.design_area.setRight(evt.detail.left - dw);
+        this.console.setRight(evt.detail.left - dw);
     }
 }

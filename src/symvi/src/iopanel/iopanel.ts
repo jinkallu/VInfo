@@ -22,7 +22,7 @@ export class IOPanel{
         this.iopanel_div.style.width = pos.width;
         this.iopanel_div.style.left = pos.left;
         this.iopanel_div.style.height = pos.height;
-        this.iopanel_div.style.background = "#C0C0C0";
+        this.iopanel_div.style.background = "#DCDCDC";
 
 
         this.minimum_size = 100; // hard coded must remove
@@ -60,7 +60,7 @@ export class IOPanel{
     mouseMove = (evt: MouseEvent) => {
         //event.preventDefault();
         if(this.resizingPos(evt)){
-            this.iopanel_div.style.cursor = "e-resize";
+            this.iopanel_div.style.cursor = "col-resize";
         }
         else{
             this.iopanel_div.style.cursor = "default";
