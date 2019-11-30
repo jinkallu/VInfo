@@ -6,19 +6,30 @@ export class CategoryApi {
         return [...this.categories];
     }
     static getCategoryItemsByCatId(categoryId) {
-        return [...this.categoryItems.filter(i => {
-                return i.categoryId === categoryId;
-            })];
+        let catitemArr = [];
+        for (let retCatItem of this.categoryItems) {
+            if (retCatItem.categoryId == categoryId) {
+                catitemArr.push(retCatItem);
+            }
+        }
+        return catitemArr;
     }
     static getCategoryItemByItemId(catItemId) {
-        return this.categoryItems.find(i => {
-            return i.catItemId === catItemId;
-        });
+        for (let catItem of this.categoryItems) {
+            if (catItem.catItemId == catItemId) {
+                return catItem;
+            }
+        }
     }
     static getItemPropsByItemId(catItemId) {
-        return [...this.categoryProps.filter(i => {
-                return i.catItemId === catItemId;
-            })];
+        let itemPropArray = [];
+        for (let itemProps of this.categoryProps) {
+            if (itemProps.catItemId == catItemId) {
+                let itp = new ItemProp(itemProps.catItemId, itemProps.propId, itemProps.propName, itemProps.propType, itemProps.propDefVal, itemProps.propOrder, itemProps.propReqd);
+                itemPropArray.push(itp);
+            }
+        }
+        return itemPropArray;
     }
 }
 CategoryApi.categories = [new Category('c1', 'Category1', 1, 'url'),

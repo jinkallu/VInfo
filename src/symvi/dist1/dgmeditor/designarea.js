@@ -43,8 +43,11 @@ export class DesignArea {
             this.addBlock({ x: x, y: y }, Id.getID(), inputs, outputs, name, itemId);
         };
         this.onClick = (evt) => {
-            console.log("Block clicked " + evt.detail.id);
-            this.properties.addItems(DesignApi.getComponentByInstId(evt.detail.id).itemProps, evt.detail.id);
+            this.properties.clearProps();
+            let itemProps = DesignApi.getComponentByInstId(evt.detail.id).itemProps;
+            console.log("printing itemprops on clikc");
+            console.log(itemProps);
+            this.properties.addItems(itemProps, evt.detail.id);
             evt.preventDefault();
         };
         this.design_area_div = document.createElement("div");

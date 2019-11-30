@@ -7,6 +7,7 @@ export class ItemProp {
         this._propDefVal = _propDefVal;
         this._propOrder = _propOrder;
         this._propReqd = _propReqd;
+        this._propVal = null;
     }
     get catItemId() {
         return this._catItemId;

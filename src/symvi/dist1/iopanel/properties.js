@@ -37,6 +37,9 @@ export class Properties {
     onChange() {
         console.log();
     }
+    clearProps() {
+        this.propDiv.innerHTML = null;
+    }
     addProperties(itemProp, instanceid) {
         let divEl = document.createElement('div');
         divEl.style.display = "flex";
@@ -44,8 +47,11 @@ export class Properties {
         divEl.style.flexDirection = 'row';
         divEl.style.margin = '5px';
         let inEl = document.createElement('input');
-        inEl.setAttribute('id', itemProp.propId);
+        inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
         inEl.setAttribute('placeholder', itemProp.propName);
+        if (itemProp.propVal != null) {
+            inEl.value = itemProp.propVal;
+        }
         inEl.addEventListener('change', function () {
             console.log("printing component" + instanceid);
             DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
@@ -69,9 +75,17 @@ export class Properties {
     }
     addItems(itemProps, instanceid) {
         this.propDiv.innerHTML = "";
+        let propContainer = document.createElement('div');
+        propContainer.style.display = "flex";
+        propContainer.style.justifyContent = "space-around";
+        propContainer.style.flexDirection = 'column';
+        let instHeader = document.createElement('p');
+        instHeader.textContent = instanceid.toString();
+        propContainer.appendChild(instHeader);
         for (let itemProp of itemProps) {
-            this.propDiv.appendChild(this.addProperties(itemProp, instanceid));
+            propContainer.appendChild(this.addProperties(itemProp, instanceid));
         }
+        this.propDiv.appendChild(propContainer);
     }
 }
 //# sourceMappingURL=properties.js.map

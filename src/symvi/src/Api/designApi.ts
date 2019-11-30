@@ -23,7 +23,7 @@ export class DesignApi {
     static addComponent(component: Component) {
         DesignApi.components.push(component);
         console.log("added component");
-        console.log(this.components);
+        console.log(component);
     }
 
     static removeComponent(id: number) {

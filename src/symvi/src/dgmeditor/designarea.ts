@@ -17,6 +17,7 @@ export class DesignArea{
     catItem:CategoryItem;
     component:Component;
     properties:Properties;
+    cat_item:CategoryItem;
 
     constructor(pos:any){
         this.design_area_div = document.createElement("div");
@@ -103,8 +104,7 @@ export class DesignArea{
             let item_id = event.dataTransfer.getData("Text");
             console.log("item_id");
             console.log(item_id);
-
-             let cat_item:CategoryItem = CategoryApi.getCategoryItemByItemId(item_id);
+            let cat_item= CategoryApi.getCategoryItemByItemId(item_id);
             console.log(cat_item.inputs);
             let inputs = cat_item.inputs;
             let outputs = cat_item.outputs;
@@ -141,8 +141,12 @@ export class DesignArea{
     }
 
     onClick = (evt:any) => {
-        console.log("Block clicked " + evt.detail.id);
-        this.properties.addItems(DesignApi.getComponentByInstId(evt.detail.id).itemProps, evt.detail.id);
+        this.properties.clearProps();
+        let itemProps=DesignApi.getComponentByInstId(evt.detail.id).itemProps;
+
+        console.log("printing itemprops on clikc");
+        console.log(itemProps);
+        this.properties.addItems(itemProps, evt.detail.id);
         evt.preventDefault();      
     }
 }

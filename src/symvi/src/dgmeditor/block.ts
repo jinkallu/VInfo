@@ -203,6 +203,10 @@ export class Block {
         //console.log("Drag Start" + event.pageX + " " + event.pageY);
         if (this.drag_started) {
             this.drag_started = false;
+            this.rect.dispatchEvent(new CustomEvent("block_clicked", {
+                bubbles: true,
+                detail: { id:  this.id}
+              }));
             // console.log(this.component);
             // this.property.addItems(this.component.itemProps,this.component.instanceId);
         }

@@ -10,6 +10,7 @@ export class ItemProp {
           private _propReqd: boolean,
 
      ) {
+          this._propVal=null;
 
      }
 

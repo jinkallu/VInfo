@@ -14,6 +14,10 @@ export class Block {
         this.dragStop = (event) => {
             if (this.drag_started) {
                 this.drag_started = false;
+                this.rect.dispatchEvent(new CustomEvent("block_clicked", {
+                    bubbles: true,
+                    detail: { id: this.id }
+                }));
             }
         };
         this.dragging = (event) => {
