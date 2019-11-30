@@ -13,10 +13,10 @@ export class MainUI {
         this.body = body;
         this.menu_bar = new MenuBar("99%", "2em");
         this.tool_box = new ToolBox("13%", "18%", "86%");
-        this.design_area = new DesignArea({ "left": "19%", "top": "13%", "width": "62%", "height": "64%" });
+        this.design_area = new DesignArea({ "left": "19%", "top": "13%", "width": "62%", "height": "66%" });
         this.console = new Console({ 'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%" });
         this.tool_bar = new ToolBar("99%", "2em", "8%", this.design_area, this.console);
-        this.iopanel = new IOPanel({ "left": "82%", "top": "13%", "width": "17%", "height": "86%" });
+        this.iopanel = new IOPanel({ "left": "82%", "top": "13%", "width": "17.5%", "height": "86%" });
         let ioc = this.iopanel.getIOControl();
         this.tool_bar.setIOControl(ioc);
     }

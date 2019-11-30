@@ -4,7 +4,7 @@ export class Console{
     constructor(pos:any){
         this.console_div = document.createElement("div");
         this.console_div.style.position = "absolute";
-        this.console_div.style.border = "solid black";
+        this.console_div.style.background = "white";
         this.console_div.style.top = pos.top;
         this.console_div.style.width = pos.width;
         this.console_div.style.left = pos.left;

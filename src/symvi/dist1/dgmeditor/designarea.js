@@ -49,7 +49,7 @@ export class DesignArea {
         };
         this.design_area_div = document.createElement("div");
         this.design_area_div.style.position = "absolute";
-        this.design_area_div.style.border = "solid black";
+        this.design_area_div.style.background = "white";
         this.design_area_div.style.top = pos.top;
         this.design_area_div.style.width = pos.width;
         this.design_area_div.style.left = pos.left;
