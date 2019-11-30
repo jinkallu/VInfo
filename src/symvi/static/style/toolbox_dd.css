@@ -63,7 +63,7 @@
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
-
+/*
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -98,3 +98,5 @@
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+*/

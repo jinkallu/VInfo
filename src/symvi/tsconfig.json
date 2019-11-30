@@ -6,7 +6,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "outDir": "../src/symvi/dist1",
+        //"outDir": "../src/symvi/dist1",
         "target": "es6"
      },
      "files": [
