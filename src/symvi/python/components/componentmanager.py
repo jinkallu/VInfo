@@ -49,7 +49,7 @@ class ComponentManager:
             print(cmp.getNoInputs(), cmp.filledInputs())
             if cmp.getNoInputs() == cmp.filledInputs() and not cmp.executed():
                 # execute the code for component
-                cmp.execute()
+                cmp.execute(child.data)
                 if cmp.getNoOutputs() == 0:
                     self.cmp_output.append(cmp)
                 if cmp.executed():

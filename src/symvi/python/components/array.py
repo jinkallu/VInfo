@@ -8,15 +8,20 @@ class Array(Components):
         self.max = 10
         self.size = 100
 
-    def execute(self):
+    def execute(self, data):
         print("Overriding from Parent")
+        self.min = float(data['properties']['min'])
+        self.max = float(data['properties']['max'])
+        self.size = float(data['properties']['count'])
+        print(self.min, self.max, self.size)
         data = []
-        dx = 0.2 #(self.max - self.min) / self.size
-        #print('dx', dx, self.max - self.min)
-        for i in range(self.size):
+        dx = (self.max - self.min) / self.size
+        print('dx', dx, self.max - self.min)
+        for i in range(int(self.size)):
+            print(i)
             x = self.min + i * dx
             data.append(x)
-            #print(i, x)
+            print(i, x)
 
         self.setOutput(0, data)
         self.setExecuted()

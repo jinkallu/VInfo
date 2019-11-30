@@ -1,9 +1,18 @@
 import JSROOT from 'JSROOT';
+import { DesignApi } from '../Api/designApi';
 export class Run {
     constructor(_design_area, _console) {
         this.execute = () => {
-            this.submit({ edges: this.createEdgesData(),
-                blocks: this.createBlocksData() });
+            let edges = this.createEdgesData();
+            let blocks = this.createBlocksData();
+            if (blocks === null) {
+                let console_data = this.console_area.get().innerHTML;
+                console_data += "<br><font color='red'>No blocks to run </font>";
+                this.console_area.get().innerHTML = console_data;
+                return;
+            }
+            this.submit({ edges: edges,
+                blocks: blocks });
         };
         this.design_area = _design_area;
         this.console_area = _console;
@@ -19,6 +28,9 @@ export class Run {
     }
     createEdgesData() {
         let edges = this.design_area.getEdges().getEdges();
+        if (edges.length < 1) {
+            return null;
+        }
         let edge;
         let edges_data = [];
         for (edge of edges) {
@@ -44,16 +56,21 @@ export class Run {
     }
     createBlocksData() {
         let blocks = this.design_area.getBlocks();
+        if (blocks.length < 1) {
+            return null;
+        }
         let blocks_data = [];
         let block;
         for (block of blocks) {
             let data = block.getData();
+            let properties = this.createPropertiesData(data.id);
             let block_data = {
                 id: data.id,
                 type: data.type,
                 name: data.name,
                 inputs: data.inputs,
-                outputs: data.outputs
+                outputs: data.outputs,
+                properties: properties
             };
             blocks_data.push(block_data);
             console.log(data.id + " " +
@@ -65,6 +82,15 @@ export class Run {
         console.log(blocks_data);
         return blocks_data;
     }
+    createPropertiesData(id) {
+        let properties = DesignApi.getComponentByInstId(id);
+        let prop_data = {};
+        for (let prop of properties.itemProps) {
+            let key = prop.propName;
+            prop_data[key] = prop.propVal;
+        }
+        return prop_data;
+    }
     async submit(send_data) {
         let response = await fetch('http://127.0.0.1:5000/api/calc', {
             method: 'POST',
@@ -73,6 +99,7 @@ export class Run {
             },
             body: JSON.stringify(send_data)
         });
+        let msg;
         let data = await response.json();
         if (data['output'] !== null) {
             let data_draw = JSROOT.parse(data['output'][0]['data']);
@@ -81,8 +108,14 @@ export class Run {
                 let output_panel = this.iocontrol.getOuputPanel();
                 JSROOT.draw(output_panel.id, data_draw, "hist");
             }
+            msg = "<br><font color='green'>" + data['message'] + "</font>";
         }
-        this.console_area.innerHTML = data['message'];
+        else {
+            msg = "<br><font color='red'>" + data['message'] + "</font>";
+        }
+        let console_data = this.console_area.get().innerHTML;
+        console_data += msg;
+        this.console_area.get().innerHTML = console_data;
         return data;
     }
     setIOControl(ioc) {

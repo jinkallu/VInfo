@@ -50,8 +50,8 @@ def add():
             data = {'output': json, 'message': msg}
             return make_response(jsonify(data))
 
-        except:
-            msg = "There were errors, output could not be generated"
+        except Exception as e:
+            msg = str(e)
             data = {'output': None, 'message': msg}
             return make_response(jsonify(data))
 

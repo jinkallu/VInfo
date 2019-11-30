@@ -23,7 +23,7 @@ class Components:
     def incFilledInputs(self):
         self.fillled_inputs += 1
 
-    def execute(self):
+    def execute(self, data):
         print ('Must override this function in child')
         self.setExecuted()
 

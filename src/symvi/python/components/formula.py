@@ -6,7 +6,7 @@ class Formula(Components):
     def __init__(self, id, no_inputs, no_outputs):
         Components.__init__(self, id, no_inputs, no_outputs)
 
-    def execute(self):
+    def execute(self, data):
         print("Overriding from Parent")
         data = []
         for i in range(len(self.input_data[0])):
