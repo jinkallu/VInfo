@@ -7,7 +7,7 @@ export class Component {
     constructor(private _instanceId: number, private _itemId: string) {
         console.log("instance from compoen"+_instanceId);
         let itemPropArr=CategoryApi.getItemPropsByItemId(this._itemId);
-        this._itemProps =itemPropArr;
+        this._itemProps =[...itemPropArr];
         console.log(this._itemProps);
         console.log("printing from compoent");
 

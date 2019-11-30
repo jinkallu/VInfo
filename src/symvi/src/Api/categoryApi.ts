@@ -78,7 +78,16 @@ export class CategoryApi {
 
           for (let itemProps of this.categoryProps) {
                if (itemProps.catItemId == catItemId) {
-                    itemPropArray.push(itemProps);
+                    let itp = new ItemProp(
+                         itemProps.catItemId,
+                         itemProps.propId,
+                         itemProps.propName,
+                         itemProps.propType,
+                         itemProps.propDefVal,
+                         itemProps.propOrder,
+                         itemProps.propReqd,
+                    );
+                    itemPropArray.push(itp);
                }
           }
           return itemPropArray;
