@@ -11,5 +11,8 @@ export class Category {
     get categoryId() {
         return this._categoryId;
     }
+    get categoryImgURL() {
+        return this._categoryImgUrl;
+    }
 }
 //# sourceMappingURL=category.js.map

@@ -8,11 +8,14 @@
 
      }
 
-     get categoryName(){
-       return this._categoryName;
-     }
-     get categoryId(){
+    get categoryName(){
+      return this._categoryName;
+    }
+    get categoryId(){
       return this._categoryId;
+    }
+    get categoryImgURL(){
+      return this._categoryImgUrl;
     }
    
 }

@@ -92,6 +92,7 @@ export class Run {
         return prop_data;
     }
     async submit(send_data) {
+        console.log("Send data ", send_data);
         let response = await fetch('http://127.0.0.1:5000/api/calc', {
             method: 'POST',
             headers: {
@@ -106,6 +107,7 @@ export class Run {
             if (this.iocontrol !== null) {
                 this.iocontrol.getIoButtonOutput().emulateClick();
                 let output_panel = this.iocontrol.getOuputPanel();
+                output_panel.innerHTML = "";
                 JSROOT.draw(output_panel.id, data_draw, "ACP");
             }
             msg = "<br><font color='green'>" + data['message'] + "</font>";

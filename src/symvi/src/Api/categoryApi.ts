@@ -4,43 +4,38 @@ import { ItemProp } from '../models/itemProp';
 export class CategoryApi {
      static categories: Category[] = [new Category(
           'c1',
-          'Category1',
+          'Basic',
           1,
-          'url'),
+          'https://www.w3schools.com/howto/img_snow.jpg'),
      new Category(
           'c2',
-          'Category2',
+          'Plot',
           2,
           'url'),
      new Category(
           'c3',
-          'Category3',
+          'Graphing Calculators',
           2,
           'url')];
      static categoryItems: CategoryItem[] = [
-          new CategoryItem('c1', 'i1', 'Array', 'url', 0, 1),
-          new CategoryItem('c1', 'i2', 'Formula', 'url', 1, 1),
-          new CategoryItem('c1', 'i3', 'Graph', 'url', 2, 0),
-          new CategoryItem('c1', 'i4', 'Duplicate', 'url', 1, 2),
-          new CategoryItem('c1', 'i5', 'Hist1', 'url', 1, 0),
-          new CategoryItem('c1', 'i6', 'Hist2', 'url', 2, 0),
-          new CategoryItem('c1', 'i7', 'item7', 'url', 3, 2),
-          new CategoryItem('c2', 'i8', 'item8', 'url', 3, 3),
-          new CategoryItem('c3', 'i9', 'item9', 'url', 2, 0),
+          new CategoryItem('c1', 'i1', 'Array', '/static/images/array.png', 0, 1),
+          new CategoryItem('c1', 'i2', 'Formula', '/static/images/formula.png', 1, 1),
+          new CategoryItem('c2', 'i3', 'Graph', '/static/images/graph.png', 2, 0),
+          new CategoryItem('c1', 'i4', 'Duplicate', '/static/images/duplicate.png', 1, 2),
+          new CategoryItem('c2', 'i5', 'Hist1', 'https://www.w3schools.com/howto/img_snow.jpg', 1, 0),
+          new CategoryItem('c2', 'i6', 'Hist2', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
+          new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0)
      ];
 
      static categoryProps: ItemProp[] = [
           new ItemProp('i1', 'p1', 'count', 'number', "10", 1, true),
           new ItemProp('i1', 'p2', 'min', 'number', "0", 2, true),
           new ItemProp('i1', 'p3', 'max', 'number', "10", 3, true),
-          new ItemProp('i1', 'p4', 'prop4', 'string', "10", 4, false),
-          new ItemProp('i1', 'p5', 'prop5', 'date', "10", 5, true),
           new ItemProp('i2', 'p6', 'Formula', 'string', null, 1, true),
-          new ItemProp('i2', 'p7', 'Min', 'number', "10", 2, true),
-          new ItemProp('i2', 'p8', 'Max', 'number', "10", 3, true),
-          new ItemProp('i2', 'p9', 'Size', 'number', "10", 4, true),
-          new ItemProp('i3', 'p10', 'propi3p9', 'number', "10", 4, false),
-          new ItemProp('i3', 'p11', 'propi3p10', 'number', "10", 2, true),
+          //new ItemProp('i7', 'p7', 'count', 'number', "10", 1, true),
+          new ItemProp('i7', 'p8', 'min', 'number', "0", 2, true),
+          new ItemProp('i7', 'p9', 'max', 'number', "10", 3, true),
+          new ItemProp('i7', 'p10', 'Formula', 'string', null, 1, true)
      ]
 
 

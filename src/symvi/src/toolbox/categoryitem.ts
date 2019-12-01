@@ -4,7 +4,7 @@ export class CategoryItem{
 
     constructor(cat_item_data:any){
         this.cat_item_img = document.createElement('img');
-        this.cat_item_img.setAttribute('src', 'https://www.w3schools.com/howto/img_snow.jpg');
+        this.cat_item_img.setAttribute('src', cat_item_data.categoryImgURL);
         this.cat_item_img.setAttribute("class", "flex-elem");
         this.cat_item_img.setAttribute('title', cat_item_data.categoryName);
         this.cat_item_img.setAttribute('id', cat_item_data.catItemId);

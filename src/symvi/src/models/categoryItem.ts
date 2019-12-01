@@ -8,6 +8,10 @@ export class CategoryItem{
           return this._categoryId;
      }
 
+     get categoryImgURL(){
+          return this._cateUrl;
+     }
+
      get categoryName(){
           return this._catItemName;
      }

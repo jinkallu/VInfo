@@ -2,6 +2,7 @@ from .array import Array
 from .formula import Formula
 from .graph import Graph
 from .duplicate import Duplicate
+from .graphingcalculator import GraphingCalculator
 
 class ComponentManager:
     def __init__(self):
@@ -14,7 +15,7 @@ class ComponentManager:
         if component != None:
             return component
 
-        method_name = 'add' + block['name']
+        method_name = 'add' + block['name'].replace(" ", "")
         # Get the method from 'self'. Default to a lambda.
         method = getattr(self, method_name)
         # Call the method as we return it
@@ -45,6 +46,11 @@ class ComponentManager:
     def addDuplicate(self, block):
         self.components.append(Duplicate(block['id'], block['inputs'], block['outputs']))
         print ("Duplicate component added")
+        return self.components[-1]
+
+    def addGraphingCalculator(self, block):
+        self.components.append(GraphingCalculator(block['id'], block['inputs'], block['outputs']))
+        print ("GraphingCalculator component added")
         return self.components[-1]
 
 

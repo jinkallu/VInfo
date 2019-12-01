@@ -10,8 +10,9 @@ class ModelTree:
     def makeTree(self):
         self.firstChildren(self.req['blocks'])
 
-        for child in self.tree.child:
-            self.findNextNode(child, self.req)
+        if self.req['edges'] != None:
+            for child in self.tree.child:
+                self.findNextNode(child, self.req)
 
         #self.print_recurse(self.tree, 0)
 
@@ -25,7 +26,9 @@ class ModelTree:
     #We have now the first children
     # now recurse over all tree find the next nodes and add it as child
     def findNextNode(self, child, req):
+        print("Iterating edges")
         for edge in req['edges']:
+            print("Iterating edges..")
             if edge['src_blk_id'] == child.data['id']:
                 for block in req['blocks']:
                     if edge['tgt_blk_id'] == block['id']:
