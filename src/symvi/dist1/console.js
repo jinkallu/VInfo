@@ -9,6 +9,7 @@ export class Console {
         this.console_div.style.height = pos.height;
         this.console_div.setAttribute('id', 'console');
         this.console_div.innerHTML = "Console";
+        this.console_div.style.overflowY = "scroll";
     }
     get() {
         return this.console_div;

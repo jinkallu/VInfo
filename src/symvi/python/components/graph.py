@@ -7,13 +7,23 @@ class Graph(Components):
 
     def execute(self, data):
         print("Overriding from Parent in Graph")
-        print(len(self.input_data[0]), len(self.input_data[1]))
-        self.h2 = ROOT.TH2F("h2", "", len(self.input_data[0]), self.input_data[0], len(self.input_data[1]), self.input_data[1])
-        #for i in range(len(self.input_data[1])):
-            #print(i, self.input_data[1][i])
-        #    self.h2.SetBinContent(i, self.input_data[1][i])
-        #self.h2.FillN(len(self.input_data[0]), self.input_data[0], self.input_data[1])
-        self.json = ROOT.TBufferJSON.ConvertToJSON(self.h2)
+        len_0 = len(self.input_data[0])
+        min_0 = min(self.input_data[0])
+        max_0 = max(self.input_data[0])
+
+        len_1 = len(self.input_data[1])
+        min_1 = min(self.input_data[1])
+        max_1 = max(self.input_data[1])
+
+        print(type(self.input_data[0]))
+
+        self.g = ROOT.TGraph(len_0)
+        self.g.SetMarkerStyle(20)
+        self.g.SetMarkerColor(2)
+        for i in range(min(len_0, len_1)):
+            self.g.SetPoint(i, self.input_data[0][i], self.input_data[1][i])
+
+        self.json = ROOT.TBufferJSON.ConvertToJSON(self.g)
 
         self.setExecuted()
 

@@ -1,5 +1,5 @@
 from .components import Components
-from math import sin
+import ROOT
 
 
 class Formula(Components):
@@ -8,12 +8,14 @@ class Formula(Components):
 
     def execute(self, data):
         print("Overriding from Parent")
-        data = []
+        formula = data['properties']['Formula']
+        self.f1 = ROOT.TFormula(formula, formula)
+        data_out = []
         for i in range(len(self.input_data[0])):
-            x = self.input_data[0][i]
-            y = sin(x) 
-            data.append(y)
+            x = float(self.input_data[0][i])
+            y = self.f1.Eval(x) 
+            data_out.append(y)
             #print(x, y)
         
-        self.setOutput(0, data)
+        self.setOutput(0, data_out)
         self.setExecuted()

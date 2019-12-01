@@ -1,6 +1,7 @@
 from .array import Array
 from .formula import Formula
 from .graph import Graph
+from .duplicate import Duplicate
 
 class ComponentManager:
     def __init__(self):
@@ -39,6 +40,11 @@ class ComponentManager:
     def addGraph(self, block):
         self.components.append(Graph(block['id'], block['inputs'], block['outputs']))
         print ("Graph component added")
+        return self.components[-1]
+
+    def addDuplicate(self, block):
+        self.components.append(Duplicate(block['id'], block['inputs'], block['outputs']))
+        print ("Duplicate component added")
         return self.components[-1]
 
 

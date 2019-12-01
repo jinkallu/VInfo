@@ -140,7 +140,7 @@ export class Run{
                 if(this.iocontrol !== null){
                     this.iocontrol.getIoButtonOutput().emulateClick();
                     let output_panel = this.iocontrol.getOuputPanel();
-                    JSROOT.draw(output_panel.id, data_draw, "hist");
+                    JSROOT.draw(output_panel.id, data_draw, "ACP");
                 }
                 msg = "<br><font color='green'>" + data['message'] + "</font>";
             }
