@@ -16,6 +16,7 @@ export class MainUI {
     //properties: Properties;
     iopanel: IOPanel;
     console: Console;
+    ioc:any;
 
 
     constructor(body: HTMLBodyElement) {
@@ -27,22 +28,28 @@ export class MainUI {
         
         this.design_area = new DesignArea({"left": "19%", "top": "13%", "width": "62%", "height": "66%"});
         this.console = new Console({'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%"});
-        this.tool_bar = new ToolBar({width: "99%", top: "3em", height: "5%"}, this.design_area, this.console); // toolbar after designarea
 
         this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "17.5%", "height": "86%"});
-        let ioc = this.iopanel.getIOControl(); // for output
-        this.tool_bar.setIOControl(ioc);
+        this.ioc = this.iopanel.getIOControl(); // for output
+
+        this.tool_bar = new ToolBar({width: "99%", top: "3em", height: "5%"}, this.design_area, this.console); // toolbar after designarea
+    console.log(body.getBoundingClientRect().width, body.getBoundingClientRect().height * 0.86);
+        this.tool_bar.setIOControl(this.ioc, {"width": body.getBoundingClientRect().width * 0.175, "height": window.innerHeight * 0.86});
+
+
         //this.properties = new Properties();
     }
 
     createUI() {
         this.createMenuBar();
-        this.createToolBar();
         this.createDesignArea();
         this.createProperties();
         this.createToolBox();
         this.creatConsole();
         this.createIOPanel();
+        this.createToolBar();
+
+        
     }
 
     createMenuBar() {

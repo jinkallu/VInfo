@@ -4,6 +4,7 @@ import JSROOT from 'JSROOT'
 import { IOControl } from '../iopanel/iocontrol';
 import { DesignApi } from '../Api/designApi';
 import { Edges } from '../dgmeditor/edges';
+import { BasicThree } from '../threejsanim/basicthree'
 
 
 export class Run{
@@ -23,6 +24,8 @@ export class Run{
         this.run_div.style.display = 'inline-block';
 
         this.run_div.addEventListener("click", this.execute);
+
+        
     }
 
     get(){
@@ -159,7 +162,12 @@ export class Run{
             return data;
     }
 
-    setIOControl(ioc:IOControl){
+    setIOControl(ioc:IOControl, pos:any){
         this.iocontrol = ioc;
+
+        // to remove
+        let output_div = this.iocontrol.getOuputPanel();
+        let three = new BasicThree(pos);
+        output_div.appendChild(three.get());
     }
 }

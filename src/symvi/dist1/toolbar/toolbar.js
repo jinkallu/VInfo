@@ -16,8 +16,8 @@ export class ToolBar {
     get() {
         return this.tool_bar_div;
     }
-    setIOControl(ioc) {
-        this.run.setIOControl(ioc);
+    setIOControl(ioc, pos) {
+        this.run.setIOControl(ioc, pos);
     }
 }
 //# sourceMappingURL=toolbar.js.map

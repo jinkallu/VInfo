@@ -16,19 +16,20 @@ export class MainUI {
         this.tool_box = new ToolBox("13%", "18%", "86%");
         this.design_area = new DesignArea({ "left": "19%", "top": "13%", "width": "62%", "height": "66%" });
         this.console = new Console({ 'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%" });
-        this.tool_bar = new ToolBar({ width: "99%", top: "3em", height: "5%" }, this.design_area, this.console);
         this.iopanel = new IOPanel({ "left": "82%", "top": "13%", "width": "17.5%", "height": "86%" });
-        let ioc = this.iopanel.getIOControl();
-        this.tool_bar.setIOControl(ioc);
+        this.ioc = this.iopanel.getIOControl();
+        this.tool_bar = new ToolBar({ width: "99%", top: "3em", height: "5%" }, this.design_area, this.console);
+        console.log(body.getBoundingClientRect().width, body.getBoundingClientRect().height * 0.86);
+        this.tool_bar.setIOControl(this.ioc, { "width": body.getBoundingClientRect().width * 0.175, "height": window.innerHeight * 0.86 });
     }
     createUI() {
         this.createMenuBar();
-        this.createToolBar();
         this.createDesignArea();
         this.createProperties();
         this.createToolBox();
         this.creatConsole();
         this.createIOPanel();
+        this.createToolBar();
     }
     createMenuBar() {
         let menubar_div = this.menu_bar.get();

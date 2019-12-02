@@ -1,5 +1,6 @@
 import JSROOT from 'JSROOT';
 import { DesignApi } from '../Api/designApi';
+import { BasicThree } from '../threejsanim/basicthree';
 export class Run {
     constructor(_design_area, _console) {
         this.execute = () => {
@@ -120,8 +121,11 @@ export class Run {
         this.console_area.get().innerHTML = console_data;
         return data;
     }
-    setIOControl(ioc) {
+    setIOControl(ioc, pos) {
         this.iocontrol = ioc;
+        let output_div = this.iocontrol.getOuputPanel();
+        let three = new BasicThree(pos);
+        output_div.appendChild(three.get());
     }
 }
 //# sourceMappingURL=run.js.map

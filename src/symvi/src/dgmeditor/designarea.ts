@@ -8,7 +8,6 @@ import{DesignApi} from '../Api/designApi';
 import {Properties} from '../iopanel/properties';
 
 
-
 export class DesignArea{
     design_area_div:HTMLDivElement;
     svg:any;

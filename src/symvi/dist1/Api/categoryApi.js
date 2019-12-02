@@ -42,7 +42,8 @@ CategoryApi.categoryItems = [
     new CategoryItem('c1', 'i4', 'Duplicate', '/static/images/duplicate.png', 1, 2),
     new CategoryItem('c2', 'i5', 'Hist1', 'https://www.w3schools.com/howto/img_snow.jpg', 1, 0),
     new CategoryItem('c2', 'i6', 'Hist2', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
-    new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0)
+    new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0),
+    new CategoryItem('c3', 'i8', 'Simulate', '/static/images/graphingcalc.png', 1, 0)
 ];
 CategoryApi.categoryProps = [
     new ItemProp('i1', 'p1', 'count', 'number', "10", 1, true),
