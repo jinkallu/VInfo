@@ -20,4 +20,4 @@ class GraphingCalculator(Components):
         self.setExecuted()
 
     def getJson(self):
-        return self.json.Data()
+        return {"data_type": "Graph", "data": self.json.Data()}

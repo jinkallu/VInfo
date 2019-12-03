@@ -15,6 +15,11 @@ export class Run {
             this.submit({ edges: edges,
                 blocks: blocks });
         };
+        this.outputResize = (evt) => {
+            console.log("resizing");
+            this.three.resize({ width: evt.target.getBoundingClientRect().width,
+                height: evt.target.getBoundingClientRect().height });
+        };
         this.design_area = _design_area;
         this.console_area = _console;
         this.run_div = document.createElement("div");
@@ -104,12 +109,23 @@ export class Run {
         let msg;
         let data = await response.json();
         if (data['output'] !== null) {
-            let data_draw = JSROOT.parse(data['output'][0]['data']);
+            let data_draw = data['output'][0]['data'];
             if (this.iocontrol !== null) {
                 this.iocontrol.getIoButtonOutput().emulateClick();
                 let output_panel = this.iocontrol.getOuputPanel();
                 output_panel.innerHTML = "";
-                JSROOT.draw(output_panel.id, data_draw, "ACP");
+                if (data_draw['data_type'] === "Sim") {
+                    let rect = output_panel.getBoundingClientRect();
+                    let output_div = this.iocontrol.getOuputPanel();
+                    this.three = new BasicThree({ "width": rect.width, "height": rect.height });
+                    this.three.setData(data_draw['data']);
+                    output_div.appendChild(this.three.get());
+                    output_div.addEventListener("resize", this.outputResize);
+                }
+                else {
+                    let dat = JSROOT.parse(data_draw["data"]);
+                    JSROOT.draw(output_panel.id, dat, "ACP");
+                }
             }
             msg = "<br><font color='green'>" + data['message'] + "</font>";
         }
@@ -121,11 +137,8 @@ export class Run {
         this.console_area.get().innerHTML = console_data;
         return data;
     }
-    setIOControl(ioc, pos) {
+    setIOControl(ioc) {
         this.iocontrol = ioc;
-        let output_div = this.iocontrol.getOuputPanel();
-        let three = new BasicThree(pos);
-        output_div.appendChild(three.get());
     }
 }
 //# sourceMappingURL=run.js.map

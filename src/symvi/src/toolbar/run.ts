@@ -12,6 +12,8 @@ export class Run{
     design_area:any;
     console_area:any;
     iocontrol: IOControl;
+    three: BasicThree;
+    
 
     constructor(_design_area:any, _console:any){
         this.design_area = _design_area;
@@ -25,7 +27,7 @@ export class Run{
 
         this.run_div.addEventListener("click", this.execute);
 
-        
+
     }
 
     get(){
@@ -142,12 +144,28 @@ export class Run{
             let msg;
             let data:any = await response.json();
             if (data['output'] !== null){
-                let data_draw = JSROOT.parse(data['output'][0]['data']);
+                let data_draw = data['output'][0]['data'];
                 if(this.iocontrol !== null){
                     this.iocontrol.getIoButtonOutput().emulateClick();
                     let output_panel = this.iocontrol.getOuputPanel();
                     output_panel.innerHTML = "";
-                    JSROOT.draw(output_panel.id, data_draw, "ACP");
+                    if(data_draw['data_type'] === "Sim"){ // must be replaced 
+                        let rect = output_panel.getBoundingClientRect();
+                        // to remove
+                        let output_div = this.iocontrol.getOuputPanel();
+                        //let three = new BasicThree(pos);
+                        this.three = new BasicThree({"width": rect.width, "height": rect.height});
+                        this.three.setData(data_draw['data']);
+
+                        //this.three.resize(pos);
+                        output_div.appendChild(this.three.get());
+                        output_div.addEventListener("resize", this.outputResize);
+                        //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
+                    }
+                    else{
+                        let dat = JSROOT.parse(data_draw["data"]);
+                        JSROOT.draw(output_panel.id, dat, "ACP");
+                    }
                 }
                 msg = "<br><font color='green'>" + data['message'] + "</font>";
             }
@@ -162,12 +180,15 @@ export class Run{
             return data;
     }
 
-    setIOControl(ioc:IOControl, pos:any){
+    setIOControl(ioc:IOControl){
         this.iocontrol = ioc;
 
-        // to remove
-        let output_div = this.iocontrol.getOuputPanel();
-        let three = new BasicThree(pos);
-        output_div.appendChild(three.get());
+        
+    }
+
+    outputResize = (evt:any) => {
+        console.log("resizing");
+        this.three.resize( {width: evt.target.getBoundingClientRect().width, 
+            height: evt.target.getBoundingClientRect().height});
     }
 }

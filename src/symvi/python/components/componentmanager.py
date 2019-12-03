@@ -3,6 +3,7 @@ from .formula import Formula
 from .graph import Graph
 from .duplicate import Duplicate
 from .graphingcalculator import GraphingCalculator
+from .simulate import Simulate
 
 class ComponentManager:
     def __init__(self):
@@ -51,6 +52,11 @@ class ComponentManager:
     def addGraphingCalculator(self, block):
         self.components.append(GraphingCalculator(block['id'], block['inputs'], block['outputs']))
         print ("GraphingCalculator component added")
+        return self.components[-1]
+
+    def addSimulate(self, block):
+        self.components.append(Simulate(block['id'], block['inputs'], block['outputs']))
+        print ("Simulate component added")
         return self.components[-1]
 
 

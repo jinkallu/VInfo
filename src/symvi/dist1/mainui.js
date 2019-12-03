@@ -20,7 +20,7 @@ export class MainUI {
         this.ioc = this.iopanel.getIOControl();
         this.tool_bar = new ToolBar({ width: "99%", top: "3em", height: "5%" }, this.design_area, this.console);
         console.log(body.getBoundingClientRect().width, body.getBoundingClientRect().height * 0.86);
-        this.tool_bar.setIOControl(this.ioc, { "width": body.getBoundingClientRect().width * 0.175, "height": window.innerHeight * 0.86 });
+        this.tool_bar.setIOControl(this.ioc);
     }
     createUI() {
         this.createMenuBar();

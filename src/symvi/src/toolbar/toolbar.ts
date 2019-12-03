@@ -26,7 +26,7 @@ export class ToolBar{
         return this.tool_bar_div;
     }
 
-    setIOControl(ioc:IOControl, pos:any){
-        this.run.setIOControl(ioc, pos);
+    setIOControl(ioc:IOControl){//}, pos:any){
+        this.run.setIOControl(ioc);//, pos);
     }
 }
