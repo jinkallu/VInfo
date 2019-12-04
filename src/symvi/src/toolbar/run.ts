@@ -188,7 +188,7 @@ export class Run{
 
     outputResize = (evt:any) => {
         console.log("resizing");
-        this.three.resize( {width: evt.target.getBoundingClientRect().width, 
-            height: evt.target.getBoundingClientRect().height});
+        //this.three.resize( {width: evt.target.getBoundingClientRect().width, 
+         //   height: evt.target.getBoundingClientRect().height});
     }
 }

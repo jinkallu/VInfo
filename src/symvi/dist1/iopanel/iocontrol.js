@@ -16,6 +16,8 @@ export class IOControl {
             this.io_button_input.get().style.background = "#E8E8E8";
         };
         this.iocontrol_div = document.createElement("div");
+        this.iocontrol_div.style.width = "100%";
+        this.iocontrol_div.style.height = "100%";
         this.io_button_input = new IOButton("Input");
         this.io_button_output = new IOButton("Output");
         let io_button_input_div = this.io_button_input.get();

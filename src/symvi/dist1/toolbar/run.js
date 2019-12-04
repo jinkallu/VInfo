@@ -17,8 +17,6 @@ export class Run {
         };
         this.outputResize = (evt) => {
             console.log("resizing");
-            this.three.resize({ width: evt.target.getBoundingClientRect().width,
-                height: evt.target.getBoundingClientRect().height });
         };
         this.design_area = _design_area;
         this.console_area = _console;
