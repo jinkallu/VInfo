@@ -32,7 +32,8 @@ export class CategoryApi {
           new CategoryItem('c2', 'i6', 'Hist2', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
           new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0),
           new CategoryItem('c4', 'i8', 'Simulate1D', '/static/images/simulate.png', 1, 0),
-          new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate.png', 2, 0)
+          new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate2d.png', 2, 0),
+          new CategoryItem('c4', 'i10', 'Motion', '/static/images/simulate2d.png', 0, 0)
      ];
 
      static categoryProps: ItemProp[] = [
@@ -47,7 +48,16 @@ export class CategoryApi {
           new ItemProp('i7', 'p9', 'max', 'number', "10", 3, true),
           new ItemProp('i7', 'p10', 'Formula', 'string', null, 1, true),
           
-          new ItemProp('i8', 'p11', 'Axis', 'number', null, 1, true)
+          new ItemProp('i8', 'p11', 'Axis', 'number', null, 1, true),
+
+          new ItemProp('i10', 'p12', 'Position_x', 'number', null, 1, true),
+          new ItemProp('i10', 'p13', 'Position_y', 'number', null, 1, true),
+          new ItemProp('i10', 'p14', 'Position_z', 'number', null, 1, true),
+          new ItemProp('i10', 'p15', 'Velocity_x', 'number', null, 1, true),
+          new ItemProp('i10', 'p16', 'Velocity_y', 'number', null, 1, true),
+          new ItemProp('i10', 'p17', 'Velocity_z', 'number', null, 1, true),
+          new ItemProp('i10', 'p18', 'duration', 'number', null, 1, true)
+
      ]
 
 
