@@ -16,7 +16,13 @@ export class CategoryApi {
           'c3',
           'Graphing Calculators',
           2,
-          'url')];
+          'url'),
+     new Category(
+          'c4',
+          'Simulation',
+          2,
+          'url')
+     ];
      static categoryItems: CategoryItem[] = [
           new CategoryItem('c1', 'i1', 'Array', '/static/images/array.png', 0, 1),
           new CategoryItem('c1', 'i2', 'Formula', '/static/images/formula.png', 1, 1),
@@ -25,18 +31,23 @@ export class CategoryApi {
           new CategoryItem('c2', 'i5', 'Hist1', 'https://www.w3schools.com/howto/img_snow.jpg', 1, 0),
           new CategoryItem('c2', 'i6', 'Hist2', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
           new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0),
-          new CategoryItem('c3', 'i8', 'Simulate', '/static/images/simulate.png', 1, 0)
+          new CategoryItem('c4', 'i8', 'Simulate1D', '/static/images/simulate.png', 1, 0),
+          new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate.png', 2, 0)
      ];
 
      static categoryProps: ItemProp[] = [
           new ItemProp('i1', 'p1', 'count', 'number', "10", 1, true),
           new ItemProp('i1', 'p2', 'min', 'number', "0", 2, true),
           new ItemProp('i1', 'p3', 'max', 'number', "10", 3, true),
+         
           new ItemProp('i2', 'p6', 'Formula', 'string', null, 1, true),
           //new ItemProp('i7', 'p7', 'count', 'number', "10", 1, true),
+          
           new ItemProp('i7', 'p8', 'min', 'number', "0", 2, true),
           new ItemProp('i7', 'p9', 'max', 'number', "10", 3, true),
-          new ItemProp('i7', 'p10', 'Formula', 'string', null, 1, true)
+          new ItemProp('i7', 'p10', 'Formula', 'string', null, 1, true),
+          
+          new ItemProp('i8', 'p11', 'Axis', 'number', null, 1, true)
      ]
 
 

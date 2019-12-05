@@ -2,7 +2,8 @@ import { Node } from './node';
 import { Properties } from '../iopanel/properties';
 export class Block {
     constructor(svg, pos, _id, _inputs, _outputs, _edges, _name, itemId) {
-        this.onClick = () => {
+        this.onClick = (evt) => {
+            evt.preventDefault();
             this.rect.dispatchEvent(new CustomEvent("block_clicked", {
                 bubbles: true,
                 detail: { id: this.id }

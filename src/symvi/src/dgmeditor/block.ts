@@ -97,7 +97,8 @@ export class Block {
         return this.group;
     }
 
-    onClick = () => {
+    onClick = (evt:any) => {
+        evt.preventDefault();
         this.rect.dispatchEvent(new CustomEvent("block_clicked", {
             bubbles: true,
             detail: { id:  this.id}
