@@ -49,6 +49,9 @@ export class Properties {
         let inEl = document.createElement('input');
         inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
         inEl.setAttribute('placeholder', itemProp.propName);
+        if (itemProp.propDefVal) {
+            inEl.value = itemProp.propDefVal;
+        }
         if (itemProp.propVal != null) {
             inEl.value = itemProp.propVal;
         }

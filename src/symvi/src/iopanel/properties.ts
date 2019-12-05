@@ -59,12 +59,12 @@ export class Properties {
           console.log()
      }
 
-     clearProps(){
-          this.propDiv.innerHTML=null;
+     clearProps() {
+          this.propDiv.innerHTML = null;
      }
 
      addProperties(itemProp: ItemProp, instanceid: number) {
-         
+
 
 
           let divEl = document.createElement('div');
@@ -76,6 +76,9 @@ export class Properties {
           let inEl = document.createElement('input');
           inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
           inEl.setAttribute('placeholder', itemProp.propName);
+          if (itemProp.propDefVal) {
+               inEl.value = itemProp.propDefVal;
+          }
           if (itemProp.propVal != null) {
 
                inEl.value = itemProp.propVal;
@@ -116,13 +119,13 @@ export class Properties {
           // // itemNameDiv.textContent=catItemName.toUpperCase();
           this.propDiv.innerHTML = "";
 
-          let propContainer=document.createElement('div');
-          propContainer.style.display="flex";
-          propContainer.style.justifyContent="space-around";
+          let propContainer = document.createElement('div');
+          propContainer.style.display = "flex";
+          propContainer.style.justifyContent = "space-around";
           propContainer.style.flexDirection = 'column';
 
-          let instHeader=document.createElement('p');
-          instHeader.textContent=instanceid.toString();
+          let instHeader = document.createElement('p');
+          instHeader.textContent = instanceid.toString();
 
           propContainer.appendChild(instHeader);
 
