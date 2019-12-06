@@ -73,6 +73,6 @@ CategoryApi.categoryProps = [
     new ItemProp('i11', 'p23', 'Velocity_y', 'number', null, 1, true),
     new ItemProp('i11', 'p24', 'Velocity_z', 'number', null, 1, true),
     new ItemProp('i11', 'p25', 'mass', 'number', null, 1, true),
-    new ItemProp('i11', 'p25', 'duration', 'number', null, 1, true)
+    new ItemProp('i11', 'p26', 'duration', 'number', null, 1, true)
 ];
 //# sourceMappingURL=categoryApi.js.map

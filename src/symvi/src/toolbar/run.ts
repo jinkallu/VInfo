@@ -177,8 +177,8 @@ export class Run{
             }
 
             let console_data = this.console_area.get().innerHTML;
-            console_data += msg
-            this.console_area.get().innerHTML = console_data;
+            msg += console_data
+            this.console_area.get().innerHTML = msg;
                 
             return data;
     }

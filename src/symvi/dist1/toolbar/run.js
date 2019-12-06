@@ -135,8 +135,8 @@ export class Run {
             msg = "<br><font color='red'>" + data['message'] + "</font>";
         }
         let console_data = this.console_area.get().innerHTML;
-        console_data += msg;
-        this.console_area.get().innerHTML = console_data;
+        msg += console_data;
+        this.console_area.get().innerHTML = msg;
         return data;
     }
     setIOControl(ioc) {
