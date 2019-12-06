@@ -1,34 +1,33 @@
-from .components import Components
+from .simulation import Simulation
 
-class Simulate1D(Components):
+class Simulate1D(Simulation):
     def __init__(self, id, no_inputs, no_outputs):
-        Components.__init__(self, id, no_inputs, no_outputs)
+        Simulation.__init__(self, id, no_inputs, no_outputs)
 
     def execute(self, data):
-        print("Overriding from Parent in Graph")
         data_out = []
-        for i in range(len(self.input_data[0])):
-            data_out.append(self.input_data[0][i])
-
-        self.json = {"data_type": "Sim", "data": {}}
-        #self.json = {"data_type": "Sim", "data": {data_out}, "axis": data['properties']['Axis']}
-        #self.json = {"data_type": "Sim", "data": }
-        self.json["data"]["0"] = None
-        self.json["data"]["1"] = None
-        self.json["data"]["2"] = None
+        data_out_x = None
+        data_out_y = None
+        data_out_z = None
 
         if data['properties']['Axis'] == "0":
-            self.json["data"]["0"] = data_out
+            data_out_x = self.input_data[0]
         
         elif data['properties']['Axis'] == "1":
-            self.json["data"]["1"] = data_out
+            data_out_y = self.input_data[0]
         
         elif data['properties']['Axis'] == "2":
-            self.json["data"]["2"] = data_out
+            data_out_z = self.input_data[0]
         
         else:
-            self.json["data"]["0"] = data_out
+            data_out_x = self.input_data[0]
+
+        data_out.append(data_out_x)
+        data_out.append(data_out_y)
+        data_out.append(data_out_z)
         
+        self.appendData(data_out)
+
 
         self.setExecuted()
 
