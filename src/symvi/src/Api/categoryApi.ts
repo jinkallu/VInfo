@@ -57,7 +57,16 @@ export class CategoryApi {
           new ItemProp('i10', 'p15', 'Velocity_x', 'number', null, 1, true),
           new ItemProp('i10', 'p16', 'Velocity_y', 'number', null, 1, true),
           new ItemProp('i10', 'p17', 'Velocity_z', 'number', null, 1, true),
-          new ItemProp('i10', 'p18', 'duration', 'number', null, 1, true)
+          new ItemProp('i10', 'p18', 'duration', 'number', null, 1, true),
+
+          new ItemProp('i11', 'p19', 'Position_x', 'number', null, 1, true),
+          new ItemProp('i11', 'p20', 'Position_y', 'number', null, 1, true),
+          new ItemProp('i11', 'p21', 'Position_z', 'number', null, 1, true),
+          new ItemProp('i11', 'p22', 'Velocity_x', 'number', null, 1, true),
+          new ItemProp('i11', 'p23', 'Velocity_y', 'number', null, 1, true),
+          new ItemProp('i11', 'p24', 'Velocity_z', 'number', null, 1, true),
+          new ItemProp('i11', 'p25', 'mass', 'number', null, 1, true),
+          new ItemProp('i11', 'p25', 'duration', 'number', null, 1, true)
 
      ]
 

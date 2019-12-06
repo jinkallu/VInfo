@@ -6,11 +6,14 @@ from .graphingcalculator import GraphingCalculator
 from .simulate1D import Simulate1D
 from .simulate2D import Simulate2D
 from .motion import Motion
+from .gravity import Gravity
 
 class ComponentManager:
     def __init__(self):
         self.components = []
         self.cmp_output = []
+
+        self.flag_gravity = False
 
 
     def addComponent(self, block):
@@ -69,6 +72,16 @@ class ComponentManager:
     def addMotion(self, block):
         self.components.append(Motion(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
+
+    def addGravity(self, block):
+        if not self.flag_gravity:
+            self.components.append(Gravity(block['id'], block['inputs'], block['outputs']))
+            self.idx_gravity = len(self.components) - 1
+            self.flag_gravity = True
+
+        self.components[self.idx_gravity].addBlock(block)
+
+        return self.components[self.idx_gravity]
 
 
     def run(self, tree):
