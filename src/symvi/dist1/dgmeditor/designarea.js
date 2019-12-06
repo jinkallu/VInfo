@@ -37,10 +37,11 @@ export class DesignArea {
             let outputs = cat_item.outputs;
             let name = cat_item.categoryName;
             let itemId = cat_item.catItemId;
+            let url = cat_item.categoryImgURL;
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
-            this.addBlock({ x: x, y: y }, Id.getID(), inputs, outputs, name, itemId);
+            this.addBlock({ x: x, y: y }, Id.getID(), inputs, outputs, name, itemId, url);
         };
         this.onClick = (evt) => {
             this.properties.clearProps();
@@ -79,8 +80,8 @@ export class DesignArea {
     get() {
         return this.design_area_div;
     }
-    addBlock(pos, id, inputs, outputs, name, itemId) {
-        let rect = new Block(this.svg, pos, id, inputs, outputs, this.edges, name, itemId);
+    addBlock(pos, id, inputs, outputs, name, itemId, url) {
+        let rect = new Block(this.svg, pos, id, inputs, outputs, this.edges, name, itemId, url);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
         rect.get().addEventListener("block_clicked", this.onClick);

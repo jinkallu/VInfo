@@ -28,7 +28,7 @@ export class Block {
 
     
 
-    constructor(svg: any, pos: any,_id:number, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string) {
+    constructor(svg: any, pos: any,_id:number, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string, url:string) {
         this.id = _id;
         this.type = 'Block';
 
@@ -49,13 +49,15 @@ export class Block {
 
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-        this.rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        this.rect = document.createElementNS("http://www.w3.org/2000/svg", "image");
         this.rect.setAttribute("width", "60");
         this.rect.setAttribute("height", "40");
-        this.rect.setAttribute("fill", "white");
+        //this.rect.setAttribute("fill", "white");
         this.rect.setAttribute("stroke", "red");
         this.rect.setAttribute("x", pos.x);
         this.rect.setAttribute("y", pos.y);
+        this.rect.setAttribute("href", url);
+        this.rect.setAttribute("style",  "outline: 0.05rem solid red;");
 
 
 

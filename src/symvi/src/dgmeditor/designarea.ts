@@ -57,8 +57,8 @@ export class DesignArea{
         return this.design_area_div;
     }
 
-    addBlock(pos:any,id:number, inputs:number, outputs:number, name:string,itemId:string){
-        let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId);
+    addBlock(pos:any,id:number, inputs:number, outputs:number, name:string, itemId:string, url:string){
+        let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId, url);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
         rect.get().addEventListener("block_clicked", this.onClick);
@@ -108,7 +108,8 @@ export class DesignArea{
             let inputs = cat_item.inputs;
             let outputs = cat_item.outputs;
             let name = cat_item.categoryName;
-            let itemId=cat_item.catItemId;
+            let itemId = cat_item.catItemId;
+            let url = cat_item.categoryImgURL
 
 
 
@@ -121,7 +122,7 @@ export class DesignArea{
             let y = event.clientY - ctm.f / ctm.d;
             
 
-            this.addBlock({ x: x, y: y },Id.getID(), inputs, outputs, name,itemId);
+            this.addBlock({ x: x, y: y },Id.getID(), inputs, outputs, name, itemId, url);
 
         //}
     }

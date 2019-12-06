@@ -1,7 +1,7 @@
 import { Node } from './node';
 import { Properties } from '../iopanel/properties';
 export class Block {
-    constructor(svg, pos, _id, _inputs, _outputs, _edges, _name, itemId) {
+    constructor(svg, pos, _id, _inputs, _outputs, _edges, _name, itemId, url) {
         this.onClick = (evt) => {
             evt.preventDefault();
             this.rect.dispatchEvent(new CustomEvent("block_clicked", {
@@ -39,13 +39,14 @@ export class Block {
         this.itemId = itemId;
         this.property = Properties.getInstance();
         this.group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        this.rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        this.rect = document.createElementNS("http://www.w3.org/2000/svg", "image");
         this.rect.setAttribute("width", "60");
         this.rect.setAttribute("height", "40");
-        this.rect.setAttribute("fill", "white");
         this.rect.setAttribute("stroke", "red");
         this.rect.setAttribute("x", pos.x);
         this.rect.setAttribute("y", pos.y);
+        this.rect.setAttribute("href", url);
+        this.rect.setAttribute("style", "outline: 0.05rem solid red;");
         this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         this.text.textContent = _name;
         this.text.setAttribute("x", pos.x);
