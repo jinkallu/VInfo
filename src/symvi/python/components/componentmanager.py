@@ -5,6 +5,7 @@ from .duplicate import Duplicate
 from .graphingcalculator import GraphingCalculator
 from .simulate1D import Simulate1D
 from .simulate2D import Simulate2D
+from .motion import Motion
 
 class ComponentManager:
     def __init__(self):
@@ -63,6 +64,10 @@ class ComponentManager:
     def addSimulate2D(self, block):
         self.components.append(Simulate2D(block['id'], block['inputs'], block['outputs']))
         print ("Simulate2D component added")
+        return self.components[-1]
+
+    def addMotion(self, block):
+        self.components.append(Motion(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
 

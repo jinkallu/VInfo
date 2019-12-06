@@ -47,15 +47,16 @@ CategoryApi.categoryItems = [
     new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0),
     new CategoryItem('c4', 'i8', 'Simulate1D', '/static/images/simulate.png', 1, 0),
     new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate2d.png', 2, 0),
-    new CategoryItem('c4', 'i10', 'Motion', '/static/images/simulate2d.png', 0, 0)
+    new CategoryItem('c4', 'i10', 'Motion', '/static/images/simulate2d.png', 0, 0),
+    new CategoryItem('c4', 'i11', 'Gravity', '/static/images/simulate2d.png', 0, 0)
 ];
 CategoryApi.categoryProps = [
-    new ItemProp('i1', 'p1', 'count', 'number', "10", 1, true),
-    new ItemProp('i1', 'p2', 'min', 'number', "0", 2, true),
-    new ItemProp('i1', 'p3', 'max', 'number', "10", 3, true),
+    new ItemProp('i1', 'p1', 'count', 'number', null, 1, true),
+    new ItemProp('i1', 'p2', 'min', 'number', null, 2, true),
+    new ItemProp('i1', 'p3', 'max', 'number', null, 3, true),
     new ItemProp('i2', 'p6', 'Formula', 'string', null, 1, true),
-    new ItemProp('i7', 'p8', 'min', 'number', "0", 2, true),
-    new ItemProp('i7', 'p9', 'max', 'number', "10", 3, true),
+    new ItemProp('i7', 'p8', 'min', 'number', null, 2, true),
+    new ItemProp('i7', 'p9', 'max', 'number', null, 3, true),
     new ItemProp('i7', 'p10', 'Formula', 'string', null, 1, true),
     new ItemProp('i8', 'p11', 'Axis', 'number', null, 1, true),
     new ItemProp('i10', 'p12', 'Position_x', 'number', null, 1, true),

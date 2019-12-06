@@ -1,6 +1,8 @@
 from flask import Flask, render_template, jsonify,send_from_directory
 from flask import request, jsonify, make_response
 
+import traceback
+
 flag_ROOT = True
 
 try:
@@ -51,7 +53,7 @@ def add():
             return make_response(jsonify(data))
 
         except Exception as e:
-            msg = str(e)
+            msg = traceback.format_exc() #str(e)
             data = {'output': None, 'message': msg}
             return make_response(jsonify(data))
 

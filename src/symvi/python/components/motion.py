@@ -1,8 +1,8 @@
-from .components import Components
+from .simulation import Simulation
 
-class Motion(Components):
+class Motion(Simulation):
     def __init__(self, id, no_inputs, no_outputs):
-        Components.__init__(self, id, no_inputs, no_outputs)
+        Simulation.__init__(self, id, no_inputs, no_outputs)
 
     def execute(self, data):
 
@@ -16,26 +16,36 @@ class Motion(Components):
 
         duration = float(data['properties']['duration'])
 
-        data_out_0 = []
-        data_out_1 = []
-        data_out_2 = []
+        data_out = []
+        data_out_x = []
+        data_out_y = []
+        data_out_z = []
 
-        for i in range(len(self.input_data[0])):
-            data_out_0.append(self.input_data[0][i])
+        dt = duration / 100
 
+        t = 0
+        while t < duration:
+            x = x_0 + t * vx_0
+            data_out_x.append(x)
+
+            y = y_0 + t * vy_0
+            data_out_y.append(y)
+
+            z = z_0 + t * vz_0
+            data_out_z.append(z)
+
+            t += dt
+
+        #self.json = {"data_type": "Sim", "data": {}}
+        data_out.append(data_out_x)
+        data_out.append(data_out_y)
+        data_out.append(data_out_z)
         
-        for i in range(len(self.input_data[1])):
-            data_out_1.append(self.input_data[1][i])
+        self.appendData(data_out)
 
-        self.json = {"data_type": "Sim", "data": {}}
-        #self.json = {"data_type": "Sim", "data": {data_out}, "axis": data['properties']['Axis']}
-        #self.json = {"data_type": "Sim", "data": }
-        self.json["data"]["0"] = data_out_0
-        self.json["data"]["1"] = data_out_1
-        self.json["data"]["2"] = None
+        #self.json["data"]["0"] = data_out_x
+        #self.json["data"]["1"] = data_out_y
+        #self.json["data"]["2"] = data_out_z
         
 
         self.setExecuted()
-
-    def getJson(self):
-        return self.json

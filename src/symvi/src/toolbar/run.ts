@@ -144,7 +144,9 @@ export class Run{
             let msg;
             let data:any = await response.json();
             if (data['output'] !== null){
+                console.log("## 0");
                 let data_draw = data['output'][0]['data'];
+                console.log("## 1");
                 if(this.iocontrol !== null){
                     this.iocontrol.getIoButtonOutput().emulateClick();
                     let output_panel = this.iocontrol.getOuputPanel();
@@ -155,8 +157,9 @@ export class Run{
                         let output_div = this.iocontrol.getOuputPanel();
                         //let three = new BasicThree(pos);
                         this.three = new BasicThree({"width": rect.width, "height": rect.height});
+                        console.log("## 2");
                         this.three.setData(data_draw['data']);
-
+                        console.log("## 3");
                         //this.three.resize(pos);
                         output_div.appendChild(this.three.get());
                         output_div.addEventListener("resize", this.outputResize);
