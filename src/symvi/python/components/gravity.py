@@ -24,11 +24,16 @@ class Gravity(Simulation):
         self.fz = []
 
         self.masses = []
+
+        self.input_size = len(self.input_data)
     
     def addBlock(self, block):
         self.blocks.append(block)
 
     def execute(self, data):
+        self.duration = float(data['properties']['duration'])
+        self.dt = 0.1#self.duration / 100
+
         self.initialize()
 
         t = 0
@@ -45,27 +50,28 @@ class Gravity(Simulation):
         self.setExecuted()
 
     def initialize(self):
-        self.duration = float(self.blocks[0]['properties']['duration'])
-        self.dt = self.duration / 100
+        
 
-        for block in self.blocks:
+        #for block in self.blocks:
+        for input in self.input_data:
             self.x.append([])
             self.y.append([])
             self.z.append([])
 
-            self.x[-1].append(float(block['properties']['Position_x']))
-            self.y[-1].append(float(block['properties']['Position_y']))
-            self.z[-1].append(float(block['properties']['Position_z']))
+            #self.x[-1].append(float(block['properties']['Position_x']))
+            self.x[-1].append(float(input['position']['x'][0]))
+            self.y[-1].append(float(input['position']['y'][0]))
+            self.z[-1].append(float(input['position']['z'][0]))
 
             self.vx.append([])
             self.vy.append([])
             self.vz.append([])
 
-            self.vx[-1].append(float(block['properties']['Velocity_x']))
-            self.vy[-1].append(float(block['properties']['Velocity_y']))
-            self.vz[-1].append(float(block['properties']['Velocity_z']))
+            self.vx[-1].append(float(input['velocity']['vx'][0]))
+            self.vy[-1].append(float(input['velocity']['vy'][0]))
+            self.vz[-1].append(float(input['velocity']['vz'][0]))
 
-            self.masses.append(float(block['properties']['mass']))
+            self.masses.append(float(input['mass']))
 
             self.ax.append([])
             self.ay.append([])
@@ -85,19 +91,19 @@ class Gravity(Simulation):
 
 
     def calculatePosition(self):
-        for i in range(len(self.blocks)):
+        for i in range(self.input_size):
             self.x[i].append(self.x[i][-1] + self.dt * self.vx[i][-1])
             self.y[i].append(self.y[i][-1] + self.dt * self.vy[i][-1])
             self.z[i].append(self.z[i][-1] + self.dt * self.vz[i][-1])
 
     def calculateVelocity(self):
-        for i in range(len(self.blocks)):
+        for i in range(self.input_size):
             self.vx[i].append(self.vx[i][-1] + self.dt * self.ax[i][-1])
             self.vy[i].append(self.vy[i][-1] + self.dt * self.ay[i][-1])
             self.vz[i].append(self.vz[i][-1] + self.dt * self.az[i][-1])
 
     def calculateAcceleration(self):
-        for i in range(len(self.blocks)):
+        for i in range(self.input_size):
             self.ax[i].append(0)
             self.ay[i].append(0)
             self.az[i].append(0)
@@ -112,12 +118,12 @@ class Gravity(Simulation):
         
     
     def calculateForce(self):
-        for i in range(len(self.blocks)):
+        for i in range(self.input_size):
             self.fx[i].append(0)
             self.fy[i].append(0)
             self.fz[i].append(0)
 
-            for j in range(len(self.blocks)):
+            for j in range(self.input_size):
                 if i == j:
                     continue
 
@@ -137,7 +143,7 @@ class Gravity(Simulation):
 
 
     def createOutput(self):
-        for i in range(len(self.blocks)):
+        for i in range(self.input_size):
             data_out = []
             data_out.append(self.x[i])
             data_out.append(self.y[i])

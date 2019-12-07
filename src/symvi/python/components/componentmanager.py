@@ -7,6 +7,9 @@ from .simulate1D import Simulate1D
 from .simulate2D import Simulate2D
 from .motion import Motion
 from .gravity import Gravity
+from .position import Position
+from .velocity import Velocity
+from .sphere import Sphere
 
 class ComponentManager:
     def __init__(self):
@@ -74,15 +77,28 @@ class ComponentManager:
         return self.components[-1]
 
     def addGravity(self, block):
-        if not self.flag_gravity:
-            self.components.append(Gravity(block['id'], block['inputs'], block['outputs']))
-            self.idx_gravity = len(self.components) - 1
-            self.flag_gravity = True
+        self.components.append(Gravity(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+        #if not self.flag_gravity:
+        #    self.components.append(Gravity(block['id'], block['inputs'], block['outputs']))
+        #    self.idx_gravity = len(self.components) - 1
+        #    self.flag_gravity = True
 
-        self.components[self.idx_gravity].addBlock(block)
+        #self.components[self.idx_gravity].addBlock(block)
 
-        return self.components[self.idx_gravity]
+        #return self.components[self.idx_gravity]
 
+    def addPosition(self, block):
+        self.components.append(Position(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addVelocity(self, block):
+        self.components.append(Velocity(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addSphere(self, block):
+        self.components.append(Sphere(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
 
     def run(self, tree):
         print("Run tree")
