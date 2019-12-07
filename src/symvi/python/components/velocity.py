@@ -13,7 +13,7 @@ class Velocity(Components):
         avy = [vy]
         avz = [vz]
 
-        data_out = {"vx": avx, "vy": avy, "vz": avz}
+        data_out = {"id": self.id,"vx": avx, "vy": avy, "vz": avz}
 
         self.setOutput(0, data_out)
         self.setExecuted()

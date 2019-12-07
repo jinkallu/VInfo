@@ -13,7 +13,7 @@ class Position(Components):
         ry = [y]
         rz = [z]
 
-        data_out = {"x": rx, "y": ry, "z": rz}
+        data_out = {"id": self.id,"x": rx, "y": ry, "z": rz}
 
         self.setOutput(0, data_out)
         self.setExecuted()

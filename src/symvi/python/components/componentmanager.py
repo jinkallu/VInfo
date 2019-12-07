@@ -16,8 +16,6 @@ class ComponentManager:
         self.components = []
         self.cmp_output = []
 
-        self.flag_gravity = False
-
 
     def addComponent(self, block):
         component = self.getComponentWithBlockId(block['id'])
@@ -79,14 +77,6 @@ class ComponentManager:
     def addGravity(self, block):
         self.components.append(Gravity(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
-        #if not self.flag_gravity:
-        #    self.components.append(Gravity(block['id'], block['inputs'], block['outputs']))
-        #    self.idx_gravity = len(self.components) - 1
-        #    self.flag_gravity = True
-
-        #self.components[self.idx_gravity].addBlock(block)
-
-        #return self.components[self.idx_gravity]
 
     def addPosition(self, block):
         self.components.append(Position(block['id'], block['inputs'], block['outputs']))

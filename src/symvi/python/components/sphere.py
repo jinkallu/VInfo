@@ -7,14 +7,18 @@ class Sphere(Components):
     def execute(self, data):
         radius = float(data['properties']['radius'])
         mass = float(data['properties']['mass'])
+        texture = data['properties']['texture']
         
         position = self.input_data[0]
         velocity = self.input_data[1]
 
-        data_out = {"position": position, 
+        data_out = {
+                    "id": self.id,
+                    "position": position, 
                     "velocity": velocity,
                     "radius": radius,
-                    "mass": mass
+                    "mass": mass,
+                    "texture": texture
                     }
 
         self.setOutput(0, data_out)

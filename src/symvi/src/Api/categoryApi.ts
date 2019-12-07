@@ -62,25 +62,27 @@ export class CategoryApi {
           new ItemProp('i10', 'p17', 'Velocity_z', 'number', null, 1, true),
           new ItemProp('i10', 'p18', 'duration', 'number', null, 1, true),
 
-          new ItemProp('i11', 'p19', 'Position_x', 'number', null, 1, true),
-          new ItemProp('i11', 'p20', 'Position_y', 'number', null, 1, true),
-          new ItemProp('i11', 'p21', 'Position_z', 'number', null, 1, true),
-          new ItemProp('i11', 'p22', 'Velocity_x', 'number', null, 1, true),
-          new ItemProp('i11', 'p23', 'Velocity_y', 'number', null, 1, true),
-          new ItemProp('i11', 'p24', 'Velocity_z', 'number', null, 1, true),
-          new ItemProp('i11', 'p25', 'mass', 'number', null, 1, true),
+          //new ItemProp('i11', 'p19', 'Position_x', 'number', null, 1, true),
+          //new ItemProp('i11', 'p20', 'Position_y', 'number', null, 1, true),
+          //new ItemProp('i11', 'p21', 'Position_z', 'number', null, 1, true),
+          //new ItemProp('i11', 'p22', 'Velocity_x', 'number', null, 1, true),
+          //new ItemProp('i11', 'p23', 'Velocity_y', 'number', null, 1, true),
+          //new ItemProp('i11', 'p24', 'Velocity_z', 'number', null, 1, true),
+          //new ItemProp('i11', 'p25', 'mass', 'number', null, 1, true),
           new ItemProp('i11', 'p26', 'duration', 'number', null, 1, true),
 
           new ItemProp('i12', 'p27', 'radius', 'number', null, 1, true),
           new ItemProp('i12', 'p28', 'mass', 'number', null, 1, true),
+          new ItemProp('i12', 'p29', 'texture', 'string', null, 1, true),
+
           
-          new ItemProp('i13', 'p29', 'Position_x', 'number', null, 1, true),
-          new ItemProp('i13', 'p30', 'Position_y', 'number', null, 1, true),
-          new ItemProp('i13', 'p31', 'Position_z', 'number', null, 1, true),
+          new ItemProp('i13', 'p30', 'Position_x', 'number', null, 1, true),
+          new ItemProp('i13', 'p31', 'Position_y', 'number', null, 1, true),
+          new ItemProp('i13', 'p32', 'Position_z', 'number', null, 1, true),
           
-          new ItemProp('i14', 'p32', 'Velocity_x', 'number', null, 1, true),
-          new ItemProp('i14', 'p33', 'Velocity_y', 'number', null, 1, true),
-          new ItemProp('i14', 'p34', 'Velocity_z', 'number', null, 1, true)
+          new ItemProp('i14', 'p33', 'Velocity_x', 'number', null, 1, true),
+          new ItemProp('i14', 'p34', 'Velocity_y', 'number', null, 1, true),
+          new ItemProp('i14', 'p35', 'Velocity_z', 'number', null, 1, true)
      ]
 
 

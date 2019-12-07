@@ -144,9 +144,14 @@ class Gravity(Simulation):
 
     def createOutput(self):
         for i in range(self.input_size):
-            data_out = []
-            data_out.append(self.x[i])
-            data_out.append(self.y[i])
-            data_out.append(self.z[i])
+            self.input_data[i]["position"]["x"] = self.x[i]
+            self.input_data[i]["position"]["y"] = self.y[i]
+            self.input_data[i]["position"]["z"] = self.z[i]
+            #position = {"x": self.x[i], "y": self.y[i], "z": self.z[i]}
+            #data_out = {"position": position}
+
+            #data_out.append(self.x[i])
+            #data_out.append(self.y[i])
+            #data_out.append(self.z[i])
             
-            self.appendData(data_out)
+            self.appendData(self.input_data[i])

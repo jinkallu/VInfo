@@ -34,12 +34,32 @@ export class BasicThree {
         this.camera.position.z = 50;
         this.animate();
     }
-    addSphere() {
-        let geometry = new THREE.SphereGeometry(3, 32, 32);
+    addSphere(rad, texture) {
+        if (!rad) {
+            rad = 3;
+        }
+        let geometry = new THREE.SphereGeometry(rad, 32, 32);
         let material = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-        this.mesh.push(new THREE.Mesh(geometry, material));
-        this.scene.add(this.mesh[this.mesh.length - 1]);
+        this.addTexture(material, texture);
+        let msh = new THREE.Mesh(geometry, material);
+        this.mesh.push(msh);
+        this.scene.add(msh);
         this.data_idx.push(0);
+    }
+    addTexture(material, texture) {
+        if (texture === "" || texture === null || texture === undefined) {
+            return;
+        }
+        texture = texture.toLowerCase();
+        material.color = new THREE.Color(0xffffff);
+        if (texture === "earth") {
+            material.map = THREE.ImageUtils.loadTexture('/static/images/textures/earth/earthmap1k.jpg');
+            material.bumpMap = THREE.ImageUtils.loadTexture('/static/images/textures/earth/earthbump1k.jpg');
+            material.specularMap = THREE.ImageUtils.loadTexture('/static/images/textures/earth/earthspec1k.jpg');
+        }
+        else if (texture == "moon") {
+            material.map = THREE.ImageUtils.loadTexture('/static/images/textures/moon/8k_moon.jpg');
+        }
     }
     setData(data) {
         this.data = data;
@@ -47,8 +67,7 @@ export class BasicThree {
             return;
         }
         for (let i = 0; i < this.data.length; i++) {
-            this.addSphere();
-            console.log("Adding sphere ", i);
+            this.addSphere(this.data[i]["radius"], this.data[i]["texture"]);
         }
     }
     updateData() {
@@ -58,27 +77,31 @@ export class BasicThree {
         for (let i = 0; i < this.data.length; i++) {
             let data_i = this.data[i];
             if (this.data[i]) {
+                let position = data_i["position"];
+                let x = position["x"];
+                let y = position["y"];
+                let z = position["z"];
                 let length = 0;
-                if (data_i[0]) {
-                    length = data_i[0].length;
+                if (x) {
+                    length = x.length;
                 }
-                else if (data_i[1]) {
-                    length = data_i[1].length;
+                else if (y) {
+                    length = y.length;
                 }
-                else if (data_i[2]) {
-                    length = data_i[2].length;
+                else if (z) {
+                    length = z.length;
                 }
                 if (this.data_idx[i] >= length) {
                     this.data_idx[i] = 0;
                 }
-                if (data_i[0]) {
-                    this.mesh[i].position.x = data_i[0][this.data_idx[i]];
+                if (x) {
+                    this.mesh[i].position.x = x[this.data_idx[i]];
                 }
-                if (data_i[1]) {
-                    this.mesh[i].position.y = data_i[1][this.data_idx[i]];
+                if (y) {
+                    this.mesh[i].position.y = y[this.data_idx[i]];
                 }
-                if (data_i[2]) {
-                    this.mesh[i].position.z = data_i[2][this.data_idx[i]];
+                if (z) {
+                    this.mesh[i].position.z = z[this.data_idx[i]];
                 }
                 this.data_idx[i]++;
             }

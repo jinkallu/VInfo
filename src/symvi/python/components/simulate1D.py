@@ -22,14 +22,15 @@ class Simulate1D(Simulation):
         else:
             data_out_x = self.input_data[0]
 
-        data_out.append(data_out_x)
-        data_out.append(data_out_y)
-        data_out.append(data_out_z)
+        data_out = {"position": {"x": None, "y": None, "z": None}}
+        data_out["position"]["x"] = data_out_x
+        data_out["position"]["y"] = data_out_y
+        data_out["position"]["z"] = data_out_z
+        #data_out.append(data_out_x)
+        #data_out.append(data_out_y)
+        #data_out.append(data_out_z)
         
         self.appendData(data_out)
 
 
         self.setExecuted()
-
-    def getJson(self):
-        return self.json
