@@ -3,6 +3,7 @@ export class BasicThree {
     constructor(pos) {
         this.animate = () => {
             this.updateData();
+            this.update();
             if (this.resizeRendererToDisplaySize(this.renderer)) {
                 let canvas = this.renderer.domElement;
                 this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -32,6 +33,9 @@ export class BasicThree {
         this.renderer = new THREE.WebGLRenderer({ canvas });
         this.renderer.setClearColor(0xffffff);
         this.camera.position.z = 50;
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.target = new THREE.Vector3(0, 0, 0);
+        this.controls.maxDistance = 4000;
         this.animate();
     }
     addSphere(rad, texture) {
@@ -106,6 +110,9 @@ export class BasicThree {
                 this.data_idx[i]++;
             }
         }
+    }
+    update() {
+        this.controls.update();
     }
     resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;

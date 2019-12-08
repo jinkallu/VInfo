@@ -21,6 +21,16 @@ export class CategoryApi {
           'c4',
           'Simulation',
           2,
+          'url'),
+     new Category(
+          'c5',
+          'Random distributions',
+          2,
+          'url'),
+     new Category(
+          'c6',
+          'Fitting',
+          2,
           'url')
      ];
      static categoryItems: CategoryItem[] = [
@@ -28,8 +38,8 @@ export class CategoryApi {
           new CategoryItem('c1', 'i2', 'Formula', '/static/images/formula.png', 1, 1),
           new CategoryItem('c2', 'i3', 'Graph', '/static/images/graph.png', 2, 0),
           new CategoryItem('c1', 'i4', 'Duplicate', '/static/images/duplicate.png', 1, 2),
-          new CategoryItem('c2', 'i5', 'Hist1', 'https://www.w3schools.com/howto/img_snow.jpg', 1, 0),
-          new CategoryItem('c2', 'i6', 'Hist2', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
+          new CategoryItem('c2', 'i5', 'Histogram1D', 'https://www.w3schools.com/howto/img_snow.jpg', 1, 0),
+          new CategoryItem('c2', 'i6', 'Histogram2D', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
           new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0),
           new CategoryItem('c4', 'i8', 'Simulate1D', '/static/images/simulate.png', 1, 0),
           new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate2d.png', 2, 0),
@@ -37,7 +47,11 @@ export class CategoryApi {
           new CategoryItem('c4', 'i11', 'Gravity', '/static/images/gravity.png', 2, 0),
           new CategoryItem('c4', 'i12', 'Sphere', '/static/images/sphere.png', 2, 1),
           new CategoryItem('c4', 'i13', 'Position', '/static/images/position.png', 0, 1),
-          new CategoryItem('c4', 'i14', 'Velocity', '/static/images/velocity.png', 0, 1)
+          new CategoryItem('c4', 'i14', 'Velocity', '/static/images/velocity.png', 0, 1),
+          new CategoryItem('c5', 'i15', 'Gaussian', '/static/images/velocity.png', 0, 1),
+          new CategoryItem('c1', 'i16', 'Function1D', '/static/images/velocity.png', 0, 1),
+          new CategoryItem('c5', 'i17', 'Distribution1D', '/static/images/velocity.png', 1, 1),
+          new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/velocity.png', 2, 0)
      ];
 
      static categoryProps: ItemProp[] = [
@@ -82,7 +96,19 @@ export class CategoryApi {
           
           new ItemProp('i14', 'p33', 'Velocity_x', 'number', null, 1, true),
           new ItemProp('i14', 'p34', 'Velocity_y', 'number', null, 1, true),
-          new ItemProp('i14', 'p35', 'Velocity_z', 'number', null, 1, true)
+          new ItemProp('i14', 'p35', 'Velocity_z', 'number', null, 1, true),
+
+          new ItemProp('i16', 'p36', 'function', 'string', null, 1, true),
+          new ItemProp('i16', 'p37', 'min', 'number', null, 1, true),
+          new ItemProp('i16', 'p38', 'max', 'number', null, 1, true),
+
+          new ItemProp('i17', 'p39', 'bins', 'number', null, 1, true),
+
+          new ItemProp('i5', 'p40', 'bins', 'number', null, 1, true),
+
+          new ItemProp('i18', 'p41', 'bins', 'number', null, 1, true),
+
+
      ]
 
 

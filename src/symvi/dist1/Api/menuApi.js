@@ -6,6 +6,6 @@ export class MenuApi {
 }
 MenuApi.menus = [
     new Menu("File", ["Open", "close", "save"]), new Menu("Edit", ["Cut", "Paste", "Undu"]), new Menu("View", ["Toolbox", "next", "next"]),
-    new Menu("Window", ["Item1", "Item2", "Item3"])
+    new Menu("Help", ["Help"])
 ];
 //# sourceMappingURL=menuApi.js.map

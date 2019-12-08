@@ -10,6 +10,10 @@ from .gravity import Gravity
 from .position import Position
 from .velocity import Velocity
 from .sphere import Sphere
+from .function1d import Function1D
+from .distribution1d import Distribution1D
+from .histogram1d import Histogram1D
+from .fitting1d import Fitting1D
 
 class ComponentManager:
     def __init__(self):
@@ -88,6 +92,22 @@ class ComponentManager:
 
     def addSphere(self, block):
         self.components.append(Sphere(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addFunction1D(self, block):
+        self.components.append(Function1D(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addDistribution1D(self, block):
+        self.components.append(Distribution1D(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addHistogram1D(self, block):
+        self.components.append(Histogram1D(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addFitting1D(self, block):
+        self.components.append(Fitting1D(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

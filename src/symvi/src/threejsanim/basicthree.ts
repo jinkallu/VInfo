@@ -9,6 +9,7 @@ export class BasicThree{
     data:any;
     data_idx: number[];
     axis:number;
+    controls: any;
 
     constructor(pos:any){
         this.three_div = document.createElement("canvas");
@@ -41,6 +42,11 @@ export class BasicThree{
 
         this.camera.position.z = 50;
         //this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // Prepare Orbit controls
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.target = new THREE.Vector3(0, 0, 0);
+        this.controls.maxDistance = 4000;
 
         this.animate();
     }
@@ -149,8 +155,14 @@ export class BasicThree{
         }
     }
 
+    // Update controls and stats
+    update() {
+        this.controls.update();
+    }
+
     animate = () => {
         this.updateData();
+        this.update();
         // responsive 
         if (this.resizeRendererToDisplaySize(this.renderer)) {
             let canvas = this.renderer.domElement;

@@ -166,8 +166,21 @@ export class Run{
                         //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
                     }
                     else{
-                        let dat = JSROOT.parse(data_draw["data"]);
-                        JSROOT.draw(output_panel.id, dat, "ACP");
+                        if(data_draw['data_type'] === "Graph"){
+                            let dat = JSROOT.parse(data_draw["data"]);
+                            JSROOT.draw(output_panel.id, dat, "ACP");
+                        }
+                        else if(data_draw['data_type'] === "Hist1D"){
+                            let dat = JSROOT.parse(data_draw["data"]);
+                            JSROOT.draw(output_panel.id, dat, "hist");
+                        }
+                        else if(data_draw['data_type'] === "Fit1D"){
+                            let dat_h = JSROOT.parse(data_draw["data"]["h1"]);
+                            JSROOT.draw(output_panel.id, dat_h, "hist");
+                            
+                            let dat_f = JSROOT.parse(data_draw["data"]["f1"]);
+                            JSROOT.draw(output_panel.id, dat_f, "ACP");
+                        }
                     }
                 }
                 msg = "<br><font color='green'>" + data['message'] + "</font>";
