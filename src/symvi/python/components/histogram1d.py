@@ -9,13 +9,15 @@ class Histogram1D(Components):
     def execute(self, data):
         #bins = len(self.input_data[0])
         bins = int(data['properties']['bins'])
-        min_0 = min(self.input_data[0])
-        max_0 = max(self.input_data[0])
+        min_0 = min(self.input_data[0]["x"])
+        max_0 = max(self.input_data[0]["x"])
         
         h1 = ROOT.TH1F("", "", bins, min_0, max_0)
 
-        for i in range(bins):
-            h1.Fill(self.input_data[0][i])
+        for i in range(len(self.input_data[0]["x"])):
+            x = self.input_data[0]["x"][i]
+            w = self.input_data[0]["w"][i] # weight
+            h1.Fill(x, w)
 
         
         self.json = ROOT.TBufferJSON.ConvertToJSON(h1)

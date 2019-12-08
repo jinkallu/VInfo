@@ -2,7 +2,7 @@ import ROOT
 
 from .components import Components
 
-class Distribution1D(Components):
+class Fixed1D(Components):
     def __init__(self, id, no_inputs, no_outputs):
         Components.__init__(self, id, no_inputs, no_outputs)
 
@@ -15,12 +15,18 @@ class Distribution1D(Components):
 
         tf1 = ROOT.TF1(function, function, min_0, max_0)
 
+        dx = (max_0 - min_0) / bins
+        x = min_0
         data_out = []
-        for i in range(bins):
-            res = tf1.GetRandom()
-            data_out.append(res)
+        data_width = []
 
-        self.setOutput(0, data_out)
+        for i in range(bins):
+            res = tf1.Eval(x)
+            data_out.append(x)
+            data_width.append(res)
+            x += dx
+
+        self.setOutput(0, {"x": data_out, "w": data_width})
         self.setExecuted()
 
     

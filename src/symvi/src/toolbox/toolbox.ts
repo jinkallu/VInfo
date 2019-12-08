@@ -17,6 +17,7 @@ export class ToolBox {
         this.tool_box_div.style.width = width;
         this.tool_box_div.style.height = height;
         this.tool_box_div.style.background = "#DCDCDC";
+        this.tool_box_div.style.overflowY = "auto";
 
         this.categories = new Categories();
         this.create();
