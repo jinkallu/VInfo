@@ -36,12 +36,12 @@ export class CategoryApi {
      ];
      static categoryItems: CategoryItem[] = [
           new CategoryItem('c1', 'i1', 'Array', '/static/images/array.png', 0, 1),
-          new CategoryItem('c1', 'i2', 'Formula', '/static/images/formula.png', 1, 1),
+          new CategoryItem('c1', 'i2', 'Function1D', '/static/images/function1d.png', 1, 1),
           new CategoryItem('c2', 'i3', 'Graph', '/static/images/graph.png', 2, 0),
           new CategoryItem('c1', 'i4', 'Duplicate', '/static/images/duplicate.png', 1, 2),
           new CategoryItem('c2', 'i5', 'Histogram1D', '/static/images/histogram1d.png', 1, 0),
           new CategoryItem('c2', 'i6', 'Histogram2D', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
-          new CategoryItem('c3', 'i7', 'Graphing Calculator', '/static/images/graphingcalc.png', 0, 0),
+          new CategoryItem('c3', 'i7', 'Graphing Calculator 1D', '/static/images/graphingcalc.png', 0, 0),
           new CategoryItem('c4', 'i8', 'Simulate1D', '/static/images/simulate.png', 1, 0),
           new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate2d.png', 2, 0),
           new CategoryItem('c4', 'i10', 'Motion', '/static/images/simulate2d.png', 0, 0),
@@ -50,9 +50,11 @@ export class CategoryApi {
           new CategoryItem('c4', 'i13', 'Position', '/static/images/position.png', 0, 1),
           new CategoryItem('c4', 'i14', 'Velocity', '/static/images/velocity.png', 0, 1),
           new CategoryItem('c5', 'i15', 'Fixed1D', '/static/images/fixed1d.png', 1, 1),
-          new CategoryItem('c1', 'i16', 'Function1D', '/static/images/function1d.png', 0, 1),
+          new CategoryItem('c1', 'i16', 'Formula1D', '/static/images/formula1d.png', 0, 1),
           new CategoryItem('c5', 'i17', 'Random1D', '/static/images/random1d.png', 1, 1),
-          new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0)
+          new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0),
+          new CategoryItem('c1', 'i19', 'Function2D', '/static/images/function2d.png', 2, 1),
+          new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc.png', 0, 0),
      ];
 
      static categoryProps: ItemProp[] = [
@@ -61,7 +63,7 @@ export class CategoryApi {
           new ItemProp('i1', 'p3', 'max', 'number', 'text', null, 3, true),
           new ItemProp('i1', 'p4', 'type', 'number', "select", null, 3, true),
 
-          new ItemProp('i2', 'p6', 'Formula', 'string', 'text', null, 1, true),
+          new ItemProp('i2', 'p6', 'function', 'string', 'text', null, 1, true),
           //new ItemProp('i7', 'p7', 'count', 'number', "10", 1, true),
 
           new ItemProp('i7', 'p8', 'min', 'number', 'text', null, 2, true),
@@ -100,7 +102,7 @@ export class CategoryApi {
           new ItemProp('i14', 'p34', 'Velocity_y', 'number', 'text', null, 1, true),
           new ItemProp('i14', 'p35', 'Velocity_z', 'number', 'text', null, 1, true),
 
-          new ItemProp('i16', 'p36', 'function', 'string', 'text', null, 1, true),
+          new ItemProp('i16', 'p36', 'formula', 'string', 'text', null, 1, true),
           new ItemProp('i16', 'p37', 'min', 'number', 'text', null, 1, true),
           new ItemProp('i16', 'p38', 'max', 'number', 'text', null, 1, true),
 
@@ -112,7 +114,13 @@ export class CategoryApi {
           new ItemProp('i18', 'p41', 'bins', 'number', 'text', null, 1, true),
 
           new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
-
+          new ItemProp('i19', 'p43', 'function', 'string', 'text', null, 1, true),
+          
+          new ItemProp('i20', 'p44', 'formula', 'string', 'text', null, 1, true),
+          new ItemProp('i20', 'p45', 'x_min', 'number', 'text', null, 2, true),
+          new ItemProp('i20', 'p46', 'x_max', 'number', 'text', null, 3, true),
+          new ItemProp('i20', 'p47', 'y_min', 'number', 'text', null, 2, true),
+          new ItemProp('i20', 'p48', 'y_max', 'number', 'text', null, 3, true),
 
      ]
 

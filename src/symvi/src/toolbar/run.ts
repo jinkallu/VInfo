@@ -132,8 +132,8 @@ export class Run{
     async submit(send_data:any) 
     {
         console.log("Send data " , send_data);
-            let response = await fetch('http://34.65.124.34:5000/api/calc', {
-            //let response = await fetch('http://127.0.0.1:5000/api/calc', {
+            //let response = await fetch('http://34.65.124.34:5000/api/calc', {
+            let response = await fetch('http://127.0.0.1:5000/api/calc', {
 
                 method: 'POST',
                 headers: {
@@ -173,6 +173,10 @@ export class Run{
                         else if(data_draw['data_type'] === "Hist1D"){
                             let dat = JSROOT.parse(data_draw["data"]);
                             JSROOT.draw(output_panel.id, dat, "hist");
+                        }
+                        else if(data_draw['data_type'] === "TF2"){
+                            let dat = JSROOT.parse(data_draw["data"]);
+                            JSROOT.draw(output_panel.id, dat, "L");
                         }
                         else if(data_draw['data_type'] === "Fit1D"){
                             let dat_h = JSROOT.parse(data_draw["data"]["h1"]);

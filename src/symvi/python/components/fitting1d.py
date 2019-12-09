@@ -12,7 +12,7 @@ class Fitting1D(Components):
 
         min_0 = min(self.input_data[1]["x"])
         max_0 = max(self.input_data[1]["x"])
-        function = self.input_data[0]["function"]
+        formula = self.input_data[0]["formula"]
 
         
         h1 = ROOT.TH1F("", "", bins, min_0, max_0)
@@ -22,7 +22,7 @@ class Fitting1D(Components):
             w = self.input_data[1]["w"][i] # weight
             h1.Fill(x, w)
 
-        tf1 = ROOT.TF1("tf1", function, min_0, max_0, 2)
+        tf1 = ROOT.TF1("tf1", formula, min_0, max_0, 2)
         tf1.SetParameters(1, 0, 2)
 
         h1.Fit(tf1, "N")

@@ -1,8 +1,8 @@
 from .array import Array
-from .formula import Formula
+from .formula1d import Formula1D
 from .graph import Graph
 from .duplicate import Duplicate
-from .graphingcalculator import GraphingCalculator
+from .graphingcalculator1d import GraphingCalculator1D
 from .simulate1D import Simulate1D
 from .simulate2D import Simulate2D
 from .motion import Motion
@@ -15,6 +15,8 @@ from .random1d import Random1D
 from .histogram1d import Histogram1D
 from .fitting1d import Fitting1D
 from .fixed1d import Fixed1D
+from .function2d import Function2D
+from .graphingcalculator2d import GraphingCalculator2D
 
 class ComponentManager:
     def __init__(self):
@@ -45,8 +47,8 @@ class ComponentManager:
         print ("Array component added")
         return self.components[-1]
 
-    def addFormula(self, block):
-        self.components.append(Formula(block['id'], block['inputs'], block['outputs']))
+    def addFormula1D(self, block):
+        self.components.append(Formula1D(block['id'], block['inputs'], block['outputs']))
         print ("Formula component added")
         return self.components[-1]
 
@@ -60,8 +62,8 @@ class ComponentManager:
         print ("Duplicate component added")
         return self.components[-1]
 
-    def addGraphingCalculator(self, block):
-        self.components.append(GraphingCalculator(block['id'], block['inputs'], block['outputs']))
+    def addGraphingCalculator1D(self, block):
+        self.components.append(GraphingCalculator1D(block['id'], block['inputs'], block['outputs']))
         print ("GraphingCalculator component added")
         return self.components[-1]
 
@@ -113,6 +115,14 @@ class ComponentManager:
 
     def addFixed1D(self, block):
         self.components.append(Fixed1D(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addFunction2D(self, block):
+        self.components.append(Function2D(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+        
+    def addGraphingCalculator2D(self, block):
+        self.components.append(GraphingCalculator2D(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

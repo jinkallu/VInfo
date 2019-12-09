@@ -11,9 +11,9 @@ class Random1D(Components):
         
         min_0 = self.input_data[0]["min"]
         max_0 = self.input_data[0]["max"]
-        function = self.input_data[0]["function"]
+        formula = self.input_data[0]["formula"]
 
-        tf1 = ROOT.TF1(function, function, min_0, max_0)
+        tf1 = ROOT.TF1(formula, formula, min_0, max_0)
 
         ROOT.gRandom.SetSeed(0)
         data_out = []
