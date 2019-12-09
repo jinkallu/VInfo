@@ -27,6 +27,7 @@ export class DesignApi {
                 break;
             }
         }
+        console.log(this.components);
     }
 }
 DesignApi.components = [];

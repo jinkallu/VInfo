@@ -1,6 +1,7 @@
 import { Category } from '../models/category';
 import { CategoryItem } from '../models/categoryItem';
 import { ItemProp } from '../models/itemProp';
+import { Lookup } from '../models/lookup';
 export class CategoryApi {
     static getCategories() {
         return [...this.categories];
@@ -25,11 +26,21 @@ export class CategoryApi {
         let itemPropArray = [];
         for (let itemProps of this.categoryProps) {
             if (itemProps.catItemId == catItemId) {
-                let itp = new ItemProp(itemProps.catItemId, itemProps.propId, itemProps.propName, itemProps.propType, itemProps.propDefVal, itemProps.propOrder, itemProps.propReqd);
+                let itp = new ItemProp(itemProps.catItemId, itemProps.propId, itemProps.propName, itemProps.propType, itemProps.propSpec, itemProps.propDefVal, itemProps.propOrder, itemProps.propReqd);
                 itemPropArray.push(itp);
             }
         }
         return itemPropArray;
+    }
+    static getLookupItems(propId) {
+        let lookupItemArray = [];
+        for (let lookupItem of this.lookupItems) {
+            if (lookupItem.propId == propId) {
+                let itp = new Lookup(lookupItem.propId, lookupItem.lookupId, lookupItem.lookupVal);
+                lookupItemArray.push(itp);
+            }
+        }
+        return lookupItemArray;
     }
 }
 CategoryApi.categories = [new Category('c1', 'Basic', 1, 'https://www.w3schools.com/howto/img_snow.jpg'),
@@ -60,37 +71,46 @@ CategoryApi.categoryItems = [
     new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0)
 ];
 CategoryApi.categoryProps = [
-    new ItemProp('i1', 'p1', 'count', 'number', null, 1, true),
-    new ItemProp('i1', 'p2', 'min', 'number', null, 2, true),
-    new ItemProp('i1', 'p3', 'max', 'number', null, 3, true),
-    new ItemProp('i2', 'p6', 'Formula', 'string', null, 1, true),
-    new ItemProp('i7', 'p8', 'min', 'number', null, 2, true),
-    new ItemProp('i7', 'p9', 'max', 'number', null, 3, true),
-    new ItemProp('i7', 'p10', 'Formula', 'string', null, 1, true),
-    new ItemProp('i8', 'p11', 'Axis', 'number', null, 1, true),
-    new ItemProp('i10', 'p12', 'Position_x', 'number', null, 1, true),
-    new ItemProp('i10', 'p13', 'Position_y', 'number', null, 1, true),
-    new ItemProp('i10', 'p14', 'Position_z', 'number', null, 1, true),
-    new ItemProp('i10', 'p15', 'Velocity_x', 'number', null, 1, true),
-    new ItemProp('i10', 'p16', 'Velocity_y', 'number', null, 1, true),
-    new ItemProp('i10', 'p17', 'Velocity_z', 'number', null, 1, true),
-    new ItemProp('i10', 'p18', 'duration', 'number', null, 1, true),
-    new ItemProp('i11', 'p26', 'duration', 'number', null, 1, true),
-    new ItemProp('i12', 'p27', 'radius', 'number', null, 1, true),
-    new ItemProp('i12', 'p28', 'mass', 'number', null, 1, true),
-    new ItemProp('i12', 'p29', 'texture', 'string', null, 1, true),
-    new ItemProp('i13', 'p30', 'Position_x', 'number', null, 1, true),
-    new ItemProp('i13', 'p31', 'Position_y', 'number', null, 1, true),
-    new ItemProp('i13', 'p32', 'Position_z', 'number', null, 1, true),
-    new ItemProp('i14', 'p33', 'Velocity_x', 'number', null, 1, true),
-    new ItemProp('i14', 'p34', 'Velocity_y', 'number', null, 1, true),
-    new ItemProp('i14', 'p35', 'Velocity_z', 'number', null, 1, true),
-    new ItemProp('i16', 'p36', 'function', 'string', null, 1, true),
-    new ItemProp('i16', 'p37', 'min', 'number', null, 1, true),
-    new ItemProp('i16', 'p38', 'max', 'number', null, 1, true),
-    new ItemProp('i17', 'p39', 'bins', 'number', null, 1, true),
-    new ItemProp('i5', 'p40', 'bins', 'number', null, 1, true),
-    new ItemProp('i18', 'p41', 'bins', 'number', null, 1, true),
-    new ItemProp('i15', 'p42', 'bins', 'number', null, 1, true),
+    new ItemProp('i1', 'p1', 'count', 'number', 'text', null, 1, true),
+    new ItemProp('i1', 'p2', 'min', 'number', 'text', null, 2, true),
+    new ItemProp('i1', 'p3', 'max', 'number', 'text', null, 3, true),
+    new ItemProp('i1', 'p4', 'type', 'number', "select", null, 3, true),
+    new ItemProp('i2', 'p6', 'Formula', 'string', 'text', null, 1, true),
+    new ItemProp('i7', 'p8', 'min', 'number', 'text', null, 2, true),
+    new ItemProp('i7', 'p9', 'max', 'number', 'text', null, 3, true),
+    new ItemProp('i7', 'p10', 'Formula', 'string', 'text', null, 1, true),
+    new ItemProp('i8', 'p11', 'Axis', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p12', 'Position_x', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p13', 'Position_y', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p14', 'Position_z', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p15', 'Velocity_x', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p16', 'Velocity_y', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p17', 'Velocity_z', 'number', 'text', null, 1, true),
+    new ItemProp('i10', 'p18', 'duration', 'number', 'text', null, 1, true),
+    new ItemProp('i11', 'p26', 'duration', 'number', 'text', null, 1, true),
+    new ItemProp('i12', 'p27', 'radius', 'number', 'text', null, 1, true),
+    new ItemProp('i12', 'p28', 'mass', 'number', 'text', null, 1, true),
+    new ItemProp('i12', 'p29', 'texture', 'string', 'text', null, 1, true),
+    new ItemProp('i13', 'p30', 'Position_x', 'number', 'text', null, 1, true),
+    new ItemProp('i13', 'p31', 'Position_y', 'number', 'text', null, 1, true),
+    new ItemProp('i13', 'p32', 'Position_z', 'number', 'text', null, 1, true),
+    new ItemProp('i14', 'p33', 'Velocity_x', 'number', 'text', null, 1, true),
+    new ItemProp('i14', 'p34', 'Velocity_y', 'number', 'text', null, 1, true),
+    new ItemProp('i14', 'p35', 'Velocity_z', 'number', 'text', null, 1, true),
+    new ItemProp('i16', 'p36', 'function', 'string', 'text', null, 1, true),
+    new ItemProp('i16', 'p37', 'min', 'number', 'text', null, 1, true),
+    new ItemProp('i16', 'p38', 'max', 'number', 'text', null, 1, true),
+    new ItemProp('i17', 'p39', 'bins', 'number', 'text', null, 1, true),
+    new ItemProp('i5', 'p40', 'bins', 'number', 'text', null, 1, true),
+    new ItemProp('i18', 'p41', 'bins', 'number', 'text', null, 1, true),
+    new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
+];
+CategoryApi.lookupItems = [
+    new Lookup('p4', '1', 'option1'),
+    new Lookup('p4', '2', 'option2'),
+    new Lookup('p4', '3', 'option3'),
+    new Lookup('p4', '4', 'option4'),
+    new Lookup('p4', '5', 'option5'),
+    new Lookup('p4', '6', 'option6')
 ];
 //# sourceMappingURL=categoryApi.js.map

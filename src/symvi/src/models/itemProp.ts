@@ -5,6 +5,7 @@ export class ItemProp {
           private _propId: string,
           private _propName: string,
           private _propType: string,
+          private _propSpec:string,
           private _propDefVal:string,
           private _propOrder: number,
           private _propReqd: boolean,
@@ -35,7 +36,12 @@ export class ItemProp {
           return this._propVal;
      }
 
+     get propSpec() {
+          return this._propSpec;
+     }
+
      set propVal(val: string) {
           this._propVal = val;
      }
+    
 }

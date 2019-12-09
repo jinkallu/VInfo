@@ -1,5 +1,6 @@
 import { Histogram } from '../histogram';
 import { DesignApi } from '../Api/designApi';
+import { CategoryApi } from '../Api/categoryApi';
 export class Properties {
     constructor() { }
     static getInstance() {
@@ -40,12 +41,7 @@ export class Properties {
     clearProps() {
         this.propDiv.innerHTML = null;
     }
-    addProperties(itemProp, instanceid) {
-        let divEl = document.createElement('div');
-        divEl.style.display = "flex";
-        divEl.style.justifyContent = "space-between";
-        divEl.style.flexDirection = 'row';
-        divEl.style.margin = '5px';
+    createTextElement(itemProp, instanceid) {
         let inEl = document.createElement('input');
         inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
         inEl.setAttribute('placeholder', itemProp.propName);
@@ -56,11 +52,8 @@ export class Properties {
             inEl.value = itemProp.propVal;
         }
         inEl.addEventListener('change', function () {
-            console.log("printing component" + instanceid);
             DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
         });
-        let lblEl = document.createElement('label');
-        lblEl.textContent = itemProp.propName.toUpperCase();
         switch (itemProp.propType) {
             case 'string':
                 inEl.setAttribute('type', 'text');
@@ -72,8 +65,41 @@ export class Properties {
                 inEl.setAttribute('type', 'date');
                 break;
         }
+        return inEl;
+    }
+    createSelectElement(itemProp, instanceid) {
+        let selEl = document.createElement('select');
+        selEl.setAttribute('id', instanceid + '_' + itemProp.propId);
+        selEl.style.maxWidth = "90%";
+        selEl.addEventListener('change', function () {
+            DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+        });
+        let options = CategoryApi.getLookupItems(itemProp.propId);
+        for (let opt of options) {
+            let optEl = document.createElement('OPTION');
+            optEl.setAttribute('value', opt.lookupId);
+            optEl.setAttribute('label', opt.lookupVal);
+            selEl.appendChild(optEl);
+        }
+        return selEl;
+    }
+    addProperties(itemProp, instanceid) {
+        let divEl = document.createElement('div');
+        divEl.style.display = "flex";
+        divEl.style.justifyContent = "space-between";
+        divEl.style.flexDirection = 'row';
+        divEl.style.margin = '5px';
+        let lblEl = document.createElement('label');
+        lblEl.textContent = itemProp.propName.toUpperCase();
         divEl.appendChild(lblEl);
-        divEl.appendChild(inEl);
+        switch (itemProp.propSpec) {
+            case 'text':
+                divEl.appendChild(this.createTextElement(itemProp, instanceid));
+                break;
+            case 'select':
+                divEl.appendChild(this.createSelectElement(itemProp, instanceid));
+                break;
+        }
         return divEl;
     }
     addItems(itemProps, instanceid) {
@@ -82,9 +108,6 @@ export class Properties {
         propContainer.style.display = "flex";
         propContainer.style.justifyContent = "space-around";
         propContainer.style.flexDirection = 'column';
-        let instHeader = document.createElement('p');
-        instHeader.textContent = instanceid.toString();
-        propContainer.appendChild(instHeader);
         for (let itemProp of itemProps) {
             propContainer.appendChild(this.addProperties(itemProp, instanceid));
         }

@@ -1,9 +1,10 @@
 export class ItemProp {
-    constructor(_catItemId, _propId, _propName, _propType, _propDefVal, _propOrder, _propReqd) {
+    constructor(_catItemId, _propId, _propName, _propType, _propSpec, _propDefVal, _propOrder, _propReqd) {
         this._catItemId = _catItemId;
         this._propId = _propId;
         this._propName = _propName;
         this._propType = _propType;
+        this._propSpec = _propSpec;
         this._propDefVal = _propDefVal;
         this._propOrder = _propOrder;
         this._propReqd = _propReqd;
@@ -32,6 +33,9 @@ export class ItemProp {
     }
     get propVal() {
         return this._propVal;
+    }
+    get propSpec() {
+        return this._propSpec;
     }
     set propVal(val) {
         this._propVal = val;

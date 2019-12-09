@@ -3,6 +3,7 @@ import { ItemProp } from '../models/itemProp';
 import { PropertyItem } from '../propertyItem';
 
 import { DesignApi } from '../Api/designApi';
+import {CategoryApi} from '../Api/categoryApi';
 
 export class Properties {
      private static instance: Properties;
@@ -62,21 +63,12 @@ export class Properties {
      clearProps() {
           this.propDiv.innerHTML = null;
      }
-
-     addProperties(itemProp: ItemProp, instanceid: number) {
-
-
-
-          let divEl = document.createElement('div');
-          divEl.style.display = "flex";
-          divEl.style.justifyContent = "space-between";
-          divEl.style.flexDirection = 'row';
-          divEl.style.margin = '5px';
-
+     createTextElement(itemProp: ItemProp, instanceid: number) {
           let inEl = document.createElement('input');
           inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
           inEl.setAttribute('placeholder', itemProp.propName);
           if (itemProp.propDefVal) {
+
                inEl.value = itemProp.propDefVal;
           }
           if (itemProp.propVal != null) {
@@ -84,13 +76,8 @@ export class Properties {
                inEl.value = itemProp.propVal;
           }
           inEl.addEventListener('change', function () {
-               console.log("printing component" + instanceid);
-               // let comp=DesignApi.getComponentByInstId(instanceid);
-               // console.log(comp);
                DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
           });
-          let lblEl = document.createElement('label');
-          lblEl.textContent = itemProp.propName.toUpperCase();
           switch (itemProp.propType) {
 
                case 'string':
@@ -105,8 +92,54 @@ export class Properties {
                     break;
 
           }
+          return inEl;
+     }
+     createSelectElement(itemProp: ItemProp, instanceid: number) {
+          let selEl=document.createElement('select');
+          selEl.setAttribute('id', instanceid + '_' + itemProp.propId);
+
+          selEl.style.maxWidth="90%";
+
+          selEl.addEventListener('change', function () {
+               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+          });
+
+          let options=CategoryApi.getLookupItems(itemProp.propId);
+
+               for (let opt of options){
+                    let optEl=document.createElement('OPTION');
+                    optEl.setAttribute('value',opt.lookupId);
+                    optEl.setAttribute('label',opt.lookupVal);
+                    selEl.appendChild(optEl);
+               }
+
+          return selEl;
+
+
+
+      }
+
+     addProperties(itemProp: ItemProp, instanceid: number) {
+
+          let divEl = document.createElement('div');
+          divEl.style.display = "flex";
+          divEl.style.justifyContent = "space-between";
+          divEl.style.flexDirection = 'row';
+          divEl.style.margin = '5px';
+
+          let lblEl = document.createElement('label');
+          lblEl.textContent = itemProp.propName.toUpperCase();
+          
           divEl.appendChild(lblEl)
-          divEl.appendChild(inEl)
+          switch (itemProp.propSpec) {
+               case 'text':
+                    divEl.appendChild(this.createTextElement(itemProp, instanceid));
+                    break;
+               case 'select':
+                         divEl.appendChild(this.createSelectElement(itemProp,instanceid));
+                    break;
+          }
+
           return divEl;
 
 
@@ -124,10 +157,10 @@ export class Properties {
           propContainer.style.justifyContent = "space-around";
           propContainer.style.flexDirection = 'column';
 
-          let instHeader = document.createElement('p');
-          instHeader.textContent = instanceid.toString();
+          // let instHeader = document.createElement('p');
+          // instHeader.textContent = instanceid.toString();
 
-          propContainer.appendChild(instHeader);
+          // propContainer.appendChild(instHeader);
 
           for (let itemProp of itemProps) {
                propContainer.appendChild(this.addProperties(itemProp, instanceid));

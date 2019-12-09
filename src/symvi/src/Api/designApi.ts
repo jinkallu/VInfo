@@ -41,6 +41,8 @@ export class DesignApi {
             }
         }
 
+        console.log(this.components);
+
 
     }
 
