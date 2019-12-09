@@ -48,9 +48,9 @@ export class CategoryApi {
           new CategoryItem('c4', 'i12', 'Sphere', '/static/images/sphere.png', 2, 1),
           new CategoryItem('c4', 'i13', 'Position', '/static/images/position.png', 0, 1),
           new CategoryItem('c4', 'i14', 'Velocity', '/static/images/velocity.png', 0, 1),
-          new CategoryItem('c5', 'i15', 'Fixed1D', '/static/images/velocity.png', 1, 1),
+          new CategoryItem('c5', 'i15', 'Fixed1D', '/static/images/fixed1d.png', 1, 1),
           new CategoryItem('c1', 'i16', 'Function1D', '/static/images/function1d.png', 0, 1),
-          new CategoryItem('c5', 'i17', 'Random1D', '/static/images/velocity.png', 1, 1),
+          new CategoryItem('c5', 'i17', 'Random1D', '/static/images/random1d.png', 1, 1),
           new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0)
      ];
 
