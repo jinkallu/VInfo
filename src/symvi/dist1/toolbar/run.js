@@ -1,6 +1,7 @@
 import JSROOT from 'JSROOT';
 import { DesignApi } from '../Api/designApi';
 import { BasicThree } from '../threejsanim/basicthree';
+import * as MATH from 'mathjs';
 export class Run {
     constructor(_design_area, _console) {
         this.execute = () => {
@@ -12,6 +13,7 @@ export class Run {
                 this.console_area.get().innerHTML = console_data;
                 return;
             }
+            console.log("Value of PI from mathjs is ", MATH.pi);
             this.submit({ edges: edges,
                 blocks: blocks });
         };

@@ -5,6 +5,7 @@ import { IOControl } from '../iopanel/iocontrol';
 import { DesignApi } from '../Api/designApi';
 import { Edges } from '../dgmeditor/edges';
 import { BasicThree } from '../threejsanim/basicthree'
+import * as MATH from 'mathjs'
 
 
 export class Run{
@@ -44,6 +45,9 @@ export class Run{
             this.console_area.get().innerHTML = console_data;
             return;
         }
+
+        console.log("Value of PI from mathjs is ", MATH.pi);
+
         this.submit({edges: edges, 
                      blocks: blocks});
     } 

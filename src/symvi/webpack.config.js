@@ -23,6 +23,7 @@ module.exports = {
         // require("jquery") is external and available
         //  on the global var jQuery
         "JSROOT": "JSROOT",
-        "THREE" : "THREE"
+        "THREE" : "THREE",
+        "MATH"  : "MATH"
     }
 }

@@ -102,6 +102,9 @@ export class Properties {
           fileEl.addEventListener('change', function () {
                DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
           });
+
+          fileEl.addEventListener('change', this.handleFileSelect, false);
+
           return fileEl;
 
      }
@@ -193,9 +196,40 @@ export class Properties {
 
 
 
+     handleFileSelect = (evt:any) => {
+          let file = evt.target.files[0]; // FileList object
+          console.log(file);
+          let reader = new FileReader();
+          reader.readAsText(file);
 
+          reader.addEventListener('load', this.readFile);
+     }
 
+     readFile = (evt: any) => {
+          let data:any[];
+          data = [];
+          let lines = evt.target.result.split(/\r?\n/);
+          for(let i = 0; i < lines.length; i++){
+               let colms = lines[i].split('\s*');
+               for(let j = 0; j < colms.length; j++){
+                    let col = colms[j];
+                    if(i === 0){
+                         data.push(col);
+                         data[data.length - 1] = [];
+                    }
+                    else{
+                         data[j].push(col);
+                    }
+               }
+          }
 
+          for(let dat of data){
+               console.log("Col");
+               for(let d of dat){
+                    console.log(d);
+               }
+          }
+     }
 
 
      // addItems(itemProps: ItemProp[], instanceid: number) {

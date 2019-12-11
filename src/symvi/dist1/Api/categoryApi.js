@@ -2,6 +2,7 @@ import { Category } from '../models/category';
 import { CategoryItem } from '../models/categoryItem';
 import { ItemProp } from '../models/itemProp';
 import { Lookup } from '../models/lookup';
+import * as MATH from 'mathjs';
 export class CategoryApi {
     static getCategories() {
         return [...this.categories];
@@ -48,7 +49,8 @@ CategoryApi.categories = [new Category('c1', 'Basic', 1, 'https://www.w3schools.
     new Category('c3', 'Graphing Calculators', 2, 'url'),
     new Category('c4', 'Simulation', 2, 'url'),
     new Category('c5', 'Generators', 2, 'url'),
-    new Category('c6', 'Fitting', 2, 'url')
+    new Category('c6', 'Fitting', 2, 'url'),
+    new Category('c7', 'IO', 2, 'url')
 ];
 CategoryApi.categoryItems = [
     new CategoryItem('c1', 'i1', 'Array', '/static/images/array.png', 0, 1),
@@ -71,6 +73,7 @@ CategoryApi.categoryItems = [
     new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0),
     new CategoryItem('c1', 'i19', 'Function2D', '/static/images/function2d.png', 2, 1),
     new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc.png', 0, 0),
+    new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/graphingcalc.png', 0, 1),
 ];
 CategoryApi.categoryProps = [
     new ItemProp('i1', 'p1', 'count', 'number', 'text', null, 1, true),
@@ -81,7 +84,7 @@ CategoryApi.categoryProps = [
     new ItemProp('i2', 'p6', 'function', 'string', 'text', null, 1, true),
     new ItemProp('i7', 'p8', 'min', 'number', 'text', null, 2, true),
     new ItemProp('i7', 'p9', 'max', 'number', 'text', null, 3, true),
-    new ItemProp('i7', 'p10', 'Formula', 'string', 'text', null, 1, true),
+    new ItemProp('i7', 'p10', 'Formula', 'string', 'text', '$$' + MATH.parse("sin(x) / x").toTex({ parenthesis: 'keep' }) + '$$', 1, true),
     new ItemProp('i8', 'p11', 'Axis', 'number', 'text', null, 1, true),
     new ItemProp('i10', 'p12', 'Position_x', 'number', 'text', null, 1, true),
     new ItemProp('i10', 'p13', 'Position_y', 'number', 'text', null, 1, true),
@@ -113,6 +116,7 @@ CategoryApi.categoryProps = [
     new ItemProp('i20', 'p46', 'x_max', 'number', 'text', null, 3, true),
     new ItemProp('i20', 'p47', 'y_min', 'number', 'text', null, 2, true),
     new ItemProp('i20', 'p48', 'y_max', 'number', 'text', null, 3, true),
+    new ItemProp('i21', 'p49', 'fileinput', 'text', "file", null, 3, true),
 ];
 CategoryApi.lookupItems = [
     new Lookup('p4', '1', 'option1'),
