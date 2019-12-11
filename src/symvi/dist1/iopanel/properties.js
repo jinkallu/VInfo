@@ -67,6 +67,16 @@ export class Properties {
         }
         return inEl;
     }
+    createFileElement(itemProp, instanceid) {
+        let fileEl = document.createElement('input');
+        fileEl.setAttribute('type', 'file');
+        fileEl.setAttribute('name', instanceid + '_' + itemProp.propId);
+        fileEl.setAttribute('id', instanceid + '_' + itemProp.propId);
+        fileEl.addEventListener('change', function () {
+            DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+        });
+        return fileEl;
+    }
     createSelectElement(itemProp, instanceid) {
         let selEl = document.createElement('select');
         selEl.setAttribute('id', instanceid + '_' + itemProp.propId);
@@ -98,6 +108,9 @@ export class Properties {
                 break;
             case 'select':
                 divEl.appendChild(this.createSelectElement(itemProp, instanceid));
+                break;
+            case 'file':
+                divEl.appendChild(this.createFileElement(itemProp, instanceid));
                 break;
         }
         return divEl;
