@@ -6,6 +6,7 @@ import { DesignApi } from '../Api/designApi';
 import { Edges } from '../dgmeditor/edges';
 import { BasicThree } from '../threejsanim/basicthree'
 import * as MATH from 'mathjs'
+import {FileIO} from './fileio'
 
 
 export class Run{
@@ -127,8 +128,16 @@ export class Run{
         let prop_data:any = {};
         for(let prop of properties.itemProps){
             let key = prop.propName;
+            if(key === "fileinput"){
+                let fileIO: FileIO = new FileIO();
+                fileIO.processFileData(prop.propVal);
+                let data = fileIO.get();
+                prop_data["data"] = data;
+            }
             prop_data[key] = prop.propVal;
         }
+
+        
 
         return prop_data;
     }

@@ -12,7 +12,7 @@ export class DesignApi {
     static getComponentByInstId(instanceId: number):Component{
 
         for (let comp of this.components){
-            if (comp.instanceId==instanceId){
+            if (comp.instanceId === instanceId){
                 return comp;
                 break;
             }

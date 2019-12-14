@@ -99,12 +99,12 @@ export class Properties {
           fileEl.setAttribute('type','file');
           fileEl.setAttribute('name',instanceid + '_' + itemProp.propId);
           fileEl.setAttribute('id',instanceid + '_' + itemProp.propId);
-          fileEl.addEventListener('change', function () {
-               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+          fileEl.setAttribute('instanceid', instanceid.toString());
+          fileEl.setAttribute('propid', itemProp.propId.toString());
+          fileEl.addEventListener('change', function (evt:any) {
+               DesignApi.addPropVal(instanceid, itemProp.propId, evt.target.files[0]/*this.value*/);
           });
-
-          fileEl.addEventListener('change', this.handleFileSelect, false);
-
+          fileEl.addEventListener('change', this.handleFileSelect);
           return fileEl;
 
      }
@@ -196,17 +196,23 @@ export class Properties {
 
 
 
-     handleFileSelect = (evt:any) => {
-          let file = evt.target.files[0]; // FileList object
-          console.log(file);
+     handleFileSelect = (event:any) => {
+          let file = event.target.files[0]; // FileList object
+          console.log("File ", file);
           let reader = new FileReader();
           reader.readAsText(file);
+          let instanceid = Number(event.target.getAttribute("instanceid"));
+          let propid = event.target.getAttribute("propid");
 
-          reader.addEventListener('load', this.readFile);
+          reader.addEventListener('load', function(evt:any){
+               DesignApi.addPropVal(instanceid, propid, evt.target.result);
+          });
+
+          //reader.addEventListener('load', this.readFile);
      }
 
      readFile = (evt: any) => {
-          let data:any[];
+ /*         let data:any[];
           data = [];
           let lines = evt.target.result.split(/\r?\n/);
           for(let i = 0; i < lines.length; i++){
@@ -229,6 +235,9 @@ export class Properties {
                     console.log(dat);
                //}
           }
+*/
+          console.log("SEt ", evt.target.instanceid, evt.target.propid, evt.target.result);
+          DesignApi.addPropVal(evt.target.instanceid, evt.target.propid, evt.target.result/*this.value*/);
      }
 
 
