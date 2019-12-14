@@ -210,7 +210,7 @@ export class Properties {
           data = [];
           let lines = evt.target.result.split(/\r?\n/);
           for(let i = 0; i < lines.length; i++){
-               let colms = lines[i].split('\s*');
+               let colms = lines[i].trim().split(/\s+/);//split('\s*');
                for(let j = 0; j < colms.length; j++){
                     let col = colms[j];
                     if(i === 0){
@@ -225,9 +225,9 @@ export class Properties {
 
           for(let dat of data){
                console.log("Col");
-               for(let d of dat){
-                    console.log(d);
-               }
+               //for(let d of dat){
+                    console.log(dat);
+               //}
           }
      }
 
