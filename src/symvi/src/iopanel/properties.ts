@@ -6,8 +6,8 @@ import { DesignApi } from '../Api/designApi';
 import {CategoryApi} from '../Api/categoryApi';
 
 import * as MATH from 'mathjs';
-//import * as MATHJAX from "mathjax";
-
+import "mathjax"
+//MATHJAX.Hub.Queue(["Typeset", MathJax.Hub]);
 //MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 
 //MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
@@ -152,10 +152,7 @@ export class Properties {
           formulaEl.setAttribute('id',instanceid + '_' + itemProp.propId);
 
           let formulaTexEl = document.createElement('div');
-
           formulaTexEl.style.overflowX = "auto";
-          //formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
-          //MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
 
           formulaDiv.appendChild(formulaEl);
           formulaDiv.appendChild(formulaTexEl);
