@@ -62,7 +62,7 @@ export class CategoryApi {
           new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0),
           new CategoryItem('c1', 'i19', 'Function2D', '/static/images/function2d.png', 2, 1),
           new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc.png', 0, 0),
-          new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/graphingcalc.png', 0, 1),
+          new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/readfile.png', 0, 1),
      ];
 
      static categoryProps: ItemProp[] = [
@@ -115,6 +115,8 @@ export class CategoryApi {
           new ItemProp('i16', 'p36', 'formula', 'string', 'text', null, 1, true),
           new ItemProp('i16', 'p37', 'min', 'number', 'text', null, 1, true),
           new ItemProp('i16', 'p38', 'max', 'number', 'text', null, 1, true),
+          new ItemProp('i16', 'p50', 'formu', 'formula', 'formula', null, 1, true),
+
 
 
           new ItemProp('i17', 'p39', 'bins', 'number', 'text', null, 1, true),

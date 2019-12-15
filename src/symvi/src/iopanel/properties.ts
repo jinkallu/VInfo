@@ -5,6 +5,13 @@ import { PropertyItem } from '../propertyItem';
 import { DesignApi } from '../Api/designApi';
 import {CategoryApi} from '../Api/categoryApi';
 
+import * as MATH from 'mathjs';
+//import * as MATHJAX from "mathjax";
+
+//MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+//MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
 export class Properties {
      private static instance: Properties;
      propDiv: HTMLDivElement;
@@ -135,6 +142,37 @@ export class Properties {
 
       }
 
+     
+     createFormulaElement(itemProp: ItemProp, instanceid: number){
+          let formulaDiv = document.createElement('div');
+
+          let formulaEl = document.createElement('input');
+          formulaEl.setAttribute('type','text');
+          formulaEl.setAttribute('name',instanceid + '_' + itemProp.propId);
+          formulaEl.setAttribute('id',instanceid + '_' + itemProp.propId);
+
+          let formulaTexEl = document.createElement('div');
+          formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
+
+          formulaDiv.appendChild(formulaEl);
+          formulaDiv.appendChild(formulaTexEl);
+
+          formulaEl.addEventListener("input", this.inputFormula);
+
+          return formulaDiv;
+     }
+
+     inputFormula(evt:any){
+          let parent = evt.target.parentElement;
+          let tex_div = parent.getElementsByTagName("div");
+          tex_div[0].innerHTML = '$$' + MATH.parse(evt.target.value).toTex({parenthesis: 'keep'}) + '$$';
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
+
+          console.log(evt.target.value);
+     }
+
+
      addProperties(itemProp: ItemProp, instanceid: number) {
 
           let divEl = document.createElement('div');
@@ -156,6 +194,9 @@ export class Properties {
                     break;
                case 'file':
                     divEl.appendChild(this.createFileElement(itemProp,instanceid));
+                    break;
+               case 'formula':
+                    divEl.appendChild(this.createFormulaElement(itemProp,instanceid));
                     break;
           }
 
@@ -207,41 +248,5 @@ export class Properties {
           reader.addEventListener('load', function(evt:any){
                DesignApi.addPropVal(instanceid, propid, evt.target.result);
           });
-
-          //reader.addEventListener('load', this.readFile);
      }
-
-     readFile = (evt: any) => {
- /*         let data:any[];
-          data = [];
-          let lines = evt.target.result.split(/\r?\n/);
-          for(let i = 0; i < lines.length; i++){
-               let colms = lines[i].trim().split(/\s+/);//split('\s*');
-               for(let j = 0; j < colms.length; j++){
-                    let col = colms[j];
-                    if(i === 0){
-                         data.push(col);
-                         data[data.length - 1] = [];
-                    }
-                    else{
-                         data[j].push(col);
-                    }
-               }
-          }
-
-          for(let dat of data){
-               console.log("Col");
-               //for(let d of dat){
-                    console.log(dat);
-               //}
-          }
-*/
-          console.log("SEt ", evt.target.instanceid, evt.target.propid, evt.target.result);
-          DesignApi.addPropVal(evt.target.instanceid, evt.target.propid, evt.target.result/*this.value*/);
-     }
-
-
-     // addItems(itemProps: ItemProp[], instanceid: number) {
-     //      console.log(itemProps);
-     // }
 }

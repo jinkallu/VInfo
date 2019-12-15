@@ -17,6 +17,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "@types/mathjax": "0.0.36",
     "jsroot": "^5.8.0",
     "three": "0"
   }

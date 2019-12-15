@@ -24,6 +24,7 @@ module.exports = {
         //  on the global var jQuery
         "JSROOT": "JSROOT",
         "THREE" : "THREE",
-        "MATH"  : "MATH"
+        "MATH"  : "MATH",
+        "MATHJAX"  : "MATHJAX"
     }
 }
