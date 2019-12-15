@@ -6,7 +6,7 @@ import { DesignApi } from '../Api/designApi';
 import {CategoryApi} from '../Api/categoryApi';
 
 import * as MATH from 'mathjs';
-//import * as MATHJAX from "mathjax";
+// import * as MathJax from "MathJax";
 
 //MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 
@@ -154,13 +154,35 @@ export class Properties {
           let formulaTexEl = document.createElement('div');
 
           formulaTexEl.style.overflowX = "auto";
+          formulaEl.value=itemProp.propVal;
+          formulaTexEl.innerHTML=itemProp.propVal;
           //formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
           //MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
 
+      
+          formulaEl.addEventListener('change', function (evt:any) {
+               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+               console.log("formula");
+               console.log(this.value);
+               let parsed = "";
+               try{
+                    let val = evt.target.value;
+                    if(val !== ""){
+                         parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
+                         formulaTexEl.innerHTML = '$$' + parsed + '$$';
+                         MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
+                    }
+                    else{
+                         formulaTexEl.innerHTML = "";
+                    }
+               }catch(error){
+                    parsed = error;
+               }
+          });
+
+          // formulaEl.addEventListener("input", this.inputFormula);
           formulaDiv.appendChild(formulaEl);
           formulaDiv.appendChild(formulaTexEl);
-
-          formulaEl.addEventListener("input", this.inputFormula);
 
           return formulaDiv;
      }

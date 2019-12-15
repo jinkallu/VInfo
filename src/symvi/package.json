@@ -18,8 +18,11 @@
   },
   "dependencies": {
     "@types/mathjax": "0.0.36",
+    "@types/mathjs": "^6.0.2",
+    "i": "^0.3.6",
     "jsroot": "^5.8.0",
-    "three": "0",
-    "mathjs": "^6.2.5"
+    "mathjax": "^2.7.7",
+    "mathjs": "^6.2.5",
+    "three": "0"
   }
 }
