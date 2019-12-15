@@ -72,12 +72,12 @@ export class CategoryApi {
           new ItemProp('i1', 'p4', 'options', 'number', "select", null, 3, true),
           new ItemProp('i1', 'p5', 'fileinput', 'text', "file", null, 3, true),
 
-          new ItemProp('i2', 'p6', 'function', 'string', 'text', null, 1, true),
+          new ItemProp('i2', 'p6', 'function', 'formula', 'formula', null, 1, true),
           //new ItemProp('i7', 'p7', 'count', 'number', "10", 1, true),
 
           new ItemProp('i7', 'p8', 'min', 'number', 'text', null, 2, true),
           new ItemProp('i7', 'p9', 'max', 'number', 'text', null, 3, true),
-          new ItemProp('i7', 'p10', 'Formula', 'string', 'text', '$$' + MATH.parse("sin(x) / x").toTex({parenthesis: 'keep'}) + '$$', 1, true),
+          new ItemProp('i7', 'p10', 'Formula', 'formula', 'formula', null, 1, true),
 
 
           new ItemProp('i8', 'p11', 'Axis', 'number', 'text', null, 1, true),
@@ -112,10 +112,10 @@ export class CategoryApi {
           new ItemProp('i14', 'p34', 'Velocity_y', 'number', 'text', null, 1, true),
           new ItemProp('i14', 'p35', 'Velocity_z', 'number', 'text', null, 1, true),
 
-          new ItemProp('i16', 'p36', 'formula', 'string', 'text', null, 1, true),
+          new ItemProp('i16', 'p36', 'formula', 'formula', 'formula', null, 1, true),
           new ItemProp('i16', 'p37', 'min', 'number', 'text', null, 1, true),
           new ItemProp('i16', 'p38', 'max', 'number', 'text', null, 1, true),
-          new ItemProp('i16', 'p50', 'formu', 'formula', 'formula', null, 1, true),
+          //new ItemProp('i16', 'p50', 'formu', 'formula', 'formula', null, 1, true),
 
 
 
@@ -128,7 +128,7 @@ export class CategoryApi {
           new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
           new ItemProp('i19', 'p43', 'function', 'string', 'text', null, 1, true),
           
-          new ItemProp('i20', 'p44', 'formula', 'string', 'text', null, 1, true),
+          new ItemProp('i20', 'p44', 'formula', 'formula', 'formula', null, 1, true),
           new ItemProp('i20', 'p45', 'x_min', 'number', 'text', null, 2, true),
           new ItemProp('i20', 'p46', 'x_max', 'number', 'text', null, 3, true),
           new ItemProp('i20', 'p47', 'y_min', 'number', 'text', null, 2, true),

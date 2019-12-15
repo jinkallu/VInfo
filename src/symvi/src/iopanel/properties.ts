@@ -152,8 +152,10 @@ export class Properties {
           formulaEl.setAttribute('id',instanceid + '_' + itemProp.propId);
 
           let formulaTexEl = document.createElement('div');
-          formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
-          MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
+
+          formulaTexEl.style.overflowX = "auto";
+          //formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
+          //MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
 
           formulaDiv.appendChild(formulaEl);
           formulaDiv.appendChild(formulaTexEl);
@@ -166,10 +168,23 @@ export class Properties {
      inputFormula(evt:any){
           let parent = evt.target.parentElement;
           let tex_div = parent.getElementsByTagName("div");
-          tex_div[0].innerHTML = '$$' + MATH.parse(evt.target.value).toTex({parenthesis: 'keep'}) + '$$';
-          MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
 
-          console.log(evt.target.value);
+          let parsed = "";
+          try{
+               let val = evt.target.value;
+               if(val !== ""){
+                    parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
+                    tex_div[0].innerHTML = '$$' + parsed + '$$';
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
+               }
+               else{
+                    tex_div[0].innerHTML = "";
+               }
+          }catch(error){
+               parsed = error;
+          }
+          
+
      }
 
 

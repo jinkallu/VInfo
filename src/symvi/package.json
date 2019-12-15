@@ -19,6 +19,7 @@
   "dependencies": {
     "@types/mathjax": "0.0.36",
     "jsroot": "^5.8.0",
-    "three": "0"
+    "three": "0",
+    "mathjs": "^6.2.5"
   }
 }
