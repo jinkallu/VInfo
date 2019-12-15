@@ -187,27 +187,27 @@ export class Properties {
           return formulaDiv;
      }
 
-     inputFormula(evt:any){
-          let parent = evt.target.parentElement;
-          let tex_div = parent.getElementsByTagName("div");
+     // inputFormula(evt:any){
+     //      let parent = evt.target.parentElement;
+     //      let tex_div = parent.getElementsByTagName("div");
 
-          let parsed = "";
-          try{
-               let val = evt.target.value;
-               if(val !== ""){
-                    parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
-                    tex_div[0].innerHTML = '$$' + parsed + '$$';
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
-               }
-               else{
-                    tex_div[0].innerHTML = "";
-               }
-          }catch(error){
-               parsed = error;
-          }
+     //      let parsed = "";
+     //      try{
+     //           let val = evt.target.value;
+     //           if(val !== ""){
+     //                parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
+     //                tex_div[0].innerHTML = '$$' + parsed + '$$';
+     //                MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
+     //           }
+     //           else{
+     //                tex_div[0].innerHTML = "";
+     //           }
+     //      }catch(error){
+     //           parsed = error;
+     //      }
           
 
-     }
+     // }
 
 
      addProperties(itemProp: ItemProp, instanceid: number) {
