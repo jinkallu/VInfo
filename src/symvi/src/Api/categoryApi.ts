@@ -40,6 +40,12 @@ export class CategoryApi {
           'IO',
           2,
           'url')
+          ,
+     new Category(
+          'c8',
+          'Nuclear',
+          2,
+          'url')
      ];
      static categoryItems: CategoryItem[] = [
           new CategoryItem('c1', 'i1', 'Array', '/static/images/array.png', 0, 1),
@@ -63,6 +69,9 @@ export class CategoryApi {
           new CategoryItem('c1', 'i19', 'Function2D', '/static/images/function2d.png', 2, 1),
           new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc.png', 0, 0),
           new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/readfile.png', 0, 1),
+          new CategoryItem('c8', 'i22', 'Nucleus', '/static/images/readfile.png', 0, 1),
+          new CategoryItem('c8', 'i23', 'Radioactivity', '/static/images/readfile.png', 1, 1),
+
      ];
 
      static categoryProps: ItemProp[] = [
@@ -135,6 +144,11 @@ export class CategoryApi {
           new ItemProp('i20', 'p48', 'y_max', 'number', 'text', null, 3, true),
 
           new ItemProp('i21', 'p49', 'fileinput', 'text', "file", null, 3, true),
+          
+          new ItemProp('i22', 'p50', 'Z', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p51', 'A', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p52', 'mass', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p53', 'halflife', 'number', "text", null, 3, true),
 
      ]
 

@@ -6,8 +6,8 @@ import { DesignApi } from '../Api/designApi';
 import {CategoryApi} from '../Api/categoryApi';
 
 import * as MATH from 'mathjs';
-import "mathjax"
-//MATHJAX.Hub.Queue(["Typeset", MathJax.Hub]);
+// import * as MathJax from "MathJax";
+
 //MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 
 //MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
@@ -153,36 +153,60 @@ export class Properties {
 
           let formulaTexEl = document.createElement('div');
           formulaTexEl.style.overflowX = "auto";
+          formulaEl.value=itemProp.propVal;
+          formulaTexEl.innerHTML=itemProp.propVal;
+          //formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
+          //MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
 
+      
+          formulaEl.addEventListener('input', function (evt:any) {
+               DesignApi.addPropVal(instanceid, itemProp.propId, this.value);
+               console.log("formula");
+               console.log(this.value);
+               let parsed = "";
+               try{
+                    let val = evt.target.value;
+                    if(val !== ""){
+                         parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
+                         formulaTexEl.innerHTML = '$$' + parsed + '$$';
+                         MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
+                    }
+                    else{
+                         formulaTexEl.innerHTML = "";
+                    }
+               }catch(error){
+                    parsed = error;
+               }
+          });
+
+          // formulaEl.addEventListener("input", this.inputFormula);
           formulaDiv.appendChild(formulaEl);
           formulaDiv.appendChild(formulaTexEl);
-
-          formulaEl.addEventListener("input", this.inputFormula);
 
           return formulaDiv;
      }
 
-     inputFormula(evt:any){
-          let parent = evt.target.parentElement;
-          let tex_div = parent.getElementsByTagName("div");
+     // inputFormula(evt:any){
+     //      let parent = evt.target.parentElement;
+     //      let tex_div = parent.getElementsByTagName("div");
 
-          let parsed = "";
-          try{
-               let val = evt.target.value;
-               if(val !== ""){
-                    parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
-                    tex_div[0].innerHTML = '$$' + parsed + '$$';
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
-               }
-               else{
-                    tex_div[0].innerHTML = "";
-               }
-          }catch(error){
-               parsed = error;
-          }
+     //      let parsed = "";
+     //      try{
+     //           let val = evt.target.value;
+     //           if(val !== ""){
+     //                parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
+     //                tex_div[0].innerHTML = '$$' + parsed + '$$';
+     //                MathJax.Hub.Queue(["Typeset", MathJax.Hub, tex_div[0]]);
+     //           }
+     //           else{
+     //                tex_div[0].innerHTML = "";
+     //           }
+     //      }catch(error){
+     //           parsed = error;
+     //      }
           
 
-     }
+     // }
 
 
      addProperties(itemProp: ItemProp, instanceid: number) {
@@ -235,7 +259,17 @@ export class Properties {
           // propContainer.appendChild(instHeader);
 
           for (let itemProp of itemProps) {
-               propContainer.appendChild(this.addProperties(itemProp, instanceid));
+               console.log("Adding");
+               let prop = this.addProperties(itemProp, instanceid);
+               propContainer.appendChild(prop);
+               let formula_parent = prop.getElementsByTagName("div");
+               if(formula_parent.length > 0){
+                    let formula = formula_parent[0].getElementsByTagName("div");
+                    if(formula !== null)
+                    {
+                         MathJax.Hub.Queue(["Typeset", MathJax.Hub, formula[0]]);
+                    }
+               }
           }
 
           this.propDiv.appendChild(propContainer);
@@ -245,6 +279,7 @@ export class Properties {
           //this.properties_div.innerHTML = "";
           //this.properties_div.appendChild(this.propDiv);
           // propEl.textContent = "working";
+
      }
 
 
