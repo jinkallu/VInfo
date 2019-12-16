@@ -14,6 +14,11 @@ class Radioactivity(Components):
         mass = self.input_data[0]["mass"]
         halflife = self.input_data[0]["halflife"]
 
+        formula = str(mass) + " * exp(-x * log2(2) / " + str(halflife) + ")"
+        min_0 = 0
+        max_0 = 100
+        bins = int(mass)
+
         tf1 = ROOT.TF1(formula, formula, min_0, max_0)
 
         ROOT.gRandom.SetSeed(0)
