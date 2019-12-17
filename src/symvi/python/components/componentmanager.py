@@ -18,6 +18,8 @@ from .fixed1d import Fixed1D
 from .function2d import Function2D
 from .graphingcalculator2d import GraphingCalculator2D
 from .readfile import ReadFile
+from .nucleus import Nucleus
+from .radioactivity import Radioactivity
 
 class ComponentManager:
     def __init__(self):
@@ -128,6 +130,14 @@ class ComponentManager:
 
     def addReadFile(self, block):
         self.components.append(ReadFile(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addNucleus(self, block):
+        self.components.append(Nucleus(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addRadioactivity(self, block):
+        self.components.append(Radioactivity(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

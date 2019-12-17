@@ -69,8 +69,8 @@ export class CategoryApi {
           new CategoryItem('c1', 'i19', 'Function2D', '/static/images/function2d.png', 2, 1),
           new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc.png', 0, 0),
           new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/readfile.png', 0, 1),
-          new CategoryItem('c8', 'i22', 'Nucleus', '/static/images/readfile.png', 0, 1),
-          new CategoryItem('c8', 'i23', 'Radioactivity', '/static/images/readfile.png', 1, 1),
+          new CategoryItem('c8', 'i22', 'Nucleus', '/static/images/nucleus.png', 0, 1),
+          new CategoryItem('c8', 'i23', 'Radioactivity', '/static/images/radioactive.png', 1, 1),
 
      ];
 
