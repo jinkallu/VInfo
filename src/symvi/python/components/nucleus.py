@@ -9,7 +9,7 @@ class Nucleus(Components):
         a = float(data['properties']['A'])
         mass = float(data['properties']['mass'])
         halflife = float(data['properties']['halflife'])
-
+        alphas = data['properties']['alphas']
 
         data_out = {
                     "id": self.id,
@@ -18,7 +18,8 @@ class Nucleus(Components):
                     "z": z,
                     "a": a,
                     "mass": mass,
-                    "halflife": halflife
+                    "halflife": halflife,
+                    "alphas" : alphas
                     }
 
         self.setOutput(0, data_out)

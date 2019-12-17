@@ -20,6 +20,8 @@ from .graphingcalculator2d import GraphingCalculator2D
 from .readfile import ReadFile
 from .nucleus import Nucleus
 from .radioactivity import Radioactivity
+from .detector import Detector
+from .radioactivelab import RadioactiveLab
 
 class ComponentManager:
     def __init__(self):
@@ -138,6 +140,14 @@ class ComponentManager:
 
     def addRadioactivity(self, block):
         self.components.append(Radioactivity(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addDetector(self, block):
+        self.components.append(Detector(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addRadioactiveLab(self, block):
+        self.components.append(RadioactiveLab(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

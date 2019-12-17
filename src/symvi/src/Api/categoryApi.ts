@@ -71,7 +71,8 @@ export class CategoryApi {
           new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/readfile.png', 0, 1),
           new CategoryItem('c8', 'i22', 'Nucleus', '/static/images/nucleus.png', 0, 1),
           new CategoryItem('c8', 'i23', 'Radioactivity', '/static/images/radioactive.png', 1, 1),
-
+          new CategoryItem('c8', 'i24', 'Radioactive Lab', '/static/images/radioactive.png', 2, 1),
+          new CategoryItem('c8', 'i25', 'Detector', '/static/images/radioactive.png', 1, 1),
      ];
 
      static categoryProps: ItemProp[] = [
@@ -149,6 +150,10 @@ export class CategoryApi {
           new ItemProp('i22', 'p51', 'A', 'number', "text", null, 3, true),
           new ItemProp('i22', 'p52', 'mass', 'number', "text", null, 3, true),
           new ItemProp('i22', 'p53', 'halflife', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p54', 'alphas', 'string', "text", null, 3, true), // energy, %, energy, %
+
+
+          new ItemProp('i25', 'p55', 'fwhm', 'number', "text", null, 3, true),
 
      ]
 

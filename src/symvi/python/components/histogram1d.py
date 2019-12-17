@@ -12,7 +12,7 @@ class Histogram1D(Components):
         min_0 = min(self.input_data[0]["x"])
         max_0 = max(self.input_data[0]["x"])
         
-        h1 = ROOT.TH1F("", "", bins, min_0, max_0)
+        h1 = ROOT.TH1F("", "", bins, min_0, max_0 + 1)
 
         for i in range(len(self.input_data[0]["x"])):
             x = self.input_data[0]["x"][i]
