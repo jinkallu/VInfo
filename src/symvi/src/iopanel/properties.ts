@@ -184,6 +184,7 @@ export class Properties {
                          parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
                          formulaTexEl.innerHTML = '$$' + parsed + '$$';
                          MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
+                         
                     }
                     else{
                          formulaTexEl.innerHTML = "";
