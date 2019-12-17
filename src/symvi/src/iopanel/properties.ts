@@ -154,7 +154,21 @@ export class Properties {
           let formulaTexEl = document.createElement('div');
           formulaTexEl.style.overflowX = "auto";
           formulaEl.value=itemProp.propVal;
-          formulaTexEl.innerHTML=itemProp.propVal;
+          let parse=null;
+          try{
+               let val = itemProp.propVal;
+               if(val !== ""){
+                    parse = MATH.parse(val).toTex({parenthesis: 'keep'});
+                    formulaTexEl.innerHTML = '$$' + parse + '$$';
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
+               }
+               else{
+                    formulaTexEl.innerHTML = "";
+               }
+          }catch(error){
+               parse = error;
+          }
+          // formulaTexEl.innerHTML=itemProp.propVal;
           //formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
           //MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
 
@@ -170,6 +184,7 @@ export class Properties {
                          parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
                          formulaTexEl.innerHTML = '$$' + parsed + '$$';
                          MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
+                         
                     }
                     else{
                          formulaTexEl.innerHTML = "";
@@ -185,6 +200,8 @@ export class Properties {
 
           return formulaDiv;
      }
+
+   
 
      // inputFormula(evt:any){
      //      let parent = evt.target.parentElement;
