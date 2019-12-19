@@ -5,14 +5,16 @@ class Detector(Components):
         Components.__init__(self, id, no_inputs, no_outputs)
 
     def execute(self, data):
-        fwhm = float(data['properties']['fwhm'])
+        sigma = float(data['properties']['sigma'])
+        radius = float(data['properties']['radius'])
         
         position = self.input_data[0]
 
         data_out = {
                     "id": self.id,
                     "position": position, 
-                    "fwhm": fwhm
+                    "sigma": sigma,
+                    "radius": radius
                     }
 
         self.setOutput(0, data_out)

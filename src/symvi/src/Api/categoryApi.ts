@@ -153,7 +153,8 @@ export class CategoryApi {
           new ItemProp('i22', 'p54', 'alphas', 'string', "text", null, 3, true), // energy, %, energy, %
 
 
-          new ItemProp('i25', 'p55', 'fwhm', 'number', "text", null, 3, true),
+          new ItemProp('i25', 'p55', 'sigma', 'number', "text", null, 3, true),
+          new ItemProp('i25', 'p56', 'radius', 'number', "text", null, 3, true),
 
      ]
 

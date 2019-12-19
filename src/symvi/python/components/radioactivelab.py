@@ -1,4 +1,5 @@
 import ROOT
+import math
 
 from .components import Components
 
@@ -15,7 +16,18 @@ class RadioactiveLab(Components):
         halflife = self.input_data[1]["halflife"]
         alphas = self.input_data[1]["alphas"]
         alphas = alphas.split()
-        sigma = self.input_data[0]["fwhm"]
+        sigma = self.input_data[0]["sigma"]
+
+        det_pos_x = float(self.input_data[0]["position"]["x"][0])
+        det_pos_y = float(self.input_data[0]["position"]["y"][0])
+        det_pos_z = float(self.input_data[0]["position"]["z"][0])
+
+        det_rad = float(self.input_data[0]["radius"])
+
+        det_r = math.sqrt(det_pos_x * det_pos_x + 
+                          det_pos_y * det_pos_y + 
+                          det_pos_z * det_pos_z
+                        )
 
         self.alpha_e = []
         self.alpha_p = []
@@ -25,6 +37,8 @@ class RadioactiveLab(Components):
             self.alpha_p.append(float(alphas[2*i+1]))
 
         rand3 = ROOT.TRandom3()
+        rand3_theta = ROOT.TRandom3()
+        rand3_phi = ROOT.TRandom3()
 
         
         #for i in range(len(alpha_e)):
@@ -42,16 +56,28 @@ class RadioactiveLab(Components):
         ROOT.gRandom.SetSeed(0)
         data_out = []
         data_width = []
+        
         for i in range(bins):
-            res = tf1.GetRandom()
-            #print(res)
+            theta = rand3_theta.Rndm() * ROOT.TMath.Pi() # 0 <= theta <= pi
+            phi = rand3_phi.Rndm() * 2 * ROOT.TMath.Pi() # 0 <= phi < 2 *pi
 
             
-            energy_i = self.getAlphaEnergy(rand3.Rndm())
-            energy = self.alpha_e[energy_i]
+            decay_pos_x = det_r * math.sin(theta) * math.cos(phi)
+            decay_pos_y = det_r * math.sin(theta) * math.sin(phi)
+            decay_pos_z = det_r * math.cos(theta)
 
-            data_out.append(energy + res)
-            data_width.append(1)
+            rad = math.sqrt((det_pos_x - decay_pos_x)**2 + (det_pos_y - decay_pos_y)**2)
+            print(rad)
+            if rad <= det_rad:
+                res = tf1.GetRandom()
+                #print(res)
+
+                
+                energy_i = self.getAlphaEnergy(rand3.Rndm())
+                energy = self.alpha_e[energy_i]
+
+                data_out.append(energy + res)
+                data_width.append(1)
 
 
         self.setOutput(0, {"x": data_out, "w": data_width})

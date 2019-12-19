@@ -201,10 +201,10 @@ export class Run{
                         }
                     }
                 }
-                msg = "<br><font color='green'>" + data['message'] + "</font>";
+                msg = "<br><font color='green'>" + data['message'] + "</font><br>";
             }
             else{
-                msg = "<br><font color='red'>" + data['message'] + "</font>";
+                msg = "<br><font color='red'>" + data['message'] + "</font><br>";
             }
 
             let console_data = this.console_area.get().innerHTML;
