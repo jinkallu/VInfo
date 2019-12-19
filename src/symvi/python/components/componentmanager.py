@@ -22,6 +22,7 @@ from .nucleus import Nucleus
 from .radioactivity import Radioactivity
 from .detector import Detector
 from .radioactivelab import RadioactiveLab
+from .simulatedecay import SimulateDecay
 
 class ComponentManager:
     def __init__(self):
@@ -148,6 +149,10 @@ class ComponentManager:
 
     def addRadioactiveLab(self, block):
         self.components.append(RadioactiveLab(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addSimulateDecay(self, block):
+        self.components.append(SimulateDecay(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

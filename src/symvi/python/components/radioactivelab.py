@@ -67,7 +67,7 @@ class RadioactiveLab(Components):
             decay_pos_z = det_r * math.cos(theta)
 
             rad = math.sqrt((det_pos_x - decay_pos_x)**2 + (det_pos_y - decay_pos_y)**2)
-            print(rad)
+            #print(rad)
             if rad <= det_rad:
                 res = tf1.GetRandom()
                 #print(res)

@@ -4,7 +4,8 @@ import JSROOT from 'JSROOT'
 import { IOControl } from '../iopanel/iocontrol';
 import { DesignApi } from '../Api/designApi';
 import { Edges } from '../dgmeditor/edges';
-import { BasicThree } from '../threejsanim/basicthree'
+import { BasicThree } from '../threejsanim/basicthree';
+import {RadioactiveThree} from '../threejsanim/radioactivethree';
 import * as MATH from 'mathjs'
 import {FileIO} from './fileio'
 
@@ -15,6 +16,7 @@ export class Run{
     console_area:any;
     iocontrol: IOControl;
     three: BasicThree;
+    radioactiveThree: RadioactiveThree;
     
 
     constructor(_design_area:any, _console:any){
@@ -176,6 +178,16 @@ export class Run{
                         console.log("## 3");
                         //this.three.resize(pos);
                         output_div.appendChild(this.three.get());
+                        output_div.addEventListener("resize", this.outputResize);
+                        //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
+                    }
+                    else if(data_draw['data_type'] === "SimDecay"){ // must be replaced 
+                        let rect = output_panel.getBoundingClientRect();
+                        // to remove
+                        let output_div = this.iocontrol.getOuputPanel();
+                        this.radioactiveThree = new RadioactiveThree({"width": rect.width, "height": rect.height});
+                        this.radioactiveThree.setDecayData(data_draw['data']);
+                        output_div.appendChild(this.radioactiveThree.get());
                         output_div.addEventListener("resize", this.outputResize);
                         //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
                     }
