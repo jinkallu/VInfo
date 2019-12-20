@@ -11,9 +11,11 @@ class SimulateDecay(Components):
         #bins = int(data['properties']['bins'])
         #min_0 = min(self.input_data[0]["x"])
         #max_0 = max(self.input_data[0]["x"])
+
+        self.data_out = self.input_data[0]
         
         
         self.setExecuted()
 
     def getJson(self):
-        return {"data_type": "SimDecay", "data": 1}
+        return {"data_type": "SimDecay", "data": self.data_out}

@@ -24,7 +24,7 @@ class RadioactiveLab(Components):
 
         det_rad = float(self.input_data[0]["radius"])
 
-        det_r = math.sqrt(det_pos_x * det_pos_x + 
+        det_pos_r = math.sqrt(det_pos_x * det_pos_x + 
                           det_pos_y * det_pos_y + 
                           det_pos_z * det_pos_z
                         )
@@ -56,15 +56,18 @@ class RadioactiveLab(Components):
         ROOT.gRandom.SetSeed(0)
         data_out = []
         data_width = []
+
+        theta_phi = []
         
         for i in range(bins):
             theta = rand3_theta.Rndm() * ROOT.TMath.Pi() # 0 <= theta <= pi
             phi = rand3_phi.Rndm() * 2 * ROOT.TMath.Pi() # 0 <= phi < 2 *pi
 
+            theta_phi.append({"theta": theta, "phi": phi})
             
-            decay_pos_x = det_r * math.sin(theta) * math.cos(phi)
-            decay_pos_y = det_r * math.sin(theta) * math.sin(phi)
-            decay_pos_z = det_r * math.cos(theta)
+            decay_pos_x = det_pos_r * math.sin(theta) * math.cos(phi)
+            decay_pos_y = det_pos_r * math.sin(theta) * math.sin(phi)
+            decay_pos_z = det_pos_r * math.cos(theta)
 
             rad = math.sqrt((det_pos_x - decay_pos_x)**2 + (det_pos_y - decay_pos_y)**2)
             #print(rad)
@@ -80,7 +83,16 @@ class RadioactiveLab(Components):
                 data_width.append(1)
 
 
-        self.setOutput(0, {"x": data_out, "w": data_width})
+        self.setOutput(0, {"x": data_out, 
+                           "w": data_width, 
+                           "det_pos":{"x": det_pos_x, 
+                                      "y": det_pos_y,
+                                      "z": det_pos_z
+                                     },
+                           "det_rad": det_rad,
+                           "theta_phi": theta_phi
+                          }
+                      )
         self.setExecuted()
 
     def getAlphaEnergy(self, prob):
