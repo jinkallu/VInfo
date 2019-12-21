@@ -17,6 +17,7 @@ export class Run{
     iocontrol: IOControl;
     three: BasicThree;
     radioactiveThree: RadioactiveThree;
+    root_divs: HTMLDivElement[];
     
 
     constructor(_design_area:any, _console:any){
@@ -30,8 +31,7 @@ export class Run{
         this.run_div.style.display = 'inline-block';
 
         this.run_div.addEventListener("click", this.execute);
-
-
+        this.root_divs = [];
     }
 
     get(){
@@ -159,59 +159,77 @@ export class Run{
             });
             let msg;
             let data:any = await response.json();
-            if (data['output'] !== null){
-                console.log("## 0");
-                let data_draw = data['output'][0]['data'];
-                console.log("## 1");
-                if(this.iocontrol !== null){
-                    this.iocontrol.getIoButtonOutput().emulateClick();
-                    let output_panel = this.iocontrol.getOuputPanel();
-                    output_panel.innerHTML = "";
-                    if(data_draw['data_type'] === "Sim"){ // must be replaced 
-                        let rect = output_panel.getBoundingClientRect();
-                        // to remove
-                        let output_div = this.iocontrol.getOuputPanel();
-                        //let three = new BasicThree(pos);
-                        this.three = new BasicThree({"width": rect.width, "height": rect.height});
-                        console.log("## 2");
-                        this.three.setData(data_draw['data']);
-                        console.log("## 3");
-                        //this.three.resize(pos);
-                        output_div.appendChild(this.three.get());
-                        output_div.addEventListener("resize", this.outputResize);
-                        //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
+
+            if (data['output'] !== null && this.iocontrol !== null){
+                this.iocontrol.getIoButtonOutput().emulateClick();
+                let output_panel = this.iocontrol.getOuputPanel();
+                this.iocontrol.get().parentNode.addEventListener("resize", this.outputResize);
+                //output_panel.innerHTML = "";
+                while (output_panel.firstChild) {
+                    let child_div:any = output_panel.firstChild;
+                    if(child_div.id.startsWith("root_")){
+                        JSROOT.cleanup(child_div.id);
                     }
-                    else if(data_draw['data_type'] === "SimDecay"){ // must be replaced 
-                        let rect = output_panel.getBoundingClientRect();
-                        // to remove
-                        let output_div = this.iocontrol.getOuputPanel();
-                        this.radioactiveThree = new RadioactiveThree({"width": rect.width, "height": rect.height});
-                        this.radioactiveThree.setDecayData(data_draw['data']);
-                        output_div.appendChild(this.radioactiveThree.get());
-                        output_div.addEventListener("resize", this.outputResize);
-                        //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
-                    }
-                    else{
-                        if(data_draw['data_type'] === "Graph"){
-                            let dat = JSROOT.parse(data_draw["data"]);
-                            JSROOT.draw(output_panel.id, dat, "ACP");
+                    output_panel.removeChild(child_div);
+                }
+                this.root_divs = [];
+                for(let i = 0; i < data['output'].length; i++){
+                    console.log("## ", i);
+                    let data_draw = data['output'][i]['data'];
+                    //if(this.iocontrol !== null){
+                        
+                        if(data_draw['data_type'] === "Sim"){ // must be replaced 
+                            let rect = output_panel.getBoundingClientRect();
+                            // to remove
+                            //let three = new BasicThree(pos);
+                            this.three = new BasicThree({"width": rect.width, "height": rect.height});
+                            console.log("## 2");
+                            this.three.setData(data_draw['data']);
+                            console.log("## 3");
+                            //this.three.resize(pos);
+                            output_panel.appendChild(this.three.get());
+                            //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
                         }
-                        else if(data_draw['data_type'] === "Hist1D"){
-                            let dat = JSROOT.parse(data_draw["data"]);
-                            JSROOT.draw(output_panel.id, dat, "hist");
+                        else if(data_draw['data_type'] === "SimDecay"){ // must be replaced 
+                            let rect = output_panel.getBoundingClientRect();
+                            // to remove
+                            this.radioactiveThree = new RadioactiveThree({"width": rect.width, "height": rect.height});
+                            this.radioactiveThree.setDecayData(data_draw['data']);
+                            output_panel.appendChild(this.radioactiveThree.get());
+                            //output_div.addEventListener("resize", this.outputResize);
+                            //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
                         }
-                        else if(data_draw['data_type'] === "TF2"){
-                            let dat = JSROOT.parse(data_draw["data"]);
-                            JSROOT.draw(output_panel.id, dat, "L");
+                        else{
+                            let root_div = document.createElement("div");
+                            root_div.setAttribute("id", "root_" + i);
+                            root_div.style.display = "block";
+                            root_div.style.width = "100%";
+                            root_div.style.height = "100%";
+
+                            this.root_divs.push(root_div);
+
+                            if(data_draw['data_type'] === "Graph"){
+                                let dat = JSROOT.parse(data_draw["data"]);
+                                JSROOT.draw(root_div.id, dat, "ACP");
+                            }
+                            else if(data_draw['data_type'] === "Hist1D"){
+                                let dat = JSROOT.parse(data_draw["data"]);
+                                JSROOT.draw(root_div.id, dat, "hist");
+                            }
+                            else if(data_draw['data_type'] === "TF2"){
+                                let dat = JSROOT.parse(data_draw["data"]);
+                                JSROOT.draw(root_div.id, dat, "L");
+                            }
+                            else if(data_draw['data_type'] === "Fit1D"){
+                                let dat_h = JSROOT.parse(data_draw["data"]["h1"]);
+                                JSROOT.draw(root_div.id, dat_h, "hist");
+                                
+                                let dat_f = JSROOT.parse(data_draw["data"]["f1"]);
+                                JSROOT.draw(root_div.id, dat_f, "ACP");
+                            }
+                            output_panel.appendChild(root_div);
                         }
-                        else if(data_draw['data_type'] === "Fit1D"){
-                            let dat_h = JSROOT.parse(data_draw["data"]["h1"]);
-                            JSROOT.draw(output_panel.id, dat_h, "hist");
-                            
-                            let dat_f = JSROOT.parse(data_draw["data"]["f1"]);
-                            JSROOT.draw(output_panel.id, dat_f, "ACP");
-                        }
-                    }
+                    //}
                 }
                 msg = "<br><font color='green'>" + data['message'] + "</font><br>";
             }
@@ -233,7 +251,9 @@ export class Run{
     }
 
     outputResize = (evt:any) => {
-        console.log("resizing");
+        for(let root_div of this.root_divs){
+            JSROOT.resize(root_div.id);
+        }
         //this.three.resize( {width: evt.target.getBoundingClientRect().width, 
          //   height: evt.target.getBoundingClientRect().height});
     }

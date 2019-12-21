@@ -73,7 +73,7 @@ export class CategoryApi {
           new CategoryItem('c8', 'i23', 'Radioactivity', '/static/images/radioactive.png', 1, 1),
           new CategoryItem('c8', 'i24', 'Radioactive Lab', '/static/images/radioactivelab.png', 2, 1),
           new CategoryItem('c8', 'i25', 'Detector', '/static/images/detector.png', 1, 1),
-          new CategoryItem('c8', 'i26', 'Simulate Decay', '/static/images/detector.png', 1, 0),
+          new CategoryItem('c8', 'i26', 'Simulate Decay', '/static/images/simulatedecay.png', 1, 0),
      ];
 
      static categoryProps: ItemProp[] = [

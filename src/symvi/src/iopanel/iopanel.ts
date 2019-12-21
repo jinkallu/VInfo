@@ -23,6 +23,8 @@ export class IOPanel{
         this.iopanel_div.style.left = pos.left;
         this.iopanel_div.style.height = pos.height;
         this.iopanel_div.style.background = "#DCDCDC";
+        this.iopanel_div.style.overflowY = "scroll";
+
 
 
         this.minimum_size = 100; // hard coded must remove
