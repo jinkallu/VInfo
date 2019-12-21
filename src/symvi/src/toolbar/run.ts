@@ -206,6 +206,10 @@ export class Run{
                             root_div.style.width = "100%";
                             root_div.style.height = "100%";
 
+                            output_panel.appendChild(root_div);
+
+                            console.log("DIV " + root_div.id);
+
                             this.root_divs.push(root_div);
 
                             if(data_draw['data_type'] === "Graph"){
@@ -227,7 +231,7 @@ export class Run{
                                 let dat_f = JSROOT.parse(data_draw["data"]["f1"]);
                                 JSROOT.draw(root_div.id, dat_f, "ACP");
                             }
-                            output_panel.appendChild(root_div);
+                            
                         }
                     //}
                 }
