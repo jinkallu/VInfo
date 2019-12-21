@@ -1,10 +1,13 @@
 import { Run } from './run'
 import { IOControl } from '../iopanel/iocontrol';
+import {ResizeOutput} from './resizeoutput';
 
 export class ToolBar{
     tool_bar_div:HTMLDivElement;
     run:Run;
-    constructor(pos:any, design_area:any, console:any){
+    resize_output: ResizeOutput;
+
+    constructor(pos:any, design_area:any, console:any, iopanel:any){
         this.tool_bar_div = document.createElement("div");
         this.tool_bar_div.style.width = pos.width;
         this.tool_bar_div.style.top = pos.top;
@@ -14,12 +17,14 @@ export class ToolBar{
         this.tool_bar_div.style.position = "absolute";
 
         this.run = new Run(design_area, console);
+        this.resize_output = new ResizeOutput(iopanel.get());
 
         this.create();
     }
 
     create(){
         this.tool_bar_div.appendChild(this.run.get());
+        this.tool_bar_div.appendChild(this.resize_output.get());
     }
 
     get(){

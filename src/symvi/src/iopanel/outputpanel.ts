@@ -8,6 +8,7 @@ export class OutputPanel{
         this.output_panel_div.style.height = "90%";
         this.output_panel_div.style.left = "0px";
         this.output_panel_div.style.display = "flex";
+        this.output_panel_div.setAttribute("flex-wrap", "wrap");
         this.output_panel_div.setAttribute('id', 'outputpanel');
     }
 

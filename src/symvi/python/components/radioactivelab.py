@@ -63,7 +63,7 @@ class RadioactiveLab(Components):
             theta = rand3_theta.Rndm() * ROOT.TMath.Pi() # 0 <= theta <= pi
             phi = rand3_phi.Rndm() * 2 * ROOT.TMath.Pi() # 0 <= phi < 2 *pi
 
-            theta_phi.append({"theta": theta, "phi": phi})
+            theta_phi.append({"theta": theta, "phi": phi, "detected": False})
             
             decay_pos_x = det_pos_r * math.sin(theta) * math.cos(phi)
             decay_pos_y = det_pos_r * math.sin(theta) * math.sin(phi)
@@ -81,6 +81,8 @@ class RadioactiveLab(Components):
 
                 data_out.append(energy + res)
                 data_width.append(1)
+
+                theta_phi[-1]["detected"] = True
 
 
         self.setOutput(0, {"x": data_out, 
