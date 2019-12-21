@@ -26,7 +26,11 @@ export class RadioactiveThree extends BasicThree{
 
         let data_i = {"position": {"x": [0], "y": [0], "z": [0]},
                       "radius": 3,
-                      "texture": ""
+                      "texture": "",
+                      "type": "Sphere",
+                      "color": 0x0000ff,
+                      "transparency": true,
+                      "opacity": 0.4
                     };
 
 
@@ -40,7 +44,10 @@ export class RadioactiveThree extends BasicThree{
                                      "y": [det_pos_y], 
                                      "z": [det_pos_z]},
                         "radius": det_rad,
-                        "texture": ""
+                        "texture": "",
+                        "type": "Cylinder",
+                        "color": 0xC0C0C0, // silver
+                        
                        };
 
 
@@ -54,7 +61,9 @@ export class RadioactiveThree extends BasicThree{
         
         let data_decay = {"position": {"x": [0], "y": [0], "z": [0]},
                           "radius": 1,
-                          "texture": ""
+                          "texture": "",
+                          "type": "Sphere",
+                          "color": 0xff0000
                          };
         this.setData([data_i, data_det, data_decay]);
     }

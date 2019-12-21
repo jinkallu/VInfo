@@ -55,12 +55,35 @@ export class BasicThree{
         //console.log("radius ", rad)
         let rad = dat["radius"];
         let texture = dat["texture"];
+        let color = dat["color"];
+        let transparency = dat["transparency"];
+        if(!transparency){
+            transparency = false;
+        }
+
+        let opacity = dat["opacity"];
+        if(!opacity){
+            opacity = 1.0;
+        }
+
+        if(!color){
+            color = 0x0000ff;
+        }
 
         if(!rad){
             rad = 3;
         }
-        let geometry = new THREE.SphereGeometry( rad, 32, 32 );
-        let material = new THREE.MeshPhongMaterial( { color: 0x0000ff } );
+        let geometry;
+        if(dat["type"] === "Cylinder"){
+            geometry = new THREE.CylinderGeometry( rad, rad, 2, 32 );
+        }
+        else{
+            geometry = new THREE.SphereGeometry( rad, 32, 32 );
+        }
+        let material = new THREE.MeshPhongMaterial( { color: color,
+                                                      transparent: transparency,
+                                                      opacity: opacity
+                                                    } );
         
         this.addTexture(material, texture);
         
