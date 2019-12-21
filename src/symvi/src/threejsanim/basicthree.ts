@@ -51,8 +51,11 @@ export class BasicThree{
         this.animate();
     }
 
-    addSphere(rad:number, texture: string){
+    addSphere(dat:any){
         //console.log("radius ", rad)
+        let rad = dat["radius"];
+        let texture = dat["texture"];
+
         if(!rad){
             rad = 3;
         }
@@ -62,6 +65,10 @@ export class BasicThree{
         this.addTexture(material, texture);
         
         let msh = new THREE.Mesh( geometry, material );
+        msh.position.x = dat["position"]["x"];
+        msh.position.y = dat["position"]["y"];
+        msh.position.z = dat["position"]["z"];
+
         this.mesh.push(msh);
         this.scene.add(msh);
 
@@ -95,7 +102,7 @@ export class BasicThree{
 
         //console.log("Data", this.data);
         for(let i = 0; i < this.data.length; i++){
-            this.addSphere(this.data[i]["radius"], this.data[i]["texture"]);
+            this.addSphere(this.data[i]);//(this.data[i]["radius"], this.data[i]["texture"]);
             //console.log("Adding sphere ", i, this.data[i]["radius"]);
         }
     }

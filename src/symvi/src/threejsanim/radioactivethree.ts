@@ -16,8 +16,7 @@ export class RadioactiveThree extends BasicThree{
 
         this.step_size = 0.5;
 
-        this.n_step = this.det_pos_r / this.step_size;
-        this.i_step = 0;
+        
 
         this.i_decay = 0;
         this.n_decay = this.data_in["theta_phi"].length;
@@ -48,6 +47,9 @@ export class RadioactiveThree extends BasicThree{
         this.det_pos_r =  Math.sqrt(det_pos_x*det_pos_x + 
                                    det_pos_y*det_pos_y +
                                    det_pos_z*det_pos_z);
+
+        this.n_step = this.det_pos_r / this.step_size;
+        this.i_step = 0;
 
         
         let data_decay = {"position": {"x": [0], "y": [0], "z": [0]},
