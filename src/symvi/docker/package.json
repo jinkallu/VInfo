@@ -1,0 +1,28 @@
+{
+  "name": "webpack-demo",
+  "sideEffects": false,
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@types/mathjax": "0.0.36",
+    "@types/mathjs": "^6.0.2",
+    "i": "^0.3.6",
+    "jsroot": "^5.8.0",
+    "mathjax": "^2.7.7",
+    "mathjs": "^6.2.5",
+    "three": "0"
+  }
+}
