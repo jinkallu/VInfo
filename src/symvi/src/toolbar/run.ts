@@ -1,6 +1,6 @@
 import { Block } from '../dgmeditor/block';
 import { Edge } from '../dgmeditor/edge';
-import JSROOT from 'JSROOT'
+import JSROOT from 'JSROOT';
 import { IOControl } from '../iopanel/iocontrol';
 import { DesignApi } from '../Api/designApi';
 import { Edges } from '../dgmeditor/edges';
@@ -174,6 +174,7 @@ export class Run{
                     }
                     output_panel.removeChild(child_div);
                 }
+                let root_count = 0;
                 this.root_divs = [];
                 for(let i = 0; i < data['output'].length; i++){
                     console.log("## ", i);
@@ -194,24 +195,32 @@ export class Run{
                         }
                         else if(data_draw['data_type'] === "SimDecay"){ // must be replaced 
                             let rect = output_panel.getBoundingClientRect();
-                            // to remove
-                            this.radioactiveThree = new RadioactiveThree({"width": rect.width, "height": rect.height});
-                            this.radioactiveThree.setDecayData(data_draw['data']);
-                            output_panel.appendChild(this.radioactiveThree.get());
-                            //output_div.addEventListener("resize", this.outputResize);
-                            //this.setIOControl(this.iocontrol, {"width": rect.width, "height": rect.height});
-                        }
-                        else{
+                            
                             let root_div = document.createElement("div");
-                            root_div.setAttribute("id", "root_" + i);
+                            root_div.setAttribute("id", "root_" + root_count);
                             root_div.style.display = "block";
                             root_div.style.width = "100%";
                             root_div.style.height = "100%";
 
+                            root_count++;
+
                             output_panel.appendChild(root_div);
+                            this.root_divs.push(root_div);
 
-                            console.log("DIV " + root_div.id);
+                            this.radioactiveThree = new RadioactiveThree({"width": rect.width, "height": rect.height});
+                            this.radioactiveThree.setDecayData(data_draw['data'], root_div);
+                            output_panel.appendChild(this.radioactiveThree.get());
+                        }
+                        else{
+                            let root_div = document.createElement("div");
+                            root_div.setAttribute("id", "root_" + root_count);
+                            root_div.style.display = "block";
+                            root_div.style.width = "100%";
+                            root_div.style.height = "100%";
 
+                            root_count++;
+
+                            output_panel.appendChild(root_div);
                             this.root_divs.push(root_div);
 
                             if(data_draw['data_type'] === "Graph"){

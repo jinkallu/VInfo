@@ -1,3 +1,4 @@
+import JSROOT from 'JSROOT';
 import {BasicThree} from './basicthree';
 
 export class RadioactiveThree extends BasicThree{
@@ -10,9 +11,17 @@ export class RadioactiveThree extends BasicThree{
     n_step: number;
     step_size: number;
     rad: number;
+    root_div: HTMLDivElement;
+    hist: any;
+    hist_dat_count: number;
 
-    setDecayData(data:any){
+    setDecayData(data:any, _root_div: HTMLDivElement){
         this.data_in = data;
+        this.root_div = _root_div;
+
+        this.hist = JSROOT.CreateHistogram("TH1F", 6000); // must change bins to variable
+        this.hist.fLineColor = 4;
+        JSROOT.draw(this.root_div.id, this.hist, "hist");
 
         this.step_size = 0.5;
 
@@ -22,6 +31,8 @@ export class RadioactiveThree extends BasicThree{
         this.n_decay = this.data_in["theta_phi"].length;
 
         this.rad = 0;
+
+        this.hist_dat_count = 0;
 
 
         let data_i = {"position": {"x": [0], "y": [0], "z": [0]},
@@ -76,6 +87,19 @@ export class RadioactiveThree extends BasicThree{
         let theta = this.data_in["theta_phi"][this.i_decay]["theta"];
         let phi = this.data_in["theta_phi"][this.i_decay]["phi"];
 
+        if(this.data_in["theta_phi"][this.i_decay]["detected"]){
+            if(this.hist_dat_count < this.data_in["x"].length)
+            {
+                let x = this.data_in["x"][this.hist_dat_count];
+                let w = this.data_in["w"][this.hist_dat_count];
+                this.hist_dat_count++;
+                //console.log(x);
+
+                this.hist.Fill(x, w);
+                JSROOT.redraw(this.root_div.id, this.hist, "hist");
+            }
+        }
+
 
         //for(let i = 0; i < n; i++){
 
@@ -99,6 +123,12 @@ export class RadioactiveThree extends BasicThree{
 
             if(this.i_decay >= this.n_decay){
                 this.i_decay = 0;
+
+                this.hist_dat_count = 0;
+
+                this.hist = null;
+                this.hist = JSROOT.CreateHistogram("TH1F", 6000);
+                JSROOT.redraw(this.root_div.id, this.hist, "hist");
             }
         }
 
