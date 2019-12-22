@@ -87,6 +87,7 @@ class RadioactiveLab(Components):
 
         self.setOutput(0, {"x": data_out, 
                            "w": data_width, 
+                           
                            "det_pos":{"x": det_pos_x, 
                                       "y": det_pos_y,
                                       "z": det_pos_z

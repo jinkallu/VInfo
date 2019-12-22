@@ -19,7 +19,19 @@ export class RadioactiveThree extends BasicThree{
         this.data_in = data;
         this.root_div = _root_div;
 
-        this.hist = JSROOT.CreateHistogram("TH1F", 6000); // must change bins to variable
+        let min = this.data_in["min"];
+        let max = this.data_in["max"];
+
+        min -= min / 90.;
+        max += max / 90.;
+
+        let bins = this.data_in["bins"];
+
+        console.log("min, max, bins", min, max, bins);
+
+        this.hist = JSROOT.CreateHistogramNew("TH1F", bins, min, max); // must change bins to variable
+        //this.hist.fXmin = 4000;
+        //this.hist.fXmax = 6000;
         this.hist.fLineColor = 4;
         JSROOT.draw(this.root_div.id, this.hist, "hist");
 

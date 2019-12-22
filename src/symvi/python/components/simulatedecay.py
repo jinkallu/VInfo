@@ -9,10 +9,13 @@ class SimulateDecay(Components):
     def execute(self, data):
         #bins = len(self.input_data[0])
         #bins = int(data['properties']['bins'])
-        #min_0 = min(self.input_data[0]["x"])
-        #max_0 = max(self.input_data[0]["x"])
+        min_0 = min(self.input_data[0]["x"])
+        max_0 = max(self.input_data[0]["x"])
 
         self.data_out = self.input_data[0]
+        self.data_out["bins"] = float(data['properties']['bins'])
+        self.data_out["min"] = min_0
+        self.data_out["max"] = max_0 
         
         
         self.setExecuted()

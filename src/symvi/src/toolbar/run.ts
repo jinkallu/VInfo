@@ -218,6 +218,8 @@ export class Run{
                             root_div.style.width = "100%";
                             root_div.style.height = "100%";
 
+                            JSROOT.RegisterForResize(root_div.id);
+
                             root_count++;
 
                             output_panel.appendChild(root_div);

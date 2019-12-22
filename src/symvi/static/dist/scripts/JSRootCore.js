@@ -1712,6 +1712,49 @@
     * @deprecated */
    JSROOT.CreateTAxis = function() { return JSROOT.Create("TAxis"); }
 
+    /** @summary Create histogramNew object
+    * @param {string} typename - histogram typename like TH1I or TH2F
+    * @param {number} nbinsx - number of bins on X-axis
+    * @param {number} xmin - minimum on x
+    * @param {number} xmax - max on x
+    * 
+    * @param {number} nbinsy - number of bins on Y-axis
+    * @param {number} ymin - minimum on y
+    * @param {number} ymax - max on y
+    * 
+    * @param {number} nbinsz - number of bins on Z-axis
+    * @param {number} zmin - minimum on z
+    * @param {number} zmax - max on z
+    */
+   JSROOT.CreateHistogramNew = function(typename, nbinsx, xmin, xmax, nbinsy, ymin, ymax, nbinsz, zmin, zmax) {
+      // create histogram object of specified type
+      // if bins numbers are specified, appropriate typed array will be created
+      var histo = JSROOT.Create(typename);
+      if (!histo.fXaxis || !histo.fYaxis || !histo.fZaxis) return null;
+      histo.fName = "hist"; histo.fTitle = "title";
+      if (nbinsx) JSROOT.extend(histo.fXaxis, { fNbins: nbinsx, fXmin: xmin, fXmax: xmax });
+      if (nbinsy) JSROOT.extend(histo.fYaxis, { fNbins: nbinsy, fXmin: ymin, fXmax: ymax });
+      if (nbinsz) JSROOT.extend(histo.fZaxis, { fNbins: nbinsz, fXmin: zmin, fXmax: zmax });
+      switch (parseInt(typename[2])) {
+         case 1: if (nbinsx) histo.fNcells = nbinsx+2; break;
+         case 2: if (nbinsx && nbinsy) histo.fNcells = (nbinsx+2) * (nbinsy+2); break;
+         case 3: if (nbinsx && nbinsy && nbinsz) histo.fNcells = (nbinsx+2) * (nbinsy+2) * (nbinsz+2); break;
+      }
+      if (histo.fNcells > 0) {
+         switch (typename[3]) {
+            case "C" : histo.fArray = new Int8Array(histo.fNcells); break;
+            case "S" : histo.fArray = new Int16Array(histo.fNcells); break;
+            case "I" : histo.fArray = new Int32Array(histo.fNcells); break;
+            case "F" : histo.fArray = new Float32Array(histo.fNcells); break;
+            case "L" : histo.fArray = new Float64Array(histo.fNcells); break;
+            case "D" : histo.fArray = new Float64Array(histo.fNcells); break;
+            default: histo.fArray = new Array(histo.fNcells); break;
+         }
+         for (var i=0;i<histo.fNcells;++i) histo.fArray[i] = 0;
+      }
+      return histo;
+   }
+
    /** @summary Create histogram object
     * @param {string} typename - histogram typename like TH1I or TH2F
     * @param {number} nbinsx - number of bins on X-axis
