@@ -80,8 +80,8 @@ export class CategoryApi {
           new ItemProp('i1', 'p1', 'count', 'number', 'text', null, 1, true),
           new ItemProp('i1', 'p2', 'min', 'number', 'text', null, 2, true),
           new ItemProp('i1', 'p3', 'max', 'number', 'text', null, 3, true),
-          new ItemProp('i1', 'p4', 'options', 'number', "select", null, 3, true),
-          new ItemProp('i1', 'p5', 'fileinput', 'text', "file", null, 3, true),
+          //new ItemProp('i1', 'p4', 'options', 'number', "select", null, 3, true),
+          //new ItemProp('i1', 'p5', 'fileinput', 'text', "file", null, 3, true),
 
           new ItemProp('i2', 'p6', 'function', 'formula', 'formula', null, 1, true),
           //new ItemProp('i7', 'p7', 'count', 'number', "10", 1, true),

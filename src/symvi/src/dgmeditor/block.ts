@@ -66,6 +66,7 @@ export class Block {
         this.text.textContent = _name;
         this.text.setAttribute("x", pos.x);
         this.text.setAttribute("y", pos.y - 10);
+        this.text.setAttribute("pointer-events", "none");
 
         this.rect.addEventListener("mousedown", this.dragStart);
         this.rect.addEventListener("mousemove", this.dragging);

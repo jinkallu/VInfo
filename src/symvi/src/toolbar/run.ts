@@ -6,8 +6,9 @@ import { DesignApi } from '../Api/designApi';
 import { Edges } from '../dgmeditor/edges';
 import { BasicThree } from '../threejsanim/basicthree';
 import {RadioactiveThree} from '../threejsanim/radioactivethree';
-import * as MATH from 'mathjs'
-import {FileIO} from './fileio'
+import * as MATH from 'mathjs';
+import {FileIO} from './fileio';
+import {Icon} from './icon';
 
 
 export class Run{
@@ -25,12 +26,20 @@ export class Run{
         this.console_area = _console;
 
         this.run_div = document.createElement("div");
-        this.run_div.innerHTML = 'Run';
-        this.run_div.style.background = 'green';
+        //this.run_div.innerHTML = 'Run';
+        //this.run_div.style.background = 'green';
+        //this.run_div.style.backgroundImage = "url('/static/images/run.png')";
         this.run_div.style.color = 'white';
-        this.run_div.style.display = 'inline-block';
+        this.run_div.style.display = 'block';
+        //this.run_div.style.position = "absolute";
         this.run_div.style.cursor = "pointer";
-        this.run_div.style.margin = "0.2rem";
+        //this.run_div.style.margin = "0.1rem";
+        this.run_div.style.width = "3rem";
+        this.run_div.style.height = "100%";
+
+        let icon = new Icon('/static/images/run.png'); 
+
+        this.run_div.appendChild(icon.get());
 
         this.run_div.addEventListener("click", this.execute);
         this.root_divs = [];

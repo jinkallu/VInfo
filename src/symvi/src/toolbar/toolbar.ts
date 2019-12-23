@@ -9,6 +9,8 @@ export class ToolBar{
 
     constructor(pos:any, design_area:any, console:any, iopanel:any){
         this.tool_bar_div = document.createElement("div");
+        this.tool_bar_div.style.display = "flex";
+        this.tool_bar_div.setAttribute("justify-content", "space-between");
         this.tool_bar_div.style.width = pos.width;
         this.tool_bar_div.style.top = pos.top;
         this.tool_bar_div.style.height = pos.height;
