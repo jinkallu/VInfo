@@ -258,6 +258,9 @@ export class Run{
                     //}
                 }
                 msg = "<br><font color='green'>" + data['message'] + "</font><br>";
+                //this.run_div.dispatchEvent(new CustomEvent("resize", {
+                //    bubbles: true
+                //  }));
             }
             else{
                 msg = "<br><font color='red'>" + data['message'] + "</font><br>";

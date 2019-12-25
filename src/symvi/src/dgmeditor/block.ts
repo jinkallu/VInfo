@@ -54,8 +54,8 @@ export class Block {
         this.rect.setAttribute("height", "40");
         //this.rect.setAttribute("fill", "white");
         this.rect.setAttribute("stroke", "red");
-        this.rect.setAttribute("x", pos.x);
-        this.rect.setAttribute("y", pos.y);
+        this.rect.setAttribute("x", pos.x - 30);
+        this.rect.setAttribute("y", pos.y - 20);
         this.rect.setAttribute("href", url);
         this.rect.setAttribute("style",  "outline: 0.05rem solid red;");
 
@@ -64,8 +64,8 @@ export class Block {
         // text
         this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         this.text.textContent = _name;
-        this.text.setAttribute("x", pos.x);
-        this.text.setAttribute("y", pos.y - 10);
+        this.text.setAttribute("x", pos.x - 30);
+        this.text.setAttribute("y", pos.y - 20 - 10);
         this.text.setAttribute("pointer-events", "none");
 
         this.rect.addEventListener("mousedown", this.dragStart);

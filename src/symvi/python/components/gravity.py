@@ -32,7 +32,7 @@ class Gravity(Simulation):
 
     def execute(self, data):
         self.duration = float(data['properties']['duration'])
-        self.dt = 0.1#self.duration / 100
+        self.dt = 0.01#self.duration / 100
 
         self.initialize()
 

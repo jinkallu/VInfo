@@ -25,6 +25,7 @@ module.exports = {
         "JSROOT": "JSROOT",
         "THREE" : "THREE",
         "MATH"  : "MATH",
-        "MATHJAX"  : "MATHJAX"
+        "MATHJAX"  : "MATHJAX",
+        "CCapture": "CCapture" 
     }
 }

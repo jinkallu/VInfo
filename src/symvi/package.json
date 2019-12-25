@@ -23,6 +23,7 @@
     "jsroot": "^5.8.0",
     "mathjax": "^2.7.7",
     "mathjs": "^6.2.5",
-    "three": "0"
+    "three": "0",
+    "ccapture": "0"
   }
 }

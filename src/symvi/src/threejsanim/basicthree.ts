@@ -1,4 +1,6 @@
 import * as THREE from 'THREE';
+//import CCapture from 'CCAPTURE';
+declare var CCapture: any;
 
 export class BasicThree{
     three_div: HTMLCanvasElement;
@@ -10,6 +12,8 @@ export class BasicThree{
     data_idx: number[];
     axis:number;
     controls: any;
+    ccapture: any;
+    light: any;
 
     constructor(pos:any){
         this.three_div = document.createElement("canvas");
@@ -23,7 +27,8 @@ export class BasicThree{
         this.data_idx = [];
         this.axis = 0;
         this.scene = new THREE.Scene();
-        this.scene.add( new THREE.AmbientLight(0x444444));
+    ///    this.scene.background = new THREE.Color( 0x000000 );
+    ///    this.scene.add( new THREE.AmbientLight(0x444444));
         this.camera = new THREE.PerspectiveCamera( 70, pos.width / pos.height, 0.1, 1000 );
 
         // addlight
@@ -31,7 +36,7 @@ export class BasicThree{
         let intensity = 1;
         let dirLight = new THREE.DirectionalLight(color, intensity);
         dirLight.position.set(0, 0, 10);
-        this.scene.add(dirLight);
+    ///    this.scene.add(dirLight);
         //this.camera.add(dirLight);
         //this.camera.add(dirLight.target);
 
@@ -48,6 +53,9 @@ export class BasicThree{
         this.controls.target = new THREE.Vector3(0, 0, 0);
         this.controls.maxDistance = 4000;
 
+        this.ccapture = new CCapture( { format: 'webm' , timeLimit: 40} );
+
+        this.light = new THREE.AmbientLight(0xffffff, 1);
         this.animate();
     }
 
@@ -80,9 +88,16 @@ export class BasicThree{
         else{
             geometry = new THREE.SphereGeometry( rad, 32, 32 );
         }
+
+        let emissive = 0x000000;
+        if(texture == "sun"){
+            emissive = 0xffffff;
+        }
+
         let material = new THREE.MeshPhongMaterial( { color: color,
                                                       transparent: transparency,
-                                                      opacity: opacity
+                                                      opacity: opacity,
+                                                      emissive: emissive
                                                     } );
         
         this.addTexture(material, texture);
@@ -115,6 +130,10 @@ export class BasicThree{
         else if(texture == "moon"){
             material.map = THREE.ImageUtils.loadTexture('/static/images/textures/moon/8k_moon.jpg');
         }
+        else if(texture == "sun"){
+            material.emissiveMap = THREE.ImageUtils.loadTexture('/static/images/textures/8k_sun.jpg');
+            this.light = new THREE.PointLight(0xffffff, 1);
+        }
     }
 
     setData(data:any){
@@ -122,12 +141,16 @@ export class BasicThree{
         if(!this.data){
             return;
         }
+        
 
         //console.log("Data", this.data);
         for(let i = 0; i < this.data.length; i++){
             this.addSphere(this.data[i]);//(this.data[i]["radius"], this.data[i]["texture"]);
             //console.log("Adding sphere ", i, this.data[i]["radius"]);
         }
+
+        this.scene.add(this.light);
+        //this.ccapture.start();
     }
 
     updateData(){
@@ -171,6 +194,7 @@ export class BasicThree{
 
                 if(x){
                     this.mesh[i].position.x = x[this.data_idx[i]];
+                    
                 }
                 //console.log("# 5");
                 if(y){
@@ -179,6 +203,13 @@ export class BasicThree{
                 if(z){
                     this.mesh[i].position.z = z[this.data_idx[i]];
                 }
+
+                if(data_i["texture"] == "sun"){
+                    this.light.position.set(this.mesh[i].position.x, 
+                                            this.mesh[i].position.y, 
+                                            this.mesh[i].position.z);
+                }
+
                 this.data_idx[i]++;
                 //console.log("# 2");
             }
@@ -202,6 +233,8 @@ export class BasicThree{
 
         this.renderer.render( this.scene, this.camera );
         requestAnimationFrame( this.animate );
+
+        this.ccapture.capture(this.three_div);
     }
 
     resizeRendererToDisplaySize(renderer:any) {
