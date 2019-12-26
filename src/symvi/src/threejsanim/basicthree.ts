@@ -53,7 +53,7 @@ export class BasicThree{
         this.controls.target = new THREE.Vector3(0, 0, 0);
         this.controls.maxDistance = 4000;
 
-        this.ccapture = new CCapture( { format: 'webm' , timeLimit: 40} );
+        this.ccapture = new CCapture( { format: 'webm' , timeLimit: 20} );
 
         this.light = new THREE.AmbientLight(0xffffff, 1);
         this.animate();
@@ -119,6 +119,12 @@ export class BasicThree{
         }
 
         texture = texture.toLowerCase();
+        
+        if(!(texture == "earth" ||
+             texture == "sun" ||
+             texture == "moon")){
+                return;
+           }
 
         material.color = new THREE.Color( 0xffffff );
 
@@ -150,7 +156,7 @@ export class BasicThree{
         }
 
         this.scene.add(this.light);
-        //this.ccapture.start();
+        this.ccapture.start();
     }
 
     updateData(){

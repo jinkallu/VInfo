@@ -6,11 +6,7 @@ import { DesignApi } from '../Api/designApi';
 import {CategoryApi} from '../Api/categoryApi';
 
 import * as MATH from 'mathjs';
-// import * as MathJax from "MathJax";
-
-//MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-
-//MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+declare var MathJax: any;  
 
 export class Properties {
      private static instance: Properties;
@@ -159,8 +155,10 @@ export class Properties {
                let val = itemProp.propVal;
                if(val !== ""){
                     parse = MATH.parse(val).toTex({parenthesis: 'keep'});
+                    formulaTexEl.style.display = 'none';
                     formulaTexEl.innerHTML = '$$' + parse + '$$';
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
+                    formulaTexEl.style.display = 'block';
                }
                else{
                     formulaTexEl.innerHTML = "";
@@ -170,7 +168,6 @@ export class Properties {
           }
           // formulaTexEl.innerHTML=itemProp.propVal;
           //formulaTexEl.innerHTML = '$$' + MATH.parse("sqrt(75 / 3) + det([[-1, 2], [3, 1]]) - sin(pi / 4)^2").toTex({parenthesis: 'keep'}) + '$$';
-          //MathJax.Hub.Queue(["Typeset", MathJax.Hub, formulaTexEl]);
 
       
           formulaEl.addEventListener('input', function (evt:any) {
@@ -182,9 +179,11 @@ export class Properties {
                     let val = evt.target.value;
                     if(val !== ""){
                          parsed = MATH.parse(val).toTex({parenthesis: 'keep'});
+                         formulaTexEl.style.display = 'none';
                          formulaTexEl.innerHTML = '$$' + parsed + '$$';
                          MathJax.Hub.Queue(["Typeset", MathJax.Hub,formulaTexEl]);
-                         
+                         formulaTexEl.style.display = 'block';
+
                     }
                     else{
                          formulaTexEl.innerHTML = "";
