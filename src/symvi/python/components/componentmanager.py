@@ -23,6 +23,8 @@ from .radioactivity import Radioactivity
 from .detector import Detector
 from .radioactivelab import RadioactiveLab
 from .simulatedecay import SimulateDecay
+from .graphingcalculator3d import GraphingCalculator3D
+
 
 class ComponentManager:
     def __init__(self):
@@ -153,6 +155,10 @@ class ComponentManager:
 
     def addSimulateDecay(self, block):
         self.components.append(SimulateDecay(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addGraphingCalculator3D(self, block):
+        self.components.append(GraphingCalculator3D(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

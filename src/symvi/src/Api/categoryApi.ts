@@ -54,7 +54,7 @@ export class CategoryApi {
           new CategoryItem('c1', 'i4', 'Duplicate', '/static/images/duplicate.png', 1, 2),
           new CategoryItem('c2', 'i5', 'Histogram1D', '/static/images/histogram1d.png', 1, 0),
           new CategoryItem('c2', 'i6', 'Histogram2D', 'https://www.w3schools.com/howto/img_snow.jpg', 2, 0),
-          new CategoryItem('c3', 'i7', 'Graphing Calculator 1D', '/static/images/graphingcalc.png', 0, 0),
+          new CategoryItem('c3', 'i7', 'Graphing Calculator 1D', '/static/images/graphingcalc_1d.png', 0, 0),
           new CategoryItem('c4', 'i8', 'Simulate1D', '/static/images/simulate.png', 1, 0),
           new CategoryItem('c4', 'i9', 'Simulate2D', '/static/images/simulate2d.png', 2, 0),
           new CategoryItem('c4', 'i10', 'Motion', '/static/images/simulate2d.png', 0, 0),
@@ -67,13 +67,15 @@ export class CategoryApi {
           new CategoryItem('c5', 'i17', 'Random1D', '/static/images/random1d.png', 1, 1),
           new CategoryItem('c6', 'i18', 'Fitting1D', '/static/images/fitting1d.png', 2, 0),
           new CategoryItem('c1', 'i19', 'Function2D', '/static/images/function2d.png', 2, 1),
-          new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc.png', 0, 0),
+          new CategoryItem('c3', 'i20', 'Graphing Calculator 2D', '/static/images/graphingcalc_2d.png', 0, 0),
           new CategoryItem('c7', 'i21', 'ReadFile', '/static/images/readfile.png', 0, 1),
           new CategoryItem('c8', 'i22', 'Nucleus', '/static/images/nucleus.png', 0, 1),
           new CategoryItem('c8', 'i23', 'Radioactivity', '/static/images/radioactive.png', 1, 1),
           new CategoryItem('c8', 'i24', 'Radioactive Lab', '/static/images/radioactivelab.png', 2, 1),
           new CategoryItem('c8', 'i25', 'Detector', '/static/images/detector.png', 1, 1),
           new CategoryItem('c8', 'i26', 'Simulate Decay', '/static/images/simulatedecay.png', 1, 0),
+          new CategoryItem('c3', 'i27', 'Graphing Calculator 3D', '/static/images/graphingcalc_3d.png', 0, 0),
+
      ];
 
      static categoryProps: ItemProp[] = [
@@ -158,6 +160,14 @@ export class CategoryApi {
           new ItemProp('i25', 'p56', 'radius', 'number', "text", null, 3, true),
 
           new ItemProp('i26', 'p57', 'bins', 'number', "text", null, 3, true),
+
+          new ItemProp('i27', 'p58', 'formula', 'formula', 'formula', null, 1, true),
+          new ItemProp('i27', 'p59', 'x_min', 'number', 'text', null, 2, true),
+          new ItemProp('i27', 'p60', 'x_max', 'number', 'text', null, 3, true),
+          new ItemProp('i27', 'p61', 'y_min', 'number', 'text', null, 2, true),
+          new ItemProp('i27', 'p62', 'y_max', 'number', 'text', null, 3, true),
+          new ItemProp('i27', 'p63', 'z_min', 'number', 'text', null, 2, true),
+          new ItemProp('i27', 'p64', 'z_max', 'number', 'text', null, 3, true),
 
      ]
 
