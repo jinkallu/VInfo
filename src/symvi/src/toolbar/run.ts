@@ -50,8 +50,22 @@ export class Run{
     }
 
     execute = () => {
+
+        //resize io panel...
+        let designArea=document.getElementById('designArea');        
+        let consoleArea=document.getElementById('console');        
+        let iopanelArea=document.getElementById('iopanel');       
+        consoleArea.style.display='none';
+        designArea.style.display='none';
+        iopanelArea.style.left="19%";
+        iopanelArea.style.top="13%";
+        iopanelArea.style.width="79%";
+
+
         let edges = this.createEdgesData();
         let blocks = this.createBlocksData();
+
+
 
         if(blocks === null){
             let console_data = this.console_area.get().innerHTML;

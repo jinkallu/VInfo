@@ -16,6 +16,7 @@ export class IOPanel{
         this.iopanel_div = document.createElement("div");
         //this.iopanel_div.setAttribute('id','properties');
         this.iopanel_div.style.position = "absolute";
+        this.iopanel_div.setAttribute('id','iopanel');
         //this.iopanel_div.style.border = "solid black";
         this.iopanel_div.style.top = pos.top;
         //this.iopanel_div.setAttribute('float',"right");
