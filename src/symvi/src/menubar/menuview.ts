@@ -33,7 +33,6 @@ export class MenuView{
         this.menu_items = new MenuItems(menu_items);
         this.menu_div.appendChild(this.menu_items.get());
 
-        //this.menu_button.addEventListener("click", this.clicked);
     }
 
     get(){

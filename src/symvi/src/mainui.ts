@@ -55,6 +55,8 @@ export class MainUI {
     createMenuBar() {
         let menubar_div = this.menu_bar.get();
         this.body.appendChild(menubar_div);
+
+        menubar_div.addEventListener("fileOpen", this.fileOpen);
     }
 
     createToolBar() {
@@ -123,5 +125,10 @@ export class MainUI {
         let dw = 10; // hardcoded must change
         this.design_area.setRight(evt.detail.left - dw);
         this.console.setRight(evt.detail.left - dw);
+    }
+
+    fileOpen = (evt:any) => {
+        this.design_area.openFile(evt.detail.file);
+        evt.preventDefault();
     }
 }

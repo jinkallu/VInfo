@@ -40,6 +40,7 @@ export class MenuBar {
             });
 
             let menuview = new MenuView(menuele, menuItems);
+
             
             this.menubar_div.appendChild(menuview.get());
 

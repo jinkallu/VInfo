@@ -150,4 +150,13 @@ export class DesignArea{
         this.properties.addItems(itemProps,evt.detail.name, evt.detail.id);
         evt.preventDefault();      
     }
+
+    openFile(file:any){
+        let reader = new FileReader();
+        reader.readAsText(file);
+        
+        reader.addEventListener('load', function(evt:any){
+            console.log("File contents ", evt.target.result);
+        });
+    }
 }

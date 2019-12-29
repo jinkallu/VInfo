@@ -21,10 +21,37 @@ export class MenuItems{
             aele.style.textDecoration = 'none';
             aele.innerText = menuItem;
             this.menu_items_div.appendChild(aele);
+
+            if(menuItem == "Open"){
+                aele.addEventListener("click", this.open);
+            }
         }
     }
 
     get(){
         return this.menu_items_div;
+    }
+
+    open = (evt:any) => {
+        var input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.addEventListener("change", this.processOpen);
+        // add onchange handler if you wish to get the file :)
+        input.click();
+
+        
+        evt.preventDefault();
+    } 
+
+    processOpen = (evt:any) => {
+        if(evt.target.value == ""){
+            return;
+        }
+
+        console.log("File name ", evt.target.files[0]);
+        this.menu_items_div.dispatchEvent(new CustomEvent("fileOpen", {
+            bubbles: true,
+            detail: { file:  evt.target.files[0]}
+        }));
     }
 }
