@@ -41,14 +41,45 @@ export class ResizeOutput{
         console.log("Resizing output");
         console.log(this.output_panel.style.width);
 
-        if(this.output_panel.style.width !== '100%'){
-            this.output_panel.style.left = '0px';
-            this.output_panel.style.width = '100%';
+        let designArea=document.getElementById('designArea');
+        
+        let consoleArea=document.getElementById('console');
+        
+        let iopanelArea=document.getElementById('iopanel');
+
+        if(designArea.style.display!='none'){
+        iopanelArea.style.display="none";
+        consoleArea.style.display='none';
+        designArea.style.display='none';
+        iopanelArea.style.left="19%";
+        iopanelArea.style.top="13%";
+        iopanelArea.style.width="79%";
+        iopanelArea.style.height="85%";
+        iopanelArea.style.display="block";
+
+
         }
         else{
-            console.log(this.output_panel.style.left);
-            this.output_panel.style.left = this.normal_left;
-            this.output_panel.style.width = this.normal_width;
+            consoleArea.style.width="62%";
+            consoleArea.style.display='block';
+            designArea.style.display='block';
+            iopanelArea.style.left="82%";
+            iopanelArea.style.width="17.5%";
         }
+
+
+
+
+
+
+        // if(this.output_panel.style.width !== '100%'){
+        //     this.output_panel.style.left = '0px';
+        //     this.output_panel.style.width = '100%';
+        // }
+        // else{
+        //     console.log(this.output_panel.style.left);
+        //     this.output_panel.style.left = this.normal_left;
+        //     this.output_panel.style.width = this.normal_width;
+        // }
     }
 }

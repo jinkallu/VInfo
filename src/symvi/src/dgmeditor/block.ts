@@ -104,7 +104,7 @@ export class Block {
         evt.preventDefault();
         this.rect.dispatchEvent(new CustomEvent("block_clicked", {
             bubbles: true,
-            detail: { id:  this.id}
+            detail: { id:  this.id,name:this.name}
           }));
     }
 

@@ -12,6 +12,8 @@ export class Properties {
      private static instance: Properties;
      propDiv: HTMLDivElement;
      properties_div: HTMLDivElement;
+     itemDiv:HTMLDivElement;
+     
 
      private constructor() { }
 
@@ -34,12 +36,14 @@ export class Properties {
           this.properties_div.style.minHeight = "80%";
 
 
-          let itemDiv = document.createElement('div');
-          itemDiv.setAttribute('id', 'itemName');
-          itemDiv.style.margin = "5px";
-          itemDiv.style.fontSize = '12px';
-          itemDiv.style.fontWeight = "bold";
-          itemDiv.style.textAlign = 'center';
+          this.itemDiv = document.createElement('div');
+          this.itemDiv.setAttribute('id', 'itemName');
+          this.itemDiv.style.margin = "5px";
+          this.itemDiv.style.fontSize = '14px';
+          this.itemDiv.style.fontWeight = "bold";
+          this.itemDiv.style.textAlign = 'center';
+          this.itemDiv.style.margin="5px";
+          
 
           this.propDiv = document.createElement('div');
           this.propDiv.style.background = 'lightgrey';
@@ -48,10 +52,9 @@ export class Properties {
           this.propDiv.style.margin = "3%";
           this.propDiv.setAttribute('id', 'this.propDiv');
           this.propDiv.style.display = "flex";
-          this.propDiv.style.flexDirection = "column";
+          this.propDiv.style.flexDirection = "column";         
 
-
-          this.properties_div.appendChild(itemDiv);
+          this.properties_div.appendChild(this.itemDiv);
           this.properties_div.appendChild(this.propDiv);
 
           let histogram = new Histogram();
@@ -227,6 +230,9 @@ export class Properties {
 
      addProperties(itemProp: ItemProp, instanceid: number) {
 
+          console.log("printing itemprops");
+          console.log(itemProp);
+
           let divEl = document.createElement('div');
           divEl.style.display = "flex";
           divEl.style.justifyContent = "space-between";
@@ -257,7 +263,7 @@ export class Properties {
 
      }
 
-     addItems(itemProps: ItemProp[], instanceid: number) {
+     addItems(itemProps: ItemProp[],name:string, instanceid: number) {
           // let propEl = document.getElementById('properties');
           // let propDiv = document.getElementById('propDiv');
           // let itemNameDiv= document.getElementById('itemName');
@@ -268,6 +274,8 @@ export class Properties {
           propContainer.style.display = "flex";
           propContainer.style.justifyContent = "space-around";
           propContainer.style.flexDirection = 'column';
+          if(name!=null)
+          this.itemDiv.innerHTML=name;
 
           // let instHeader = document.createElement('p');
           // instHeader.textContent = instanceid.toString();
