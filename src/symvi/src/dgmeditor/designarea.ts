@@ -17,6 +17,7 @@ export class DesignArea{
     component:Component;
     properties:Properties;
     cat_item:CategoryItem;
+    itemName:string;
 
     constructor(pos:any){
         this.design_area_div = document.createElement("div");
@@ -66,7 +67,8 @@ export class DesignArea{
         this.component = new Component(id, itemId);
 
         DesignApi.addComponent(this.component);
-        this.properties.addItems(this.component.itemProps,id);     
+        this.itemName=name;
+        this.properties.addItems(this.component.itemProps,this.itemName,id);     
 
     }
 
@@ -144,9 +146,8 @@ export class DesignArea{
         this.properties.clearProps();
         let itemProps=DesignApi.getComponentByInstId(evt.detail.id).itemProps;
 
-        console.log("printing itemprops on clikc");
-        console.log(itemProps);
-        this.properties.addItems(itemProps, evt.detail.id);
+       
+        this.properties.addItems(itemProps,evt.detail.name, evt.detail.id);
         evt.preventDefault();      
     }
 }

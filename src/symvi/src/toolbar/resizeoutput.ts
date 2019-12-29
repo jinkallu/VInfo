@@ -54,11 +54,13 @@ export class ResizeOutput{
         iopanelArea.style.left="19%";
         iopanelArea.style.top="13%";
         iopanelArea.style.width="79%";
+        iopanelArea.style.height="85%";
         iopanelArea.style.display="block";
 
 
         }
         else{
+            consoleArea.style.width="62%";
             consoleArea.style.display='block';
             designArea.style.display='block';
             iopanelArea.style.left="82%";

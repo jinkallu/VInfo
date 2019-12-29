@@ -36,6 +36,7 @@ export class Run{
         //this.run_div.style.margin = "0.1rem";
         this.run_div.style.width = "3rem";
         this.run_div.style.height = "100%";
+        
 
         let icon = new Icon('/static/images/run.png'); 
 
@@ -54,11 +55,15 @@ export class Run{
         //resize io panel...
         let designArea=document.getElementById('designArea');        
         let consoleArea=document.getElementById('console');        
-        let iopanelArea=document.getElementById('iopanel');       
-        consoleArea.style.display='none';
+        let iopanelArea=document.getElementById('iopanel');  
+        consoleArea.style.width='79%';
+
+        consoleArea.style.display='block';
         designArea.style.display='none';
         iopanelArea.style.left="19%";
         iopanelArea.style.top="13%";
+        iopanelArea.style.width="79%";
+        iopanelArea.style.height="66%";
         iopanelArea.style.width="79%";
 
 
