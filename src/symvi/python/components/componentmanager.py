@@ -24,7 +24,7 @@ from .detector import Detector
 from .radioactivelab import RadioactiveLab
 from .simulatedecay import SimulateDecay
 from .graphingcalculator3d import GraphingCalculator3D
-
+from .savefile import SaveFile
 
 class ComponentManager:
     def __init__(self):
@@ -159,6 +159,10 @@ class ComponentManager:
 
     def addGraphingCalculator3D(self, block):
         self.components.append(GraphingCalculator3D(block['id'], block['inputs'], block['outputs']))
+        return self.components[-1]
+
+    def addSaveFile(self, block):
+        self.components.append(SaveFile(block['id'], block['inputs'], block['outputs']))
         return self.components[-1]
 
     def run(self, tree):

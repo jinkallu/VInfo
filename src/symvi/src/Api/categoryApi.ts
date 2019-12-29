@@ -75,7 +75,7 @@ export class CategoryApi {
           new CategoryItem('c8', 'i25', 'Detector', '/static/images/detector.png', 1, 1),
           new CategoryItem('c8', 'i26', 'Simulate Decay', '/static/images/simulatedecay.png', 1, 0),
           new CategoryItem('c3', 'i27', 'Graphing Calculator 3D', '/static/images/graphingcalc_3d.png', 0, 0),
-
+          new CategoryItem('c7', 'i28', 'SaveFile', '/static/images/readfile.png', 1, 0),
      ];
 
      static categoryProps: ItemProp[] = [

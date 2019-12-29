@@ -158,7 +158,7 @@ export class Run{
     async submit(send_data:any) 
     {
         console.log("Send data " , send_data);
-            //let response = await fetch('http://34.65.124.34:5000/api/calc', {
+            //let response = await fetch('http://34.65.89.94:5000/api/calc', {
             let response = await fetch('http://127.0.0.1:5000/api/calc', {
 
                 method: 'POST',
@@ -220,6 +220,23 @@ export class Run{
                             this.radioactiveThree.setDecayData(data_draw['data'], root_div);
                             output_panel.appendChild(this.radioactiveThree.get());
                         }
+                        else if(data_draw['data_type'] === "SaveFile"){ // must be replaced 
+                            //console.log("SaveFile", data_draw["data"]);
+                            let out:string;
+                            for(let x of data_draw["data"]){
+                                out += x + "\n";
+                            }
+                            var element = document.createElement('a');
+                            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(out));
+                            element.setAttribute('download', "hist");
+
+                            element.style.display = 'none';
+                            document.body.appendChild(element);
+
+                            element.click();
+
+                            document.body.removeChild(element);
+                        }
                         else{
                             let root_div = document.createElement("div");
                             root_div.setAttribute("id", "root_" + root_count);
@@ -244,7 +261,11 @@ export class Run{
                             }
                             else if(data_draw['data_type'] === "TF2"){
                                 let dat = JSROOT.parse(data_draw["data"]);
-                                JSROOT.draw(root_div.id, dat, "L");
+                                JSROOT.draw(root_div.id, dat, "surf1");
+                            }
+                            else if(data_draw['data_type'] === "TF3"){
+                                let dat = JSROOT.parse(data_draw["data"]);
+                                JSROOT.draw(root_div.id, dat, "glcol");
                             }
                             else if(data_draw['data_type'] === "Fit1D"){
                                 let dat_h = JSROOT.parse(data_draw["data"]["h1"]);

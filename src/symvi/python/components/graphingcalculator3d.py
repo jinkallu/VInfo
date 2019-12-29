@@ -29,4 +29,4 @@ class GraphingCalculator3D(Components):
         self.setExecuted()
 
     def getJson(self):
-        return {"data_type": "TF2", "data": self.json.Data()}
+        return {"data_type": "TF3", "data": self.json.Data()}
