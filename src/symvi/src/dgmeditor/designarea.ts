@@ -151,12 +151,93 @@ export class DesignArea{
         evt.preventDefault();      
     }
 
-    openFile(file:any){
-        let reader = new FileReader();
-        reader.readAsText(file);
+    processJSON(file:any){
+        for(let block of file.blocks){
+            let cat_item= CategoryApi.getCategoryItemByItemId(block.item_id);
+            console.log(cat_item.inputs);
+            let inputs = cat_item.inputs;
+            let outputs = cat_item.outputs;
+            let name = cat_item.categoryName;
+            let itemId = cat_item.catItemId;
+            let url = cat_item.categoryImgURL
+
+            let new_id = Id.getID();
+            this.addBlock({ x: block.pos.x, y: block.pos.y }, new_id, inputs, outputs, name, itemId, url);
+
+            block.new_id = new_id;
+        }
+
+        for (let edge of file.edges){
+            let src_blk = null;
+            let tgt_blk = null;
+
+            for(let block of file.blocks){
+                if(src_blk != null && tgt_blk != null){
+                    break;
+                }
+
+                if (block.id == edge.src_blk_id){
+                    src_blk = block;
+                }
+                else if (block.id == edge.tgt_blk_id){
+                    tgt_blk = block;
+                }
+            }
+
+            if(src_blk == null || tgt_blk == null){
+                console.log("Internal error");
+                return;
+            }
+
+            for (let block of this.blocks){
+                if(block.getId() == src_blk.new_id){
+                    let node = block.getOutputNode(edge.src_node_id);
+                    node.get().dispatchEvent(new CustomEvent('click'));
+
+                    break;
+                }
+            }
+
+            for (let block of this.blocks){
+                if(block.getId() == tgt_blk.new_id){
+                    let node = block.getInputNode(edge.tgt_node_id);
+                    //node.get().click();
+                    node.get().dispatchEvent(new CustomEvent('click'));
+
+                    break;
+                }
+            }
+        } 
+    }
+
+    saveFile(){
+        let out = "{\n\"blocks\": [\n";
+        for(let block of this.blocks){
+            console.log(block.getDataSave());
+            out += JSON.stringify(block.getDataSave()) + ",\n";
+        }
+
+        out = out.replace(/,(\s+)?$/, '');
+        out += "\n],\n\n";
+
+        out += "\"edges\": [\n";
+        for(let edge of this.edges.getEdges()){
+            out += JSON.stringify(edge.getData()) + ",\n";
+        }
+
+        out = out.replace(/,(\s+)?$/, '');
+        out += "\n]\n\n";
+    
+        out += "}";
+
         
-        reader.addEventListener('load', function(evt:any){
-            console.log("File contents ", evt.target.result);
-        });
+
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(out));
+        element.setAttribute('download', "test");
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 }

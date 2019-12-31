@@ -1,5 +1,8 @@
+import { JSONRead } from './jsonread';
+
 export class MenuItems{
     menu_items_div: HTMLDivElement;
+    jsonRead: JSONRead;
 
     constructor(menu_items:any){
         this.menu_items_div = document.createElement('div');
@@ -25,7 +28,13 @@ export class MenuItems{
             if(menuItem == "Open"){
                 aele.addEventListener("click", this.open);
             }
+            else if(menuItem == "Save"){
+                aele.addEventListener("click", this.save);
+            }
         }
+
+        this.jsonRead = new JSONRead();
+        this.menu_items_div.appendChild(this.jsonRead.get());
     }
 
     get(){
@@ -43,15 +52,29 @@ export class MenuItems{
         evt.preventDefault();
     } 
 
+    save = (evt: any) => {
+        console.log("Save");
+
+        this.menu_items_div.dispatchEvent(new CustomEvent("fileSave", {
+            bubbles: true,
+            //detail: { file:  evt.target.files[0]}
+        }));
+
+        evt.preventDefault();
+    }
+
     processOpen = (evt:any) => {
         if(evt.target.value == ""){
             return;
         }
 
+        this.jsonRead.openFile(evt.target.files[0]);
+/*
         console.log("File name ", evt.target.files[0]);
         this.menu_items_div.dispatchEvent(new CustomEvent("fileOpen", {
             bubbles: true,
             detail: { file:  evt.target.files[0]}
         }));
+*/
     }
 }

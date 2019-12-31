@@ -6,26 +6,24 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
         //"outDir": "../src/symvi/dist1",
         "target": "es6",
-        "types": ["mathjax"]
+        "types": [
+                  "mathjax",
+                  "three",
+                  "node",
+                  "node/fs"
+                 ]
      },
-     "files": [
-        
-         "src/dgmeditor/node.ts",
-         "src/dgmeditor/block.ts",
-         "src/dgmeditor/designarea.ts",
-         "./src/main.ts",
-         "./src/mainui.ts",
-         "src/menubar/menubar.ts",
-         "src/iopanel/properties.ts",
-         "src/toolbar/toolbar.ts",
-         "./src/Api/categoryApi.ts",
-         "./src/models/category.ts",
-         "src/toolbox/toolbox.ts"
-     ],
-     "typesRoots": [
-        "./typings",
-        "../node_modules/@types"
-      ]
+     "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@types/node",
+      "./node_modules/@types/node/ts3.2",
+      "./"
+     ]
  }

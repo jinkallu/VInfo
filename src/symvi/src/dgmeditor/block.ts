@@ -100,6 +100,10 @@ export class Block {
         return this.group;
     }
 
+    getId(){
+        return this.id;
+    }
+
     onClick = (evt:any) => {
         evt.preventDefault();
         this.rect.dispatchEvent(new CustomEvent("block_clicked", {
@@ -265,5 +269,30 @@ export class Block {
             outputs: this.outputs
         };
         return data;
+    }
+
+    getDataSave(){
+        let data = {
+            id: this.id,
+            type_id: this.type,
+            item_id: this.itemId,
+            pos: {
+                    x: this.rect.getAttributeNS(null, "x"),
+                    y: this.rect.getAttributeNS(null, "y")
+                },
+            name: this.name,
+            inputs: this.inputs,
+            outputs: this.outputs
+        }
+
+        return data;
+    }
+
+    getInputNode(i:number){
+        return this.input_nodes[i];
+    }
+
+    getOutputNode(i:number){
+        return this.output_nodes[i];
     }
 }

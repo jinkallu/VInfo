@@ -57,6 +57,8 @@ export class MainUI {
         this.body.appendChild(menubar_div);
 
         menubar_div.addEventListener("fileOpen", this.fileOpen);
+        menubar_div.addEventListener("fileSave", this.fileSave);
+
     }
 
     createToolBar() {
@@ -128,7 +130,14 @@ export class MainUI {
     }
 
     fileOpen = (evt:any) => {
-        this.design_area.openFile(evt.detail.file);
+        //console.log(evt.detail.json_dgm);
+        this.design_area.processJSON(evt.detail.json_dgm);
+        evt.preventDefault();
+    }
+
+    fileSave = (evt:any) => {
+        console.log("File save event");
+        this.design_area.saveFile();
         evt.preventDefault();
     }
 }

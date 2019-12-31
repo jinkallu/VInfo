@@ -1,6 +1,7 @@
-import * as THREE from 'THREE';
+//import THREE from 'three';
 //import CCapture from 'CCAPTURE';
 declare var CCapture: any;
+declare var THREE: any;
 
 export class BasicThree{
     three_div: HTMLCanvasElement;

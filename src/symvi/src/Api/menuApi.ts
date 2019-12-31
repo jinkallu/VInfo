@@ -5,7 +5,7 @@ export class MenuApi {
 
                new Menu(
                     "File",
-                    ["Open", "close", "save"]
+                    ["Open", "Close", "Save"]
 
                ), new Menu(
                     "Edit",
