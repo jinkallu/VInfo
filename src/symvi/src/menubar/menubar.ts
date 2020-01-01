@@ -65,6 +65,15 @@ export class MenuBar {
                 menu_style.style.display = 'none'; // all elese
             }
         }
+        
+        evt.stopPropagation();
+    }
+
+    hideMenus(){
+        for(let menuview of this.menuviews){
+            let menu_style = menuview.getItems().get();
+            menu_style.style.display = 'none';
+        }
     }
 }
 

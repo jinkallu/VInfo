@@ -21,6 +21,7 @@ export class MainUI {
 
     constructor(body: HTMLBodyElement) {
         this.body = body;
+
         
         this.menu_bar = new MenuBar({width: "99%", height: "2rem"});
         this.tool_box = new ToolBox("13%", "18%", "86%");
@@ -38,6 +39,9 @@ export class MainUI {
 
 
         //this.properties = new Properties();
+
+        this.body.addEventListener("click", this.clicked);
+
     }
 
     createUI() {
@@ -139,5 +143,9 @@ export class MainUI {
         console.log("File save event");
         this.design_area.saveFile();
         evt.preventDefault();
+    }
+
+    clicked = () => {
+        this.menu_bar.hideMenus();
     }
 }
