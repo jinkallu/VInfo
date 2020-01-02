@@ -3,6 +3,7 @@ import { Edges } from './edges';
 import { DesignApi } from '../Api/designApi';
 import { Component } from '../models/component';
 import {Properties} from '../iopanel/properties';
+import { ContextMenu } from './contextmenu';
 
 // import { Script } from 'vm';
 
@@ -26,9 +27,10 @@ export class Block {
     component: Component;
     property:Properties;
 
-    
+    context_menu: ContextMenu;
 
-    constructor(svg: any, pos: any,_id:number, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string, url:string) {
+
+    constructor(svg: any, pos: any,_id:number, _inputs: number, _outputs: number, _edges: Edges, _name: string, itemId: string, url:string, body: HTMLBodyElement) {
         this.id = _id;
         this.type = 'Block';
 
@@ -74,6 +76,8 @@ export class Block {
         this.rect.addEventListener("mouseleave", this.dragStop);
 
         this.rect.addEventListener("click", this.onClick);
+        this.rect.addEventListener("contextmenu", this.contextMenu); 
+
 
         
         
@@ -91,6 +95,12 @@ export class Block {
         
         this.addInputs();
         this.addOutputs();
+
+        this.context_menu = new ContextMenu();
+
+        body.appendChild(this.context_menu.get());
+        this.context_menu.get().addEventListener("delete", this.delete);
+
         // this.rect.addEventListener("click", this.onClick);
     }
 
@@ -102,6 +112,16 @@ export class Block {
 
     getId(){
         return this.id;
+    }
+
+    setSelected(){
+        this.rect.setAttribute("stroke", "blue");
+        this.rect.setAttribute("style",  "outline: 0.05rem dashed blue;");
+    }
+
+    setDeselected(){
+        this.rect.setAttribute("stroke", "red");
+        this.rect.setAttribute("style",  "outline: 0.05rem solid red;");
     }
 
     onClick = (evt:any) => {
@@ -294,5 +314,34 @@ export class Block {
 
     getOutputNode(i:number){
         return this.output_nodes[i];
+    }
+
+    resetNode(io: boolean, node_id: any){
+        if(io){
+            this.input_nodes[node_id].resetConnection();
+        }
+        else{
+            this.output_nodes[node_id].resetConnection();
+        }
+    }
+
+    delete = (event:any) => {
+        event.preventDefault();
+        
+        this.rect.dispatchEvent(new CustomEvent("deleteBlock", {
+            bubbles: true,
+            detail: { id:  this.id}
+          }));
+    }
+
+    contextMenu = (evt: any) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        console.log("Clicked context menu from block ", evt.pageX, evt.pageY);
+        this.context_menu.display(evt.pageX, evt.pageY);
+    }
+
+    hideContextMenu(){
+        this.context_menu.hide();
     }
 }

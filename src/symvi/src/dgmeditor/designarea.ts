@@ -18,8 +18,11 @@ export class DesignArea{
     properties:Properties;
     cat_item:CategoryItem;
     itemName:string;
+    body: HTMLBodyElement;
 
-    constructor(pos:any){
+    constructor(pos:any, _body: HTMLBodyElement){
+        this.body = _body;
+
         this.design_area_div = document.createElement("div");
         this.design_area_div.style.position = "absolute";
         this.design_area_div.style.background = "white";
@@ -36,7 +39,7 @@ export class DesignArea{
         this.svg.style.position = "absolute";
 
         this.blocks = [];
-        this.edges = new Edges(this.svg); 
+        this.edges = new Edges(this.svg, _body); 
 
         this.svg.addEventListener("mousemove", this.mouseMove); 
         this.svg.addEventListener("contextmenu", this.contextMenu); 
@@ -45,8 +48,14 @@ export class DesignArea{
         this.svg.addEventListener("dragover", this.dragOver);  
         this.svg.addEventListener("drop", this.drop); 
 
+        this.svg.addEventListener("deleteEdge", this.deleteEdgeTrig);
+        this.svg.addEventListener("deleteBlock", this.deleteBlock);
+
         this.create();
         this.properties=Properties.getInstance();
+
+        this.body.addEventListener("click", this.bodyClicked);
+        this.body.addEventListener("contextmenu", this.bodyClicked);
 
     }
 
@@ -59,7 +68,7 @@ export class DesignArea{
     }
 
     addBlock(pos:any,id:number, inputs:number, outputs:number, name:string, itemId:string, url:string){
-        let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId, url);
+        let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId, url, this.body);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
         rect.get().addEventListener("block_clicked", this.onClick);
@@ -69,7 +78,8 @@ export class DesignArea{
         DesignApi.addComponent(this.component);
         this.itemName=name;
         this.properties.addItems(this.component.itemProps,this.itemName,id);     
-
+        
+        this.activeBlock(rect.getId());
     }
 
     mouseMove = (event: MouseEvent) => {
@@ -148,7 +158,21 @@ export class DesignArea{
 
        
         this.properties.addItems(itemProps,evt.detail.name, evt.detail.id);
+        
+        this.activeBlock(evt.detail.id);
+
         evt.preventDefault();      
+    }
+
+    activeBlock(id: any){
+        for (let block of this.blocks){
+            if(id == block.getId()){
+                block.setSelected();
+            }
+            else{
+                block.setDeselected();
+            }
+        } 
     }
 
     processJSON(file:any){
@@ -239,5 +263,44 @@ export class DesignArea{
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
+    }
+
+    deleteEdgeTrig = (evt: any) => {
+        this.deleteEdge(evt.detail.id);
+    }
+
+    deleteEdge(id: any){
+        let edge_data = this.edges.deleteEdge(id);
+        for(let block of this.blocks){
+            if(edge_data.src_blk_id == block.getId()){
+                block.resetNode(false, edge_data.src_node_id); // output node
+            }
+            else if(edge_data.tgt_blk_id == block.getId()){
+                block.resetNode(true, edge_data.src_node_id); // input node
+            }
+        }
+    }
+
+    deleteBlock = (evt: any) => {
+        for(let i = 0; i < this.blocks.length; i++){
+            if (this.blocks[i].getId() == evt.detail.id){
+                let edges_connected = this.edges.getEdgesConnectedWithBlock(this.blocks[i].getId());
+                for(let edge of edges_connected){
+                    this.deleteEdge(edge.getId());
+                }
+                
+                this.svg.removeChild(this.blocks[i].get());
+                this.blocks[i] = null;
+                this.blocks.splice(i, 1);
+            }
+        }
+    }
+
+    bodyClicked = () => {
+        this.edges.bodyClicked();
+
+        for(let block of this.blocks){
+            block.hideContextMenu();
+        }
     }
 }

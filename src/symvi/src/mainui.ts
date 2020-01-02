@@ -27,7 +27,7 @@ export class MainUI {
         this.tool_box = new ToolBox("13%", "18%", "86%");
 
         
-        this.design_area = new DesignArea({"left": "19%", "top": "13%", "width": "62%", "height": "66%"});
+        this.design_area = new DesignArea({"left": "19%", "top": "13%", "width": "62%", "height": "66%"}, this.body);
         this.console = new Console({'left': "19%", 'top': "80%", 'width': "62%", 'height': "19%"});
 
         this.iopanel = new IOPanel({"left": "82%", "top": "13%", "width" : "17.5%", "height": "86%"});

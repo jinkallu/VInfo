@@ -124,4 +124,9 @@ export class Node{
         this.circle.setAttributeNS(null, "fill", "white");
     }
 
+    resetConnection(){
+        this.edge = undefined;
+        this.connected = false;
+    }
+
 }

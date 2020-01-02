@@ -1,4 +1,5 @@
 import { Id } from './id';
+import { ContextMenu } from './contextmenu';
 
 export class Edge{
     id:number;
@@ -14,7 +15,9 @@ export class Edge{
     polyline:any;
     pos:any;
 
-    constructor(_src:any, _tgt:any, flag_temp = false){
+    context_menu: ContextMenu;
+
+    constructor(_src:any, _tgt:any, flag_temp = false, body: HTMLBodyElement = null){
         if(!flag_temp){
             this.id = Id.getID();
         }
@@ -48,7 +51,14 @@ export class Edge{
 
         this.polyline.addEventListener("mouseover", this.mouseOver); 
         this.polyline.addEventListener("mouseout", this.mouseOut); 
-        this.polyline.addEventListener("contextmenu", this.delete); 
+        this.polyline.addEventListener("contextmenu", this.contextMenu); 
+
+        this.context_menu = new ContextMenu();
+
+        if(!flag_temp){
+            body.appendChild(this.context_menu.get());
+            this.context_menu.get().addEventListener("delete", this.delete);
+        }
     }
 
     updatePoints(){
@@ -84,10 +94,27 @@ export class Edge{
         this.polyline.setAttribute("stroke-width", "1");
     }
 
+    contextMenu = (evt:any) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        
+        this.context_menu.display(evt.pageX, evt.pageY);
+        
+    }
+
+    hideContextMenu(){
+        this.context_menu.hide();
+    }
+
     delete = (event:any) => {
         event.preventDefault();
         this.active = false;
-        this.polyline.parentNode.removeChild(this.polyline);
+        
+        this.polyline.dispatchEvent(new CustomEvent("deleteEdge", {
+            bubbles: true,
+            detail: { id:  this.id}
+          }));
+          //this.polyline.parentNode.removeChild(this.polyline);
         //console.log("delete");
         // also reset the block nodes
     }
@@ -108,5 +135,17 @@ export class Edge{
                             tgt_node_id: this.tgt_node_id
                         };
         return data;
+    }
+
+    getId(){
+        return this.id;
+    }
+
+    connectedToBlock(id: any){
+        if(this.src_block_id == id || this.tgt_block_id == id){
+            return true;
+        }
+        
+        return false;
     }
 }

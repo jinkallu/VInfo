@@ -9,16 +9,24 @@ export class Edges{
     connection_src:any;
     connection_tgt:any;
 
-    constructor(_svg:any){
+    body: HTMLBodyElement;
+
+    constructor(_svg:any, _body: HTMLBodyElement){
         this.edges = [];
         this.svg = _svg;
 
         this.connection_started = false;
+
+        this.body = _body;
+
+        //this.body.addEventListener("click", this.bodyClicked);
+        //this.body.addEventListener("contextmenu", this.bodyClicked);
     }
 
     addEdge(){
         
-        this.edges.push(new Edge(this.connection_src, this.connection_tgt));
+        this.edges.push(new Edge(this.connection_src, this.connection_tgt, false, this.body));
+        //this.edges[this.edges.length - 1].getPolyLine().addEventListener("deleteEdge", this.deleteEdge);
         this.svg.appendChild(this.edges[this.edges.length - 1].getPolyLine());
         return this.edges[this.edges.length - 1];
     }
@@ -64,5 +72,36 @@ export class Edges{
 
     getEdges(){
         return this.edges;
+    }
+
+    bodyClicked(){
+        for(let edge of this.edges){
+            edge.hideContextMenu();
+        }
+    }
+
+    deleteEdge = (id: any) => {
+        for (let i = 0; i < this.edges.length; i++){
+            if(this.edges[i].getId() == id){
+
+                let edge_data = this.edges[i].getData();
+                this.svg.removeChild(this.edges[i].getPolyLine());
+                this.edges.splice(i, 1);
+                
+                return edge_data;
+            }
+        }
+    }
+
+    getEdgesConnectedWithBlock(id: any){
+        let edges_connected = [];
+
+        for(let edge of this.edges){
+            if(edge.connectedToBlock(id)){
+                edges_connected.push(edge);
+            }
+        }
+
+        return edges_connected;
     }
 }
