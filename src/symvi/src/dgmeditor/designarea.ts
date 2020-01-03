@@ -189,6 +189,9 @@ export class DesignArea{
             this.addBlock({ x: block.pos.x, y: block.pos.y }, new_id, inputs, outputs, name, itemId, url);
 
             block.new_id = new_id;
+            for(let props of block.properties){
+                DesignApi.addPropVal(new_id, props._propId, props._propVal);
+            }
         }
 
         for (let edge of file.edges){
@@ -276,7 +279,7 @@ export class DesignArea{
                 block.resetNode(false, edge_data.src_node_id); // output node
             }
             else if(edge_data.tgt_blk_id == block.getId()){
-                block.resetNode(true, edge_data.src_node_id); // input node
+                block.resetNode(true, edge_data.tgt_node_id); // input node
             }
         }
     }
