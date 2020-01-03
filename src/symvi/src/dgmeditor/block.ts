@@ -292,6 +292,8 @@ export class Block {
     }
 
     getDataSave(){
+        let propsForsave=DesignApi.getPropsByInstId(this.id);
+      
         let data = {
             id: this.id,
             type_id: this.type,
@@ -302,7 +304,8 @@ export class Block {
                 },
             name: this.name,
             inputs: this.inputs,
-            outputs: this.outputs
+            outputs: this.outputs,
+            properties:propsForsave
         }
 
         return data;

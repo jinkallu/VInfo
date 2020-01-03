@@ -1,4 +1,5 @@
 import { Component } from '../models/component';
+import { ItemProp } from '../models/itemProp';
 
 export class DesignApi {
     static components: Component[] = [];
@@ -14,6 +15,17 @@ export class DesignApi {
         for (let comp of this.components){
             if (comp.instanceId === instanceId){
                 return comp;
+                break;
+            }
+        }
+       
+    }
+
+    static getPropsByInstId(instanceId: number):ItemProp[]{
+
+        for (let comp of this.components){
+            if (comp.instanceId === instanceId){
+                return comp.itemProps;
                 break;
             }
         }
