@@ -8,6 +8,8 @@ export class CategoryItem{
         this.cat_item_img.setAttribute("class", "flex-elem");
         this.cat_item_img.setAttribute('title', cat_item_data.categoryName);
         this.cat_item_img.setAttribute('id', cat_item_data.catItemId);
+        this.cat_item_img.setAttribute('border', "1rem solid black");
+        this.cat_item_img.style.position = "relative";
 
         this.cat_item_img.draggable = true;
         this.cat_item_img.addEventListener("dragstart", this.dragStart); 
