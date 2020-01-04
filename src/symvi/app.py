@@ -28,9 +28,11 @@ def loadmodel():
     model = request.args.get("model")
     
     filename = os.path.join(app.static_folder, 'models/' + model + '.json')
-    with open(filename) as blog_file:
-        data = json.dumps(json.load(blog_file))
-
+    try:
+        with open(filename) as blog_file:
+            data = json.dumps(json.load(blog_file))
+    except:
+        data = json.dumps(None)
     #data = json.dumps( model )
     return render_template('index.html', data = data)
 
