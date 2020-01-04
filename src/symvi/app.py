@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify,send_from_directory
-from flask import request, jsonify, make_response
-
+from flask import request, json, make_response
+import os
 import traceback
 
 flag_ROOT = True
@@ -20,9 +20,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    data = json.dumps( None )
+    return render_template('index.html', data = data)
 
+@app.route('/loadmodel')
+def loadmodel():
+    model = request.args.get("model")
+    
+    filename = os.path.join(app.static_folder, 'models/' + model + '.json')
+    with open(filename) as blog_file:
+        data = json.dumps(json.load(blog_file))
 
+    #data = json.dumps( model )
+    return render_template('index.html', data = data)
 
 @app.route('/es6-static/<path:filename>')
 def es6_static(filename):

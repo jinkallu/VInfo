@@ -12,19 +12,6 @@
         gtag('config', 'UA-42336031-2');
     </script>
 
-
-    <!-- <script src = "menu.js"> </script>
-        <script src = "menubar.js"> </script>
-        <script src = "toolbar.js"> </script>
-        <script src = "toolbox.js"> </script>
-        <script src = "block.js"> </script>
-        <script src = "designarea.js"> </script>
-        <script src = "properties.js"> </script>
-        <script src = "mainui.js"> </script>
-        <script src = "main.js"> </script> -->
-</head>
-
-<body>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/toolbox_dd.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/jquery-ui.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/jquery-ui.min.css') }}">
@@ -32,11 +19,12 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootGeoPainter.min.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootPainter.min.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/JSRootPainter.css') }}">
-    
+
+
     <script src="{{ url_for('static', filename='dist/scripts/JSRootCore.js') }}"></script>
     <script src="{{ url_for('static', filename='dist/scripts/three.min.js') }}"></script>
     <script src="{{ url_for('static', filename='dist/scripts/OrbitControls.js') }}"></script>
-    
+
     <script id="MathJax-script" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
@@ -46,12 +34,21 @@
 
     <script src="{{ url_for('static', filename='dist/scripts/CCapture.all.min.js') }}"> </script>
 
-    <script src="{{ url_for('static', filename='dist/bundle.js') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='dist/bundle.js') }}"> </script>
 
+</head>
 
-        //   <!-- import { init } from "/static/js/dist1/main.js"; -->
-        init();
-    </script>
+<body>
+     
+    {% block javascript %}
+        <script>
+            let data = {{ data | safe }}
+            window.MyExposedNamespace.init(data); 
+        </script>
+    {% endblock %}
+
+    <script> 
+        
+    </script> 
 </body>
-
 </html>

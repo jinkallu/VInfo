@@ -44,7 +44,7 @@ export class MainUI {
 
     }
 
-    createUI() {
+    createUI(data: any) {
         this.createMenuBar();
         this.createDesignArea();
         this.createProperties();
@@ -53,7 +53,9 @@ export class MainUI {
         this.createIOPanel();
         this.createToolBar();
 
-        
+        if(data != null){
+            this.design_area.processJSON(data);
+        }
     }
 
     createMenuBar() {

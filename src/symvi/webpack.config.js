@@ -4,7 +4,8 @@ module.exports = {
     entry: "./src/main.ts",
     output: {
         path: path.resolve(__dirname, 'static/dist'),
-        filename: "bundle.js"
+        filename: "bundle.js",
+        library: 'MyExposedNamespace'
     },
     devtool: 'inline-source-map',
     devServer: {

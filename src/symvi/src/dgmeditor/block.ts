@@ -61,7 +61,29 @@ export class Block {
         this.rect.setAttribute("href", url);
         this.rect.setAttribute("style",  "outline: 0.05rem solid red;");
 
+        /*let pattern = document.createElementNS("http://www.w3.org/2000/svg", "pattern");
+        pattern.setAttribute("id", "img1");
+        pattern.setAttribute("patternUnits", "userSpaceOnUse");
+        pattern.setAttribute("width", "100%");
+        pattern.setAttribute("height", "100%");
 
+        let image = document.createElementNS("http://www.w3.org/2000/svg", "image");
+        image.setAttribute("xlink:href", url);
+        image.style.width = "100%";
+        image.style.height = "100%";
+        image.setAttribute("x", "0");
+        image.setAttribute("y", "0");
+
+        pattern.appendChild(image);
+
+        this.svg.appendChild(pattern);
+
+        this.rect.setAttribute("fill", "url(#img1)");*/
+        //let defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        //let pattern = svg.pattern(defs, "imgPattern", 0, 0, 100, 100, 0, 0, 10, 10, 
+        //              {patternUnits: "userSpaceOnUse"});
+        //let img = svg.image( pattern, 100, 50, 200, 200, url);
+        //this.rect.setAttribute("fill", "url(#imgPattern)");
 
         // text
         this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");

@@ -112,11 +112,12 @@ export class DesignArea{
         event.preventDefault();
         //console.log("Drop");
         //if ( event.target.className === "flex-elem" ) {
+            console.log(event);
             let item_id = event.dataTransfer.getData("Text");
-            console.log("item_id");
-            console.log(item_id);
+            //console.log("item_id");
+            //console.log(item_id);
             let cat_item= CategoryApi.getCategoryItemByItemId(item_id);
-            console.log(cat_item.inputs);
+            //console.log(cat_item.inputs);
             let inputs = cat_item.inputs;
             let outputs = cat_item.outputs;
             let name = cat_item.categoryName;
