@@ -100,4 +100,8 @@ export class IOPanel{
     getIOControl(){
         return this.iocontrol;
     }
+
+    showInput(){
+        this.iocontrol.showInput();
+    }
 }

@@ -53,7 +53,7 @@ export class Run{
     execute = () => {
 
         //resize io panel...
-        let designArea=document.getElementById('designArea');        
+        /*let designArea=document.getElementById('designArea');        
         let consoleArea=document.getElementById('console');        
         let iopanelArea=document.getElementById('iopanel');  
         consoleArea.style.width='79%';
@@ -64,7 +64,7 @@ export class Run{
         iopanelArea.style.top="13%";
         iopanelArea.style.width="79%";
         iopanelArea.style.height="66%";
-        iopanelArea.style.width="79%";
+        iopanelArea.style.width="79%";*/
 
 
         let edges = this.createEdgesData();
@@ -79,7 +79,7 @@ export class Run{
             return;
         }
 
-        console.log("Value of PI from mathjs is ", MATH.pi);
+        //console.log("Value of PI from mathjs is ", MATH.pi);
 
         this.submit({edges: edges, 
                      blocks: blocks});
@@ -193,7 +193,7 @@ export class Run{
             if (data['output'] !== null && this.iocontrol !== null){
                 this.iocontrol.getIoButtonOutput().emulateClick();
                 let output_panel = this.iocontrol.getOuputPanel();
-                this.iocontrol.get().parentNode.addEventListener("resize", this.outputResize);
+                //this.iocontrol.get().parentNode.addEventListener("resize", this.outputResize);
                 //output_panel.innerHTML = "";
                 while (output_panel.firstChild) {
                     let child_div:any = output_panel.firstChild;
@@ -298,9 +298,9 @@ export class Run{
                     //}
                 }
                 msg = "<br><font color='green'>" + data['message'] + "</font><br>";
-                //this.run_div.dispatchEvent(new CustomEvent("resize", {
-                //    bubbles: true
-                //  }));
+                this.run_div.dispatchEvent(new CustomEvent("full_output", {
+                    bubbles: true
+                }));
             }
             else{
                 msg = "<br><font color='red'>" + data['message'] + "</font><br>";
@@ -319,7 +319,8 @@ export class Run{
         
     }
 
-    outputResize = (evt:any) => {
+    outputResize() {
+        console.log("RESIZING OUTPUT");
         for(let root_div of this.root_divs){
             JSROOT.resize(root_div.id);
         }

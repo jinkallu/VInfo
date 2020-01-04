@@ -20,12 +20,15 @@ export class ToolBar{
 
         this.run = new Run(design_area, console);
         this.resize_output = new ResizeOutput(iopanel.get());
+        this.resize_output.get().addEventListener("click", this.resizingOutput);
 
+        this.run.get().addEventListener("full_output", this.showFullOutput);
         this.create();
     }
 
     create(){
         this.tool_bar_div.appendChild(this.run.get());
+
         this.tool_bar_div.appendChild(this.resize_output.get());
     }
 
@@ -35,5 +38,13 @@ export class ToolBar{
 
     setIOControl(ioc:IOControl){//}, pos:any){
         this.run.setIOControl(ioc);//, pos);
+    }
+
+    resizingOutput = () => {
+        this.run.outputResize();
+    }
+
+    showFullOutput = () => {
+        this.resize_output.showFullOutput();
     }
 }

@@ -78,6 +78,9 @@ export class MainUI {
     createDesignArea() {
         let design_area_div = this.design_area.get();        
         this.body.appendChild(design_area_div);
+
+        design_area_div.addEventListener("block_clicked", this.blockClicked);
+
     }
 
     createIOPanel(){
@@ -148,4 +151,8 @@ export class MainUI {
     clicked = () => {
         this.menu_bar.hideMenus();
     }
+
+    blockClicked = () => {
+        this.iopanel.showInput();
+    } 
 }

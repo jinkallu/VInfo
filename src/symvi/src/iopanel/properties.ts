@@ -73,6 +73,7 @@ export class Properties {
           let inEl = document.createElement('input');
           inEl.setAttribute('id', instanceid + '_' + itemProp.propId);
           inEl.setAttribute('placeholder', itemProp.propName);
+          inEl.style.overflowX = "hidden";
           if (itemProp.propDefVal) {
 
                inEl.value = itemProp.propDefVal;
@@ -149,6 +150,7 @@ export class Properties {
           formulaEl.setAttribute('type','text');
           formulaEl.setAttribute('name',instanceid + '_' + itemProp.propId);
           formulaEl.setAttribute('id',instanceid + '_' + itemProp.propId);
+          formulaEl.style.overflowX = "hidden";
 
           let formulaTexEl = document.createElement('div');
           formulaTexEl.style.overflowX = "auto";
@@ -238,8 +240,10 @@ export class Properties {
           divEl.style.justifyContent = "space-between";
           divEl.style.flexDirection = 'row';
           divEl.style.margin = '5px';
+          divEl.style.overflowX = "auto";
 
           let lblEl = document.createElement('label');
+          lblEl.style.padding = "0.5rem";
           lblEl.textContent = itemProp.propName.toUpperCase();
           
           divEl.appendChild(lblEl)

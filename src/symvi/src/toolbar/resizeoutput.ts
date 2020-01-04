@@ -7,6 +7,10 @@ export class ResizeOutput{
     output_panel: HTMLDivElement;
     normal_width:any;
     normal_left:any;  
+    designArea: any;
+    consoleArea: any;
+    iopanelArea: any;
+
 
     constructor(_output_panel: HTMLDivElement){
         this.output_panel = _output_panel;
@@ -30,7 +34,11 @@ export class ResizeOutput{
 
         this.resize_output_div.appendChild(icon.get());
 
+         // must find a better way below, avoid get lementbyid
+         
+
         this.resize_output_div.addEventListener("click", this.resize);
+
     }
 
     get(){
@@ -38,33 +46,21 @@ export class ResizeOutput{
     }
 
     resize = () => {
-        console.log("Resizing output");
-        console.log(this.output_panel.style.width);
+        //console.log("Resizing output");
+        //console.log(this.output_panel.style.width);
 
-        let designArea=document.getElementById('designArea');
+        this.designArea = document.getElementById('designArea');
         
-        let consoleArea=document.getElementById('console');
-        
-        let iopanelArea=document.getElementById('iopanel');
+        this.consoleArea = document.getElementById('console');
+         
+        this.iopanelArea = document.getElementById('iopanel');
+ 
 
-        if(designArea.style.display!='none'){
-        iopanelArea.style.display="none";
-        consoleArea.style.display='none';
-        designArea.style.display='none';
-        iopanelArea.style.left="19%";
-        iopanelArea.style.top="13%";
-        iopanelArea.style.width="79%";
-        iopanelArea.style.height="85%";
-        iopanelArea.style.display="block";
-
-
+        if(this.designArea.style.display!='none'){
+            this.showFullOutput();
         }
         else{
-            consoleArea.style.width="62%";
-            consoleArea.style.display='block';
-            designArea.style.display='block';
-            iopanelArea.style.left="82%";
-            iopanelArea.style.width="17.5%";
+            this.showMinOutput();
         }
 
 
@@ -81,5 +77,30 @@ export class ResizeOutput{
         //     this.output_panel.style.left = this.normal_left;
         //     this.output_panel.style.width = this.normal_width;
         // }
+    }
+
+    showFullOutput(){
+        this.designArea = document.getElementById('designArea');
+        
+         this.consoleArea = document.getElementById('console');
+         
+         this.iopanelArea = document.getElementById('iopanel');
+ 
+        this.iopanelArea.style.display="none";
+        this.consoleArea.style.display='none';
+        this.designArea.style.display='none';
+        this.iopanelArea.style.left="0%";
+        this.iopanelArea.style.top="13%";
+        this.iopanelArea.style.width="99%";
+        this.iopanelArea.style.height="85%";
+        this.iopanelArea.style.display="block";
+    }
+
+    showMinOutput(){
+        this.consoleArea.style.width="62%";
+        this.consoleArea.style.display='block';
+        this.designArea.style.display='block';
+        this.iopanelArea.style.left="82%";
+        this.iopanelArea.style.width="17.5%";
     }
 }

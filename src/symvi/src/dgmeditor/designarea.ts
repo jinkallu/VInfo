@@ -161,7 +161,7 @@ export class DesignArea{
         
         this.activeBlock(evt.detail.id);
 
-        evt.preventDefault();      
+        //evt.preventDefault();      
     }
 
     activeBlock(id: any){
