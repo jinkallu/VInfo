@@ -19,8 +19,10 @@ export class MenuView{
         this.menu_button.style.paddingLeft = '0.5rem';
         this.menu_button.style.paddingRight = '0.5rem';
 
-        this.menu_button.style.background = "#E8E8E8";
+        this.menu_button.style.background = "#FFFFFF";
         this.menu_button.style.color = "black";	
+        this.menu_button.style.cursor = "default";
+
         
         //this.menu_div.setAttribute('id', menuele.menuId);
 

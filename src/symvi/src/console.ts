@@ -12,6 +12,8 @@ export class Console{
         this.console_div.setAttribute('id','console');
         this.console_div.innerHTML = "Console";
         this.console_div.style.overflowY = "scroll";
+        this.console_div.style.borderTop = "solid #C0C0C0";
+        this.console_div.style.borderTopWidth = "thin";
     }
 
     get(){

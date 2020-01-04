@@ -46,7 +46,7 @@ export class Properties {
           
 
           this.propDiv = document.createElement('div');
-          this.propDiv.style.background = 'lightgrey';
+          this.propDiv.style.background = '#F5F5F5';
           this.propDiv.style.minHeight = "40%";
           this.propDiv.style.width = "90";
           this.propDiv.style.margin = "3%";

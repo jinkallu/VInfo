@@ -17,6 +17,7 @@ export class MenuBar {
         this.menubar_div.style.display = "flex";
         //this.menubar_div.style.background = " #404040";
         this.menubar_div.style.borderBottom = "solid #C0C0C0";
+        this.menubar_div.style.borderBottomWidth = "thin";
         this.menubar_div.setAttribute('id','menubar');
 
         this.menus = MenuApi.getMenus();

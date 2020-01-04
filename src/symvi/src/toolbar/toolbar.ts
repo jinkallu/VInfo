@@ -16,6 +16,7 @@ export class ToolBar{
         this.tool_bar_div.style.height = pos.height;
         //this.tool_bar_div.style.background = "#C0C0C0";
         this.tool_bar_div.style.borderBottom = "solid #C0C0C0";
+        this.tool_bar_div.style.borderBottomWidth = "thin";
         this.tool_bar_div.style.position = "absolute";
 
         this.run = new Run(design_area, console);

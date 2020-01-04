@@ -5,10 +5,12 @@ export class Icon{
         this.icon_div = document.createElement("img");
         this.icon_div.src = img_url;
         this.icon_div.style.display = "block";
-        //this.icon_div.style.position = "absolute";
-        this.icon_div.style.width = "100%";
-        this.icon_div.style.height = "80%";
-        this.icon_div.style.marginRight = "3rem";
+        this.icon_div.style.position = "relative";
+        this.icon_div.style.width = "50%";
+        //this.icon_div.style.height = "100%";
+        //this.icon_div.style.marginRight = "3rem";
+        this.icon_div.style.border = "5rem";
+        //this.icon_div.style.padding = "1rem";
     }
 
     get(){
