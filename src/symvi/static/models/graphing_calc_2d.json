@@ -1,0 +1,10 @@
+{
+"blocks": [
+{"id":0,"type_id":"Block","item_id":"i20","pos":{"x":"348.24277816342493","y":"179.6057658784487"},"name":"Graphing Calculator 2D","inputs":0,"outputs":0,"properties":[{"_catItemId":"i20","_propId":"p44","_propName":"formula","_propType":"formula","_propSpec":"formula","_propDefVal":null,"_propOrder":1,"_propReqd":true,"_propVal":"exp(-x^2 - y^2)"},{"_catItemId":"i20","_propId":"p45","_propName":"x_min","_propType":"number","_propSpec":"text","_propDefVal":null,"_propOrder":2,"_propReqd":true,"_propVal":"-4"},{"_catItemId":"i20","_propId":"p46","_propName":"x_max","_propType":"number","_propSpec":"text","_propDefVal":null,"_propOrder":3,"_propReqd":true,"_propVal":"4"},{"_catItemId":"i20","_propId":"p47","_propName":"y_min","_propType":"number","_propSpec":"text","_propDefVal":null,"_propOrder":2,"_propReqd":true,"_propVal":"-4"},{"_catItemId":"i20","_propId":"p48","_propName":"y_max","_propType":"number","_propSpec":"text","_propDefVal":null,"_propOrder":3,"_propReqd":true,"_propVal":"4"}]}
+],
+
+"edges": [
+
+]
+
+}

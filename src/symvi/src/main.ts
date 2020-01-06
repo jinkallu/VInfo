@@ -14,3 +14,5 @@ export function init(data: any){
     let mainUI = new MainUI(body);
     mainUI.createUI(data);
 }
+
+(<any>window).init = init;

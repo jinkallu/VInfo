@@ -71,8 +71,8 @@ export class DesignArea{
         let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId, url, this.body);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
-        rect.get().addEventListener("block_clicked", this.onClick);
-
+        //rect.get().addEventListener("block_clicked", this.onClick);
+        
         this.component = new Component(id, itemId);
 
         DesignApi.addComponent(this.component);
@@ -80,6 +80,10 @@ export class DesignArea{
         this.properties.addItems(this.component.itemProps,this.itemName,id);     
         
         this.activeBlock(rect.getId());
+
+        rect.get().addEventListener("block_clicked", this.onClick);
+
+        return rect;
     }
 
     mouseMove = (event: MouseEvent) => {
@@ -162,6 +166,10 @@ export class DesignArea{
         
         this.activeBlock(evt.detail.id);
 
+        this.design_area_div.dispatchEvent(new CustomEvent("block_clicked", {
+            bubbles: true,
+            detail: { id:  evt.detail.id,name:""}
+          }));
         //evt.preventDefault();      
     }
 
@@ -187,12 +195,14 @@ export class DesignArea{
             let url = cat_item.categoryImgURL
 
             let new_id = Id.getID();
-            this.addBlock({ x: block.pos.x, y: block.pos.y }, new_id, inputs, outputs, name, itemId, url);
+            let rect = this.addBlock({ x: block.pos.x, y: block.pos.y }, new_id, inputs, outputs, name, itemId, url);
 
             block.new_id = new_id;
             for(let props of block.properties){
                 DesignApi.addPropVal(new_id, props._propId, props._propVal);
             }
+
+            rect.getRect().dispatchEvent(new CustomEvent("click"));
         }
 
         for (let edge of file.edges){

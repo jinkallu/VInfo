@@ -58,7 +58,10 @@ export class Block {
         this.rect.setAttribute("stroke", "red");
         this.rect.setAttribute("x", pos.x - 30);
         this.rect.setAttribute("y", pos.y - 20);
-        this.rect.setAttribute("href", url);
+
+        if (navigator.userAgent.indexOf("Chrome") > 0) { // check if the browser is chrome
+            this.rect.setAttribute("href", url);
+        }
         this.rect.setAttribute("style",  "outline: 0.05rem solid red;");
 
         /*let pattern = document.createElementNS("http://www.w3.org/2000/svg", "pattern");
@@ -130,6 +133,10 @@ export class Block {
 
     get() {
         return this.group;
+    }
+
+    getRect(){
+        return this.rect;
     }
 
     getId(){

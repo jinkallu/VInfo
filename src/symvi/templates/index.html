@@ -25,7 +25,7 @@
     <script src="{{ url_for('static', filename='dist/scripts/three.min.js') }}"></script>
     <script src="{{ url_for('static', filename='dist/scripts/OrbitControls.js') }}"></script>
 
-    <script id="MathJax-script" async
+    <script id="MathJax-script"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
     <script type="text/x-mathjax-config">
@@ -43,7 +43,7 @@
     {% block javascript %}
         <script>
             let data = {{ data | safe }}
-            window.MyExposedNamespace.init(data); 
+            window.init(data); 
         </script>
     {% endblock %}
 

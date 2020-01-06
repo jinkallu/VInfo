@@ -157,7 +157,7 @@ export class BasicThree{
         }
 
         this.scene.add(this.light);
-        this.ccapture.start();
+        //this.ccapture.start();
     }
 
     updateData(){
