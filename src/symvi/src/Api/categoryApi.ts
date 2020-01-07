@@ -140,7 +140,7 @@ export class CategoryApi {
 
           new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
           new ItemProp('i19', 'p43', 'function', 'string', 'text', null, 1, true),
-          
+
           new ItemProp('i20', 'p44', 'formula', 'formula', 'formula', null, 1, true),
           new ItemProp('i20', 'p45', 'x_min', 'number', 'text', null, 2, true),
           new ItemProp('i20', 'p46', 'x_max', 'number', 'text', null, 3, true),
@@ -148,7 +148,7 @@ export class CategoryApi {
           new ItemProp('i20', 'p48', 'y_max', 'number', 'text', null, 3, true),
 
           new ItemProp('i21', 'p49', 'fileinput', 'text', "file", null, 3, true),
-          
+
           new ItemProp('i22', 'p50', 'Z', 'number', "text", null, 3, true),
           new ItemProp('i22', 'p51', 'A', 'number', "text", null, 3, true),
           new ItemProp('i22', 'p52', 'mass', 'number', "text", null, 3, true),
@@ -180,7 +180,30 @@ export class CategoryApi {
           new Lookup('p4', '6', 'option6')
      ];
 
-     static getCategories() {
+     static async test(){
+          let send_data = 'test';
+
+
+          let response = await fetch('/gettoolboxitems', {
+
+               method: 'get',
+
+               headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+               },
+               // body: JSON.stringify(send_data)
+          });
+          let msg;
+          let data:any =  response.json();
+          console.log("printing api call values ");
+          console.log(data);
+
+     }
+
+     static  getCategories() {
+          this.test();
+         
+
           return [...this.categories];
      }
 

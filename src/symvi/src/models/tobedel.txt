@@ -1,0 +1,359 @@
+
+INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 
+
+ 'count', 'number', 'text', null, 1, true from symvi.catitems where imageurl like '/static/images/array.png';
+
+
+
+
+         INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 
+ 'min', 'number', 'text', null, 2, true from symvi.catitems where imageurl like '/static/images/array.png';
+                  INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 'max', 'number', 'text', null, 3, true from symvi.catitems where imageurl like'/static/images/array.png';
+
+    
+         
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 'function', 'formula', 'formula', null, 1, true from symvi.catitems where imageurl like'/static/images/function1d.png';
+        
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 'min', 'number', 'text', null, 2, true from symvi.catitems where imageurl like'/static/images/graphingcalc_1d.png';
+                  INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 'max', 'number', 'text', null, 3, true from symvi.catitems where imageurl like'/static/images/graphingcalc_1d.png';
+                   INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 'Formula', 'formula', 'formula', null, 1, true from symvi.catitems where imageurl like'/static/images/graphingcalc_1d.png';
+
+
+         INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+    select catitemid, 'Axis', 'number', 'text', null, 1, true from symvi.catitems where imageurl like'/static/images/simulate.png';
+
+          new ItemProp('i10', 'p12', 'Position_x', 'number', 'text', null, 1, true),
+          new ItemProp('i10', 'p13', 'Position_y', 'number', 'text', null, 1, true),
+          new ItemProp('i10', 'p14', 'Position_z', 'number', 'text', null, 1, true),
+          new ItemProp('i10', 'p15', 'Velocity_x', 'number', 'text', null, 1, true),
+          new ItemProp('i10', 'p16', 'Velocity_y', 'number', 'text', null, 1, true),
+          new ItemProp('i10', 'p17', 'Velocity_z', 'number', 'text', null, 1, true),
+          new ItemProp('i10', 'p18', 'duration', 'number', 'text', null, 1, true),
+
+          //new ItemProp('i11', 'p19', 'Position_x', 'number','text',null, 1, true),
+          //new ItemProp('i11', 'p20', 'Position_y', 'number','text',null, 1, true),
+          //new ItemProp('i11', 'p21', 'Position_z', 'number','text',null, 1, true),
+          //new ItemProp('i11', 'p22', 'Velocity_x', 'number','text',null, 1, true),
+          //new ItemProp('i11', 'p23', 'Velocity_y', 'number','text',null, 1, true),
+          //new ItemProp('i11', 'p24', 'Velocity_z', 'number','text',null, 1, true),
+          //new ItemProp('i11', 'p25', 'mass', 'number','text',null, 1, true),
+          new ItemProp('i11', 'p26', 'duration', 'number', 'text', null, 1, true),
+
+          new ItemProp('i12', 'p27', 'radius', 'number', 'text', null, 1, true),
+          new ItemProp('i12', 'p28', 'mass', 'number', 'text', null, 1, true),
+          new ItemProp('i12', 'p29', 'texture', 'string', 'text', null, 1, true),
+
+
+          new ItemProp('i13', 'p30', 'Position_x', 'number', 'text', null, 1, true),
+          new ItemProp('i13', 'p31', 'Position_y', 'number', 'text', null, 1, true),
+          new ItemProp('i13', 'p32', 'Position_z', 'number', 'text', null, 1, true),
+
+          new ItemProp('i14', 'p33', 'Velocity_x', 'number', 'text', null, 1, true),
+          new ItemProp('i14', 'p34', 'Velocity_y', 'number', 'text', null, 1, true),
+          new ItemProp('i14', 'p35', 'Velocity_z', 'number', 'text', null, 1, true),
+
+          new ItemProp('i16', 'p36', 'formula', 'formula', 'formula', null, 1, true),
+          new ItemProp('i16', 'p37', 'min', 'number', 'text', null, 1, true),
+          new ItemProp('i16', 'p38', 'max', 'number', 'text', null, 1, true),
+          //new ItemProp('i16', 'p50', 'formu', 'formula', 'formula', null, 1, true),
+
+
+
+          new ItemProp('i17', 'p39', 'bins', 'number', 'text', null, 1, true),
+
+          new ItemProp('i5', 'p40', 'bins', 'number', 'text', null, 1, true),
+
+          new ItemProp('i18', 'p41', 'bins', 'number', 'text', null, 1, true),
+
+          new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
+          new ItemProp('i19', 'p43', 'function', 'string', 'text', null, 1, true),
+          
+          new ItemProp('i20', 'p44', 'formula', 'formula', 'formula', null, 1, true),
+          new ItemProp('i20', 'p45', 'x_min', 'number', 'text', null, 2, true),
+          new ItemProp('i20', 'p46', 'x_max', 'number', 'text', null, 3, true),
+          new ItemProp('i20', 'p47', 'y_min', 'number', 'text', null, 2, true),
+          new ItemProp('i20', 'p48', 'y_max', 'number', 'text', null, 3, true),
+
+          new ItemProp('i21', 'p49', 'fileinput', 'text', "file", null, 3, true),
+          
+          new ItemProp('i22', 'p50', 'Z', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p51', 'A', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p52', 'mass', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p53', 'halflife', 'number', "text", null, 3, true),
+          new ItemProp('i22', 'p54', 'alphas', 'string', "text", null, 3, true), // energy, %, energy, %
+
+
+          new ItemProp('i25', 'p55', 'sigma', 'number', "text", null, 3, true),
+          new ItemProp('i25', 'p56', 'radius', 'number', "text", null, 3, true),
+
+          new ItemProp('i26', 'p57', 'bins', 'number', "text", null, 3, true),
+
+          new ItemProp('i27', 'p58', 'formula', 'formula', 'formula', null, 1, true),
+          new ItemProp('i27', 'p59', 'x_min', 'number', 'text', null, 2, true),
+          new ItemProp('i27', 'p60', 'x_max', 'number', 'text', null, 3, true),
+          new ItemProp('i27', 'p61', 'y_min', 'number', 'text', null, 2, true),
+          new ItemProp('i27', 'p62', 'y_max', 'number', 'text', null, 3, true),
+          new ItemProp('i27', 'p63', 'z_min', 'number', 'text', null, 2, true),
+          new ItemProp('i27', 'p64', 'z_max', 'number', 'text', null, 3, true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b4',  'count', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b4',  'min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b4',  'max', 'number', 'text', null, 3, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b4',  'options', 'number', "select", null, 3, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b4',  'fileinput', 'text', "file", null, 3, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b4',  'function', 'formula', 'formula', null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('b154b1f9-f61a-4eb2-9c86-2fbdf764b7ed',  'count', 'number', "10", 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('b154b1f9-f61a-4eb2-9c86-2fbdf764b7ed',  'min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('b154b1f9-f61a-4eb2-9c86-2fbdf764b7ed',  'max', 'number', 'text', null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('b154b1f9-f61a-4eb2-9c86-2fbdf764b7ed',  'Formula', 'formula', 'formula', null, 1, true);
+
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('cf4427bd-6eb7-4505-9fbc-40f9d88c947a',  'Axis', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'Position_x', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'Position_y', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'Position_z', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'Velocity_x', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'Velocity_y', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'Velocity_z', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'duration', 'number', 'text', null, 1, true);
+
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'Position_x', 'number','text',null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'Position_y', 'number','text',null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'Position_z', 'number','text',null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'Velocity_x', 'number','text',null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'Velocity_y', 'number','text',null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'Velocity_z', 'number','text',null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'mass', 'number','text',null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41', 'duration', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42', 'radius', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42', 'mass', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42', 'texture', 'string', 'text', null, 1, true);
+
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b43', 'Position_x', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b43', 'Position_y', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b43', 'Position_z', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b44', 'Velocity_x', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b44', 'Velocity_y', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b44', 'Velocity_z', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b46', 'formula', 'formula', 'formula', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b46', 'min', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b46', 'max', 'number', 'text', null, 1, true);
+          //INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b46', 'formu', 'formula', 'formula', null, 1, true);
+
+
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47', 'bins', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('0dd2a20f-ba09-4dca-971c-da051163d476',  'bins', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b48',  'bins', 'number', 'text', null, 1, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b45',  'bins', 'number', 'text', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b49', 'function', 'string', 'text', null, 1, true);
+          
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40', 'formula', 'formula', 'formula', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40',  'x_min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40',  'x_max', 'number', 'text', null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40',  'y_min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b40',  'y_max', 'number', 'text', null, 3, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b41',  'fileinput', 'text', "file", null, 3, true);
+          
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42','Z', 'number', "text", null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42',  'A', 'number', "text", null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42',  'mass', 'number', "text", null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42',  'halflife', 'number', "text", null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b42',  'alphas', 'string', "text", null, 3, true); // energy, %, energy, %
+
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b45', 'sigma', 'number', "text", null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b45',  'radius', 'number', "text", null, 3, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b46',  'bins', 'number', "text", null, 3, true);
+
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47',  'formula', 'formula', 'formula', null, 1, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47',  'x_min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47', 'x_max', 'number', 'text', null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47',  'y_min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47',  'y_max', 'number', 'text', null, 3, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47',  'z_min', 'number', 'text', null, 2, true);
+          INSERT INTO symvi.itemprops(
+	catitemid, propname,proptype,propspec,propdefval,sortorder, isrequired)
+	VALUES ('26058697-1d78-4c52-b4e6-330a03b190b47', 'z_max', 'number', 'text', null, 3, true);	

@@ -2,6 +2,10 @@ from flask import Flask, render_template, jsonify,send_from_directory
 from flask import request, json, make_response
 import os
 import traceback
+from flask_restful import Api
+from flask_jwt_extended import JWTManager
+import views, models, resources
+
 
 flag_ROOT = True
 
@@ -16,12 +20,25 @@ except ImportError:
 
 
 app = Flask(__name__)
+api = Api(app)
+app.config['POSTGRES_DATABASE_URI_REMOTE'] = "dbname='gqdhjhdi' user='gqdhjhdi' host='john.db.elephantsql.com' password='a7obAswTJ2i4Pe9sCvUnKQ2NVFf_TwVH'"
+app.config['SECRET_KEY'] = 'some-secret-string'
+app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+jwt = JWTManager(app)
+
 
 
 @app.route('/')
 def index():
     data = json.dumps( None )
     return render_template('index.html', data = data)
+
+
+@app.route('/test')
+def test():
+    res={'id':'success'}
+    return res
+
 
 @app.route('/loadmodel')
 def loadmodel():
@@ -78,6 +95,9 @@ def add():
         data = {'output': None, 'message': msg}
         return make_response(jsonify(data), 400)
     #return getF1()
+
+api.add_resource(resources.GetToolboxItems,'/gettoolboxitems')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
