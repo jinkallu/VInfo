@@ -21,10 +21,10 @@ export class Categories{
         return this.categoriesDiv;
     }
 
-    createCategories(){
-        let categories_data = CategoryApi.getCategories();
+     async createCategories(){
+        let categories_data =  CategoryApi.getCategories();
         let flag_first:boolean = false;
-        for (let category_data of categories_data) {
+        for (let category_data of await categories_data) {
             let category:Category = new Category(category_data); 
             this.categoriesDiv.appendChild(category.create());
 
