@@ -26,6 +26,41 @@ class ToolboxModel():
         conn.close()
         return data[0]
 
+class ModelModel():
+    @classmethod
+    def get_models(cls):
+        try:            
+            conn = psycopg2.connect(DATABASECLOUD)           
+            print("conn successfull")
+        except:
+            print("I am unable to connect to the database")
+        
+        cur=conn.cursor()
+        res_json=None
+        res=cur.execute(""" call symvi.getmodels(%s)""",[res_json])
+        data=cur.fetchone()
+        # cur.execute("""SELECT datname from pg_database""")
+        conn.commit()
+        conn.close()
+        return data[0]
+
+    @classmethod
+    def save_model(cls,modeldata):
+        try:            
+            conn = psycopg2.connect(DATABASECLOUD)           
+            print("conn successfull")
+        except:
+            print("I am unable to connect to the database")
+        
+        cur=conn.cursor()
+        res_json=None
+        res=cur.execute(""" call symvi.savemodel(%s,%s)""",[json.dumps(modeldata),res_json])
+        data=cur.fetchone()
+        # cur.execute("""SELECT datname from pg_database""")
+        conn.commit()
+        conn.close()
+        return data[0]
+
 # class NodeModel():
 #     @classmethod
 #     def create_node(cls, nodedata):

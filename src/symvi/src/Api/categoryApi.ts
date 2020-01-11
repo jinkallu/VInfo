@@ -178,7 +178,7 @@ export class CategoryApi {
 
      //      new ItemProp('i18', 'p41', 'bins', 'number', 'text', null, 1, true),
 
-     //      new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
+      //   new ItemProp('i15', 'p42', 'bins', 'number', 'text', null, 1, true),
      //      new ItemProp('i19', 'p43', 'function', 'string', 'text', null, 1, true),
 
      //      new ItemProp('i20', 'p44', 'formula', 'formula', 'formula', null, 1, true),

@@ -34,10 +34,6 @@ def index():
     return render_template('index.html', data = data)
 
 
-@app.route('/test')
-def test():
-    res={'id':'success'}
-    return res
 
 
 @app.route('/loadmodel')
@@ -97,6 +93,8 @@ def add():
     #return getF1()
 
 api.add_resource(resources.GetToolboxItems,'/gettoolboxitems')
+api.add_resource(resources.GetModels ,'/getmodels')
+api.add_resource(resources.SaveModel ,'/savemodel')
 
 
 if __name__ == '__main__':

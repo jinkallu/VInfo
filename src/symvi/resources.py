@@ -1,9 +1,12 @@
-from flask_restful import Resource, reqparse
-from models import ToolboxModel
+from flask_restful import Resource, reqparse,request
+from models import ToolboxModel,ModelModel
 # , RevokedTokenModel
 import json
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
+
+# modelparser=reqparse.RequestParser()
+# modelparser.add_argument('modeldata',type='json',help = 'This field cannot be blank', required = True)
 # regparser = reqparse.RequestParser()
 # regparser.add_argument('username', help = 'This field cannot be blank', required = True)
 # regparser.add_argument('password', help = 'This field cannot be blank', required = True)
@@ -44,6 +47,18 @@ from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_r
 class GetToolboxItems(Resource):
     def get(self):
         res=ToolboxModel.get_toolbox()
+        return res
+
+class GetModels(Resource):
+    def get(self):
+        res=ModelModel.get_models ()
+        return res
+
+class SaveModel(Resource):
+    def post(self):
+        # data=modelparser.parse_args()   
+        json_data = request.get_json(force=True)     
+        res=ModelModel.save_model(json_data)
         return res
 
 # class UserRegistration(Resource):
