@@ -176,9 +176,10 @@ export class Run{
 
     async submit(send_data:any) 
     {
-        console.log("Send data " , send_data);
+        let host = self.location.origin
+        console.log("Send data " , host);
             // let response = await fetch('http://34.65.89.94:5000/api/calc', {
-            let response = await fetch('http://127.0.0.1:5000/api/calc', {
+            let response = await fetch(host + '/api/calc', {
 
                 method: 'POST',
         
