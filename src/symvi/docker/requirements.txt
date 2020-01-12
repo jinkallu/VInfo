@@ -5,3 +5,7 @@
 
 # requirements for api
 flask
+flask_restful
+flask_jwt_extended
+passlib
+psycopg2-binary
