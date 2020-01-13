@@ -36,8 +36,9 @@ export class BasicThree{
         let color = 0xffffff;
         let intensity = 1;
         let dirLight = new THREE.DirectionalLight(color, intensity);
-        dirLight.position.set(0, 0, 10);
-    ///    this.scene.add(dirLight);
+        //dirLight.position.set(0, 0, 50);
+        this.camera.add(dirLight);
+        this.scene.add(this.camera);
         //this.camera.add(dirLight);
         //this.camera.add(dirLight.target);
 
@@ -47,6 +48,8 @@ export class BasicThree{
 
 
         this.camera.position.z = 50;
+        this.camera.position.y = 0;
+        this.camera.position.x = 0;
         //this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         // Prepare Orbit controls
@@ -156,7 +159,7 @@ export class BasicThree{
             //console.log("Adding sphere ", i, this.data[i]["radius"]);
         }
 
-        this.scene.add(this.light);
+        //this.scene.add(this.light);
         //this.ccapture.start();
     }
 

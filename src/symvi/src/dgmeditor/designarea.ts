@@ -186,8 +186,7 @@ export class DesignArea{
 
     processJSON(file:any){
         for(let block of file.blocks){
-            let cat_item= CategoryApi.getCategoryItemByItemId(block.item_id);
-            console.log(cat_item.inputs);
+            let cat_item = CategoryApi.getCategoryItemByItemId(block.item_id);
             let inputs = cat_item.inputs;
             let outputs = cat_item.outputs;
             let name = cat_item.categoryName;
