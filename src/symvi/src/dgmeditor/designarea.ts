@@ -1,26 +1,27 @@
-import {Block } from './block';
-import {Edges } from './edges';
+
+import { Block } from './block';
+import { Edges } from './edges';
 import { CategoryApi } from '../Api/categoryApi';
 import { CategoryItem } from '../models/categoryItem';
 import { Id } from './id';
-import{Component} from '../models/component';
-import{DesignApi} from '../Api/designApi';
-import {Properties} from '../iopanel/properties';
+import { Component } from '../models/component';
+import { DesignApi } from '../Api/designApi';
+import { Properties } from '../iopanel/properties';
 
 
-export class DesignArea{
-    design_area_div:HTMLDivElement;
-    svg:any;
-    edges:Edges;
-    blocks:Block[];
-    catItem:CategoryItem;
-    component:Component;
-    properties:Properties;
-    cat_item:CategoryItem;
-    itemName:string;
+export class DesignArea {
+    design_area_div: HTMLDivElement;
+    svg: any;
+    edges: Edges;
+    blocks: Block[];
+    catItem: CategoryItem;
+    component: Component;
+    properties: Properties;
+    cat_item: CategoryItem;
+    itemName: string;
     body: HTMLBodyElement;
 
-    constructor(pos:any, _body: HTMLBodyElement){
+    constructor(pos: any, _body: HTMLBodyElement) {
         this.body = _body;
 
         this.design_area_div = document.createElement("div");
@@ -30,55 +31,55 @@ export class DesignArea{
         this.design_area_div.style.width = pos.width;
         this.design_area_div.style.left = pos.left;
         this.design_area_div.style.height = pos.height;
-        this.design_area_div.setAttribute('id','designArea');
+        this.design_area_div.setAttribute('id', 'designArea');
 
-        this.svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+        this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.svg.setAttribute("height", '100%');
         this.svg.setAttribute("width", '100%');
         this.svg.overflow = 'auto';
         this.svg.style.position = "absolute";
 
         this.blocks = [];
-        this.edges = new Edges(this.svg, _body); 
+        this.edges = new Edges(this.svg, _body);
 
-        this.svg.addEventListener("mousemove", this.mouseMove); 
-        this.svg.addEventListener("contextmenu", this.contextMenu); 
+        this.svg.addEventListener("mousemove", this.mouseMove);
+        this.svg.addEventListener("contextmenu", this.contextMenu);
 
         this.svg.addEventListener("dragenter", this.dragEnter);
-        this.svg.addEventListener("dragover", this.dragOver);  
-        this.svg.addEventListener("drop", this.drop); 
+        this.svg.addEventListener("dragover", this.dragOver);
+        this.svg.addEventListener("drop", this.drop);
 
         this.svg.addEventListener("deleteEdge", this.deleteEdgeTrig);
         this.svg.addEventListener("deleteBlock", this.deleteBlock);
 
         this.create();
-        this.properties=Properties.getInstance();
+        this.properties = Properties.getInstance();
 
         this.body.addEventListener("click", this.bodyClicked);
         this.body.addEventListener("contextmenu", this.bodyClicked);
 
     }
 
-    create(){
+    create() {
         this.design_area_div.appendChild(this.svg);
     }
 
-    get(){
+    get() {
         return this.design_area_div;
     }
 
-    addBlock(pos:any,id:number, inputs:number, outputs:number, name:string, itemId:string, url:string){
-        let rect = new Block(this.svg, pos,id, inputs, outputs, this.edges, name,itemId, url, this.body);
+    addBlock(pos: any, id: number, inputs: number, outputs: number, name: string, itemId: string, url: string) {
+        let rect = new Block(this.svg, pos, id, inputs, outputs, this.edges, name, itemId, url, this.body);
         this.svg.appendChild(rect.get());
         this.blocks.push(rect);
         //rect.get().addEventListener("block_clicked", this.onClick);
-        
+
         this.component = new Component(id, itemId);
 
         DesignApi.addComponent(this.component);
-        this.itemName=name;
-        this.properties.addItems(this.component.itemProps,this.itemName,id);     
-        
+        this.itemName = name;
+        this.properties.addItems(this.component.itemProps, this.itemName, id);
+
         this.activeBlock(rect.getId());
 
         rect.get().addEventListener("block_clicked", this.onClick);
@@ -87,17 +88,17 @@ export class DesignArea{
     }
 
     mouseMove = (event: MouseEvent) => {
-        if(this.edges.connectionStarted()){
+        if (this.edges.connectionStarted()) {
             //console.log("moving temp");
             let ctm = this.svg.getScreenCTM();
             let x = event.clientX - ctm.e / ctm.a;
             let y = event.clientY - ctm.f / ctm.d;
-            this.edges.tmp_edge.setPointTgt({x: x, y: y});
+            this.edges.tmp_edge.setPointTgt({ x: x, y: y });
         }
     }
 
     contextMenu = (event: MouseEvent) => {
-        if(this.edges.connectionStarted()){
+        if (this.edges.connectionStarted()) {
             this.edges.setConnectionStarted(false);
             event.preventDefault();
         }
@@ -116,76 +117,76 @@ export class DesignArea{
         event.preventDefault();
         //console.log("Drop");
         //if ( event.target.className === "flex-elem" ) {
-            console.log(event);
-            let item_id = event.dataTransfer.getData("Text");
-            //console.log("item_id");
-            //console.log(item_id);
-            let cat_item= CategoryApi.getCategoryItemByItemId(item_id);
-            //console.log(cat_item.inputs);
-            let inputs = cat_item.inputs;
-            let outputs = cat_item.outputs;
-            let name = cat_item.categoryName;
-            let itemId = cat_item.catItemId;
-            let url = cat_item.categoryImgURL
+        console.log(event);
+        let item_id = event.dataTransfer.getData("Text");
+        //console.log("item_id");
+        //console.log(item_id);
+        let cat_item = CategoryApi.getCategoryItemByItemId(item_id);
+        //console.log(cat_item.inputs);
+        let inputs = cat_item.inputs;
+        let outputs = cat_item.outputs;
+        let name = cat_item.categoryName;
+        let itemId = cat_item.catItemId;
+        let url = cat_item.categoryImgURL
 
 
 
 
-            //console.log(inputs + " " + outputs);
+        //console.log(inputs + " " + outputs);
 
 
-            let ctm = this.svg.getScreenCTM();
-            let x = event.clientX - ctm.e / ctm.a;
-            let y = event.clientY - ctm.f / ctm.d;
-            
+        let ctm = this.svg.getScreenCTM();
+        let x = event.clientX - ctm.e / ctm.a;
+        let y = event.clientY - ctm.f / ctm.d;
 
-            this.addBlock({ x: x, y: y },Id.getID(), inputs, outputs, name, itemId, url);
+
+        this.addBlock({ x: x, y: y }, Id.getID(), inputs, outputs, name, itemId, url);
 
         //}
     }
 
-    getBlocks(){
+    getBlocks() {
         return this.blocks;
     }
 
-    getEdges(){
+    getEdges() {
         return this.edges;
     }
 
-    setRight(right:number){
+    setRight(right: number) {
         let width = right - this.design_area_div.getBoundingClientRect().left;
         this.design_area_div.style.width = width + 'px';
     }
 
-    onClick = (evt:any) => {
+    onClick = (evt: any) => {
         this.properties.clearProps();
-        let itemProps=DesignApi.getComponentByInstId(evt.detail.id).itemProps;
+        let itemProps = DesignApi.getComponentByInstId(evt.detail.id).itemProps;
 
-       
-        this.properties.addItems(itemProps,evt.detail.name, evt.detail.id);
-        
+
+        this.properties.addItems(itemProps, evt.detail.name, evt.detail.id);
+
         this.activeBlock(evt.detail.id);
 
         this.design_area_div.dispatchEvent(new CustomEvent("block_clicked", {
             bubbles: true,
-            detail: { id:  evt.detail.id,name:""}
-          }));
+            detail: { id: evt.detail.id, name: "" }
+        }));
         //evt.preventDefault();      
     }
 
-    activeBlock(id: any){
-        for (let block of this.blocks){
-            if(id == block.getId()){
+    activeBlock(id: any) {
+        for (let block of this.blocks) {
+            if (id == block.getId()) {
                 block.setSelected();
             }
-            else{
+            else {
                 block.setDeselected();
             }
-        } 
+        }
     }
 
-    processJSON(file:any){
-        for(let block of file.blocks){
+    processJSON(file: any) {
+        for (let block of file.blocks) {
             let cat_item = CategoryApi.getCategoryItemByItemId(block.item_id);
             let inputs = cat_item.inputs;
             let outputs = cat_item.outputs;
@@ -197,37 +198,37 @@ export class DesignArea{
             let rect = this.addBlock({ x: block.pos.x, y: block.pos.y }, new_id, inputs, outputs, name, itemId, url);
 
             block.new_id = new_id;
-            for(let props of block.properties){
+            for (let props of block.properties) {
                 DesignApi.addPropVal(new_id, props._propId, props._propVal);
             }
 
             rect.getRect().dispatchEvent(new CustomEvent("click"));
         }
 
-        for (let edge of file.edges){
+        for (let edge of file.edges) {
             let src_blk = null;
             let tgt_blk = null;
 
-            for(let block of file.blocks){
-                if(src_blk != null && tgt_blk != null){
+            for (let block of file.blocks) {
+                if (src_blk != null && tgt_blk != null) {
                     break;
                 }
 
-                if (block.id == edge.src_blk_id){
+                if (block.id == edge.src_blk_id) {
                     src_blk = block;
                 }
-                else if (block.id == edge.tgt_blk_id){
+                else if (block.id == edge.tgt_blk_id) {
                     tgt_blk = block;
                 }
             }
 
-            if(src_blk == null || tgt_blk == null){
+            if (src_blk == null || tgt_blk == null) {
                 console.log("Internal error");
                 return;
             }
 
-            for (let block of this.blocks){
-                if(block.getId() == src_blk.new_id){
+            for (let block of this.blocks) {
+                if (block.getId() == src_blk.new_id) {
                     let node = block.getOutputNode(edge.src_node_id);
                     node.get().dispatchEvent(new CustomEvent('click'));
 
@@ -235,8 +236,8 @@ export class DesignArea{
                 }
             }
 
-            for (let block of this.blocks){
-                if(block.getId() == tgt_blk.new_id){
+            for (let block of this.blocks) {
+                if (block.getId() == tgt_blk.new_id) {
                     let node = block.getInputNode(edge.tgt_node_id);
                     //node.get().click();
                     node.get().dispatchEvent(new CustomEvent('click'));
@@ -244,12 +245,16 @@ export class DesignArea{
                     break;
                 }
             }
-        } 
+        }
     }
 
-    saveFile(){
-        let out = "{\n\"blocks\": [\n";
-        for(let block of this.blocks){
+    createJson() {
+        let out = "{\n\"modelcatid\":\"6bc3a9d2-6c65-45e6-9173-feedabeebf9f\",\n";
+        out += "\n\"modelname\":\"testname\",";
+        out += "\n\"createdby\":\"6bc3a9d2-6c65-45e6-9173-feedabeebf9f\",";
+
+        out += "\n\"blocks\": [\n";
+        for (let block of this.blocks) {
             console.log(block.getDataSave());
             out += JSON.stringify(block.getDataSave()) + ",\n";
         }
@@ -258,17 +263,48 @@ export class DesignArea{
         out += "\n],\n\n";
 
         out += "\"edges\": [\n";
-        for(let edge of this.edges.getEdges()){
+        for (let edge of this.edges.getEdges()) {
             out += JSON.stringify(edge.getData()) + ",\n";
         }
 
         out = out.replace(/,(\s+)?$/, '');
         out += "\n]\n\n";
-    
+
         out += "}";
+        return out;
+    }
 
-        
 
+    // let out = "{\n\"blocks\": [\n";
+    // for(let block of this.blocks){
+    //     console.log(block.getDataSave());
+    //     out += JSON.stringify(block.getDataSave()) + ",\n";
+    // }
+
+    // out = out.replace(/,(\s+)?$/, '');
+    // out += "\n],\n\n";
+
+    // out += "\"edges\": [\n";
+    // for(let edge of this.edges.getEdges()){
+    //     out += JSON.stringify(edge.getData()) + ",\n";
+    // }
+
+    // out = out.replace(/,(\s+)?$/, '');
+    // out += "\n]\n\n";
+
+    // out += "}";
+    cloudSave() {
+
+        let out = this.createJson();
+        console.log(out);
+
+
+    }
+
+
+
+    saveFile() {
+        let out = this.createJson();
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(out));
         element.setAttribute('download', "test");
@@ -282,26 +318,26 @@ export class DesignArea{
         this.deleteEdge(evt.detail.id);
     }
 
-    deleteEdge(id: any){
+    deleteEdge(id: any) {
         let edge_data = this.edges.deleteEdge(id);
-        for(let block of this.blocks){
-            if(edge_data.src_blk_id == block.getId()){
+        for (let block of this.blocks) {
+            if (edge_data.src_blk_id == block.getId()) {
                 block.resetNode(false, edge_data.src_node_id); // output node
             }
-            else if(edge_data.tgt_blk_id == block.getId()){
+            else if (edge_data.tgt_blk_id == block.getId()) {
                 block.resetNode(true, edge_data.tgt_node_id); // input node
             }
         }
     }
 
     deleteBlock = (evt: any) => {
-        for(let i = 0; i < this.blocks.length; i++){
-            if (this.blocks[i].getId() == evt.detail.id){
+        for (let i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].getId() == evt.detail.id) {
                 let edges_connected = this.edges.getEdgesConnectedWithBlock(this.blocks[i].getId());
-                for(let edge of edges_connected){
+                for (let edge of edges_connected) {
                     this.deleteEdge(edge.getId());
                 }
-                
+
                 this.svg.removeChild(this.blocks[i].get());
                 this.blocks[i] = null;
                 this.blocks.splice(i, 1);
@@ -312,7 +348,7 @@ export class DesignArea{
     bodyClicked = () => {
         this.edges.bodyClicked();
 
-        for(let block of this.blocks){
+        for (let block of this.blocks) {
             block.hideContextMenu();
         }
     }

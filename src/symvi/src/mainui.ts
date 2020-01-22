@@ -64,6 +64,7 @@ export class MainUI {
 
         menubar_div.addEventListener("fileOpen", this.fileOpen);
         menubar_div.addEventListener("fileSave", this.fileSave);
+        menubar_div.addEventListener("cloudSave", this.cloudSave);
 
     }
 
@@ -147,6 +148,12 @@ export class MainUI {
     fileSave = (evt:any) => {
         console.log("File save event");
         this.design_area.saveFile();
+        evt.preventDefault();
+    }
+
+    cloudSave = (evt:any) => {
+        console.log("File save event");
+        this.design_area.cloudSave();
         evt.preventDefault();
     }
 

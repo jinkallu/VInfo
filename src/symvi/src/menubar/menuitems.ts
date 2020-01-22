@@ -65,6 +65,17 @@ export class MenuItems{
         evt.preventDefault();
     }
 
+    cloudSave = (evt: any) => {
+        console.log("Save");
+
+        this.menu_items_div.dispatchEvent(new CustomEvent("cloudSave", {
+            bubbles: true,
+            //detail: { file:  evt.target.files[0]}
+        }));
+
+        evt.preventDefault();
+    }
+
     processOpen = (evt:any) => {
         if(evt.target.value == ""){
             return;
