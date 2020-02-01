@@ -133,15 +133,15 @@ export class BasicThree{
         material.color = new THREE.Color( 0xffffff );
 
         if(texture === "earth"){
-            material.map = THREE.ImageUtils.loadTexture('/static/images/textures/earth/earthmap1k.jpg');
-            material.bumpMap = THREE.ImageUtils.loadTexture('/static/images/textures/earth/earthbump1k.jpg');
-            material.specularMap = THREE.ImageUtils.loadTexture('/static/images/textures/earth/earthspec1k.jpg');
+            material.map = THREE.ImageUtils.loadTexture('/symvi/static/images/textures/earth/earthmap1k.jpg');
+            material.bumpMap = THREE.ImageUtils.loadTexture('/symvi/static/images/textures/earth/earthbump1k.jpg');
+            material.specularMap = THREE.ImageUtils.loadTexture('/symvi/static/images/textures/earth/earthspec1k.jpg');
         }
         else if(texture == "moon"){
-            material.map = THREE.ImageUtils.loadTexture('/static/images/textures/moon/8k_moon.jpg');
+            material.map = THREE.ImageUtils.loadTexture('/symvi/static/images/textures/moon/8k_moon.jpg');
         }
         else if(texture == "sun"){
-            material.emissiveMap = THREE.ImageUtils.loadTexture('/static/images/textures/8k_sun.jpg');
+            material.emissiveMap = THREE.ImageUtils.loadTexture('/symvi/static/images/textures/8k_sun.jpg');
             this.light = new THREE.PointLight(0xffffff, 1);
         }
     }

@@ -38,7 +38,8 @@ export class Run{
         this.run_div.style.height = "100%";
         
 
-        let icon = new Icon('/static/images/run.png'); 
+        let icon = new Icon('/symvi/static/images/run.png'); 
+        //let icon = new Icon("{{ url_for('static', filename='images/run.png') }}");
 
         this.run_div.appendChild(icon.get());
 
@@ -179,7 +180,7 @@ export class Run{
         let host = self.location.origin
         console.log("Send data " , host);
             // let response = await fetch('http://34.65.89.94:5000/api/calc', {
-            let response = await fetch(host + '/api/calc', {
+            let response = await fetch(host + '/symvi' + '/api/calc', {
 
                 method: 'POST',
         

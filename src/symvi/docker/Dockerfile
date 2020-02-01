@@ -21,6 +21,8 @@ RUN apt update &&                  \
         libxpm-dev               \
         libxft-dev               \
         libxext-dev              \
+        apache2                  \
+        libapache2-mod-wsgi      \
 	wget			&& \
     apt clean			 
 
@@ -41,6 +43,7 @@ COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
 EXPOSE 5000 
+EXPOSE 8080
 
 # API pytest
 #ENV PYTHONPATH=$PYTHONPATH:flaskr/api/

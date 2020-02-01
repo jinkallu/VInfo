@@ -126,7 +126,7 @@ export class DesignArea{
             let outputs = cat_item.outputs;
             let name = cat_item.categoryName;
             let itemId = cat_item.catItemId;
-            let url = cat_item.categoryImgURL
+            let url =  cat_item.categoryImgURL
 
 
 

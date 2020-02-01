@@ -30,7 +30,7 @@ export class ResizeOutput{
         this.resize_output_div.style.width = "3rem";
 
 
-        let icon = new Icon('/static/images/resize.png'); 
+        let icon = new Icon('/symvi/static/images/resize.png'); 
 
         this.resize_output_div.appendChild(icon.get());
 

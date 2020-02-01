@@ -10,8 +10,8 @@ export class CategoryApi {
      static categoryProps:ItemProp[]=[];
      // static testcategories: Category[] = [];
      static async gettoolbox() {
-
-          let response = await fetch('/gettoolboxitems', {
+          let host = self.location.origin;
+          let response = await fetch(host + '/symvi' + '/gettoolboxitems', {
 
                method: 'get',
 
@@ -26,11 +26,11 @@ export class CategoryApi {
 
           for (let category of data.itemcategories) {
                this.categories.push(new Category(category.itemcategoryid, category.itemcategoryname, category.sortorder, category.imageurl))
-
           }
 
           for (let categoryItem of data.catitems) {
-               this.categoryItems.push(new CategoryItem(categoryItem.itemcategoryid, categoryItem.catitemid,categoryItem.catitemname, categoryItem.imageurl, categoryItem.inputs, categoryItem.outputs, true))
+               this.categoryItems.push(new CategoryItem(categoryItem.itemcategoryid, categoryItem.catitemid,categoryItem.catitemname, categoryItem.imageurl, categoryItem.inputs, categoryItem.outputs, true));
+               //console.log("image url ", categoryItem.imageurl);
           }
           //  this.categories=data.json()['itemcategories'];
 

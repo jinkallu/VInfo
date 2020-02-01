@@ -60,7 +60,7 @@ export class Block {
         this.rect.setAttribute("y", pos.y - 20);
 
         if (navigator.userAgent.indexOf("Chrome") > 0) { // check if the browser is chrome
-            this.rect.setAttribute("href", url);
+            this.rect.setAttribute("href", '/symvi' + url);
         }
         this.rect.setAttribute("style",  "outline: 0.05rem solid red;");
 
