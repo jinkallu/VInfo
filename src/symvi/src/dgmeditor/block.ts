@@ -336,6 +336,8 @@ export class Block {
             outputs: this.outputs,
             properties:propsForsave
         }
+        console.log("printing block name while saving");
+        console.log(this.name);
 
         return data;
     }
