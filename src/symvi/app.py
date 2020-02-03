@@ -34,7 +34,10 @@ def index():
     return render_template('index.html', data = data)
 
 
-
+@app.route('/videoeditor')
+def videoEditor():
+    data = json.dumps( "videoeditor" )
+    return render_template('index.html', data = data)
 
 @app.route('/loadmodel')
 def loadmodel():

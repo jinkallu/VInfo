@@ -1,0 +1,304 @@
+export class VideoEditor{
+    editor_div: HTMLDivElement;
+
+    constructor(){
+        let body: HTMLBodyElement = document.body as HTMLBodyElement;
+        body.style.width = "100%";
+        body.style.height = "100%";
+        body.style.background = "#FFFFFF";
+
+        let main_div = document.createElement("div");
+        body.appendChild(main_div);
+
+        let add_button: HTMLButtonElement = document.createElement("button");
+        add_button.innerHTML = "Add video";
+        add_button.addEventListener("click", this.add);
+        main_div.appendChild(add_button);
+
+        let add_image_button: HTMLButtonElement = document.createElement("button");
+        add_image_button.innerHTML = "Add text";
+        add_image_button.addEventListener("click", this.addText);
+        main_div.appendChild(add_image_button);
+
+        let renderer: HTMLButtonElement = document.createElement("button");
+        renderer.innerHTML = "Render";
+        renderer.addEventListener("click", this.render);
+        main_div.appendChild(renderer);
+        
+        this.editor_div = document.createElement("div");
+        this.editor_div.style.display = "flex";
+        this.editor_div.style.flexDirection = "row";
+        this.editor_div.style.flexWrap = "wrap";
+
+        main_div.appendChild(this.editor_div);
+    }
+
+    render = () => {
+        let ffmpeg_command = "ffmpeg";
+        
+        let child_divs = this.editor_div.getElementsByTagName("div");
+        let total_media = 0;
+        for (let div of child_divs){
+            let inputs = div.getElementsByTagName("input");
+            for (let input of inputs){
+                if (input.type != "file"){
+                    continue;
+                }
+                let videos  = div.getElementsByTagName("video");
+                for (let video of videos){
+                    
+                    let sliders  = div.getElementsByTagName("input");
+                    let slider_cnt = 0;
+                    let start, duration;
+                    for (let slider of sliders){
+                        if (slider.type != "range"){
+                            continue;
+                        }
+                        if(slider_cnt == 0){
+                            start = slider.value;
+                        }
+                        else if(slider_cnt == 1){
+                            duration = (+slider.value - +start).toString();
+                        }
+                        slider_cnt++;
+                    }
+                    ffmpeg_command += " -ss " + start + " -t " + duration;
+                    
+                    ffmpeg_command += " -i " + input.files[0].name; // video
+                    total_media ++;
+                    break;
+                }
+                
+                let images  = div.getElementsByTagName("img");
+                for (let img of images){
+                    ffmpeg_command += " -loop 1 -framerate 30 -t 10 -i " + input.files[0].name; 
+                    total_media ++;
+
+                    break;
+                }
+            }
+            /*
+            let imgs  = div.getElementsByTagName("img");
+
+            for (let img of imgs){
+                ffmpeg_command += " -i " + img.src;
+            }
+
+            let videos  = div.getElementsByTagName("video");
+
+            for (let video of videos){
+                ffmpeg_command += " -i " + video.src;
+            }*/
+        }
+        ffmpeg_command += " -filter_complex '";
+        for (let total = 0; total < total_media; total++){
+            ffmpeg_command += " [" + total.toString() + "]";
+        }
+        ffmpeg_command += " concat=n=" + total_media + ":v=1:a=0' video.mp4 ";
+
+        console.log(ffmpeg_command);
+    } 
+
+    addText = () => {
+        let img_div = document.createElement("div");
+        // text
+        let text = document.createElement("input");
+        text.type = "text";
+        text.id = "text";
+        text.addEventListener("input", this.textChanged);
+
+
+        let label_text = document.createElement("label");
+        label_text.htmlFor = "text";
+        label_text.innerHTML = "Text";
+
+        img_div.appendChild(label_text);
+        img_div.appendChild(text);
+
+        // text color
+
+        let text_color = document.createElement("input");
+        text_color.type = "text";
+        text_color.id = "text_color";
+        text_color.addEventListener("input", this.textColorChanged);
+
+
+        let label_text_color = document.createElement("label");
+        label_text_color.htmlFor = "text_color";
+        label_text_color.innerHTML = "Text color";
+
+        img_div.appendChild(label_text_color);
+        img_div.appendChild(text_color);
+
+        // text size
+
+        let text_size = document.createElement("input");
+        text_size.type = "text";
+        text_size.id = "text_size";
+        text_size.addEventListener("input", this.textSizeChanged);
+
+
+        let label_text_size = document.createElement("label");
+        label_text_size.htmlFor = "text_size";
+        label_text_size.innerHTML = "Text size";
+
+        img_div.appendChild(label_text_size);
+        img_div.appendChild(text_size);
+
+        // background color
+        let background_color = document.createElement("input");
+        background_color.type = "text";
+        background_color.id = "color";
+        background_color.addEventListener("input", this.colorChanged);
+
+        let label_color = document.createElement("label");
+        label_color.htmlFor = "color";
+        label_color.innerHTML = "Background color";
+
+        img_div.appendChild(label_color);
+        img_div.appendChild(background_color);
+
+        let img_selector = document.createElement("input");
+        img_selector.type = "file";
+        img_selector.id = "image";
+        img_selector.addEventListener("change", this.processImgOpen);
+
+        let label_image = document.createElement("label");
+        label_image.htmlFor = "image";
+        label_image.innerHTML = "Background image";
+
+        img_div.appendChild(label_image);
+        img_div.appendChild(img_selector);
+
+        let img = document.createElement("img");
+        img.style.width = "40%";
+
+        let holder_div = document.createElement("div");
+        holder_div.style.width = "40%";
+        holder_div.style.height = "100%";
+        holder_div.style.backgroundSize = "contain";
+        holder_div.style.textAlign = "center";
+        holder_div.style.margin = "auto";
+        holder_div.style.padding = "2rem";
+
+
+
+        img_div.appendChild(img);
+        img_div.appendChild(holder_div);
+
+        this.editor_div.appendChild(img_div);
+    }
+
+    textColorChanged = (evt: any) => {
+        let div_holder = evt.target.parentElement.getElementsByTagName("div")[0];
+        div_holder.style.color = evt.target.value;
+    }
+
+    textSizeChanged = (evt: any) => {
+        let div_holder = evt.target.parentElement.getElementsByTagName("div")[0];
+        div_holder.style.fontSize = evt.target.value;
+    }
+
+    textChanged = (evt: any) => {
+        let div_holder = evt.target.parentElement.getElementsByTagName("div")[0];
+        div_holder.innerHTML = evt.target.value;
+    }
+
+    colorChanged = (evt: any) => {
+        let div_holder = evt.target.parentElement.getElementsByTagName("div")[0];
+        console.log(evt.target.value)
+        div_holder.style.backgroundColor = evt.target.value;
+    }
+
+    add = () => {
+        console.log("Clicked");
+        let video_div = document.createElement("div");
+
+        let video_selector = document.createElement("input");
+        video_selector.type = "file";
+        video_selector.addEventListener("change", this.processOpen);
+
+        video_div.appendChild(video_selector);
+
+        let video = document.createElement("video");
+        video.style.width = "40%";
+        video.controls = true;
+        //video.style.height = 8
+
+        video_div.appendChild(video);
+
+        let start_slider = document.createElement("input");
+        start_slider.type = "range";
+        start_slider.max = video.duration.toString();
+        start_slider.min = "0";
+        start_slider.value = start_slider.min;
+        start_slider.step = (video.duration / 500).toString();
+        start_slider.addEventListener("input", this.sliderStartChange);
+        start_slider.style.width = "100%";
+
+        video_div.appendChild(start_slider);
+
+        let stop_slider = document.createElement("input");
+        stop_slider.type = "range";
+        stop_slider.max = video.duration.toString();
+        stop_slider.min = "0";
+        stop_slider.value = stop_slider.max;
+        //this.setStopSliderMin(stop_slider, start_slider.min);
+
+        video_div.appendChild(stop_slider);
+        stop_slider.style.width = "100%";
+        stop_slider.addEventListener("input", this.sliderStopChange);
+
+
+        this.editor_div.appendChild(video_div);
+    }
+
+    /*setStopSliderMin(slider: any, num: string){
+        let min = +num + 1;
+        slider.min = min.toString()
+    }*/
+
+    processOpen = (evt: any) => {
+        let video = evt.target.parentElement.getElementsByTagName("video")[0];
+
+        if(evt.target.value == ""){
+            video.src = "";
+            return;
+        }
+
+        let objectURL = URL.createObjectURL(evt.target.files[0]);
+        video.src = objectURL;
+        let sliders = evt.target.parentElement.getElementsByTagName("input");
+        for (let slider of sliders){
+            if (slider.type != "range"){
+                continue;
+            }
+            slider.max = video.duration.toString();
+            slider.step = (video.duration / 500).toString();
+        }
+        console.log(evt.target.files[0]);
+    }
+
+    processImgOpen = (evt: any) => {
+        let img = evt.target.parentElement.getElementsByTagName("img")[0];
+        let div_holder = evt.target.parentElement.getElementsByTagName("div")[0];
+
+        if(evt.target.value == ""){
+            img.src = "";
+            return;
+        }
+
+        let objectURL = URL.createObjectURL(evt.target.files[0]);
+        img.src = objectURL;
+        div_holder.style.backgroundImage = "url(" + objectURL + ")";
+        
+    }
+
+    sliderStartChange = (evt: any) => {
+        evt.target.parentElement.getElementsByTagName("video")[0].currentTime = evt.target.value;
+    }
+
+    sliderStopChange = (evt: any) => {
+        evt.target.parentElement.getElementsByTagName("video")[0].currentTime = evt.target.value;
+    }
+}
