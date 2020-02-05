@@ -37,6 +37,33 @@ export class VideoEditor{
         let ffmpeg_command = "ffmpeg";
         
         let child_divs = this.editor_div.getElementsByTagName("div");
+        // create images with text
+        let image_names = [];
+        let img_cnt = 0;
+        for (let div of child_divs){
+            let texts = div.getElementsByTagName("input");
+            if (texts.length < 1){
+                break;
+            }
+
+            for (let text of texts){
+                console.log("inputs", text.value);
+            }
+
+            let text = texts[0].value;
+            let color = texts[1].value;
+            let size = texts[2].value;
+            let bgcolor = texts[3].value;
+
+            let img_name = img_cnt.toString() + ".png";
+            image_names.push(img_name);
+            let command = "convert -background '" + bgcolor  + "' -fill '" + color + "' -font Candice -size 1920x1080  -pointsize " + size + "  -gravity center label:" + text + " " + img_name;
+            console.log("img cmd ", command);
+
+            img_cnt++;
+        }
+
+
         let total_media = 0;
         for (let div of child_divs){
             let inputs = div.getElementsByTagName("input");
@@ -196,7 +223,7 @@ export class VideoEditor{
 
     textSizeChanged = (evt: any) => {
         let div_holder = evt.target.parentElement.getElementsByTagName("div")[0];
-        div_holder.style.fontSize = evt.target.value;
+        div_holder.style.fontSize = evt.target.value + "px";
     }
 
     textChanged = (evt: any) => {
@@ -289,7 +316,7 @@ export class VideoEditor{
         }
 
         let objectURL = URL.createObjectURL(evt.target.files[0]);
-        img.src = objectURL;
+        //img.src = objectURL;
         div_holder.style.backgroundImage = "url(" + objectURL + ")";
         
     }
