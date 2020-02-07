@@ -39,11 +39,16 @@ export class VideoEditor{
         let child_divs = this.editor_div.getElementsByTagName("div");
         // create images with text
         let image_names = [];
+        let images_duration = [];
         let img_cnt = 0;
         for (let div of child_divs){
+            let images  = div.getElementsByTagName("img");
+            if (images.length < 1){
+                continue;
+            } 
             let texts = div.getElementsByTagName("input");
             if (texts.length < 1){
-                break;
+                continue;
             }
 
             for (let text of texts){
@@ -54,17 +59,20 @@ export class VideoEditor{
             let color = texts[1].value;
             let size = texts[2].value;
             let bgcolor = texts[3].value;
+            let duration = texts[5].value;
 
             let img_name = img_cnt.toString() + ".png";
             image_names.push(img_name);
+            images_duration.push(duration);
             let command = "convert -background '" + bgcolor  + "' -fill '" + color + "' -font Candice -size 1920x1080  -pointsize " + size + "  -gravity center label:" + text + " " + img_name;
-            console.log("img cmd ", command);
+            console.log(command);
 
             img_cnt++;
         }
 
 
         let total_media = 0;
+        let i_img = 0;
         for (let div of child_divs){
             let inputs = div.getElementsByTagName("input");
             for (let input of inputs){
@@ -98,7 +106,8 @@ export class VideoEditor{
                 
                 let images  = div.getElementsByTagName("img");
                 for (let img of images){
-                    ffmpeg_command += " -loop 1 -framerate 30 -t 10 -i " + input.files[0].name; 
+                    ffmpeg_command += " -loop 1 -framerate 30 -t " + images_duration[i_img] + " -i " + image_names[i_img]; 
+                    i_img++;
                     total_media ++;
 
                     break;
@@ -197,8 +206,24 @@ export class VideoEditor{
         img_div.appendChild(label_image);
         img_div.appendChild(img_selector);
 
+        // image duration
+        let image_duration = document.createElement("input");
+        image_duration.type = "text";
+        image_duration.id = "duration";
+        //image_duration.addEventListener("input", this.colorChanged);
+
+        let label_duration = document.createElement("label");
+        label_duration.htmlFor = "color";
+        label_duration.innerHTML = "Duration";
+
+        img_div.appendChild(label_duration);
+        img_div.appendChild(image_duration);
+
         let img = document.createElement("img");
         img.style.width = "40%";
+        img_div.appendChild(img);
+
+
 
         let holder_div = document.createElement("div");
         holder_div.style.width = "40%";
@@ -210,7 +235,6 @@ export class VideoEditor{
 
 
 
-        img_div.appendChild(img);
         img_div.appendChild(holder_div);
 
         this.editor_div.appendChild(img_div);
