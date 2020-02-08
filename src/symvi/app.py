@@ -5,6 +5,9 @@ import traceback
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 import views, models, resources
+import googletrans
+#from googletrans import Translator
+
 
 
 flag_ROOT = True
@@ -38,6 +41,23 @@ def index():
 def videoEditor():
     data = json.dumps( "videoeditor" )
     return render_template('index.html', data = data)
+
+@app.route('/translate', methods=["POST"])
+def translate():
+    req = request.get_json()
+    text = req["translate"]
+    print "text ", text
+    languages = googletrans.LANGUAGES.keys()
+
+    translator = googletrans.Translator()
+    data = {}
+    for lang in languages:
+        result = translator.translate(text, src='en', dest=lang)
+        translation = result.text
+        translation = translation.encode('utf8')
+        data[lang] = translation
+
+    return make_response(jsonify(data))
 
 @app.route('/loadmodel')
 def loadmodel():
@@ -101,5 +121,5 @@ api.add_resource(resources.SaveModel ,'/savemodel')
 
 
 if __name__ == '__main__':
-    #app.run(host='0.0.0.0', port=5000, debug=True)
+    #app.run(host='0.0.0.0', port=5002, debug=True)
     app.run()

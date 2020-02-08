@@ -27,19 +27,23 @@ export class VideoEditor{
         
         this.editor_div = document.createElement("div");
         this.editor_div.style.display = "flex";
-        this.editor_div.style.flexDirection = "row";
+        //this.editor_div.style.flexDirection = "row";
         this.editor_div.style.flexWrap = "wrap";
 
         main_div.appendChild(this.editor_div);
     }
 
     render = () => {
+        let commands: string;
+
         let ffmpeg_command = "ffmpeg";
         
         let child_divs = this.editor_div.getElementsByTagName("div");
         // create images with text
+        let images_text = [];
         let image_names = [];
         let images_duration = [];
+        let images_begin = []
         let img_cnt = 0;
         for (let div of child_divs){
             let images  = div.getElementsByTagName("img");
@@ -64,15 +68,17 @@ export class VideoEditor{
             let img_name = img_cnt.toString() + ".png";
             image_names.push(img_name);
             images_duration.push(duration);
+            images_text.push(text);
             let command = "convert -background '" + bgcolor  + "' -fill '" + color + "' -font Candice -size 1920x1080  -pointsize " + size + "  -gravity center label:" + text + " " + img_name;
-            console.log(command);
-
+            //this.getTranslation(text);
+            commands += command + "\n";
             img_cnt++;
         }
 
 
         let total_media = 0;
         let i_img = 0;
+        let time: number = 0;
         for (let div of child_divs){
             let inputs = div.getElementsByTagName("input");
             for (let input of inputs){
@@ -98,7 +104,7 @@ export class VideoEditor{
                         slider_cnt++;
                     }
                     ffmpeg_command += " -ss " + start + " -t " + duration;
-                    
+                    time += +duration;
                     ffmpeg_command += " -i " + input.files[0].name; // video
                     total_media ++;
                     break;
@@ -107,6 +113,8 @@ export class VideoEditor{
                 let images  = div.getElementsByTagName("img");
                 for (let img of images){
                     ffmpeg_command += " -loop 1 -framerate 30 -t " + images_duration[i_img] + " -i " + image_names[i_img]; 
+                    images_begin.push(time);
+                    time += +images_duration[i_img]
                     i_img++;
                     total_media ++;
 
@@ -133,7 +141,68 @@ export class VideoEditor{
         ffmpeg_command += " concat=n=" + total_media + ":v=1:a=0' video.mp4 ";
 
         console.log(ffmpeg_command);
+        commands += ffmpeg_command;
+
+        this.saveFileSRT(images_text, images_begin, images_duration)
+
+        this.saveFile(commands);
     } 
+
+    async getTranslation(text:any){
+        console.log(text)
+        let data_snd: any = {'translate': text};
+        let host = self.location.origin
+        console.log("Send data " , host);
+            // let response = await fetch('http://34.65.89.94:5000/api/calc', {
+            let response = await fetch(host + '/symvi' + '/translate', {
+
+                method: 'POST',
+        
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(data_snd)
+            });
+            let msg;
+            let data:any = await response.json();
+
+            console.log(data);
+    }
+
+    saveFileSRT(images_text: string[], images_begin: number[], images_duration: string[]){
+        // save file
+        let text: string = "";
+        for (let i = 0; i < images_text.length; i++){
+            text += (i+1).toString() + "\n";
+            text += new Date(images_begin[i] * 1000).toISOString().substr(11, 8) + " --> " + new Date((images_begin[i] +  +images_duration[i]) * 1000).toISOString().substr(11, 8)+ "\n";
+            text += images_text[i] + "\n\n";
+        }
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', "test.srt");
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+    saveFile(text: string){
+        // save file
+
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', "test.sh");
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
 
     addText = () => {
         let img_div = document.createElement("div");
@@ -231,7 +300,7 @@ export class VideoEditor{
         holder_div.style.backgroundSize = "contain";
         holder_div.style.textAlign = "center";
         holder_div.style.margin = "auto";
-        holder_div.style.padding = "2rem";
+        //holder_div.style.padding = "2rem";
 
 
 
@@ -272,7 +341,7 @@ export class VideoEditor{
         video_div.appendChild(video_selector);
 
         let video = document.createElement("video");
-        video.style.width = "40%";
+        //video.style.width = "40%";
         video.controls = true;
         //video.style.height = 8
 
