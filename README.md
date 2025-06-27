@@ -6,6 +6,11 @@
 
 **VInfo** is a modular web application that integrates a MediaWiki backend, a modern Svelte-based frontend, and a RESTful API. The project is designed for collaborative document management, rich media viewing, and extensible data workflows.
 
+![Alt text](./images/1.png)
+![Alt text](./images/2.png)
+![Alt text](./images/3.png)
+
+
 ### Main Components
 
 - **MediaWiki Backend:**  
